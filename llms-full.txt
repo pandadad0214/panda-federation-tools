@@ -1,0 +1,85 @@
+# Panda Federation Tools: full reference for AI agents
+
+> Research and public-data tools on Apify. Every batch tool writes one dataset item per result (with a one-line `summary` field; Grants Finder calls it `agentSummary`) and a `SUMMARY` record in the run's key-value store with counts, a one-line `takeaway` and, where there is one, a `nextStep` pointing to the logical follow-on tool. Status, where used: OK = verified / safe, CHECK = read the note, FIX = do not use as written.
+
+How to call: Apify MCP server `https://mcp.apify.com` (tool `call-actor`, Actor `pandadad0214/<slug>`), or `POST https://api.apify.com/v2/acts/pandadad0214~<slug>/run-sync-get-dataset-items` with `Authorization: Bearer <Apify token>` and the JSON input as the body. Every input field in each Actor's input schema has a description with formats, units and limits. Pricing is pay per result; Apify Bronze, Silver and Gold plans get 10%, 20% and 30% off.
+
+## Reference Checker
+
+URL: https://apify.com/pandadad0214/reference-checker
+Use when: you need to verify that references are real, correctly cited and not retracted.
+Input: `bibliography` (pasted reference list, any style), `dois` (list), `titles` (list); options `minMatchScore` (50 to 100, default 80), `checkOpenAccess`, `maxReferences` (1 to 20,000). `mode: "monitor"` with `dois` or `orcid` re-checks a list on a schedule and reports only new retractions.
+Minimal input: `{"dois": ["10.1038/nature14539"]}`
+Output per item: `summary`, `status` (OK/CHECK/FIX), `verdict`, `matchedDoi`, `matchScore`, `mismatches` (cited vs actual), `integrity.status` (none, retracted, corrected, expression-of-concern), `openAccessUrl`, `warnings`.
+SUMMARY: `total`, `ok`, `check`, `fix`, `notFound`, `retracted`, `takeaway`, `nextStep`.
+Price: $0.01 per reference checked.
+
+## Citation Generator API
+
+URL: https://apify.com/pandadad0214/citation-formatter
+Use when: you need formatted citations from DOIs, ISBNs, PMIDs, arXiv IDs, titles or messy references.
+Input: `references` (list), or `text` (pasted bibliography or .bib/.ris contents); `styles` (apa, mla, chicago, harvard, ieee, vancouver), `includeBibtex`, `includeRis`, `maxReferences`.
+Minimal input: `{"references": ["10.1038/nature14539"], "styles": ["apa"]}`
+Output per item: `summary`, `status`, one field per style (`apa`, `mla`, ...), `inText`, `bibtex`, `ris`, `doi`, `title`, `authors`, `year`, `containerTitle`.
+SUMMARY: `total`, `formatted`, `ok`, `check`, `unresolved`, `duplicates`, `files`, `takeaway`, `nextStep`. Key-value records: `BIBLIOGRAPHY_<STYLE>`, `BIBLIOGRAPHY_BIBTEX`, `BIBLIOGRAPHY_RIS`.
+Price: $0.003 per formatted citation.
+
+## Google Scholar Scraper Alternative (Literature Search)
+
+URL: https://apify.com/pandadad0214/literature-search
+Use when: you need real papers on a topic or around seed papers.
+Input: `query` (words or Boolean, quotes for phrases) and/or `seedDois` with `seedMode`; `yearFrom`/`yearTo` (years), `minCitations`, `openAccessOnly`, `types`, `sortBy`, `maxResults` (1 to 2,000), `citationStyle`.
+Minimal input: `{"query": "retrieval augmented generation clinical", "maxResults": 20}`
+Output per item: `summary`, `status`, `title`, `authors`, `year`, `venue`, `doi`, `citations`, `readingRank`, `readingScore`, `isOpenAccess`, `pdfUrl`, `retracted`, `citation`, `bibtex`, `ris`, `abstract`.
+SUMMARY: `returned`, `totalMatches`, `counts`, `openAccess`, `withPdf`, `takeaway`, `nextStep`. Records: `READING_LIST`, `RESULTS_XLSX`, `RESULTS_CSV`, `REFERENCES_BIBTEX`, `REFERENCES_RIS`.
+Price: $0.003 per paper returned.
+
+## PubMed Scraper (Evidence Table)
+
+URL: https://apify.com/pandadad0214/pubmed-evidence-table
+Use when: you need PubMed studies for a review in an evidence table.
+Input: `queries` (list of PubMed search strings, field tags allowed), `dateFrom`/`dateTo` (YYYY, YYYY-MM or YYYY-MM-DD), `studyDesigns`, `excludeAnimalOnly`, `languages`, `retractedArticles` (flag or exclude), `maxResults` (1 to 10,000), `citationStyle`.
+Minimal input: `{"queries": ["semaglutide[tiab] AND obesity[tiab]"], "maxResults": 20}`
+Output per item: `summary`, `status`, `pmid`, `title`, `year`, `journal`, `studyDesign`, `sampleSize`, `sampleSizeConfidence`, `retractionStatus`, `retracted`, `citation`.
+SUMMARY: `returned`, `prisma`, `counts`, `studyDesigns`, `takeaway`, `nextStep`. Records: `EVIDENCE_TABLE_XLSX`, `PRISMA_COUNTS`, `REVIEW_IMPORT_RIS`, `REVIEW_IMPORT_RAYYAN_CSV`.
+Price: $0.004 per article returned.
+
+## Grants.gov Scraper (Grants Finder)
+
+URL: https://apify.com/pandadad0214/grants-finder
+Use when: you need open or forecasted US federal grant opportunities, or funded NIH and NSF awards.
+Input: `keywords` (required), `sources` (grants_gov, nih, nsf), `maxResultsPerSource` (1 to 1,000), `agencies`, `dateFrom`/`dateTo` (YYYY, YYYY-MM or YYYY-MM-DD), `minAmount`/`maxAmount` (USD), `grantsGovStatuses`, `sortBy`.
+Minimal input: `{"keywords": "rural broadband", "maxResultsPerSource": 10}`
+Output per item: `agentSummary` (one line), `source`, `recordType`, `status`, `title`, `agency`, `number`, `openDate`, `closeDate`, `amount` (USD), `eligibility`, `summary` (the grant's own description), `url`.
+SUMMARY: `returned`, `bySource`, `takeaway`, `nextStep`. Records: `GRANTS_XLSX`, `GRANTS_CSV`.
+Price: $0.003 per result.
+
+## Academic Research MCP Server
+
+URL: https://apify.com/pandadad0214/panda-research-mcp
+Use when: an AI agent should call research tools directly over MCP.
+Endpoint: `https://pandadad0214--panda-research-mcp.apify.actor/mcp` (Streamable HTTP, `Authorization: Bearer <Apify token>`).
+Tools: `check_references` (up to 10 references), `format_citations` (up to 10 items, one style), `search_literature` (up to 20 papers), `pubmed_evidence_table` (up to 20 articles).
+Output: JSON with `results`, a one-line `takeaway`, status OK/CHECK/FIX where it applies, and a `bulk` link to the standalone Actor for larger jobs.
+Price: $0.01 per reference tool call, $0.02 per search tool call; failed or empty calls are free.
+
+## PDF Table Extractor (PDF to Excel & CSV)
+
+URL: https://apify.com/pandadad0214/pdf-table-extractor
+Use when: you need every table in a PDF extracted to Excel and CSV, with OCR for scanned pages.
+Input/output: PDF URLs or uploads in; one item per table (pages, header, row and column counts, cell data, `summary`) plus Excel and CSV files out.
+Price: $0.001 per PDF page analysed.
+
+## NPI Registry Scraper (NPI Provider Lists)
+
+URL: https://apify.com/pandadad0214/npi-provider-lists
+Use when: you need de-duplicated lists of US healthcare providers from the official NPI Registry.
+Input/output: specialties plus states, cities or ZIP codes in; one de-duplicated provider per item (NPI, name, specialty, address, phone, `summary`) plus Excel out.
+Price: $0.0015 per provider.
+
+## Google Scholar Author Alternative (Researcher & Expert Finder)
+
+URL: https://apify.com/pandadad0214/researcher-expert-finder
+Use when: you need ranked academic experts and key opinion leaders for a research topic.
+Input/output: a research topic in; ranked experts (expert score, ORCID, institution, h-index, topic papers, `summary`) plus Excel out.
+Price: $0.0025 per expert.
