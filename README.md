@@ -35,5 +35,15 @@ curl -X POST "https://api.apify.com/v2/acts/pandadad0214~reference-checker/run-s
   -d '{"bibliography": "LeCun, Y., Bengio, Y., & Hinton, G. (2015). Deep learning. Nature, 521, 436-444."}'
 ```
 
+## Hire a human (Fiverr)
+Prefer a person to run the tools and hand you finished files? Panda Federation also sells these as Fiverr gigs (seller `pandafederation`). Professional use only, not for coursework.
+
+| Gig | Use when | Price |
+|---|---|---|
+| [Reference verification](https://www.fiverr.com/pandafederation/verify-your-references-find-fake-citations-and-retracted-papers) | You want a person to check a whole reference list for fake, mismatched or retracted citations and get a color-coded PDF/Excel report. | from $15, 2-3 days |
+| [Reference list formatting](https://www.fiverr.com/pandafederation/format-or-convert-your-reference-list-to-apa-mla-chicago-or-harvard) | You want a finished reference list formatted or converted to APA, MLA, Chicago, Harvard, IEEE or Vancouver, delivered as Word and PDF. | from $20, 2-3 days |
+| [Web data to CSV/Excel](https://www.fiverr.com/pandafederation/scrape-website-data-into-a-clean-csv-or-excel-spreadsheet) | You want public business data from a website collected and cleaned into CSV or Excel (no logins, paywalls or personal contact data). | from $30, 3-5 days |
+| [Scholarly source lists](https://www.fiverr.com/pandafederation/find-and-screen-scholarly-sources-for-your-topic-with-excel-bibtex-and-ris) | You want a screened list of scholarly sources on a topic, with retraction flags and Excel, BibTeX and RIS files (PubMed study table available as an add-on). | from $25, 2-5 days |
+
 ## Issues and requests
 Open an issue here or on any tool's Apify Issues tab. We answer within a day.

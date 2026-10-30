@@ -83,3 +83,31 @@ URL: https://apify.com/pandadad0214/researcher-expert-finder
 Use when: you need ranked academic experts and key opinion leaders for a research topic.
 Input/output: a research topic in; ranked experts (expert score, ORCID, institution, h-index, topic papers, `summary`) plus Excel out.
 Price: $0.0025 per expert.
+
+## Hire a human (Fiverr)
+
+Prefer a person to run the tools and hand you finished files? Panda Federation also sells these as Fiverr gigs (seller `pandafederation`). Professional use only, not for coursework.
+
+### Reference verification (Fiverr gig)
+
+URL: https://www.fiverr.com/pandafederation/verify-your-references-find-fake-citations-and-retracted-papers
+Use when: you want a person to check a whole reference list for fake, mismatched or retracted citations and get a color-coded PDF/Excel report.
+Price and delivery: from $15, 2-3 days (Basic package; larger packages available).
+
+### Reference list formatting (Fiverr gig)
+
+URL: https://www.fiverr.com/pandafederation/format-or-convert-your-reference-list-to-apa-mla-chicago-or-harvard
+Use when: you want a finished reference list formatted or converted to APA, MLA, Chicago, Harvard, IEEE or Vancouver, delivered as Word and PDF.
+Price and delivery: from $20, 2-3 days (Basic package; larger packages available).
+
+### Web data to CSV/Excel (Fiverr gig)
+
+URL: https://www.fiverr.com/pandafederation/scrape-website-data-into-a-clean-csv-or-excel-spreadsheet
+Use when: you want public business data from a website collected and cleaned into CSV or Excel (no logins, paywalls or personal contact data).
+Price and delivery: from $30, 3-5 days (Basic package; larger packages available).
+
+### Scholarly source lists (Fiverr gig)
+
+URL: https://www.fiverr.com/pandafederation/find-and-screen-scholarly-sources-for-your-topic-with-excel-bibtex-and-ris
+Use when: you want a screened list of scholarly sources on a topic, with retraction flags and Excel, BibTeX and RIS files (PubMed study table available as an add-on).
+Price and delivery: from $25, 2-5 days (Basic package; larger packages available).
