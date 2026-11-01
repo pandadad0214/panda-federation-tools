@@ -1,6 +1,6 @@
 # Panda Federation Tools
 
-Reliable research and public-data tools that run on [Apify](https://apify.com/pandadad0214). Every tool uses official, free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF), charges only per result, and gives you Excel/CSV/JSON plus a clear **OK / CHECK / FIX** status where it applies. Built with AI assistance.
+Reliable research and public-data tools that run on [Apify](https://apify.com/pandadad0214). Every tool uses official, free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending), charges only per result, and gives you Excel/CSV/JSON plus a clear **OK / CHECK / FIX** status where it applies. Built with AI assistance.
 
 | Tool | What it does | Price (free plan) |
 |---|---|---|
@@ -13,6 +13,7 @@ Reliable research and public-data tools that run on [Apify](https://apify.com/pa
 | [PDF to Excel & CSV Converter](https://apify.com/pandadad0214/pdf-table-extractor) | Every table in a PDF → Excel & CSV, with OCR for scanned pages | $0.001 / page |
 | [NPI Registry Scraper](https://apify.com/pandadad0214/npi-provider-lists) | De-duplicated US doctor & healthcare provider lists from the official NPI Registry | $0.0015 / provider |
 | [Google Scholar Author Alternative](https://apify.com/pandadad0214/researcher-expert-finder) | Ranked academic experts & KOLs for a research topic, with ORCID and h-index | $0.0025 / expert |
+| [USAspending Scraper: Federal Contracts](https://apify.com/pandadad0214/federal-contract-finder) | Federal contract awards, incumbents and recompete leads (contracts ending soon) by NAICS, PSC, agency or set-aside | $0.002 / contract |
 
 Apify's free plan includes $5/month of credit. Bronze, Silver and Gold Apify plans get 10–30% off.
 
@@ -26,6 +27,7 @@ Apify's free plan includes $5/month of credit. Bronze, Silver and Gold Apify pla
 - **Writing a paper:** Literature Search → Citation Generator → Reference Checker before you submit.
 - **Systematic review:** PubMed Scraper (evidence table + PRISMA counts) → Reference Checker.
 - **Funding:** Grants.gov Scraper → Literature Search on the topic.
+- **Federal contracting:** USAspending Scraper (recompete radar + top incumbents) → Grants.gov Scraper for related funding.
 - **AI agents:** connect the MCP server so your agent checks its own citations.
 
 ## Quick start (API)

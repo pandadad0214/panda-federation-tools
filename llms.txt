@@ -26,6 +26,7 @@ Run any tool through Apify's MCP server (https://mcp.apify.com, Actor `pandadad0
 
 - [PDF Table Extractor (PDF to Excel & CSV)](https://apify.com/pandadad0214/pdf-table-extractor): Use when you need every table in a PDF extracted to Excel and CSV, with OCR for scanned pages.
 - [NPI Registry Scraper (NPI Provider Lists)](https://apify.com/pandadad0214/npi-provider-lists): Use when you need de-duplicated lists of US healthcare providers from the official NPI Registry.
+- [USAspending Scraper (Federal Contract Finder)](https://apify.com/pandadad0214/federal-contract-finder): Use when you need US federal contract awards, the incumbents in a market, or contracts ending soon (recompete leads) by NAICS, PSC, agency, state or set-aside.
 
 ## Experts
 

@@ -84,6 +84,16 @@ Use when: you need ranked academic experts and key opinion leaders for a researc
 Input/output: a research topic in; ranked experts (expert score, ORCID, institution, h-index, topic papers, `summary`) plus Excel out.
 Price: $0.0025 per expert.
 
+## USAspending Scraper (Federal Contract Finder)
+
+URL: https://apify.com/pandadad0214/federal-contract-finder
+Use when: you need US federal contract awards, the incumbents in a market, or contracts whose period of performance ends soon (recompete leads).
+Input: `mode` (awards or recompete), `keywords`, `naicsCodes`, `pscCodes`, `agencies` (name or abbreviation, e.g. DOD, VA, Department of the Army), `performanceStates`, `setAsides` (SBA, 8A, HZC, SDVOSBC, WOSB…), `recipientNames`, `recompeteMonths` (1 to 36), `dateFrom`/`dateTo`, `minAmount`/`maxAmount`, `maxResults` (1 to 5,000), `sortBy`. At least one filter is required.
+Minimal input: `{"mode": "recompete", "naicsCodes": ["541512"], "recompeteMonths": 12, "maxResults": 20}`
+Output per item: `agentSummary` (one line), `awardId`, `recipientName`, `recipientUei`, `amount` (USD), `awardingAgency`, `awardingSubAgency`, `naicsCode`, `pscCode`, `description`, `startDate`, `endDate`, `monthsLeft`, `status`, `performanceState`, `url`.
+SUMMARY: `returned`, `totalAmount`, `endingWithin12Months`, `topRecipients`, `takeaway`, `nextStep`. Records: `CONTRACTS_XLSX` (with a Top recipients sheet), `CONTRACTS_CSV`.
+Price: $0.002 per contract returned.
+
 ## Hire a human (Fiverr)
 
 Prefer a person to run the tools and hand you finished files? Panda Federation also sells these as Fiverr gigs (seller `pandafederation`). Professional use only, not for coursework.
