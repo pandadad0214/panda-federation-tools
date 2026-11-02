@@ -1,6 +1,6 @@
 # Panda Federation Tools
 
-> Research and public-data tools on Apify for people and AI agents: check citations for fake or retracted papers, format references, search scholarly literature and PubMed, and find federal grants. Each tool uses official free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF), charges per result, returns JSON with a one-line `summary` per item and a `SUMMARY` record with a `takeaway`, and marks results OK / CHECK / FIX where it applies.
+> Research and public-data tools on Apify for people and AI agents: check citations for fake or retracted papers, format references, search scholarly literature and PubMed, find federal grants and contracts, and build marketing and lead lists (email security, AI search audits, podcasts, local businesses). Each tool uses official or open free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, public DNS, Apple Podcasts, OpenStreetMap), charges per result, returns JSON with a one-line `summary` per item and a `SUMMARY` record with a `takeaway`, and marks results OK / CHECK / FIX where it applies.
 
 Run any tool through Apify's MCP server (https://mcp.apify.com, Actor `pandadad0214/<slug>`), the Apify API (`POST https://api.apify.com/v2/acts/pandadad0214~<slug>/run-sync-get-dataset-items` with an Apify token), or the Apify Console. Full input and output details: [llms-full.txt](llms-full.txt).
 
@@ -31,6 +31,13 @@ Run any tool through Apify's MCP server (https://mcp.apify.com, Actor `pandadad0
 ## Experts
 
 - [Google Scholar Author Alternative (Researcher & Expert Finder)](https://apify.com/pandadad0214/researcher-expert-finder): Use when you need ranked academic experts and key opinion leaders for a research topic.
+
+## Marketing, SEO and leads
+
+- [Email Domain Security Checker](https://apify.com/pandadad0214/email-domain-security-checker): Use when you need to know whether domains have SPF, DKIM, DMARC, MTA-STS and BIMI set up correctly, can be spoofed, and what to fix (email deliverability audit).
+- [AI Search & SEO Audit](https://apify.com/pandadad0214/ai-search-seo-audit): Use when you need SEO and AI-search (GEO) readiness scores for web pages, whether AI crawlers are blocked, ranked fixes and an llms.txt draft.
+- [Podcast Leads Finder](https://apify.com/pandadad0214/podcast-leads-finder): Use when you need active podcasts on a topic with the host, the contact email the show publishes, publishing activity and whether it features guests.
+- [Local Business Leads (Google Maps alternative)](https://apify.com/pandadad0214/local-business-leads): Use when you need local businesses of a type in a city or radius with address, phone, email, website and opening hours from OpenStreetMap.
 
 ## Hire a human (Fiverr)
 

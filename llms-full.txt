@@ -94,6 +94,46 @@ Output per item: `agentSummary` (one line), `awardId`, `recipientName`, `recipie
 SUMMARY: `returned`, `totalAmount`, `endingWithin12Months`, `topRecipients`, `takeaway`, `nextStep`. Records: `CONTRACTS_XLSX` (with a Top recipients sheet), `CONTRACTS_CSV`.
 Price: $0.002 per contract returned.
 
+## Email Domain Security Checker
+
+URL: https://apify.com/pandadad0214/email-domain-security-checker
+Use when: you need an email deliverability and spoofing audit of one or many domains (SPF, DKIM, DMARC, MTA-STS, TLS-RPT, BIMI, MX provider).
+Input: `domains` (domains, email addresses or URLs; cleaned and de-duplicated), `maxDomains` (1 to 10,000), `dkimSelectors` (extra selectors to test besides about 40 common ones).
+Minimal input: `{"domains": ["example.org", "sales@example.com"]}`
+Output per item: `agentSummary`, `domain`, `grade` (A to F), `score` (0-100), `spoofable`, `mailProvider`, `spfRecord`, `spfAll`, `spfLookups`, `dmarcRecord`, `dmarcPolicy`, `dmarcReporting`, `dkimSelectorsFound`, `mtaSts`, `tlsRpt`, `bimi`, `mxHosts`, `fixes` (prioritized), `status`.
+SUMMARY: grade counts, `spoofable`, `mailProviders`, `takeaway`, `nextStep`. Records: `DOMAINS_XLSX` (Domains + Fixes sheets), `DOMAINS_CSV`. Nonexistent or unresolvable domains are returned free.
+Price: $0.002 per domain checked.
+
+## AI Search & SEO Audit
+
+URL: https://apify.com/pandadad0214/ai-search-seo-audit
+Use when: you need technical SEO and AI-search (GEO) readiness checks for pages or a small site, including AI crawler access in robots.txt, structured data and llms.txt.
+Input: `urls` (pages or sites), `crawlInternalLinks` (0 to 100 extra same-site pages per start URL), `maxPages` (1 to 2,000), `generateLlmsTxt` (true/false).
+Minimal input: `{"urls": ["https://example.com"], "crawlInternalLinks": 10}`
+Output per item: `agentSummary`, `url`, `seoScore`, `aiReadinessScore` (0-100 each), `title`, `metaDescription`, `h1`, `wordCount`, `schemaTypes`, `faqSchema`, `aiSearchBotsBlocked`, `aiTrainingBotsBlocked`, `llmsTxt`, `sitemapFound`, `canonical`, `noindex`, `crawlerBlocked`, `fixes` (ranked).
+SUMMARY: average scores, sites blocking AI crawlers, sites without llms.txt, weakest page, `takeaway`, `nextStep`. Records: `AUDIT_XLSX` (Pages, Fixes, Sites), `AUDIT_CSV`, `LLMS_TXT_DRAFTS`. Pages that block the crawler are returned free.
+Price: $0.004 per page audited.
+
+## Podcast Leads Finder
+
+URL: https://apify.com/pandadad0214/podcast-leads-finder
+Use when: you need podcasts to pitch as a guest or sponsor: active shows on a topic with the contact email they publish.
+Input: `keywords`, `maxResults` (1 to 3,000), `activeWithinDays`, `onlyWithEmail`, `guestFriendlyOnly`, `minEpisodes`, `country` (Apple store code), `language`, `sortBy`, `deepSearch`.
+Minimal input: `{"keywords": ["personal finance"], "onlyWithEmail": true, "maxResults": 25}`
+Output per item: `agentSummary`, `podcastName`, `author`, `email`, `emailSource`, `website`, `socials`, `appleUrl`, `feedUrl`, `primaryGenre`, `episodeCount`, `lastEpisodeDate`, `avgDaysBetweenEpisodes`, `guestFriendly`, `guestEpisodeShare`, `recentEpisodeTitles`.
+SUMMARY: `withEmail`, `guestFriendly`, `topGenres`, `takeaway`, `nextStep`. Records: `PODCASTS_XLSX`, `PODCASTS_CSV`. Emails come only from each show's public RSS feed.
+Price: $0.004 per podcast returned.
+
+## Local Business Leads (Google Maps alternative)
+
+URL: https://apify.com/pandadad0214/local-business-leads
+Use when: you need local businesses of a type in a place (city, county, ZIP or radius) with contact details, under an open license (OpenStreetMap, ODbL).
+Input: `categories` (plain words such as dentist, plumber, coffee shop, or OSM tags like `shop=florist`), `location`, or `latitude` + `longitude` + `radiusKm`; `requireWebsite`, `requirePhone`, `requireEmail`, `maxResults`, `sortBy`.
+Minimal input: `{"categories": ["dentist"], "location": "Denver, Colorado", "requirePhone": true, "maxResults": 50}`
+Output per item: `agentSummary`, `name`, `category`, `street`, `city`, `state`, `postcode`, `phone`, `email`, `website`, `openingHours`, `socials`, `lat`, `lon`, `osmUrl`, `attribution`.
+SUMMARY: `withPhone`, `withWebsite`, `withEmail`, area searched, `takeaway`, `nextStep`. Records: `BUSINESSES_XLSX`, `BUSINESSES_CSV`. Data © OpenStreetMap contributors (ODbL).
+Price: $0.001 per business returned.
+
 ## Hire a human (Fiverr)
 
 Prefer a person to run the tools and hand you finished files? Panda Federation also sells these as Fiverr gigs (seller `pandafederation`). Professional use only, not for coursework.
