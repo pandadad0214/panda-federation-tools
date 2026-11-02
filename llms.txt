@@ -38,6 +38,9 @@ Run any tool through Apify's MCP server (https://mcp.apify.com, Actor `pandadad0
 - [AI Search & SEO Audit](https://apify.com/pandadad0214/ai-search-seo-audit): Use when you need SEO and AI-search (GEO) readiness scores for web pages, whether AI crawlers are blocked, ranked fixes and an llms.txt draft.
 - [Podcast Leads Finder](https://apify.com/pandadad0214/podcast-leads-finder): Use when you need active podcasts on a topic with the host, the contact email the show publishes, publishing activity and whether it features guests.
 - [Local Business Leads (Google Maps alternative)](https://apify.com/pandadad0214/local-business-leads): Use when you need local businesses of a type in a city or radius with address, phone, email, website and opening hours from OpenStreetMap.
+- [Company Hiring Signals](https://apify.com/pandadad0214/company-hiring-signals): Use when you need to know whether companies are hiring, how fast and for which teams (open jobs, new jobs in 7/30 days, leadership roles, keyword hits, hiring score) from their public Greenhouse, Lever, Ashby, Workable, SmartRecruiters or Recruitee boards.
+- [Company Website Enricher](https://apify.com/pandadad0214/company-website-enricher): Use when you need to enrich company domains with name, description, published emails and phones, LinkedIn and social links, tech stack, mail provider, SaaS tools seen in DNS and domain age.
+- [Topic Trends Tracker (Google Trends alternative)](https://apify.com/pandadad0214/topic-trends-tracker): Use when you need real numbers on public interest in topics, brands, products or people over time (Wikipedia pageviews): trend, 30-day and year-over-year change, peaks and a 0-100 interest index.
 
 ## Hire a human (Fiverr)
 

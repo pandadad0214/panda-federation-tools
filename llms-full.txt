@@ -134,6 +134,36 @@ Output per item: `agentSummary`, `name`, `category`, `street`, `city`, `state`, 
 SUMMARY: `withPhone`, `withWebsite`, `withEmail`, area searched, `takeaway`, `nextStep`. Records: `BUSINESSES_XLSX`, `BUSINESSES_CSV`. Data © OpenStreetMap contributors (ODbL).
 Price: $0.001 per business returned.
 
+## Company Hiring Signals
+
+URL: https://apify.com/pandadad0214/company-hiring-signals
+Use when: you need a hiring-intent signal per company: whether it is hiring, how fast, for which teams, and whether leadership roles are open (sales triggers, recruiting leads, competitor watch).
+Input: `companies` (domains, names or job-board links such as https://jobs.lever.co/spotify), `titleKeywords` (counted in job titles), `minOpenJobs`, `checkWebsite` (find the exact board on the careers page, robots.txt respected), `maxCompanies` (1 to 5,000).
+Minimal input: `{"companies": ["stripe.com", "Notion"], "titleKeywords": ["SDR"]}`
+Output per item: `agentSummary`, `company`, `domain`, `signal` (hot/warm/cold/none), `hiringScore` (0-100), `openJobs`, `newJobs7d`, `newJobs30d`, `leadershipJobs`, `leadershipTitles`, `topFunctions`, `functionCounts`, `remoteShare`, `topLocations`, `keywordHits`, `newestJobs`, `lastPostedAt`, `ats`, `boardUrl`, `matchedBy`, `status`.
+SUMMARY: `signals`, `hot`, `notFound`, `takeaway`, `nextStep`. Records: `HIRING_XLSX` (Companies + every open job), `COMPANIES_CSV`, `JOBS_CSV`. Companies without a public board are returned free.
+Price: $0.003 per company returned.
+
+## Company Website Enricher
+
+URL: https://apify.com/pandadad0214/company-website-enricher
+Use when: you need firmographic enrichment for company domains from public sources: the company's own website (robots.txt respected), public DNS and RDAP.
+Input: `domains` (domains, URLs or emails), `onlyWithTech` (e.g. Shopify, HubSpot), `onlyWithEmail`, `onlyWithPhone`, `extraPages` (0 to 4 contact/about pages), `maxDomains` (1 to 10,000).
+Minimal input: `{"domains": ["glossier.com", "basecamp.com"]}`
+Output per item: `agentSummary`, `companyName`, `description`, `primaryEmail`, `emails`, `phones`, `linkedinUrl`, `socials`, `address`, `cms`, `techStack`, `techByCategory`, `mailProvider`, `emailSendingTools`, `verifiedServices`, `domainCreated`, `domainAgeYears`, `domainExpires`, `registrar`, `copyrightYear`, `status`.
+SUMMARY: `withEmail`, `withPhone`, `withLinkedIn`, `topTech`, `takeaway`, `nextStep`. Records: `ENRICHED_XLSX` (Companies + Technologies), `ENRICHED_CSV`. Unreachable sites and filtered-out domains are free. Only contacts the company publishes; no guessed personal emails.
+Price: $0.003 per domain returned.
+
+## Topic Trends Tracker (Google Trends alternative)
+
+URL: https://apify.com/pandadad0214/topic-trends-tracker
+Use when: you need to compare public interest in topics, brands, products or people with real numbers over time, without Google Trends rate limits (Wikimedia pageviews API, data from July 2015).
+Input: `topics` (words or Wikipedia links; redirects followed, disambiguation skipped), `months` (1 to 120), `language` (Wikipedia edition, default en), `device` (all/desktop/mobile), `excludeBots` (default true), `includeDailySeries`, `maxTopics`.
+Minimal input: `{"topics": ["ChatGPT", "Ozempic"], "months": 12}`
+Output per item: `agentSummary`, `topic`, `article`, `url`, `interestIndex` (0-100), `trend` (surging/rising/flat/falling), `totalViews`, `avgDailyViews`, `last30dViews`, `change30dPct`, `yoyChangePct`, `peakDate`, `peakViews`, `spikes`, `monthlyViews`, optional `dailyViews`.
+SUMMARY: `ranking`, `notFound`, `takeaway`, `nextStep`. Records: `TRENDS_XLSX` (Topics, Monthly and Daily sheets with one column per topic), `TOPICS_CSV`, `DAILY_CSV`. Topics without an article are free.
+Price: $0.002 per topic tracked.
+
 ## Hire a human (Fiverr)
 
 Prefer a person to run the tools and hand you finished files? Panda Federation also sells these as Fiverr gigs (seller `pandafederation`). Professional use only, not for coursework.

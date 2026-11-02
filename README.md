@@ -1,6 +1,6 @@
 # Panda Federation Tools
 
-Reliable research and public-data tools that run on [Apify](https://apify.com/pandadad0214). Every tool uses official, free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, public DNS, Apple Podcasts, OpenStreetMap), charges only per result, and gives you Excel/CSV/JSON plus a clear **OK / CHECK / FIX** status where it applies. Built with AI assistance.
+Reliable research and public-data tools that run on [Apify](https://apify.com/pandadad0214). Every tool uses official, free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, public DNS, Apple Podcasts, OpenStreetMap, public job-board feeds, Wikimedia), charges only per result, and gives you Excel/CSV/JSON plus a clear **OK / CHECK / FIX** status where it applies. Built with AI assistance.
 
 | Tool | What it does | Price (free plan) |
 |---|---|---|
@@ -18,6 +18,9 @@ Reliable research and public-data tools that run on [Apify](https://apify.com/pa
 | [AI Search & SEO Audit](https://apify.com/pandadad0214/ai-search-seo-audit) | SEO + AI search (GEO) readiness scores per page: AI crawler access, schema, llms.txt, ranked fixes, llms.txt draft | $0.004 / page |
 | [Podcast Leads Finder](https://apify.com/pandadad0214/podcast-leads-finder) | Active podcasts by topic with host, published contact email, activity and a guest-friendly flag | $0.004 / podcast |
 | [Local Business Leads](https://apify.com/pandadad0214/local-business-leads) | Google Maps alternative: local businesses by category and city with phone, email, website and hours from OpenStreetMap | $0.001 / business |
+| [Company Hiring Signals](https://apify.com/pandadad0214/company-hiring-signals) | Which companies are hiring and for which teams: open jobs, new jobs in 7/30 days, leadership roles, keyword hits and a hiring score from Greenhouse, Lever, Ashby, Workable, SmartRecruiters and Recruitee | $0.003 / company |
+| [Company Website Enricher](https://apify.com/pandadad0214/company-website-enricher) | Company domains → name, description, published emails and phones, LinkedIn and socials, tech stack, mail provider, SaaS seen in DNS and domain age | $0.003 / domain |
+| [Topic Trends Tracker](https://apify.com/pandadad0214/topic-trends-tracker) | Google Trends alternative with real numbers: Wikipedia pageviews per topic with trend, 30-day and year-over-year change, peaks and a 0-100 interest index | $0.002 / topic |
 
 Apify's free plan includes $5/month of credit. Bronze, Silver and Gold Apify plans get 10–30% off.
 
@@ -33,6 +36,8 @@ Apify's free plan includes $5/month of credit. Bronze, Silver and Gold Apify pla
 - **Funding:** Grants.gov Scraper → Literature Search on the topic.
 - **Federal contracting:** USAspending Scraper (recompete radar + top incumbents) → Grants.gov Scraper for related funding.
 - **Local prospecting:** Local Business Leads → AI Search & SEO Audit on their websites → Email Domain Security Checker on their domains.
+- **Account prioritization:** Company Hiring Signals (who is growing, which teams) → Company Website Enricher (stack, contacts, socials) → Email Domain Security Checker.
+- **Market and product research:** Topic Trends Tracker (real interest numbers, YoY) → Literature Search or Podcast Leads Finder on the rising topics.
 - **Getting booked on podcasts:** AI Search & SEO Audit on your own site → Podcast Leads Finder.
 - **AI agents:** connect the MCP server so your agent checks its own citations.
 
