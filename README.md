@@ -1,6 +1,6 @@
 # Panda Federation Tools
 
-Reliable research and public-data tools that run on [Apify](https://apify.com/pandadad0214). Every tool uses official, free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, public DNS, Apple Podcasts, OpenStreetMap, public job-board feeds, Wikimedia), charges only per result, and gives you Excel/CSV/JSON plus a clear **OK / CHECK / FIX** status where it applies. Built with AI assistance.
+Reliable research and public-data tools that run on [Apify](https://apify.com/pandadad0214). Every tool uses official, free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, public DNS, Apple Podcasts, OpenStreetMap, public job-board feeds, Wikimedia, FMCSA open data, companies' own websites), charges only per result, and gives you Excel/CSV/JSON plus a clear **OK / CHECK / FIX** status where it applies. Built with AI assistance.
 
 | Tool | What it does | Price (free plan) |
 |---|---|---|
@@ -21,6 +21,9 @@ Reliable research and public-data tools that run on [Apify](https://apify.com/pa
 | [Company Hiring Signals](https://apify.com/pandadad0214/company-hiring-signals) | Which companies are hiring and for which teams: open jobs, new jobs in 7/30 days, leadership roles, keyword hits and a hiring score from Greenhouse, Lever, Ashby, Workable, SmartRecruiters and Recruitee | $0.003 / company |
 | [Company Website Enricher](https://apify.com/pandadad0214/company-website-enricher) | Company domains → name, description, published emails and phones, LinkedIn and socials, tech stack, mail provider, SaaS seen in DNS and domain age | $0.003 / domain |
 | [Topic Trends Tracker](https://apify.com/pandadad0214/topic-trends-tracker) | Google Trends alternative with real numbers: Wikipedia pageviews per topic with trend, 30-day and year-over-year change, peaks and a 0-100 interest index | $0.002 / topic |
+| [Company Team & Decision-Maker Finder](https://apify.com/pandadad0214/company-team-finder) | Company domains → people from their own team and leadership pages: name, title, seniority, department, decision-maker flag, published email or email pattern, LinkedIn links. No LinkedIn scraping | $0.002 / person |
+| [Trucking Company Leads (FMCSA)](https://apify.com/pandadad0214/trucking-company-leads) | New and existing US trucking companies, brokers and forwarders from official FMCSA data: USDOT/MC, phone, email, officers, fleet size, drivers, cargo, by state and registration date | $0.002 / carrier |
+| [Website Change Monitor](https://apify.com/pandadad0214/website-change-monitor) | Watch competitor pricing, terms, careers or any public page: added and removed text, change %, price changes and keyword alerts versus the last run; webhook on change | $0.0015 / page |
 
 Apify's free plan includes $5/month of credit. Bronze, Silver and Gold Apify plans get 10–30% off.
 
@@ -37,6 +40,9 @@ Apify's free plan includes $5/month of credit. Bronze, Silver and Gold Apify pla
 - **Federal contracting:** USAspending Scraper (recompete radar + top incumbents) → Grants.gov Scraper for related funding.
 - **Local prospecting:** Local Business Leads → AI Search & SEO Audit on their websites → Email Domain Security Checker on their domains.
 - **Account prioritization:** Company Hiring Signals (who is growing, which teams) → Company Website Enricher (stack, contacts, socials) → Email Domain Security Checker.
+- **Outbound to decision makers:** Company Hiring Signals → Company Team & Decision-Maker Finder (names, titles, email pattern) → Email Domain Security Checker.
+- **Trucking and logistics sales:** Trucking Company Leads (new FMCSA carriers this week) → Company Website Enricher on carriers with a company domain.
+- **Competitor watch:** Website Change Monitor on competitors' pricing and careers pages, scheduled weekly → Company Hiring Signals for the same companies.
 - **Market and product research:** Topic Trends Tracker (real interest numbers, YoY) → Literature Search or Podcast Leads Finder on the rising topics.
 - **Getting booked on podcasts:** AI Search & SEO Audit on your own site → Podcast Leads Finder.
 - **AI agents:** connect the MCP server so your agent checks its own citations.

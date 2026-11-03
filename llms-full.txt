@@ -164,6 +164,36 @@ Output per item: `agentSummary`, `topic`, `article`, `url`, `interestIndex` (0-1
 SUMMARY: `ranking`, `notFound`, `takeaway`, `nextStep`. Records: `TRENDS_XLSX` (Topics, Monthly and Daily sheets with one column per topic), `TOPICS_CSV`, `DAILY_CSV`. Topics without an article are free.
 Price: $0.002 per topic tracked.
 
+## Company Team & Decision-Maker Finder
+
+URL: https://apify.com/pandadad0214/company-team-finder
+Use when: you need the people behind companies (leaders, decision makers, staff) with titles from each company's own public website: team, leadership, about, staff, attorney and partner pages (robots.txt respected, no LinkedIn scraping, no logins).
+Input: `companies` (domains, URLs, team-page URLs or work emails), `decisionMakersOnly`, `titleKeywords`, `departments`, `maxPeoplePerCompany` (default 50), `maxPagesPerCompany` (2 to 20, default 6), `maxCompanies` (1 to 5,000).
+Minimal input: `{"companies": ["sparkbox.com"], "decisionMakersOnly": true}`
+Output per item: `agentSummary`, `company`, `domain`, `name`, `firstName`, `lastName`, `title`, `seniority` (c-level, founder/owner, president, partner, vp, director, manager, individual), `department`, `isDecisionMaker`, `email` (published), `emailGuess` + `emailConfidence` (pattern from published emails, or unverified first.last), `linkedinUrl`, `profileUrl`, `sourceUrl`, `foundVia`.
+SUMMARY: `companies` (status, team pages, email pattern per company), `topPeople`, `decisionMakers`, `takeaway`, `nextStep`. Records: `PEOPLE_XLSX` (People + Companies), `PEOPLE_CSV`. Companies with no readable team page, and people removed by filters, are free.
+Price: $0.002 per person returned.
+
+## Trucking Company Leads (FMCSA)
+
+URL: https://apify.com/pandadad0214/trucking-company-leads
+Use when: you need US motor carriers, freight brokers or forwarders from the official FMCSA Company Census File (data.transportation.gov, updated daily), especially new entrants registered in the last N days.
+Input: `mode` (new / search / lookup), `daysBack`, `states`, `cities`, `zipPrefixes`, `minPowerUnits`, `maxPowerUnits`, `minDrivers`, `maxDrivers`, `operation` (A interstate, B intrastate hazmat, C intrastate non-hazmat), `carrierClass` (forHire/private/exempt/passenger), `entityType` (C carrier, B broker, F forwarder, S shipper, I IEP), `cargo`, `hazmatOnly`, `requireEmail`, `requirePhone`, `nameContains`, `updatedWithinDays`, `dotNumbers` (lookup), `activeOnly`, `maxResults` (1 to 100,000).
+Minimal input: `{"mode": "new", "daysBack": 7, "states": ["TX"]}`
+Output per item: `agentSummary`, `dotNumber`, `mcNumber`, `dockets`, `legalName`, `dbaName`, `status`, `addedDate`, `daysSinceAdded`, `officers`, `phone`, `cellPhone`, `email`, `companyEmailDomain`, `street`, `city`, `state`, `zip`, `powerUnits`, `trucks`, `drivers`, `cdlDrivers`, `fleetBand`, `cargo`, `hazmat`, `operation`, `carrierClasses`, `entityTypes`, `safetyRating`, `lastFilingDate`, `tags`, `saferUrl`.
+SUMMARY: `withEmail`, `withPhone`, `byState`, `fleetBands`, `newestRegistration`, `takeaway`, `nextStep`. Records: `CARRIERS_XLSX` (Carriers + By state), `CARRIERS_CSV`. Runs that match nothing are free.
+Price: $0.002 per carrier returned.
+
+## Website Change Monitor
+
+URL: https://apify.com/pandadad0214/website-change-monitor
+Use when: you need to know if public web pages changed since the previous check, and what changed. Snapshots are kept in the caller's own Apify account (key-value store `panda-change-monitor-<monitorName>`), so repeated calls with the same `monitorName` compare against the last call.
+Input: `urls` (one per line, optional label after " | "), `monitorName`, `watchKeywords`, `cssSelector`, `ignorePatterns` (regex), `ignoreNumbersAndDates`, `minChangePercent`, `onlyReportChanges`, `webhookUrl` (https; POSTed only when pages changed), `maxPages`.
+Minimal input: `{"urls": ["https://example.com/pricing"], "monitorName": "my-watch"}`
+Output per item: `agentSummary`, `url`, `label`, `status` (baseline saved / changed / unchanged / unchanged (below threshold) / error), `changed`, `changePercent`, `addedCount`, `removedCount`, `addedLines`, `removedLines`, `prices`, `priceChanges`, `keywordsPresent`, `keywordsAppeared`, `keywordsDisappeared`, `titleBefore`, `titleAfter`, `previousCheckAt`.
+SUMMARY: `changed` (changed pages with summaries), `failed`, `counts`, `takeaway`, `nextStep`. Records: `CHANGES_XLSX` (Pages + every added/removed line), `PAGES_CSV`. Pages that can't be fetched are free.
+Price: $0.0015 per page checked.
+
 ## Hire a human (Fiverr)
 
 Prefer a person to run the tools and hand you finished files? Panda Federation also sells these as Fiverr gigs (seller `pandafederation`). Professional use only, not for coursework.
