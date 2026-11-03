@@ -37,4 +37,4 @@ Tools are generated from the public Apify Store, so the MCP schema always matche
 Pin new dependencies exactly in `pyproject.toml`, run `uv lock`, and commit `uv.lock`. Dependabot proposes updates weekly.
 
 ## Releases
-Bump the version in `pyproject.toml`, `src/panda_federation_tools/__init__.py` and `server.json` together (a test checks they match), update the changelog, then tag `vX.Y.Z`.
+Bump the version in `pyproject.toml`, `src/panda_federation_tools/__init__.py` and `server.json` together (a test checks they match), update the changelog, then tag `vX.Y.Z`. Pushing the tag publishes `server.json` to the official MCP Registry through GitHub OIDC (`.github/workflows/publish-mcp-registry.yml`); no registry token is stored.
