@@ -2,11 +2,12 @@
 
 > Research and public-data tools on Apify. Every batch tool writes one dataset item per result (with a one-line `summary` field; Grants Finder calls it `agentSummary`) and a `SUMMARY` record in the run's key-value store with counts, a one-line `takeaway` and, where there is one, a `nextStep` pointing to the logical follow-on tool. Status, where used: OK = verified / safe, CHECK = read the note, FIX = do not use as written.
 
-How to call: Apify MCP server `https://mcp.apify.com` (tool `call-actor`, Actor `pandadad0214/<slug>`), or `POST https://api.apify.com/v2/acts/pandadad0214~<slug>/run-sync-get-dataset-items` with `Authorization: Bearer <Apify token>` and the JSON input as the body. Every input field in each Actor's input schema has a description with formats, units and limits. Pricing is pay per result; Apify Bronze, Silver and Gold plans get 10%, 20% and 30% off.
+How to call: this repo's MCP server (stdio; `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.0.0 panda-federation-tools`, env `APIFY_TOKEN`; tool names below, each also takes optional `run_max_items`, `run_max_charge_usd` and `run_timeout_secs`; inputs are validated against the Actor's schema before any run), Apify MCP server `https://mcp.apify.com` (tool `call-actor`, Actor `pandadad0214/<slug>`), or `POST https://api.apify.com/v2/acts/pandadad0214~<slug>/run-sync-get-dataset-items` with `Authorization: Bearer <Apify token>` and the JSON input as the body. Every input field in each Actor's input schema has a description with formats, units and limits. Pricing is pay per result; Apify Bronze, Silver and Gold plans get 10%, 20% and 30% off.
 
 ## Reference Checker
 
 URL: https://apify.com/pandadad0214/reference-checker
+MCP tool (this repo): `reference_checker`
 Use when: you need to verify that references are real, correctly cited and not retracted.
 Input: `bibliography` (pasted reference list, any style), `dois` (list), `titles` (list); options `minMatchScore` (50 to 100, default 80), `checkOpenAccess`, `maxReferences` (1 to 20,000). `mode: "monitor"` with `dois` or `orcid` re-checks a list on a schedule and reports only new retractions.
 Minimal input: `{"dois": ["10.1038/nature14539"]}`
@@ -17,6 +18,7 @@ Price: $0.01 per reference checked.
 ## Citation Generator API
 
 URL: https://apify.com/pandadad0214/citation-formatter
+MCP tool (this repo): `citation_formatter`
 Use when: you need formatted citations from DOIs, ISBNs, PMIDs, arXiv IDs, titles or messy references.
 Input: `references` (list), or `text` (pasted bibliography or .bib/.ris contents); `styles` (apa, mla, chicago, harvard, ieee, vancouver), `includeBibtex`, `includeRis`, `maxReferences`.
 Minimal input: `{"references": ["10.1038/nature14539"], "styles": ["apa"]}`
@@ -27,6 +29,7 @@ Price: $0.003 per formatted citation.
 ## Google Scholar Scraper Alternative (Literature Search)
 
 URL: https://apify.com/pandadad0214/literature-search
+MCP tool (this repo): `literature_search`
 Use when: you need real papers on a topic or around seed papers.
 Input: `query` (words or Boolean, quotes for phrases) and/or `seedDois` with `seedMode`; `yearFrom`/`yearTo` (years), `minCitations`, `openAccessOnly`, `types`, `sortBy`, `maxResults` (1 to 2,000), `citationStyle`.
 Minimal input: `{"query": "retrieval augmented generation clinical", "maxResults": 20}`
@@ -37,6 +40,7 @@ Price: $0.003 per paper returned.
 ## PubMed Scraper (Evidence Table)
 
 URL: https://apify.com/pandadad0214/pubmed-evidence-table
+MCP tool (this repo): `pubmed_evidence_table`
 Use when: you need PubMed studies for a review in an evidence table.
 Input: `queries` (list of PubMed search strings, field tags allowed), `dateFrom`/`dateTo` (YYYY, YYYY-MM or YYYY-MM-DD), `studyDesigns`, `excludeAnimalOnly`, `languages`, `retractedArticles` (flag or exclude), `maxResults` (1 to 10,000), `citationStyle`.
 Minimal input: `{"queries": ["semaglutide[tiab] AND obesity[tiab]"], "maxResults": 20}`
@@ -47,6 +51,7 @@ Price: $0.004 per article returned.
 ## Grants.gov Scraper (Grants Finder)
 
 URL: https://apify.com/pandadad0214/grants-finder
+MCP tool (this repo): `grants_finder`
 Use when: you need open or forecasted US federal grant opportunities, or funded NIH and NSF awards.
 Input: `keywords` (required), `sources` (grants_gov, nih, nsf), `maxResultsPerSource` (1 to 1,000), `agencies`, `dateFrom`/`dateTo` (YYYY, YYYY-MM or YYYY-MM-DD), `minAmount`/`maxAmount` (USD), `grantsGovStatuses`, `sortBy`.
 Minimal input: `{"keywords": "rural broadband", "maxResultsPerSource": 10}`
@@ -66,6 +71,7 @@ Price: $0.01 per reference tool call, $0.02 per search tool call; failed or empt
 ## PDF Table Extractor (PDF to Excel & CSV)
 
 URL: https://apify.com/pandadad0214/pdf-table-extractor
+MCP tool (this repo): `pdf_table_extractor`
 Use when: you need every table in a PDF extracted to Excel and CSV, with OCR for scanned pages.
 Input/output: PDF URLs or uploads in; one item per table (pages, header, row and column counts, cell data, `summary`) plus Excel and CSV files out.
 Price: $0.001 per PDF page analysed.
@@ -73,6 +79,7 @@ Price: $0.001 per PDF page analysed.
 ## NPI Registry Scraper (NPI Provider Lists)
 
 URL: https://apify.com/pandadad0214/npi-provider-lists
+MCP tool (this repo): `npi_provider_lists`
 Use when: you need de-duplicated lists of US healthcare providers from the official NPI Registry.
 Input/output: specialties plus states, cities or ZIP codes in; one de-duplicated provider per item (NPI, name, specialty, address, phone, `summary`) plus Excel out.
 Price: $0.0015 per provider.
@@ -80,6 +87,7 @@ Price: $0.0015 per provider.
 ## Google Scholar Author Alternative (Researcher & Expert Finder)
 
 URL: https://apify.com/pandadad0214/researcher-expert-finder
+MCP tool (this repo): `researcher_expert_finder`
 Use when: you need ranked academic experts and key opinion leaders for a research topic.
 Input/output: a research topic in; ranked experts (expert score, ORCID, institution, h-index, topic papers, `summary`) plus Excel out.
 Price: $0.0025 per expert.
@@ -87,6 +95,7 @@ Price: $0.0025 per expert.
 ## USAspending Scraper (Federal Contract Finder)
 
 URL: https://apify.com/pandadad0214/federal-contract-finder
+MCP tool (this repo): `federal_contract_finder`
 Use when: you need US federal contract awards, the incumbents in a market, or contracts whose period of performance ends soon (recompete leads).
 Input: `mode` (awards or recompete), `keywords`, `naicsCodes`, `pscCodes`, `agencies` (name or abbreviation, e.g. DOD, VA, Department of the Army), `performanceStates`, `setAsides` (SBA, 8A, HZC, SDVOSBC, WOSB…), `recipientNames`, `recompeteMonths` (1 to 36), `dateFrom`/`dateTo`, `minAmount`/`maxAmount`, `maxResults` (1 to 5,000), `sortBy`. At least one filter is required.
 Minimal input: `{"mode": "recompete", "naicsCodes": ["541512"], "recompeteMonths": 12, "maxResults": 20}`
@@ -97,6 +106,7 @@ Price: $0.002 per contract returned.
 ## Email Domain Security Checker
 
 URL: https://apify.com/pandadad0214/email-domain-security-checker
+MCP tool (this repo): `email_domain_security_checker`
 Use when: you need an email deliverability and spoofing audit of one or many domains (SPF, DKIM, DMARC, MTA-STS, TLS-RPT, BIMI, MX provider).
 Input: `domains` (domains, email addresses or URLs; cleaned and de-duplicated), `maxDomains` (1 to 10,000), `dkimSelectors` (extra selectors to test besides about 40 common ones).
 Minimal input: `{"domains": ["example.org", "sales@example.com"]}`
@@ -107,6 +117,7 @@ Price: $0.002 per domain checked.
 ## AI Search & SEO Audit
 
 URL: https://apify.com/pandadad0214/ai-search-seo-audit
+MCP tool (this repo): `ai_search_seo_audit`
 Use when: you need technical SEO and AI-search (GEO) readiness checks for pages or a small site, including AI crawler access in robots.txt, structured data and llms.txt.
 Input: `urls` (pages or sites), `crawlInternalLinks` (0 to 100 extra same-site pages per start URL), `maxPages` (1 to 2,000), `generateLlmsTxt` (true/false).
 Minimal input: `{"urls": ["https://example.com"], "crawlInternalLinks": 10}`
@@ -117,6 +128,7 @@ Price: $0.004 per page audited.
 ## Podcast Leads Finder
 
 URL: https://apify.com/pandadad0214/podcast-leads-finder
+MCP tool (this repo): `podcast_leads_finder`
 Use when: you need podcasts to pitch as a guest or sponsor: active shows on a topic with the contact email they publish.
 Input: `keywords`, `maxResults` (1 to 3,000), `activeWithinDays`, `onlyWithEmail`, `guestFriendlyOnly`, `minEpisodes`, `country` (Apple store code), `language`, `sortBy`, `deepSearch`.
 Minimal input: `{"keywords": ["personal finance"], "onlyWithEmail": true, "maxResults": 25}`
@@ -127,6 +139,7 @@ Price: $0.004 per podcast returned.
 ## Local Business Leads (Google Maps alternative)
 
 URL: https://apify.com/pandadad0214/local-business-leads
+MCP tool (this repo): `local_business_leads`
 Use when: you need local businesses of a type in a place (city, county, ZIP or radius) with contact details, under an open license (OpenStreetMap, ODbL).
 Input: `categories` (plain words such as dentist, plumber, coffee shop, or OSM tags like `shop=florist`), `location`, or `latitude` + `longitude` + `radiusKm`; `requireWebsite`, `requirePhone`, `requireEmail`, `maxResults`, `sortBy`.
 Minimal input: `{"categories": ["dentist"], "location": "Denver, Colorado", "requirePhone": true, "maxResults": 50}`
@@ -137,6 +150,7 @@ Price: $0.001 per business returned.
 ## Company Hiring Signals
 
 URL: https://apify.com/pandadad0214/company-hiring-signals
+MCP tool (this repo): `company_hiring_signals`
 Use when: you need a hiring-intent signal per company: whether it is hiring, how fast, for which teams, and whether leadership roles are open (sales triggers, recruiting leads, competitor watch).
 Input: `companies` (domains, names or job-board links such as https://jobs.lever.co/spotify), `titleKeywords` (counted in job titles), `minOpenJobs`, `checkWebsite` (find the exact board on the careers page, robots.txt respected), `maxCompanies` (1 to 5,000).
 Minimal input: `{"companies": ["stripe.com", "Notion"], "titleKeywords": ["SDR"]}`
@@ -147,6 +161,7 @@ Price: $0.003 per company returned.
 ## Company Website Enricher
 
 URL: https://apify.com/pandadad0214/company-website-enricher
+MCP tool (this repo): `company_website_enricher`
 Use when: you need firmographic enrichment for company domains from public sources: the company's own website (robots.txt respected), public DNS and RDAP.
 Input: `domains` (domains, URLs or emails), `onlyWithTech` (e.g. Shopify, HubSpot), `onlyWithEmail`, `onlyWithPhone`, `extraPages` (0 to 4 contact/about pages), `maxDomains` (1 to 10,000).
 Minimal input: `{"domains": ["glossier.com", "basecamp.com"]}`
@@ -157,6 +172,7 @@ Price: $0.003 per domain returned.
 ## Topic Trends Tracker (Google Trends alternative)
 
 URL: https://apify.com/pandadad0214/topic-trends-tracker
+MCP tool (this repo): `topic_trends_tracker`
 Use when: you need to compare public interest in topics, brands, products or people with real numbers over time, without Google Trends rate limits (Wikimedia pageviews API, data from July 2015).
 Input: `topics` (words or Wikipedia links; redirects followed, disambiguation skipped), `months` (1 to 120), `language` (Wikipedia edition, default en), `device` (all/desktop/mobile), `excludeBots` (default true), `includeDailySeries`, `maxTopics`.
 Minimal input: `{"topics": ["ChatGPT", "Ozempic"], "months": 12}`
@@ -167,6 +183,7 @@ Price: $0.002 per topic tracked.
 ## Company Team & Decision-Maker Finder
 
 URL: https://apify.com/pandadad0214/company-team-finder
+MCP tool (this repo): `company_team_finder`
 Use when: you need the people behind companies (leaders, decision makers, staff) with titles from each company's own public website: team, leadership, about, staff, attorney and partner pages (robots.txt respected, no LinkedIn scraping, no logins).
 Input: `companies` (domains, URLs, team-page URLs or work emails), `decisionMakersOnly`, `titleKeywords`, `departments`, `maxPeoplePerCompany` (default 50), `maxPagesPerCompany` (2 to 20, default 6), `maxCompanies` (1 to 5,000).
 Minimal input: `{"companies": ["sparkbox.com"], "decisionMakersOnly": true}`
@@ -177,6 +194,7 @@ Price: $0.002 per person returned.
 ## Trucking Company Leads (FMCSA)
 
 URL: https://apify.com/pandadad0214/trucking-company-leads
+MCP tool (this repo): `trucking_company_leads`
 Use when: you need US motor carriers, freight brokers or forwarders from the official FMCSA Company Census File (data.transportation.gov, updated daily), especially new entrants registered in the last N days.
 Input: `mode` (new / search / lookup), `daysBack`, `states`, `cities`, `zipPrefixes`, `minPowerUnits`, `maxPowerUnits`, `minDrivers`, `maxDrivers`, `operation` (A interstate, B intrastate hazmat, C intrastate non-hazmat), `carrierClass` (forHire/private/exempt/passenger), `entityType` (C carrier, B broker, F forwarder, S shipper, I IEP), `cargo`, `hazmatOnly`, `requireEmail`, `requirePhone`, `nameContains`, `updatedWithinDays`, `dotNumbers` (lookup), `activeOnly`, `maxResults` (1 to 100,000).
 Minimal input: `{"mode": "new", "daysBack": 7, "states": ["TX"]}`
@@ -187,6 +205,7 @@ Price: $0.002 per carrier returned.
 ## Website Change Monitor
 
 URL: https://apify.com/pandadad0214/website-change-monitor
+Status: publishing soon (not yet public; not yet in this repo's MCP server).
 Use when: you need to know if public web pages changed since the previous check, and what changed. Snapshots are kept in the caller's own Apify account (key-value store `panda-change-monitor-<monitorName>`), so repeated calls with the same `monitorName` compare against the last call.
 Input: `urls` (one per line, optional label after " | "), `monitorName`, `watchKeywords`, `cssSelector`, `ignorePatterns` (regex), `ignoreNumbersAndDates`, `minChangePercent`, `onlyReportChanges`, `webhookUrl` (https; POSTed only when pages changed), `maxPages`.
 Minimal input: `{"urls": ["https://example.com/pricing"], "monitorName": "my-watch"}`

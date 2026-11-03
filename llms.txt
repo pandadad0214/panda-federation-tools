@@ -2,21 +2,21 @@
 
 > Research and public-data tools on Apify for people and AI agents: check citations for fake or retracted papers, format references, search scholarly literature and PubMed, find federal grants and contracts, and build marketing and lead lists (email security, AI search audits, podcasts, local businesses). Each tool uses official or open free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, public DNS, Apple Podcasts, OpenStreetMap), charges per result, returns JSON with a one-line `summary` per item and a `SUMMARY` record with a `takeaway`, and marks results OK / CHECK / FIX where it applies.
 
-Run any tool through Apify's MCP server (https://mcp.apify.com, Actor `pandadad0214/<slug>`), the Apify API (`POST https://api.apify.com/v2/acts/pandadad0214~<slug>/run-sync-get-dataset-items` with an Apify token), or the Apify Console. Full input and output details: [llms-full.txt](llms-full.txt).
+Run any tool through this repo's open-source MCP server (stdio, Python): `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.0.0 panda-federation-tools` with `APIFY_TOKEN` set; each tool is exposed under the MCP tool name shown in brackets. You can also use Apify's MCP server (https://mcp.apify.com, Actor `pandadad0214/<slug>`), the Apify API (`POST https://api.apify.com/v2/acts/pandadad0214~<slug>/run-sync-get-dataset-items` with an Apify token), or the Apify Console. Full input and output details: [llms-full.txt](llms-full.txt).
 
 ## Citations and references
 
-- [Reference Checker](https://apify.com/pandadad0214/reference-checker): Use when you need to know whether references, DOIs or paper titles are real, correctly cited and not retracted (catches AI-hallucinated citations).
-- [Citation Generator API](https://apify.com/pandadad0214/citation-formatter): Use when you need DOIs, ISBNs, PMIDs, arXiv IDs or messy references turned into APA, MLA, Chicago, Harvard, IEEE, Vancouver, BibTeX or RIS.
+- [Reference Checker](https://apify.com/pandadad0214/reference-checker) [MCP tool `reference_checker`]: Use when you need to know whether references, DOIs or paper titles are real, correctly cited and not retracted (catches AI-hallucinated citations).
+- [Citation Generator API](https://apify.com/pandadad0214/citation-formatter) [MCP tool `citation_formatter`]: Use when you need DOIs, ISBNs, PMIDs, arXiv IDs or messy references turned into APA, MLA, Chicago, Harvard, IEEE, Vancouver, BibTeX or RIS.
 
 ## Literature search
 
-- [Google Scholar Scraper Alternative (Literature Search)](https://apify.com/pandadad0214/literature-search): Use when you need real scholarly papers on a topic, ranked, with citation counts, free PDF links, retraction flags and BibTeX.
-- [PubMed Scraper (Evidence Table)](https://apify.com/pandadad0214/pubmed-evidence-table): Use when you need PubMed studies in a screening-ready evidence table with study design, sample size, retraction status and PRISMA counts.
+- [Google Scholar Scraper Alternative (Literature Search)](https://apify.com/pandadad0214/literature-search) [MCP tool `literature_search`]: Use when you need real scholarly papers on a topic, ranked, with citation counts, free PDF links, retraction flags and BibTeX.
+- [PubMed Scraper (Evidence Table)](https://apify.com/pandadad0214/pubmed-evidence-table) [MCP tool `pubmed_evidence_table`]: Use when you need PubMed studies in a screening-ready evidence table with study design, sample size, retraction status and PRISMA counts.
 
 ## Funding
 
-- [Grants.gov Scraper (Grants Finder)](https://apify.com/pandadad0214/grants-finder): Use when you need open or upcoming US federal grant opportunities plus funded NIH and NSF awards in one table.
+- [Grants.gov Scraper (Grants Finder)](https://apify.com/pandadad0214/grants-finder) [MCP tool `grants_finder`]: Use when you need open or upcoming US federal grant opportunities plus funded NIH and NSF awards in one table.
 
 ## For AI agents (MCP)
 
@@ -24,26 +24,26 @@ Run any tool through Apify's MCP server (https://mcp.apify.com, Actor `pandadad0
 
 ## Documents and public data
 
-- [PDF Table Extractor (PDF to Excel & CSV)](https://apify.com/pandadad0214/pdf-table-extractor): Use when you need every table in a PDF extracted to Excel and CSV, with OCR for scanned pages.
-- [NPI Registry Scraper (NPI Provider Lists)](https://apify.com/pandadad0214/npi-provider-lists): Use when you need de-duplicated lists of US healthcare providers from the official NPI Registry.
-- [USAspending Scraper (Federal Contract Finder)](https://apify.com/pandadad0214/federal-contract-finder): Use when you need US federal contract awards, the incumbents in a market, or contracts ending soon (recompete leads) by NAICS, PSC, agency, state or set-aside.
+- [PDF Table Extractor (PDF to Excel & CSV)](https://apify.com/pandadad0214/pdf-table-extractor) [MCP tool `pdf_table_extractor`]: Use when you need every table in a PDF extracted to Excel and CSV, with OCR for scanned pages.
+- [NPI Registry Scraper (NPI Provider Lists)](https://apify.com/pandadad0214/npi-provider-lists) [MCP tool `npi_provider_lists`]: Use when you need de-duplicated lists of US healthcare providers from the official NPI Registry.
+- [USAspending Scraper (Federal Contract Finder)](https://apify.com/pandadad0214/federal-contract-finder) [MCP tool `federal_contract_finder`]: Use when you need US federal contract awards, the incumbents in a market, or contracts ending soon (recompete leads) by NAICS, PSC, agency, state or set-aside.
 
 ## Experts
 
-- [Google Scholar Author Alternative (Researcher & Expert Finder)](https://apify.com/pandadad0214/researcher-expert-finder): Use when you need ranked academic experts and key opinion leaders for a research topic.
+- [Google Scholar Author Alternative (Researcher & Expert Finder)](https://apify.com/pandadad0214/researcher-expert-finder) [MCP tool `researcher_expert_finder`]: Use when you need ranked academic experts and key opinion leaders for a research topic.
 
 ## Marketing, SEO and leads
 
-- [Email Domain Security Checker](https://apify.com/pandadad0214/email-domain-security-checker): Use when you need to know whether domains have SPF, DKIM, DMARC, MTA-STS and BIMI set up correctly, can be spoofed, and what to fix (email deliverability audit).
-- [AI Search & SEO Audit](https://apify.com/pandadad0214/ai-search-seo-audit): Use when you need SEO and AI-search (GEO) readiness scores for web pages, whether AI crawlers are blocked, ranked fixes and an llms.txt draft.
-- [Podcast Leads Finder](https://apify.com/pandadad0214/podcast-leads-finder): Use when you need active podcasts on a topic with the host, the contact email the show publishes, publishing activity and whether it features guests.
-- [Local Business Leads (Google Maps alternative)](https://apify.com/pandadad0214/local-business-leads): Use when you need local businesses of a type in a city or radius with address, phone, email, website and opening hours from OpenStreetMap.
-- [Company Hiring Signals](https://apify.com/pandadad0214/company-hiring-signals): Use when you need to know whether companies are hiring, how fast and for which teams (open jobs, new jobs in 7/30 days, leadership roles, keyword hits, hiring score) from their public Greenhouse, Lever, Ashby, Workable, SmartRecruiters or Recruitee boards.
-- [Company Website Enricher](https://apify.com/pandadad0214/company-website-enricher): Use when you need to enrich company domains with name, description, published emails and phones, LinkedIn and social links, tech stack, mail provider, SaaS tools seen in DNS and domain age.
-- [Topic Trends Tracker (Google Trends alternative)](https://apify.com/pandadad0214/topic-trends-tracker): Use when you need real numbers on public interest in topics, brands, products or people over time (Wikipedia pageviews): trend, 30-day and year-over-year change, peaks and a 0-100 interest index.
-- [Company Team & Decision-Maker Finder](https://apify.com/pandadad0214/company-team-finder): Use when you need the leaders and decision makers of companies (name, title, seniority, department, published email or email pattern, LinkedIn link) from their own public team and leadership pages, without scraping LinkedIn.
-- [Trucking Company Leads (FMCSA)](https://apify.com/pandadad0214/trucking-company-leads): Use when you need new or existing US trucking companies, freight brokers or forwarders with USDOT/MC number, phone, email, officers, fleet size, drivers and cargo from official FMCSA open data, filtered by state, registration date and fleet size.
-- [Website Change Monitor](https://apify.com/pandadad0214/website-change-monitor): Use when you need to know whether public web pages changed since the last check and what changed (added/removed text, change percent, price changes, keyword alerts), e.g. competitor pricing, terms or careers pages.
+- [Email Domain Security Checker](https://apify.com/pandadad0214/email-domain-security-checker) [MCP tool `email_domain_security_checker`]: Use when you need to know whether domains have SPF, DKIM, DMARC, MTA-STS and BIMI set up correctly, can be spoofed, and what to fix (email deliverability audit).
+- [AI Search & SEO Audit](https://apify.com/pandadad0214/ai-search-seo-audit) [MCP tool `ai_search_seo_audit`]: Use when you need SEO and AI-search (GEO) readiness scores for web pages, whether AI crawlers are blocked, ranked fixes and an llms.txt draft.
+- [Podcast Leads Finder](https://apify.com/pandadad0214/podcast-leads-finder) [MCP tool `podcast_leads_finder`]: Use when you need active podcasts on a topic with the host, the contact email the show publishes, publishing activity and whether it features guests.
+- [Local Business Leads (Google Maps alternative)](https://apify.com/pandadad0214/local-business-leads) [MCP tool `local_business_leads`]: Use when you need local businesses of a type in a city or radius with address, phone, email, website and opening hours from OpenStreetMap.
+- [Company Hiring Signals](https://apify.com/pandadad0214/company-hiring-signals) [MCP tool `company_hiring_signals`]: Use when you need to know whether companies are hiring, how fast and for which teams (open jobs, new jobs in 7/30 days, leadership roles, keyword hits, hiring score) from their public Greenhouse, Lever, Ashby, Workable, SmartRecruiters or Recruitee boards.
+- [Company Website Enricher](https://apify.com/pandadad0214/company-website-enricher) [MCP tool `company_website_enricher`]: Use when you need to enrich company domains with name, description, published emails and phones, LinkedIn and social links, tech stack, mail provider, SaaS tools seen in DNS and domain age.
+- [Topic Trends Tracker (Google Trends alternative)](https://apify.com/pandadad0214/topic-trends-tracker) [MCP tool `topic_trends_tracker`]: Use when you need real numbers on public interest in topics, brands, products or people over time (Wikipedia pageviews): trend, 30-day and year-over-year change, peaks and a 0-100 interest index.
+- [Company Team & Decision-Maker Finder](https://apify.com/pandadad0214/company-team-finder) [MCP tool `company_team_finder`]: Use when you need the leaders and decision makers of companies (name, title, seniority, department, published email or email pattern, LinkedIn link) from their own public team and leadership pages, without scraping LinkedIn.
+- [Trucking Company Leads (FMCSA)](https://apify.com/pandadad0214/trucking-company-leads) [MCP tool `trucking_company_leads`]: Use when you need new or existing US trucking companies, freight brokers or forwarders with USDOT/MC number, phone, email, officers, fleet size, drivers and cargo from official FMCSA open data, filtered by state, registration date and fleet size.
+- [Website Change Monitor](https://apify.com/pandadad0214/website-change-monitor) (publishing soon): Use when you need to know whether public web pages changed since the last check and what changed (added/removed text, change percent, price changes, keyword alerts), e.g. competitor pricing, terms or careers pages.
 
 ## Hire a human (Fiverr)
 
@@ -55,5 +55,7 @@ Prefer a person to run the tools and hand you finished files? Panda Federation a
 - [Scholarly source lists (Fiverr)](https://www.fiverr.com/pandafederation/find-and-screen-scholarly-sources-for-your-topic-with-excel-bibtex-and-ris): Use when you want a screened list of scholarly sources on a topic, with retraction flags and Excel, BibTeX and RIS files (PubMed study table available as an add-on). From $25, 2-5 days.
 
 ## Optional
+
+- [Source code, install and security notes (GitHub)](https://github.com/pandadad0214/panda-federation-tools): the MCP server in this repo, client configs for Claude, Cursor and VS Code, and SECURITY.md.
 
 - [All Panda Federation tools on Apify](https://apify.com/pandadad0214)
