@@ -205,6 +205,7 @@ curl -X POST "https://api.apify.com/v2/acts/pandadad0214~reference-checker/run-s
 ## For AI agents and LLMs
 - [`llms.txt`](llms.txt): short index of every tool and when to use it ([llms.txt convention](https://llmstxt.org)).
 - [`llms-full.txt`](llms-full.txt): each tool's inputs, outputs and prices in one file.
+- [`llms-install.md`](llms-install.md): step-by-step setup for AI coding agents such as Cline.
 - Every result has a one-line summary field (`summary` on the citation, literature, PubMed, PDF, NPI and expert tools; `agentSummary` on the others), and every run saves a `SUMMARY` record with a `takeaway` and the suggested next tool.
 - Start small (one or two inputs), read the summary line, then widen.
 
