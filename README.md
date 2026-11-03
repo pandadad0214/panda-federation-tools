@@ -104,6 +104,7 @@ Use the same stdio command in that client's MCP settings:
 - **Command:** `uvx`
 - **Args:** `--from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1 panda-federation-tools`
 - **Env:** `APIFY_TOKEN=apify_api_YOUR_TOKEN`
+- **Cline:** also set `"timeout": 60` (seconds). Starting with uvx from GitHub can take longer than Cline's 10-second default. Step-by-step setup is in [`llms-install.md`](llms-install.md).
 
 Prefer pip? `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1"`, then run `panda-federation-tools` as the command.
 
