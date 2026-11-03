@@ -4,7 +4,7 @@
   "title": "Panda Research MCP",
   "description": "Check citations, catch fake/retracted papers, search OpenAlex & PubMed, format references.",
   "websiteUrl": "https://apify.com/pandadad0214/panda-research-mcp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "remotes": [
     {
       "type": "streamable-http",

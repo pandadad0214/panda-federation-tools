@@ -67,15 +67,67 @@ async def test_error_mapping(status, pattern):
     assert TOKEN not in str(info.value)
 
 
-async def test_retries_once_on_5xx():
+async def test_retries_once_on_429():
     calls = []
 
     def handler(request):
         calls.append(1)
-        return httpx.Response(503) if len(calls) == 1 else httpx.Response(200, json=[])
+        return httpx.Response(429) if len(calls) == 1 else httpx.Response(200, json=[])
 
     assert await run(client(handler)) == []
     assert len(calls) == 2
+
+
+@pytest.mark.parametrize("status", [500, 502, 503, 504])
+async def test_never_retries_5xx_so_runs_are_not_double_charged(status):
+    calls = []
+
+    def handler(request):
+        calls.append(1)
+        return httpx.Response(status)
+
+    with pytest.raises(ApifyError):
+        await run(client(handler))
+    assert len(calls) == 1
+
+
+async def test_retries_connection_failures_once():
+    calls = []
+
+    def handler(request):
+        calls.append(1)
+        if len(calls) == 1:
+            raise httpx.ConnectError("refused", request=request)
+        return httpx.Response(200, json=[{"a": 1}])
+
+    assert await run(client(handler)) == [{"a": 1}]
+    assert len(calls) == 2
+
+
+async def test_does_not_retry_after_request_was_sent():
+    calls = []
+
+    def handler(request):
+        calls.append(1)
+        raise httpx.ReadError(f"reset {TOKEN}", request=request)
+
+    with pytest.raises(ApifyError, match="may have started") as info:
+        await run(client(handler))
+    assert len(calls) == 1
+    assert TOKEN not in str(info.value)
+
+
+async def test_gives_up_after_two_connection_failures():
+    def handler(request):
+        raise httpx.ConnectError("refused", request=request)
+
+    with pytest.raises(ApifyError, match="Could not connect"):
+        await run(client(handler))
+
+
+async def test_invalid_json_body():
+    with pytest.raises(ApifyError, match="not JSON"):
+        await run(client(lambda r: httpx.Response(200, content=b"<html>")))
 
 
 async def test_timeout_is_reported():

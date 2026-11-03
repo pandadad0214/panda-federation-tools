@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import logging
 import sys
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 from typing import Any
 
 import anyio
@@ -21,6 +21,7 @@ from panda_federation_tools.config import Settings
 
 log = logging.getLogger("panda_federation_tools")
 MAX_TEXT_CHARS = 60_000
+HEARTBEAT_SECS = 5
 STORE_URL = "https://apify.com/pandadad0214"
 
 INSTRUCTIONS = """Panda Federation Tools: research and public-data tools (Apify Actors by pandadad0214).
@@ -72,8 +73,51 @@ def validate_arguments(spec: ToolSpec, arguments: dict[str, Any]) -> list[str]:
     return errors
 
 
+def _fit_text(payload: dict[str, Any]) -> str:
+    """JSON text for the model, kept under MAX_TEXT_CHARS by dropping whole items (always valid JSON)."""
+    text = json.dumps(payload, ensure_ascii=False, default=str)
+    if len(text) <= MAX_TEXT_CHARS:
+        return text
+    items = list(payload["items"])
+    shown = dict(payload)
+    lo, hi = 0, len(items)
+    while lo < hi:  # largest prefix of items that fits
+        mid = (lo + hi + 1) // 2
+        shown["items"] = items[:mid]
+        if len(json.dumps(shown, ensure_ascii=False, default=str)) + 200 <= MAX_TEXT_CHARS:
+            lo = mid
+        else:
+            hi = mid - 1
+    shown["items"] = items[:lo]
+    shown["truncated"] = (
+        f"Showing {lo} of {len(items)} items to fit the context window. All items are in structuredContent; "
+        "lower run_max_items for shorter output."
+    )
+    return json.dumps(shown, ensure_ascii=False, default=str)
+
+
+ProgressFn = Callable[[float, float | None, str | None], Awaitable[None]]
+
+
+async def _heartbeat(progress: ProgressFn, spec: ToolSpec, timeout_secs: int) -> None:
+    """Report progress every few seconds so MCP clients do not time out on long Actor runs."""
+    elapsed = 0
+    while True:
+        await anyio.sleep(HEARTBEAT_SECS)
+        elapsed += HEARTBEAT_SECS
+        try:
+            await progress(float(elapsed), float(timeout_secs), f"{spec.title}: running on Apify ({elapsed}s)")
+        except Exception:  # progress is best effort; never fail the call because of it
+            log.debug("progress notification failed", exc_info=True)
+            return
+
+
 async def call_tool(
-    spec: ToolSpec, arguments: dict[str, Any], settings: Settings, factory: ClientFactory = _default_factory
+    spec: ToolSpec,
+    arguments: dict[str, Any],
+    settings: Settings,
+    factory: ClientFactory = _default_factory,
+    progress: ProgressFn | None = None,
 ) -> types.CallToolResult:
     arguments = dict(arguments or {})
     problems = validate_arguments(spec, arguments)
@@ -86,9 +130,13 @@ async def call_tool(
         arguments.pop(key, None)
     client = factory(settings)
     try:
-        items = await client.run_actor(
-            spec.actor, arguments, timeout_secs=timeout_secs, max_items=max_items, max_charge_usd=max_charge
-        )
+        async with anyio.create_task_group() as tg:
+            if progress is not None:
+                tg.start_soon(_heartbeat, progress, spec, timeout_secs)
+            items = await client.run_actor(
+                spec.actor, arguments, timeout_secs=timeout_secs, max_items=max_items, max_charge_usd=max_charge
+            )
+            tg.cancel_scope.cancel()
     except ApifyError as exc:
         return _error(redact(str(exc), settings.token))
     except Exception as exc:  # never leak internals or secrets
@@ -97,9 +145,7 @@ async def call_tool(
     payload: dict[str, Any] = {"actor": spec.actor, "count": len(items), "items": items}
     if not items:
         payload["note"] = "No results. Runs that find nothing are not charged per result."
-    text = json.dumps(payload, ensure_ascii=False, default=str)
-    if len(text) > MAX_TEXT_CHARS:
-        text = text[:MAX_TEXT_CHARS] + "... [truncated; lower run_max_items or read structuredContent]"
+    text = _fit_text(payload)
     return types.CallToolResult(content=[types.TextContent(type="text", text=text)], structured_content=payload)
 
 
@@ -114,7 +160,9 @@ def create_server(settings: Settings | None = None, factory: ClientFactory = _de
         spec = get_tool(params.name)
         if spec is None:
             return _error(f"Unknown tool: {params.name}")
-        return await call_tool(spec, dict(params.arguments or {}), cfg, factory)
+        session = getattr(ctx, "session", None)
+        progress = getattr(session, "report_progress", None)
+        return await call_tool(spec, dict(params.arguments or {}), cfg, factory, progress)
 
     def schema_for(name: str) -> dict[str, Any] | None:
         spec = get_tool(name)

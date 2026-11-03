@@ -1,0 +1,30 @@
+name: Bug report
+description: Something in the MCP server or a tool does not work as described.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Never paste your Apify API token. Security issues go to the Security tab (private report), not here."
+  - type: input
+    id: tool
+    attributes:
+      label: Tool
+      description: The MCP tool or Apify Actor, e.g. reference_checker
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: Input you used (remove anything private)
+      render: json
+  - type: input
+    id: client
+    attributes:
+      label: MCP client and server version
+      description: e.g. Claude Desktop, Cursor, VS Code; output of `panda-federation-tools --version`

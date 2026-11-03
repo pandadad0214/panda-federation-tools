@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security vulnerability (private)
+    url: https://github.com/pandadad0214/panda-federation-tools/security/advisories/new
+    about: Please report security issues privately.
+  - name: A problem with one Actor's results on Apify
+    url: https://apify.com/pandadad0214
+    about: Open an issue on that Actor's Issues tab in the Apify Store.

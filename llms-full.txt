@@ -2,7 +2,7 @@
 
 > Research and public-data tools on Apify. Every batch tool writes one dataset item per result (with a one-line `summary` field; Grants Finder calls it `agentSummary`) and a `SUMMARY` record in the run's key-value store with counts, a one-line `takeaway` and, where there is one, a `nextStep` pointing to the logical follow-on tool. Status, where used: OK = verified / safe, CHECK = read the note, FIX = do not use as written.
 
-How to call: this repo's MCP server (stdio; `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.0.0 panda-federation-tools`, env `APIFY_TOKEN`; tool names below, each also takes optional `run_max_items`, `run_max_charge_usd` and `run_timeout_secs`; inputs are validated against the Actor's schema before any run), Apify MCP server `https://mcp.apify.com` (tool `call-actor`, Actor `pandadad0214/<slug>`), or `POST https://api.apify.com/v2/acts/pandadad0214~<slug>/run-sync-get-dataset-items` with `Authorization: Bearer <Apify token>` and the JSON input as the body. Every input field in each Actor's input schema has a description with formats, units and limits. Pricing is pay per result; Apify Bronze, Silver and Gold plans get 10%, 20% and 30% off.
+How to call: this repo's MCP server (stdio; `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0 panda-federation-tools`, env `APIFY_TOKEN`; tool names below, each also takes optional `run_max_items`, `run_max_charge_usd` and `run_timeout_secs`; inputs are validated against the Actor's schema before any run), Apify MCP server `https://mcp.apify.com` (tool `call-actor`, Actor `pandadad0214/<slug>`), or `POST https://api.apify.com/v2/acts/pandadad0214~<slug>/run-sync-get-dataset-items` with `Authorization: Bearer <Apify token>` and the JSON input as the body. Every input field in each Actor's input schema has a description with formats, units and limits. Pricing is pay per result; Apify Bronze, Silver and Gold plans get 10%, 20% and 30% off.
 
 ## Reference Checker
 
@@ -74,7 +74,7 @@ URL: https://apify.com/pandadad0214/pdf-table-extractor
 MCP tool (this repo): `pdf_table_extractor`
 Use when: you need every table in a PDF extracted to Excel and CSV, with OCR for scanned pages.
 Input/output: PDF URLs or uploads in; one item per table (pages, header, row and column counts, cell data, `summary`) plus Excel and CSV files out.
-Price: $0.001 per PDF page analysed.
+Price: $0.001 per PDF page analysed, plus $0.003 per table extracted and $0.02 per scanned page OCRed (only when ocrScannedPages is on). PDFs that cannot be fetched cost nothing.
 
 ## NPI Registry Scraper (NPI Provider Lists)
 

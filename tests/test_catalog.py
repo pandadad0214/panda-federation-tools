@@ -67,3 +67,28 @@ def test_versions_match():
     server = json.loads((ROOT / "server.json").read_text(encoding="utf-8"))
     assert project["version"] == __version__ == server["version"]
     assert server["name"] == "io.github.pandadad0214/panda-research-mcp"
+
+
+def test_readme_prices_match_the_live_catalog():
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    rows = {line.split("|")[1].strip(" `"): line for line in readme.splitlines() if line.startswith("| `")}
+    for tool in load_catalog():
+        row = rows[tool.name]
+        for price in tool.pricing:
+            assert f"${price['usd']:g}" in row, f"README price for {tool.name} is out of date"
+
+
+def test_readme_install_commands_use_the_current_version():
+    from panda_federation_tools import __version__
+
+    readme = "".join((ROOT / f).read_text(encoding="utf-8") for f in ("README.md", "llms.txt", "llms-full.txt"))
+    tags = set(re.findall(r"panda-federation-tools(?:\.git#|@)v(\d+\.\d+\.\d+)", readme))
+    assert tags == {__version__}, tags
+
+
+def test_llms_full_prices_match_the_live_catalog():
+    full = (ROOT / "llms-full.txt").read_text(encoding="utf-8")
+    for tool in load_catalog():
+        section = full.split(f"URL: {tool.url}", 1)[1].split("\nURL: ", 1)[0]
+        for price in tool.pricing:
+            assert f"${price['usd']:g}" in section, f"llms-full.txt price for {tool.name} is out of date"

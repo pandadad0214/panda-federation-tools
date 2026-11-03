@@ -10,7 +10,9 @@ import httpx2 as httpx
 
 from panda_federation_tools import __version__
 
-RETRY_STATUSES = {429, 500, 502, 503, 504}
+# Only retry when we know no Actor run was started, so a retry can never double-charge:
+# 429 (request rejected by the rate limiter) and connection failures (request never sent).
+RETRY_STATUSES = {429}
 MAX_ATTEMPTS = 2
 _TOKEN_RE = re.compile(r"apify_api_[A-Za-z0-9]+")
 
@@ -78,15 +80,24 @@ class ApifyClient:
                 try:
                     resp = await http.post(url, params=params, json=run_input, headers=headers)
                 except httpx.TimeoutException as exc:
+                    if isinstance(exc, httpx.ConnectTimeout) and attempt < MAX_ATTEMPTS:
+                        await asyncio.sleep(self._retry_delay)
+                        continue
                     raise ApifyError(
                         f"Timed out after {timeout_secs}s waiting for {actor}. "
-                        "Try a smaller input or a larger run_timeout_secs."
+                        "Try a smaller input or a larger run_timeout_secs (max 300)."
                     ) from exc
-                except httpx.HTTPError as exc:
+                except httpx.ConnectError as exc:
                     if attempt < MAX_ATTEMPTS:
                         await asyncio.sleep(self._retry_delay)
                         continue
-                    raise ApifyError(f"Network error calling Apify: {redact(type(exc).__name__, self._token)}") from exc
+                    raise ApifyError(f"Could not connect to Apify: {redact(type(exc).__name__, self._token)}") from exc
+                except httpx.HTTPError as exc:
+                    # The request may have reached Apify and started a run; do not retry (no double charge).
+                    raise ApifyError(
+                        f"Network error calling Apify ({redact(type(exc).__name__, self._token)}). "
+                        "Check your Apify Console before retrying: the run may have started."
+                    ) from exc
                 if resp.status_code in RETRY_STATUSES and attempt < MAX_ATTEMPTS:
                     await asyncio.sleep(self._retry_delay * attempt)
                     continue
@@ -114,8 +125,9 @@ class ApifyClient:
             raise ApifyError(f"Actor {actor} was not found on Apify.")
         if status == 408:
             raise ApifyError(
-                f"{actor} did not finish within {timeout_secs}s. Narrow the input or raise "
-                "run_timeout_secs (max 300). The run keeps going in your Apify Console."
+                f"{actor} did not finish within {timeout_secs}s and was stopped. Narrow the input or raise "
+                "run_timeout_secs (max 300). Results found before the stop are in the run's dataset "
+                "in your Apify Console."
             )
         if status == 429:
             raise ApifyError("Apify rate limit reached. Wait a moment and try again.")

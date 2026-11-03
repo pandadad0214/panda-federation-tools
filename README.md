@@ -33,7 +33,7 @@
 3. Check that the server starts:
 
 ```bash
-uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.0.0 panda-federation-tools --version
+uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0 panda-federation-tools --version
 ```
 
 Then add it to your MCP client below. The server speaks MCP over **stdio**.
@@ -50,7 +50,7 @@ Edit `claude_desktop_config.json` (Settings → Developer → Edit Config):
   "mcpServers": {
     "panda-federation-tools": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.0.0", "panda-federation-tools"],
+      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0", "panda-federation-tools"],
       "env": { "APIFY_TOKEN": "apify_api_YOUR_TOKEN" }
     }
   }
@@ -61,7 +61,7 @@ Edit `claude_desktop_config.json` (Settings → Developer → Edit Config):
 
 ```bash
 claude mcp add panda-federation-tools --env APIFY_TOKEN=apify_api_YOUR_TOKEN -- \
-  uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.0.0 panda-federation-tools
+  uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0 panda-federation-tools
 ```
 
 ### Cursor
@@ -72,7 +72,7 @@ Add to `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):
   "mcpServers": {
     "panda-federation-tools": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.0.0", "panda-federation-tools"],
+      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0", "panda-federation-tools"],
       "env": { "APIFY_TOKEN": "apify_api_YOUR_TOKEN" }
     }
   }
@@ -91,7 +91,7 @@ Add to `.vscode/mcp.json`. VS Code prompts for the token and stores it securely:
     "panda-federation-tools": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.0.0", "panda-federation-tools"],
+      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0", "panda-federation-tools"],
       "env": { "APIFY_TOKEN": "${input:apify-token}" }
     }
   }
@@ -102,10 +102,17 @@ Add to `.vscode/mcp.json`. VS Code prompts for the token and stores it securely:
 Use the same stdio command in that client's MCP settings:
 
 - **Command:** `uvx`
-- **Args:** `--from git+https://github.com/pandadad0214/panda-federation-tools@v1.0.0 panda-federation-tools`
+- **Args:** `--from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0 panda-federation-tools`
 - **Env:** `APIFY_TOKEN=apify_api_YOUR_TOKEN`
 
-Prefer pip? `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.0.0"`, then run `panda-federation-tools` as the command.
+Prefer pip? `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0"`, then run `panda-federation-tools` as the command.
+
+Prefer Docker? Build the image from this repo and run it over stdio:
+
+```bash
+docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.1.0
+docker run -i --rm -e APIFY_TOKEN panda-federation-tools
+```
 
 ## Tools
 
@@ -132,7 +139,7 @@ Each MCP tool runs one public Apify Actor and returns its results. Input fields,
 | `company_team_finder` | [company-team-finder](https://apify.com/pandadad0214/company-team-finder) | Leaders and decision makers from companies' own team pages (no LinkedIn scraping) | $0.002 / person |
 | `trucking_company_leads` | [trucking-company-leads](https://apify.com/pandadad0214/trucking-company-leads) | New and existing US carriers and brokers from official FMCSA data | $0.002 / carrier |
 
-Every tool also accepts three optional run controls: `run_max_items` (results to return, default 50), `run_max_charge_usd` (spending cap for the call, default $0.50) and `run_timeout_secs` (default 120, max 300).
+Every tool also accepts three optional run controls: `run_max_items` (results to return, default 50), `run_max_charge_usd` (spending cap for the call, default $0.50) and `run_timeout_secs` (default 120, max 300). While a run is in progress the server sends MCP progress notifications every few seconds, so clients that support them do not time out. Most tools answer in 5–15 seconds for a few inputs; `local_business_leads` and big crawls can take a minute or more, so give them `run_timeout_secs: 300`.
 
 Also on Apify: the hosted [Academic Research MCP Server](https://apify.com/pandadad0214/panda-research-mcp) ($0.01–$0.02 per call) and [Website Change Monitor](https://apify.com/pandadad0214/website-change-monitor) (publishing soon; it joins this server once it is public).
 
@@ -177,7 +184,8 @@ Also on Apify: the hosted [Academic Research MCP Server](https://apify.com/panda
 - **Least privilege:** the token needs permission to run Actors. Apify supports [scoped API tokens](https://docs.apify.com/platform/integrations/api#api-tokens); a token limited to running these Actors is enough.
 - **Read-only tools:** every tool only reads public data; none writes to your systems. Tools are marked `readOnlyHint: true`.
 - **Validated inputs:** every call is checked against the Actor's JSON Schema (types, ranges, enums, no unknown fields) before it runs. Secret Actor inputs (such as optional third-party API keys) are deliberately not exposed to the model.
-- **Bounded cost and time:** per-call spending cap, item cap and timeout, with one retry on transient Apify errors.
+- **Bounded cost and time:** per-call spending cap, item cap and timeout. The server retries once only when Apify never started a run (rate limit or failed connection), so a retry can never charge you twice.
+- **Context-safe output:** large results are trimmed to whole items (still valid JSON) for the model, with every item kept in `structuredContent`.
 - **Supply chain:** pinned dependencies with a committed `uv.lock`, `pip-audit` and CodeQL in CI, Dependabot updates, and GitHub Actions pinned to commit SHAs.
 - Found a vulnerability? See [SECURITY.md](SECURITY.md).
 
@@ -209,7 +217,7 @@ uv run ruff check . && uv run mypy
 python scripts/build_catalog.py   # refresh tool schemas and prices from the Apify Store
 ```
 
-Layout: `src/panda_federation_tools/` (server, Apify client, bundled `catalog.json`), `tests/`, `scripts/build_catalog.py`. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CHANGELOG.md](CHANGELOG.md).
+Layout: `src/panda_federation_tools/` (server, Apify client, bundled `catalog.json`), `tests/`, `scripts/build_catalog.py`, `Dockerfile`. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CHANGELOG.md](CHANGELOG.md).
 
 ## Hire a human (Fiverr)
 Prefer a person to run the tools and hand you finished files? Panda Federation also sells these as Fiverr gigs (seller `pandafederation`). Professional use only, not for coursework.

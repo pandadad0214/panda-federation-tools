@@ -1,8 +1,11 @@
 import json
+import sys
 
+import anyio
 import pytest
 from mcp import Client
 
+from panda_federation_tools import server as server_module
 from panda_federation_tools.apify import ApifyError
 from panda_federation_tools.catalog import load_catalog
 from panda_federation_tools.config import Settings
@@ -96,3 +99,62 @@ def test_settings_from_env(monkeypatch):
     s = Settings.from_env()
     assert s.token == TOKEN and s.max_charge_usd == 25.0 and s.timeout_secs == 10
     assert TOKEN not in repr(s)
+
+
+def test_bad_env_numbers_fall_back_to_defaults(monkeypatch):
+    for value in ("abc", "nan", "inf"):
+        monkeypatch.setenv("PANDA_MAX_CHARGE_USD", value)
+        monkeypatch.setenv("PANDA_MAX_ITEMS", value)
+        s = Settings.from_env()
+        assert s.max_charge_usd == 0.5 and s.max_items == 50
+
+
+async def test_large_results_are_truncated_to_valid_json():
+    items = [{"summary": "x" * 1000, "n": i} for i in range(200)]
+    async with Client(server_with(FakeClient(items=items))) as c:
+        r = await c.call_tool("topic_trends_tracker", {})
+    assert not r.is_error
+    text = r.content[0].text
+    assert len(text) <= server_module.MAX_TEXT_CHARS
+    payload = json.loads(text)  # still valid JSON
+    assert payload["count"] == 200 and 0 < len(payload["items"]) < 200
+    assert "structuredContent" in payload["truncated"]
+    assert len(r.structured_content["items"]) == 200
+
+
+class SlowClient(FakeClient):
+    async def run_actor(self, actor, run_input, **kw):
+        await anyio.sleep(0.2)
+        return [{"ok": True}]
+
+
+async def test_long_runs_send_progress_notifications(monkeypatch):
+    monkeypatch.setattr(server_module, "HEARTBEAT_SECS", 0.05)
+    seen = []
+
+    async def on_progress(progress, total, message):
+        seen.append((progress, total, message))
+
+    async with Client(server_with(SlowClient())) as c:
+        r = await c.call_tool("topic_trends_tracker", {"run_timeout_secs": 60}, progress_callback=on_progress)
+    assert not r.is_error
+    assert seen and seen[0][1] == 60 and "running on Apify" in seen[0][2]
+
+
+async def test_run_options_are_stripped_and_defaults_apply():
+    fake = FakeClient()
+    settings = Settings(token=TOKEN, timeout_secs=45, max_items=7, max_charge_usd=0.2)
+    async with Client(create_server(settings, factory=lambda s: fake)) as c:
+        await c.call_tool("topic_trends_tracker", {"topics": ["Python"], "run_max_charge_usd": 0.05})
+    _, run_input, kw = fake.calls[0]
+    assert run_input == {"topics": ["Python"]}
+    assert kw == {"timeout_secs": 45, "max_items": 7, "max_charge_usd": 0.05}
+
+
+def test_main_prints_version(monkeypatch, capsys):
+    from panda_federation_tools import __version__
+    from panda_federation_tools.server import main
+
+    monkeypatch.setattr(sys, "argv", ["panda-federation-tools", "--version"])
+    main()
+    assert capsys.readouterr().out.strip() == __version__

@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import logging
 import os
 from dataclasses import dataclass, field
+
+log = logging.getLogger("panda_federation_tools")
 
 DEFAULT_TIMEOUT_SECS = 120
 MAX_TIMEOUT_SECS = 300  # Apify run-sync endpoints wait at most 300 s.
@@ -19,8 +22,11 @@ def _num(name: str, default: float, lo: float, hi: float) -> float:
         return default
     try:
         value = float(raw)
-    except ValueError as exc:
-        raise ValueError(f"{name} must be a number, got {raw!r}") from exc
+    except ValueError:
+        value = float("nan")
+    if value != value or value in (float("inf"), float("-inf")):  # not a finite number
+        log.warning("%s must be a number between %g and %g; using the default %g", name, lo, hi, default)
+        return default
     return min(max(value, lo), hi)
 
 

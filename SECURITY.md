@@ -19,7 +19,7 @@ Include what you found, how to reproduce it, and the impact. We acknowledge repo
 
 In scope: the MCP server in `src/`, the catalog generator in `scripts/`, the CI workflows, and the `server.json` registry metadata.
 
-For the hosted Apify Actors themselves (data quality, a bug in a run), open an issue on that Actor's Apify Issues tab. For Apify platform issues, contact [Apify](https://apify.com/security).
+For the hosted Apify Actors themselves (data quality, a bug in a run), open an issue on that Actor's Apify Issues tab. For Apify platform issues, contact [Apify](https://trust.apify.com).
 
 ## How this server protects you
 
