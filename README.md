@@ -165,7 +165,7 @@ Also on Apify: the hosted [Academic Research MCP Server](https://apify.com/panda
 
 - You pay Apify per result, at the prices above, from your own Apify account. Apify Bronze, Silver and Gold plans get 10–30% off.
 - **Empty runs cost nothing per result.** Apify adds a tiny platform start fee (about $0.00005 per run).
-- `run_max_items` (default 50) also sets the Actor's own result limit on 16 of the 18 tools, so you only pay for the results you asked for. On `grants_finder`, `pdf_table_extractor` and `company_team_finder` (whose limits count sources, pages or companies), set those fields directly; the charge cap still applies.
+- `run_max_items` (default 50) also sets the Actor's own result limit on 15 of the 18 tools, so you only pay for the results you asked for. On `grants_finder`, `pdf_table_extractor` and `company_team_finder` (whose limits count sources, pages or companies), set those fields directly; the charge cap still applies.
 - Every MCP call is capped by `run_max_charge_usd` (default $0.50, set your own default with `PANDA_MAX_CHARGE_USD`). Apify stops the run when the cap is reached.
 - The MCP server itself is free and open source (MIT).
 
