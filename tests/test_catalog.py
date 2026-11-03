@@ -81,7 +81,9 @@ def test_readme_prices_match_the_live_catalog():
 def test_readme_install_commands_use_the_current_version():
     from panda_federation_tools import __version__
 
-    readme = "".join((ROOT / f).read_text(encoding="utf-8") for f in ("README.md", "llms.txt", "llms-full.txt", "llms-install.md"))
+    readme = "".join(
+        (ROOT / f).read_text(encoding="utf-8") for f in ("README.md", "llms.txt", "llms-full.txt", "llms-install.md")
+    )
     tags = set(re.findall(r"panda-federation-tools(?:\.git#|@)v(\d+\.\d+\.\d+)", readme))
     assert tags == {__version__}, tags
 
