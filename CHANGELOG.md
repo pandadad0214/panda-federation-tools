@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-11-03
+
+### Fixed
+- `run_max_items` now also sets each Actor's own result limit (for example `maxResults`, `maxDomains`, `maxReferences`) when you leave it unset, so a small `run_max_items` means a small bill and not just a shorter reply. Apify's `maxItems` is not enforced for pay-per-event Actors, which is how these tools are priced. The returned dataset is also limited to `run_max_items`.
+- Docs and server instructions now name the per-row summary field correctly (`summary` on the research tools, `agentSummary` on the lead, audit and monitoring tools).
+
 ## [1.1.0] - 2026-11-03
 
 ### Added
@@ -34,6 +40,7 @@ All notable changes to this project are documented here. The format follows [Kee
 ### Earlier
 - Tool index (`README.md`, `llms.txt`, `llms-full.txt`), MIT license and `server.json` for the hosted Academic Research MCP Server (`io.github.pandadad0214/panda-research-mcp`, version 1.0.0) in the official MCP Registry.
 
-[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/pandadad0214/panda-federation-tools/releases/tag/v1.0.0

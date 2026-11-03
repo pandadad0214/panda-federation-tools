@@ -51,7 +51,7 @@ async def test_call_passes_input_and_run_options():
     assert payload["count"] == 1 and payload["items"][0]["status"] == "OK"
     actor, run_input, kw = fake.calls[0]
     assert actor == "pandadad0214/reference-checker"
-    assert run_input == {"dois": ["10.1038/nature14539"]}
+    assert run_input == {"dois": ["10.1038/nature14539"], "maxReferences": 3}
     assert kw["max_items"] == 3 and kw["max_charge_usd"] == 0.5
 
 
@@ -147,7 +147,7 @@ async def test_run_options_are_stripped_and_defaults_apply():
     async with Client(create_server(settings, factory=lambda s: fake)) as c:
         await c.call_tool("topic_trends_tracker", {"topics": ["Python"], "run_max_charge_usd": 0.05})
     _, run_input, kw = fake.calls[0]
-    assert run_input == {"topics": ["Python"]}
+    assert run_input == {"topics": ["Python"], "maxTopics": 7}
     assert kw == {"timeout_secs": 45, "max_items": 7, "max_charge_usd": 0.05}
 
 
@@ -158,3 +158,22 @@ def test_main_prints_version(monkeypatch, capsys):
     monkeypatch.setattr(sys, "argv", ["panda-federation-tools", "--version"])
     main()
     assert capsys.readouterr().out.strip() == __version__
+
+
+async def test_result_cap_respects_explicit_actor_field_and_schema_limits():
+    fake = FakeClient()
+    async with Client(server_with(fake)) as c:
+        await c.call_tool("literature_search", {"query": "x", "maxResults": 20, "run_max_items": 5})
+        await c.call_tool("researcher_expert_finder", {"topic": "x", "run_max_items": 1000})
+        await c.call_tool("company_team_finder", {"companies": ["a.com"], "run_max_items": 5})
+    assert fake.calls[0][1]["maxResults"] == 20  # caller's own cap wins
+    assert fake.calls[1][1]["maxResults"] == 200  # clamped to the Actor's maximum
+    assert "maxCompanies" not in fake.calls[2][1]  # cap counts companies, not people: left alone
+
+
+def test_every_result_cap_field_exists_in_its_actor_schema():
+    from panda_federation_tools.catalog import RESULT_CAP_FIELDS
+
+    for tool in load_catalog():
+        if tool.name in RESULT_CAP_FIELDS:
+            assert tool.result_cap_field == RESULT_CAP_FIELDS[tool.name], tool.name

@@ -12,7 +12,7 @@
 
 - **Official, free data sources only:** Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, NPI Registry, FMCSA, public DNS, Apple Podcasts, OpenStreetMap, Wikimedia, public job-board feeds and companies' own websites. No logins, no paywalls, no LinkedIn scraping.
 - **Pay per result, capped:** a few tenths of a cent per result; runs that find nothing are not charged per result; every MCP call has a hard USD spending cap.
-- **Agent-friendly output:** JSON with a one-line `summary` per row and **OK / CHECK / FIX** status where it applies.
+- **Agent-friendly output:** JSON with a one-line `summary` or `agentSummary` per row and **OK / CHECK / FIX** status where it applies.
 - **Your token stays yours:** the server runs on your machine and sends your `APIFY_TOKEN` only to `api.apify.com`, in a header. It is never logged or returned.
 
 ## Contents
@@ -33,7 +33,7 @@
 3. Check that the server starts:
 
 ```bash
-uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0 panda-federation-tools --version
+uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1 panda-federation-tools --version
 ```
 
 Then add it to your MCP client below. The server speaks MCP over **stdio**.
@@ -50,7 +50,7 @@ Edit `claude_desktop_config.json` (Settings → Developer → Edit Config):
   "mcpServers": {
     "panda-federation-tools": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0", "panda-federation-tools"],
+      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1", "panda-federation-tools"],
       "env": { "APIFY_TOKEN": "apify_api_YOUR_TOKEN" }
     }
   }
@@ -61,7 +61,7 @@ Edit `claude_desktop_config.json` (Settings → Developer → Edit Config):
 
 ```bash
 claude mcp add panda-federation-tools --env APIFY_TOKEN=apify_api_YOUR_TOKEN -- \
-  uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0 panda-federation-tools
+  uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1 panda-federation-tools
 ```
 
 ### Cursor
@@ -72,7 +72,7 @@ Add to `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):
   "mcpServers": {
     "panda-federation-tools": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0", "panda-federation-tools"],
+      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1", "panda-federation-tools"],
       "env": { "APIFY_TOKEN": "apify_api_YOUR_TOKEN" }
     }
   }
@@ -91,7 +91,7 @@ Add to `.vscode/mcp.json`. VS Code prompts for the token and stores it securely:
     "panda-federation-tools": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0", "panda-federation-tools"],
+      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1", "panda-federation-tools"],
       "env": { "APIFY_TOKEN": "${input:apify-token}" }
     }
   }
@@ -102,15 +102,15 @@ Add to `.vscode/mcp.json`. VS Code prompts for the token and stores it securely:
 Use the same stdio command in that client's MCP settings:
 
 - **Command:** `uvx`
-- **Args:** `--from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0 panda-federation-tools`
+- **Args:** `--from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1 panda-federation-tools`
 - **Env:** `APIFY_TOKEN=apify_api_YOUR_TOKEN`
 
-Prefer pip? `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.0"`, then run `panda-federation-tools` as the command.
+Prefer pip? `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1"`, then run `panda-federation-tools` as the command.
 
 Prefer Docker? Build the image from this repo and run it over stdio:
 
 ```bash
-docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.1.0
+docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.1.1
 docker run -i --rm -e APIFY_TOKEN panda-federation-tools
 ```
 
@@ -165,6 +165,7 @@ Also on Apify: the hosted [Academic Research MCP Server](https://apify.com/panda
 
 - You pay Apify per result, at the prices above, from your own Apify account. Apify Bronze, Silver and Gold plans get 10–30% off.
 - **Empty runs cost nothing per result.** Apify adds a tiny platform start fee (about $0.00005 per run).
+- `run_max_items` (default 50) also sets the Actor's own result limit on 16 of the 18 tools, so you only pay for the results you asked for. On `grants_finder`, `pdf_table_extractor` and `company_team_finder` (whose limits count sources, pages or companies), set those fields directly; the charge cap still applies.
 - Every MCP call is capped by `run_max_charge_usd` (default $0.50, set your own default with `PANDA_MAX_CHARGE_USD`). Apify stops the run when the cap is reached.
 - The MCP server itself is free and open source (MIT).
 
@@ -204,8 +205,8 @@ curl -X POST "https://api.apify.com/v2/acts/pandadad0214~reference-checker/run-s
 ## For AI agents and LLMs
 - [`llms.txt`](llms.txt): short index of every tool and when to use it ([llms.txt convention](https://llmstxt.org)).
 - [`llms-full.txt`](llms-full.txt): each tool's inputs, outputs and prices in one file.
-- Every result has a one-line `summary` field, and every run saves a `SUMMARY` record with a `takeaway` and the suggested next tool.
-- Start small (one or two inputs), read the `summary`, then widen.
+- Every result has a one-line summary field (`summary` on the citation, literature, PubMed, PDF, NPI and expert tools; `agentSummary` on the others), and every run saves a `SUMMARY` record with a `takeaway` and the suggested next tool.
+- Start small (one or two inputs), read the summary line, then widen.
 
 ## Development
 

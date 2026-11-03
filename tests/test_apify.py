@@ -36,7 +36,7 @@ async def test_success_sends_token_in_header_only():
     assert seen["auth"] == f"Bearer {TOKEN}"
     assert TOKEN not in seen["url"]
     assert "/v2/acts/pandadad0214~reference-checker/run-sync-get-dataset-items" in seen["url"]
-    assert "maxItems=5" in seen["url"] and "maxTotalChargeUsd=0.25" in seen["url"]
+    assert "maxItems=5" in seen["url"] and "limit=5" in seen["url"] and "maxTotalChargeUsd=0.25" in seen["url"]
     assert seen["body"] == {"dois": ["10.1/x"]}
 
 

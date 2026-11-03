@@ -15,7 +15,10 @@ RUN_OPTIONS: dict[str, dict[str, Any]] = {
         "type": "integer",
         "minimum": 1,
         "maximum": MAX_ITEMS,
-        "description": "Optional. Most results to return from this call (default from PANDA_MAX_ITEMS, 50).",
+        "description": (
+            "Optional. Most results to return from this call (default from PANDA_MAX_ITEMS, 50). "
+            "Also limits how many results the Actor produces and charges for, unless you set its own max field."
+        ),
     },
     "run_max_charge_usd": {
         "type": "number",
@@ -29,6 +32,29 @@ RUN_OPTIONS: dict[str, dict[str, Any]] = {
         "maximum": MAX_TIMEOUT_SECS,
         "description": "Optional. Seconds to wait for results (default from PANDA_TIMEOUT_SECS, 120; max 300).",
     },
+}
+
+
+# The Actor input that caps how many results a run produces (and charges for), per tool.
+# run_max_items fills it in when the caller leaves it unset, so a small run_max_items also means a small bill.
+# Tools whose cap counts something else (per source, per company, per PDF) rely on run_max_charge_usd instead.
+RESULT_CAP_FIELDS: dict[str, str] = {
+    "reference_checker": "maxReferences",
+    "citation_formatter": "maxReferences",
+    "literature_search": "maxResults",
+    "pubmed_evidence_table": "maxResults",
+    "researcher_expert_finder": "maxResults",
+    "npi_provider_lists": "maxResults",
+    "federal_contract_finder": "maxResults",
+    "email_domain_security_checker": "maxDomains",
+    "ai_search_seo_audit": "maxPages",
+    "podcast_leads_finder": "maxResults",
+    "local_business_leads": "maxResults",
+    "company_hiring_signals": "maxCompanies",
+    "company_website_enricher": "maxDomains",
+    "topic_trends_tracker": "maxTopics",
+    "trucking_company_leads": "maxResults",
+    "website_change_monitor": "maxPages",
 }
 
 
@@ -46,6 +72,20 @@ class ToolSpec:
     def price_text(self) -> str:
         parts = [f"${p['usd']:g} per {p['title'].lower()}" for p in self.pricing if p.get("usd") is not None]
         return "; ".join(parts) if parts else "see the Apify page"
+
+    @property
+    def result_cap_field(self) -> str | None:
+        field = RESULT_CAP_FIELDS.get(self.name)
+        return field if field in self.actor_schema.get("properties", {}) else None
+
+    def apply_result_cap(self, run_input: dict[str, Any], max_items: int) -> dict[str, Any]:
+        """Copy of run_input with the Actor's own result cap set from max_items, unless the caller set it."""
+        field = self.result_cap_field
+        if field is None or field in run_input:
+            return run_input
+        prop = self.actor_schema["properties"][field]
+        cap = min(max_items, int(prop.get("maximum", max_items)))
+        return {**run_input, field: max(cap, int(prop.get("minimum", 1)))}
 
     @property
     def input_schema(self) -> dict[str, Any]:

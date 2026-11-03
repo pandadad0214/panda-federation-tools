@@ -66,6 +66,7 @@ class ApifyClient:
         params: dict[str, str | int | float] = {
             "timeout": timeout_secs,
             "maxItems": max_items,
+            "limit": max_items,  # dataset items returned to the caller
             "maxTotalChargeUsd": max_charge_usd,
             "format": "json",
             "clean": 1,

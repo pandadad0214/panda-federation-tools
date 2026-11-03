@@ -33,7 +33,8 @@ local_business_leads, trucking_company_leads, podcast_leads_finder.
 Audits: email_domain_security_checker, ai_search_seo_audit.
 Public data: grants_finder, federal_contract_finder, npi_provider_lists, topic_trends_tracker,
 pdf_table_extractor, researcher_expert_finder.
-Results carry a one-line `summary`; rows may be marked OK / CHECK / FIX.
+Each result has a one-line `summary` or `agentSummary`; rows may be marked OK / CHECK / FIX.
+run_max_items also caps how many results most tools produce and charge for.
 Every call costs a little per result (empty runs are not charged per result) and is capped by
 run_max_charge_usd. Keep inputs small first, then widen."""
 
@@ -128,6 +129,7 @@ async def call_tool(
     timeout_secs = int(arguments.pop("run_timeout_secs", settings.timeout_secs))
     for key in RUN_OPTIONS:
         arguments.pop(key, None)
+    arguments = spec.apply_result_cap(arguments, max_items)
     client = factory(settings)
     try:
         async with anyio.create_task_group() as tg:
