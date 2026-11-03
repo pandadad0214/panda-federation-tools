@@ -1,6 +1,8 @@
 # Panda Federation Tools
 
 [![M8ven Score](https://m8ven.ai/badge/mcp/pandadad0214/panda-federation-tools)](https://m8ven.ai/mcp/pandadad0214/panda-federation-tools?s=readme)
+[![CI](https://github.com/pandadad0214/panda-federation-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/pandadad0214/panda-federation-tools/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/pandadad0214/panda-federation-tools/actions/workflows/codeql.yml/badge.svg)](https://github.com/pandadad0214/panda-federation-tools/actions/workflows/codeql.yml)
 [![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.pandadad0214%2Fpanda--research--mcp-blue)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.pandadad0214)
 [![Apify Store](https://img.shields.io/badge/Apify_Store-pandadad0214-00a3ff)](https://apify.com/pandadad0214)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](pyproject.toml)
