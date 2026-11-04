@@ -25,6 +25,7 @@
 - [Hosted options (no install)](#hosted-options-no-install)
 - [For AI agents and LLMs](#for-ai-agents-and-llms)
 - [Development](#development)
+- [Agent skills (Agensi)](#agent-skills-agensi)
 
 ## Quick start
 
@@ -221,6 +222,16 @@ python scripts/build_catalog.py   # refresh tool schemas and prices from the Api
 ```
 
 Layout: `src/panda_federation_tools/` (server, Apify client, bundled `catalog.json`), `tests/`, `scripts/build_catalog.py`, `Dockerfile`. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CHANGELOG.md](CHANGELOG.md).
+
+## Agent skills (Agensi)
+
+Ready-made skills that wrap these tools for AI agents are listed on the [Panda Federation Agensi profile](https://www.agensi.io/creators/panda_federation). Each skill runs the Apify tools above, so the usual pay-per-result prices apply on top of the skill price.
+
+- [Medical Writing Pack: evidence tables, ref checks and KOLs](https://agensi.io/skills/medical-writing-pack-evidence-tables-ref-checks-kols) ($12)
+- [RFP Compliance Matrix + Incumbent Intel](https://agensi.io/skills/rfp-compliance-matrix-incumbent-intel-federal-proposals) (free)
+- [GEO & SEO Site Audit](https://agensi.io/skills/geo-seo-site-audit-real-crawl-0-100-score-0-004-page) ($4.99)
+- [Email Deliverability Audit: SPF/DKIM/DMARC in bulk](https://agensi.io/skills/email-deliverability-audit-live-spf-dkim-dmarc-in-bulk) (free)
+- [Citation Check: fake, miscited and retracted references](https://agensi.io/skills/citation-check-fake-miscited-retracted-references) (free)
 
 ## Hire a human (Fiverr)
 Prefer a person to run the tools and hand you finished files? Panda Federation also sells these as Fiverr gigs (seller `pandafederation`). Professional use only, not for coursework.

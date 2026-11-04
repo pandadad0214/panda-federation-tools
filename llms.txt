@@ -55,6 +55,10 @@ Run any tool through this repo's open-source MCP server (stdio, Python): `uvx --
 - Trucking and logistics sales: `trucking_company_leads`, then `company_website_enricher`.
 - Market research: `topic_trends_tracker`, then `literature_search` or `podcast_leads_finder` on rising topics.
 
+## Agent skills (Agensi)
+
+- [Panda Federation skills on Agensi](https://www.agensi.io/creators/panda_federation): agent skills that wrap these tools (medical writing pack, RFP compliance matrix, GEO/SEO audit, email deliverability audit, citation check and more). The Apify pay-per-result prices apply on top of any skill price.
+
 ## Hire a human (Fiverr)
 
 Prefer a person to run the tools and hand you finished files? Panda Federation also sells these as Fiverr gigs (seller `pandafederation`). Professional use only, not for coursework.
