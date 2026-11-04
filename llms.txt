@@ -45,6 +45,11 @@ Run any tool through this repo's open-source MCP server (stdio, Python): `uvx --
 - [Trucking Company Leads (FMCSA)](https://apify.com/pandadad0214/trucking-company-leads) [MCP tool `trucking_company_leads`]: Use when you need new or existing US trucking companies, freight brokers or forwarders with USDOT/MC number, phone, email, officers, fleet size, drivers and cargo from official FMCSA open data, filtered by state, registration date and fleet size.
 - [Website Change Monitor](https://apify.com/pandadad0214/website-change-monitor) (publishing soon): Use when you need to know whether public web pages changed since the last check and what changed (added/removed text, change percent, price changes, keyword alerts), e.g. competitor pricing, terms or careers pages.
 
+## AI agent safety
+
+- [Hidden AI Instructions Scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) (free, publishing soon): Use before an agent reads a site it doesn't trust, to find text hidden from people but aimed at AI agents (prompt injection) with technique, location, excerpt and category (policy notice, manipulation, harmful).
+- [Hidden AI Instructions Watch (GitHub)](https://github.com/pandadad0214/hidden-ai-instructions-watch): public, evidence-only log of pages with hidden AI-directed text, with method and corrections process.
+
 ## Typical workflows
 
 - Writing a paper: `literature_search`, then `citation_formatter`, then `reference_checker` before you submit.

@@ -145,6 +145,8 @@ Every tool also accepts three optional run controls: `run_max_items` (results to
 
 Also on Apify: the hosted [Academic Research MCP Server](https://apify.com/pandadad0214/panda-research-mcp) ($0.01–$0.02 per call) and [Website Change Monitor](https://apify.com/pandadad0214/website-change-monitor) (publishing soon; it joins this server once it is public).
 
+Free for everyone: the [Hidden AI Instructions Scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) (publishing soon) checks web pages for hidden prompt injection aimed at AI agents, and [Hidden AI Instructions Watch](https://github.com/pandadad0214/hidden-ai-instructions-watch) is our public, evidence-only log of what it finds.
+
 ### Example prompts
 - "Check these 12 references for fake or retracted papers and tell me which to fix."
 - "Find 20 recent peer-reviewed papers on GLP-1 and heart failure with free PDFs, then format them in APA."
