@@ -2,6 +2,7 @@
 
 **One MCP server that gives Claude, Cursor, VS Code Copilot and other AI assistants 18 research and public-data tools: citation checks, literature search, grants, contracts, leads and domain audits.**
 
+[![PyPI](https://img.shields.io/pypi/v/panda-federation-tools)](https://pypi.org/project/panda-federation-tools/)
 [![Latest Release](https://img.shields.io/github/v/release/pandadad0214/panda-federation-tools?label=latest%20release)](https://github.com/pandadad0214/panda-federation-tools/releases/latest)
 [![M8ven Score](https://m8ven.ai/badge/mcp/pandadad0214-panda-federation-tools-ta5xv3?v=eebc91f7834ff2dc3922a4031d7790f2)](https://m8ven.ai/mcp/pandadad0214-panda-federation-tools-ta5xv3?s=readme)
 [![CI](https://github.com/pandadad0214/panda-federation-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/pandadad0214/panda-federation-tools/actions/workflows/ci.yml)
@@ -17,10 +18,10 @@
 
 **You need:** a free [Apify API token](https://console.apify.com/settings/integrations) (the free plan includes $5/month) and [uv](https://docs.astral.sh/uv/getting-started/installation/) (one command: `curl -LsSf https://astral.sh/uv/install.sh | sh`, or on Windows `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`).
 
-**One command (works today):**
+**One command** (from [PyPI](https://pypi.org/project/panda-federation-tools/)):
 
 ```bash
-uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0 panda-federation-tools
+uvx panda-federation-tools
 ```
 
 No clone needed. Replace `apify_api_YOUR_TOKEN` below with your token, and never commit a file that contains it.
@@ -28,7 +29,7 @@ No clone needed. Replace `apify_api_YOUR_TOKEN` below with your token, and never
 **No install at all?** Use the hosted research server (4 research tools) at `https://pandadad0214--panda-research-mcp.apify.actor/mcp` with header `Authorization: Bearer <your Apify token>`. See [Hosted options](#hosted-options-no-install).
 
 ### Cursor
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=panda-federation-tools&config=eyJjb21tYW5kIjoidXZ4IiwiYXJncyI6WyItLWZyb20iLCJnaXQraHR0cHM6Ly9naXRodWIuY29tL3BhbmRhZGFkMDIxNC9wYW5kYS1mZWRlcmF0aW9uLXRvb2xzQHYxLjIuMCIsInBhbmRhLWZlZGVyYXRpb24tdG9vbHMiXSwiZW52Ijp7IkFQSUZZX1RPS0VOIjoiYXBpZnlfYXBpX1lPVVJfVE9LRU4ifX0=)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=panda-federation-tools&config=eyJjb21tYW5kIjoidXZ4IiwiYXJncyI6WyJwYW5kYS1mZWRlcmF0aW9uLXRvb2xzIl0sImVudiI6eyJBUElGWV9UT0tFTiI6ImFwaWZ5X2FwaV9ZT1VSX1RPS0VOIn19)
 
 Click the button, then paste your token into `APIFY_TOKEN`. Or add this to `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):
 
@@ -37,7 +38,7 @@ Click the button, then paste your token into `APIFY_TOKEN`. Or add this to `~/.c
   "mcpServers": {
     "panda-federation-tools": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0", "panda-federation-tools"],
+      "args": ["panda-federation-tools"],
       "env": { "APIFY_TOKEN": "apify_api_YOUR_TOKEN" }
     }
   }
@@ -52,7 +53,7 @@ Or: Settings → Developer → Edit Config, then add the same `mcpServers` block
 
 ```bash
 claude mcp add panda-federation-tools --env APIFY_TOKEN=apify_api_YOUR_TOKEN -- \
-  uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0 panda-federation-tools
+  uvx panda-federation-tools
 ```
 
 ### VS Code (GitHub Copilot agent mode)
@@ -67,7 +68,7 @@ Add to `.vscode/mcp.json`. VS Code asks for the token and stores it securely:
     "panda-federation-tools": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0", "panda-federation-tools"],
+      "args": ["panda-federation-tools"],
       "env": { "APIFY_TOKEN": "${input:apify-token}" }
     }
   }
@@ -75,14 +76,14 @@ Add to `.vscode/mcp.json`. VS Code asks for the token and stores it securely:
 ```
 
 ### Windsurf, Cline, Zed, Goose and others
-Command `uvx`, args `--from git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0 panda-federation-tools`, env `APIFY_TOKEN`. For Cline also set `"timeout": 60`. Agent-readable steps: [`llms-install.md`](llms-install.md).
+Command `uvx`, args `panda-federation-tools`, env `APIFY_TOKEN`. For Cline also set `"timeout": 60`. Agent-readable steps: [`llms-install.md`](llms-install.md).
 
 ### Other ways to install
-- **From the Release download (works today):** `uvx --from https://github.com/pandadad0214/panda-federation-tools/releases/download/v1.2.0/panda_federation_tools-1.2.0-py3-none-any.whl panda-federation-tools`
+- **Pinned to a git tag:** `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0 panda-federation-tools`
+- **From the Release download:** `uvx --from https://github.com/pandadad0214/panda-federation-tools/releases/download/v1.2.0/panda_federation_tools-1.2.0-py3-none-any.whl panda-federation-tools`
 - **Helper script:** download `install.sh` (macOS/Linux) or `install.ps1` (Windows) from the latest Release. It installs uv if needed, checks the server starts and prints your config. One package works on every OS.
-- **pip:** `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0"`, then run `panda-federation-tools`.
+- **pip:** `pip install panda-federation-tools` (or a git tag: `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0"`), then run `panda-federation-tools`.
 - **Docker:** `docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.2.0` then `docker run -i --rm -e APIFY_TOKEN panda-federation-tools`.
-- *After PyPI publish (planned):* `uvx panda-federation-tools`. This becomes the one command once the package is on PyPI.
 
 ## What's included
 
