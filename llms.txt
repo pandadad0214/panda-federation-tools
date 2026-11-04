@@ -1,6 +1,6 @@
 # Panda Federation Tools
 
-> Research and public-data tools on Apify for people and AI agents: check citations for fake or retracted papers, format references, search scholarly literature and PubMed, find federal grants and contracts, and build marketing and lead lists (email security, AI search audits, podcasts, local businesses). Each tool uses official or open free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, public DNS, Apple Podcasts, OpenStreetMap), charges per result, returns JSON with a one-line `summary` or `agentSummary` per item and a `SUMMARY` record with a `takeaway`, and marks results OK / CHECK / FIX where it applies.
+> Research and public-data tools on Apify for people and AI agents: check citations for fake or retracted papers, format references, search scholarly literature and PubMed, find federal grants and contracts, and build B2B lead and market lists (company hiring signals, website enrichment, decision makers from company team pages, new trucking companies, local businesses, podcasts, email security, AI search audits, topic trends, website change alerts). Each tool uses official or open free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, FMCSA, public ATS job boards, Wikipedia pageviews, public DNS, Apple Podcasts, OpenStreetMap), charges per result, returns JSON with a one-line `summary` or `agentSummary` per item and a `SUMMARY` record with a `takeaway`, and marks results OK / CHECK / FIX where it applies.
 
 Run any tool through this repo's open-source MCP server (stdio, Python): `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1 panda-federation-tools` with `APIFY_TOKEN` set; each tool is exposed under the MCP tool name shown in brackets. You can also use Apify's MCP server (https://mcp.apify.com, Actor `pandadad0214/<slug>`), the Apify API (`POST https://api.apify.com/v2/acts/pandadad0214~<slug>/run-sync-get-dataset-items` with an Apify token), or the Apify Console. Full input and output details: [llms-full.txt](llms-full.txt).
 
@@ -44,6 +44,16 @@ Run any tool through this repo's open-source MCP server (stdio, Python): `uvx --
 - [Company Team & Decision-Maker Finder](https://apify.com/pandadad0214/company-team-finder) [MCP tool `company_team_finder`]: Use when you need the leaders and decision makers of companies (name, title, seniority, department, published email or email pattern, LinkedIn link) from their own public team and leadership pages, without scraping LinkedIn.
 - [Trucking Company Leads (FMCSA)](https://apify.com/pandadad0214/trucking-company-leads) [MCP tool `trucking_company_leads`]: Use when you need new or existing US trucking companies, freight brokers or forwarders with USDOT/MC number, phone, email, officers, fleet size, drivers and cargo from official FMCSA open data, filtered by state, registration date and fleet size.
 - [Website Change Monitor](https://apify.com/pandadad0214/website-change-monitor) (publishing soon): Use when you need to know whether public web pages changed since the last check and what changed (added/removed text, change percent, price changes, keyword alerts), e.g. competitor pricing, terms or careers pages.
+
+## Typical workflows
+
+- Writing a paper: `literature_search`, then `citation_formatter`, then `reference_checker` before you submit.
+- Account prioritization: `company_hiring_signals`, then `company_website_enricher`, then `email_domain_security_checker`.
+- Outbound to decision makers: `company_hiring_signals`, then `company_team_finder` (names, titles, email pattern).
+- Federal contracting: `federal_contract_finder` (recompete radar and incumbents), then `grants_finder`.
+- Local prospecting: `local_business_leads`, then `ai_search_seo_audit` on their websites.
+- Trucking and logistics sales: `trucking_company_leads`, then `company_website_enricher`.
+- Market research: `topic_trends_tracker`, then `literature_search` or `podcast_leads_finder` on rising topics.
 
 ## Hire a human (Fiverr)
 
