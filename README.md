@@ -46,8 +46,9 @@ Click the button, then paste your token into `APIFY_TOKEN`. Or add this to `~/.c
 ```
 
 ### Claude Desktop
+**Easiest:** download the `panda-federation-tools-<version>.mcpb` file from the [latest Release](https://github.com/pandadad0214/panda-federation-tools/releases/latest) and double-click it. Claude asks for your Apify token and keeps it in your system keychain.
+
 Or: Settings → Developer → Edit Config, then add the same `mcpServers` block as Cursor to `claude_desktop_config.json` and restart Claude.
-**Easiest:** download `panda-federation-tools-1.2.0.mcpb` from the [latest Release](https://github.com/pandadad0214/panda-federation-tools/releases/latest) and double-click it. Claude asks for your Apify token and keeps it in your system keychain.
 
 ### Claude Code
 

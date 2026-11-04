@@ -1,10 +1,10 @@
-**Install in one command** (needs [uv](https://docs.astral.sh/uv/) and a free [Apify token](https://console.apify.com/settings/integrations)):
+**Install in one command** from [PyPI](https://pypi.org/project/panda-federation-tools/) (needs [uv](https://docs.astral.sh/uv/) and a free [Apify token](https://console.apify.com/settings/integrations)):
 
 ```bash
-uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0 panda-federation-tools
+uvx panda-federation-tools@{{VERSION}}
 ```
 
-- **Claude Desktop:** download `panda-federation-tools-1.2.0.mcpb` below and double-click it.
+- **Claude Desktop:** download `panda-federation-tools-{{VERSION}}.mcpb` below and double-click it.
 - **Cursor:** use the "Add to Cursor" button in the [README](https://github.com/pandadad0214/panda-federation-tools#install--use).
 - **Helper scripts:** `install.sh` (macOS/Linux) or `install.ps1` (Windows). One package works on every OS.
 - Verify downloads with `SHA256SUMS.txt`.

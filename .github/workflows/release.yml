@@ -2,9 +2,9 @@ name: Release
 
 # On a v* tag: verify versions, test, build wheel + sdist + Claude Desktop .mcpb,
 # write SHA256SUMS.txt and create the GitHub Release.
-# PyPI publishing is a separate job (Trusted Publishing / OIDC, no stored token). It is
-# continue-on-error so a missing PyPI trusted-publisher config never blocks the GitHub Release.
-# Re-run PyPI later with: Actions -> Release -> Run workflow (tag = v1.2.0).
+# PyPI publishing is a separate job (Trusted Publishing / OIDC, no stored token). It runs in
+# parallel with the GitHub Release; a PyPI failure now fails the run so it is never missed.
+# Re-publish an existing tag to PyPI with: Actions -> Release -> Run workflow (tag = vX.Y.Z).
 on:
   push:
     tags: ["v*"]
@@ -72,15 +72,16 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # release-notes.md is a template: {{VERSION}} becomes the tag's version (no leading v).
+          sed "s/{{VERSION}}/${GITHUB_REF_NAME#v}/g" .github/release-notes.md > notes.md
           gh release create "$GITHUB_REF_NAME" dist/* \
             --repo "$GITHUB_REPOSITORY" --title "$GITHUB_REF_NAME" \
-            --notes-file .github/release-notes.md --verify-tag --latest
+            --notes-file notes.md --verify-tag --latest
 
   pypi:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    continue-on-error: true
     environment:
       name: pypi
       url: https://pypi.org/project/panda-federation-tools/
