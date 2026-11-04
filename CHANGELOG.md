@@ -4,6 +4,16 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-04
+
+### Added
+- Claude Desktop extension (`.mcpb`) attached to every Release: double-click to install, with a secure token prompt.
+- One-click "Add to Cursor" button, and `install.sh` / `install.ps1` helpers.
+- Release workflow: on a version tag CI tests, builds the wheel, sdist and `.mcpb`, writes `SHA256SUMS.txt` and creates the GitHub Release. PyPI publishing via Trusted Publishing (no stored token).
+
+### Changed
+- README now leads with Install / Use; developer docs moved to "For developers".
+
 ## [1.1.1] - 2026-11-03
 
 ### Fixed
@@ -40,7 +50,8 @@ All notable changes to this project are documented here. The format follows [Kee
 ### Earlier
 - Tool index (`README.md`, `llms.txt`, `llms-full.txt`), MIT license and `server.json` for the hosted Academic Research MCP Server (`io.github.pandadad0214/panda-research-mcp`, version 1.0.0) in the official MCP Registry.
 
-[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/pandadad0214/panda-federation-tools/releases/tag/v1.0.0

@@ -1,0 +1,62 @@
+{
+  "manifest_version": "0.3",
+  "name": "panda-federation-tools",
+  "display_name": "Panda Federation Tools",
+  "version": "1.2.0",
+  "description": "18 research and public-data tools on Apify: citation checks, literature search, grants, contracts, leads and domain audits.",
+  "author": {
+    "name": "Panda Federation",
+    "url": "https://github.com/pandadad0214"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pandadad0214/panda-federation-tools"
+  },
+  "homepage": "https://github.com/pandadad0214/panda-federation-tools",
+  "documentation": "https://github.com/pandadad0214/panda-federation-tools#readme",
+  "support": "https://github.com/pandadad0214/panda-federation-tools/issues",
+  "icon": "icon.png",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "citations",
+    "apify",
+    "grants",
+    "leads"
+  ],
+  "server": {
+    "type": "python",
+    "entry_point": "src/panda_federation_tools/server.py",
+    "mcp_config": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "${__dirname}",
+        "panda-federation-tools"
+      ],
+      "env": {
+        "APIFY_TOKEN": "${user_config.apify_token}"
+      }
+    }
+  },
+  "user_config": {
+    "apify_token": {
+      "type": "string",
+      "title": "Apify API token",
+      "description": "From console.apify.com/settings/integrations (free account works). Sent only to api.apify.com.",
+      "sensitive": true,
+      "required": true
+    }
+  },
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "python": ">=3.11"
+    }
+  },
+  "long_description": "Requires uv (https://docs.astral.sh/uv/). Claude starts the bundled server with uvx and passes your Apify token from the system keychain."
+}

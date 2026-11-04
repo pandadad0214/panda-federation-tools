@@ -1,5 +1,8 @@
 # Panda Federation Tools
 
+**One MCP server that gives Claude, Cursor, VS Code Copilot and other AI assistants 18 research and public-data tools: citation checks, literature search, grants, contracts, leads and domain audits.**
+
+[![Latest Release](https://img.shields.io/github/v/release/pandadad0214/panda-federation-tools?label=latest%20release)](https://github.com/pandadad0214/panda-federation-tools/releases/latest)
 [![M8ven Score](https://m8ven.ai/badge/mcp/pandadad0214-panda-federation-tools-ta5xv3?v=eebc91f7834ff2dc3922a4031d7790f2)](https://m8ven.ai/mcp/pandadad0214-panda-federation-tools-ta5xv3?s=readme)
 [![CI](https://github.com/pandadad0214/panda-federation-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/pandadad0214/panda-federation-tools/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/pandadad0214/panda-federation-tools/actions/workflows/codeql.yml/badge.svg)](https://github.com/pandadad0214/panda-federation-tools/actions/workflows/codeql.yml)
@@ -8,80 +11,52 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-**An open-source MCP server and tool index for 18 research and public-data tools on [Apify](https://apify.com/pandadad0214).** Check citations for fake or retracted papers, find real literature, build grant, contract and lead lists, and audit domains and websites, from Claude, Cursor, VS Code or any MCP client, or straight from the Apify API.
+**[⬇ Download the latest Release](https://github.com/pandadad0214/panda-federation-tools/releases/latest)** · [Changelog](CHANGELOG.md)
 
-- **Official, free data sources only:** Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, NPI Registry, FMCSA, public DNS, Apple Podcasts, OpenStreetMap, Wikimedia, public job-board feeds and companies' own websites. No logins, no paywalls, no LinkedIn scraping.
-- **Pay per result, capped:** a few tenths of a cent per result; runs that find nothing are not charged per result; every MCP call has a hard USD spending cap.
-- **Agent-friendly output:** JSON with a one-line `summary` or `agentSummary` per row and **OK / CHECK / FIX** status where it applies.
-- **Your token stays yours:** the server runs on your machine and sends your `APIFY_TOKEN` only to `api.apify.com`, in a header. It is never logged or returned.
+## Install / Use
 
-## Contents
-- [Quick start](#quick-start)
-- [Client setup](#client-setup) (Claude Desktop, Claude Code, Cursor, VS Code, others)
-- [Tools](#tools)
-- [Pricing](#pricing)
-- [Configuration](#configuration)
-- [Security and permissions](#security-and-permissions)
-- [Hosted options (no install)](#hosted-options-no-install)
-- [For AI agents and LLMs](#for-ai-agents-and-llms)
-- [Development](#development)
-- [Agent skills (Agensi)](#agent-skills-agensi)
+**You need:** a free [Apify API token](https://console.apify.com/settings/integrations) (the free plan includes $5/month) and [uv](https://docs.astral.sh/uv/getting-started/installation/) (one command: `curl -LsSf https://astral.sh/uv/install.sh | sh`, or on Windows `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`).
 
-## Quick start
-
-1. Get a free Apify account and copy your API token from [Console → Settings → API & Integrations](https://console.apify.com/settings/integrations). The free plan includes $5 of monthly credit.
-2. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) (one command; it brings its own Python).
-3. Check that the server starts:
+**One command (works today):**
 
 ```bash
-uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1 panda-federation-tools --version
+uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0 panda-federation-tools
 ```
 
-Then add it to your MCP client below. The server speaks MCP over **stdio**.
+No clone needed. Replace `apify_api_YOUR_TOKEN` below with your token, and never commit a file that contains it.
 
-## Client setup
+**No install at all?** Use the hosted research server (4 research tools) at `https://pandadad0214--panda-research-mcp.apify.actor/mcp` with header `Authorization: Bearer <your Apify token>`. See [Hosted options](#hosted-options-no-install).
 
-Replace `apify_api_YOUR_TOKEN` with your own token. Do not commit config files that contain it.
+### Cursor
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=panda-federation-tools&config=eyJjb21tYW5kIjoidXZ4IiwiYXJncyI6WyItLWZyb20iLCJnaXQraHR0cHM6Ly9naXRodWIuY29tL3BhbmRhZGFkMDIxNC9wYW5kYS1mZWRlcmF0aW9uLXRvb2xzQHYxLjIuMCIsInBhbmRhLWZlZGVyYXRpb24tdG9vbHMiXSwiZW52Ijp7IkFQSUZZX1RPS0VOIjoiYXBpZnlfYXBpX1lPVVJfVE9LRU4ifX0=)
 
-### Claude Desktop
-Edit `claude_desktop_config.json` (Settings → Developer → Edit Config):
+Click the button, then paste your token into `APIFY_TOKEN`. Or add this to `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):
 
 ```json
 {
   "mcpServers": {
     "panda-federation-tools": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1", "panda-federation-tools"],
+      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0", "panda-federation-tools"],
       "env": { "APIFY_TOKEN": "apify_api_YOUR_TOKEN" }
     }
   }
 }
 ```
+
+### Claude Desktop
+Or: Settings → Developer → Edit Config, then add the same `mcpServers` block as Cursor to `claude_desktop_config.json` and restart Claude.
+**Easiest:** download `panda-federation-tools-1.2.0.mcpb` from the [latest Release](https://github.com/pandadad0214/panda-federation-tools/releases/latest) and double-click it. Claude asks for your Apify token and keeps it in your system keychain.
 
 ### Claude Code
 
 ```bash
 claude mcp add panda-federation-tools --env APIFY_TOKEN=apify_api_YOUR_TOKEN -- \
-  uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1 panda-federation-tools
-```
-
-### Cursor
-Add to `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):
-
-```json
-{
-  "mcpServers": {
-    "panda-federation-tools": {
-      "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1", "panda-federation-tools"],
-      "env": { "APIFY_TOKEN": "apify_api_YOUR_TOKEN" }
-    }
-  }
-}
+  uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0 panda-federation-tools
 ```
 
 ### VS Code (GitHub Copilot agent mode)
-Add to `.vscode/mcp.json`. VS Code prompts for the token and stores it securely:
+Add to `.vscode/mcp.json`. VS Code asks for the token and stores it securely:
 
 ```json
 {
@@ -92,31 +67,31 @@ Add to `.vscode/mcp.json`. VS Code prompts for the token and stores it securely:
     "panda-federation-tools": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1", "panda-federation-tools"],
+      "args": ["--from", "git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0", "panda-federation-tools"],
       "env": { "APIFY_TOKEN": "${input:apify-token}" }
     }
   }
 }
 ```
 
-### Windsurf, Cline, Zed, Goose and other MCP clients
-Use the same stdio command in that client's MCP settings:
+### Windsurf, Cline, Zed, Goose and others
+Command `uvx`, args `--from git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0 panda-federation-tools`, env `APIFY_TOKEN`. For Cline also set `"timeout": 60`. Agent-readable steps: [`llms-install.md`](llms-install.md).
 
-- **Command:** `uvx`
-- **Args:** `--from git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1 panda-federation-tools`
-- **Env:** `APIFY_TOKEN=apify_api_YOUR_TOKEN`
-- **Cline:** also set `"timeout": 60` (seconds). Starting with uvx from GitHub can take longer than Cline's 10-second default. Step-by-step setup is in [`llms-install.md`](llms-install.md).
+### Other ways to install
+- **From the Release download (works today):** `uvx --from https://github.com/pandadad0214/panda-federation-tools/releases/download/v1.2.0/panda_federation_tools-1.2.0-py3-none-any.whl panda-federation-tools`
+- **Helper script:** download `install.sh` (macOS/Linux) or `install.ps1` (Windows) from the latest Release. It installs uv if needed, checks the server starts and prints your config. One package works on every OS.
+- **pip:** `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0"`, then run `panda-federation-tools`.
+- **Docker:** `docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.2.0` then `docker run -i --rm -e APIFY_TOKEN panda-federation-tools`.
+- *After PyPI publish (planned):* `uvx panda-federation-tools`. This becomes the one command once the package is on PyPI.
 
-Prefer pip? `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.1.1"`, then run `panda-federation-tools` as the command.
+## What's included
 
-Prefer Docker? Build the image from this repo and run it over stdio:
+- **Official, free data sources only:** Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, NPI Registry, FMCSA, public DNS, Apple Podcasts, OpenStreetMap, Wikimedia, public job-board feeds and companies' own websites. No logins, no paywalls, no LinkedIn scraping.
+- **Pay per result, capped:** a few tenths of a cent per result; runs that find nothing are not charged per result; every MCP call has a hard USD spending cap.
+- **Agent-friendly output:** JSON with a one-line `summary` or `agentSummary` per row and **OK / CHECK / FIX** status where it applies.
+- **Your token stays yours:** the server runs on your machine and sends your `APIFY_TOKEN` only to `api.apify.com`, in a header. It is never logged or returned.
 
-```bash
-docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.1.1
-docker run -i --rm -e APIFY_TOKEN panda-federation-tools
-```
-
-## Tools
+### Tools
 
 Each MCP tool runs one public Apify Actor and returns its results. Input fields, limits and defaults come from the Actor's own input schema and are validated before anything runs, so a bad input never costs money.
 
@@ -206,25 +181,6 @@ curl -X POST "https://api.apify.com/v2/acts/pandadad0214~reference-checker/run-s
   -d '{"dois": ["10.1038/nature14539"]}'
 ```
 
-## For AI agents and LLMs
-- [`llms.txt`](llms.txt): short index of every tool and when to use it ([llms.txt convention](https://llmstxt.org)).
-- [`llms-full.txt`](llms-full.txt): each tool's inputs, outputs and prices in one file.
-- [`llms-install.md`](llms-install.md): step-by-step setup for AI coding agents such as Cline.
-- Every result has a one-line summary field (`summary` on the citation, literature, PubMed, PDF, NPI and expert tools; `agentSummary` on the others), and every run saves a `SUMMARY` record with a `takeaway` and the suggested next tool.
-- Start small (one or two inputs), read the summary line, then widen.
-
-## Development
-
-```bash
-git clone https://github.com/pandadad0214/panda-federation-tools && cd panda-federation-tools
-uv sync                 # installs pinned dependencies from uv.lock
-uv run pytest           # offline tests, no token or network needed
-uv run ruff check . && uv run mypy
-python scripts/build_catalog.py   # refresh tool schemas and prices from the Apify Store
-```
-
-Layout: `src/panda_federation_tools/` (server, Apify client, bundled `catalog.json`), `tests/`, `scripts/build_catalog.py`, `Dockerfile`. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CHANGELOG.md](CHANGELOG.md).
-
 ## Agent skills (Agensi)
 
 Ready-made skills that wrap these tools for AI agents are listed on the [Panda Federation Agensi profile](https://www.agensi.io/creators/panda_federation). Each skill runs the Apify tools above, so the usual pay-per-result prices apply on top of the skill price.
@@ -244,6 +200,27 @@ Prefer a person to run the tools and hand you finished files? Panda Federation a
 | [Reference list formatting](https://www.fiverr.com/pandafederation/format-or-convert-your-reference-list-to-apa-mla-chicago-or-harvard) | You want a finished reference list formatted or converted to APA, MLA, Chicago, Harvard, IEEE or Vancouver, delivered as Word and PDF. | from $20, 2-3 days |
 | [Web data to CSV/Excel](https://www.fiverr.com/pandafederation/scrape-website-data-into-a-clean-csv-or-excel-spreadsheet) | You want public business data from a website collected and cleaned into CSV or Excel (no logins, paywalls or personal contact data). | from $30, 3-5 days |
 | [Scholarly source lists](https://www.fiverr.com/pandafederation/find-and-screen-scholarly-sources-for-your-topic-with-excel-bibtex-and-ris) | You want a screened list of scholarly sources on a topic, with retraction flags and Excel, BibTeX and RIS files (PubMed study table available as an add-on). | from $25, 2-5 days |
+
+## For developers
+
+### For AI agents and LLMs
+- [`llms.txt`](llms.txt): short index of every tool and when to use it ([llms.txt convention](https://llmstxt.org)).
+- [`llms-full.txt`](llms-full.txt): each tool's inputs, outputs and prices in one file.
+- [`llms-install.md`](llms-install.md): step-by-step setup for AI coding agents such as Cline.
+- Every result has a one-line summary field (`summary` on the citation, literature, PubMed, PDF, NPI and expert tools; `agentSummary` on the others), and every run saves a `SUMMARY` record with a `takeaway` and the suggested next tool.
+- Start small (one or two inputs), read the summary line, then widen.
+
+### Build, test and contribute
+
+```bash
+git clone https://github.com/pandadad0214/panda-federation-tools && cd panda-federation-tools
+uv sync                 # installs pinned dependencies from uv.lock
+uv run pytest           # offline tests, no token or network needed
+uv run ruff check . && uv run mypy
+python scripts/build_catalog.py   # refresh tool schemas and prices from the Apify Store
+```
+
+Layout: `src/panda_federation_tools/` (server, Apify client, bundled `catalog.json`), `tests/`, `scripts/build_catalog.py`, `Dockerfile`. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CHANGELOG.md](CHANGELOG.md).
 
 ## Issues and requests
 Open an [issue](https://github.com/pandadad0214/panda-federation-tools/issues) here or on any tool's Apify Issues tab. We answer within a day.
