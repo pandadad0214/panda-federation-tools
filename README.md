@@ -137,6 +137,9 @@ Built and tested, and going public on the Apify Store a few a day (Apify limits 
 | [federal-register-monitor](https://apify.com/pandadad0214/federal-register-monitor) | New federal rules and notices with open comment deadlines | $0.001 / document |
 | [product-recall-monitor](https://apify.com/pandadad0214/product-recall-monitor) | FDA food, drug and device plus CPSC recalls in one feed | $0.0015 / recall |
 | [vin-decoder-recalls](https://apify.com/pandadad0214/vin-decoder-recalls) | Bulk NHTSA VIN decode with recall campaigns and complaint counts | $0.001 / VIN |
+| [building-permit-leads](https://apify.com/pandadad0214/building-permit-leads) | New building permits from 8 US cities with trade category, job value and contractor | $0.0015 / permit |
+| [florida-new-business-leads](https://apify.com/pandadad0214/florida-new-business-leads) | New Florida LLCs and corporations daily (Sunbiz) with officers and addresses | $0.0015 / business |
+| [bulk-domain-whois-expiry](https://apify.com/pandadad0214/bulk-domain-whois-expiry) | Bulk RDAP/WHOIS: registrar, expiry and days left, availability, DNS host | $0.001 / domain |
 
 [Hidden AI Instructions Watch](https://github.com/pandadad0214/hidden-ai-instructions-watch) is our public, evidence-only log of what the free scanner finds.
 

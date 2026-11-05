@@ -51,6 +51,9 @@ Run any tool through this repo's open-source MCP server (stdio, Python): `uvx pa
 - [Federal Register Monitor](https://apify.com/pandadad0214/federal-register-monitor) (publishing soon): Use when you need new US federal rules, proposed rules and notices by keyword or agency, with comment deadlines and days left.
 - [Product Recall Monitor](https://apify.com/pandadad0214/product-recall-monitor) (publishing soon): Use when you need FDA (food, drugs, devices) and CPSC (consumer products) recalls in one feed, with product, hazard, firm, class and status.
 - [VIN Decoder + Recalls](https://apify.com/pandadad0214/vin-decoder-recalls) (publishing soon): Use when you need to bulk-decode VINs with NHTSA vPIC (year, make, model, trim, engine, plant) plus NHTSA recall campaigns and complaint counts.
+- [Building Permit Leads](https://apify.com/pandadad0214/building-permit-leads) (publishing soon): Use when you need newly issued building permits from US city open-data portals (NYC, LA, Chicago, SF, Seattle, Austin, New Orleans, Cambridge) with address, trade category (roofing, solar, HVAC, new construction), job value, contractor and owner.
+- [Florida New Business Leads](https://apify.com/pandadad0214/florida-new-business-leads) (publishing soon): Use when you need new Florida LLCs, corporations and nonprofits from the official Sunbiz daily files, with addresses, officers/managers, registered agent and an industry guess, filtered by city, ZIP or industry.
+- [Bulk Domain WHOIS & Expiry Checker](https://apify.com/pandadad0214/bulk-domain-whois-expiry) (publishing soon): Use when you need registrar, created and expiry dates, days to expiry, availability, locks, nameservers and DNS host for many domains via official RDAP (WHOIS fallback).
 
 ## AI agent safety
 
