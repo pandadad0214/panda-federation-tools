@@ -43,10 +43,10 @@ Run any tool through this repo's open-source MCP server (stdio, Python): `uvx pa
 - [Topic Trends Tracker (Google Trends alternative)](https://apify.com/pandadad0214/topic-trends-tracker) [MCP tool `topic_trends_tracker`]: Use when you need real numbers on public interest in topics, brands, products or people over time (Wikipedia pageviews): trend, 30-day and year-over-year change, peaks and a 0-100 interest index.
 - [Company Team & Decision-Maker Finder](https://apify.com/pandadad0214/company-team-finder) [MCP tool `company_team_finder`]: Use when you need the leaders and decision makers of companies (name, title, seniority, department, published email or email pattern, LinkedIn link) from their own public team and leadership pages, without scraping LinkedIn.
 - [Trucking Company Leads (FMCSA)](https://apify.com/pandadad0214/trucking-company-leads) [MCP tool `trucking_company_leads`]: Use when you need new or existing US trucking companies, freight brokers or forwarders with USDOT/MC number, phone, email, officers, fleet size, drivers and cargo from official FMCSA open data, filtered by state, registration date and fleet size.
-- [Website Change Monitor](https://apify.com/pandadad0214/website-change-monitor) (publishing soon): Use when you need to know whether public web pages changed since the last check and what changed (added/removed text, change percent, price changes, keyword alerts), e.g. competitor pricing, terms or careers pages.
-- [SBIR/STTR Topic Radar](https://apify.com/pandadad0214/sbir-sttr-topic-radar) (publishing soon): Use when you need open SBIR/STTR topics from every agency by keyword, with full topic text, close dates and DoD Q&A.
-- [SEC Financials to Excel](https://apify.com/pandadad0214/sec-financials-excel) (publishing soon): Use when you need standardized annual income statement, balance sheet and cash-flow lines for US-listed companies from SEC EDGAR XBRL, as comps or model data.
-- [Clinical Trial Leads](https://apify.com/pandadad0214/clinical-trial-leads) (publishing soon): Use when you need ClinicalTrials.gov trials by condition, drug, sponsor, phase, status or location, with sponsors, contacts and every study site.
+- [Website Change Monitor](https://apify.com/pandadad0214/website-change-monitor) [MCP tool `website_change_monitor`]: Use when you need to know whether public web pages changed since the last check and what changed (added/removed text, change percent, price changes, keyword alerts), e.g. competitor pricing, terms or careers pages.
+- [SBIR/STTR Topic Radar](https://apify.com/pandadad0214/sbir-sttr-topic-radar) [MCP tool `sbir_sttr_topic_radar`]: Use when you need open SBIR/STTR topics from every agency by keyword, with full topic text, close dates and DoD Q&A.
+- [SEC Financials to Excel](https://apify.com/pandadad0214/sec-financials-excel) [MCP tool `sec_financials_excel`]: Use when you need standardized annual income statement, balance sheet and cash-flow lines for US-listed companies from SEC EDGAR XBRL, as comps or model data.
+- [Clinical Trial Leads](https://apify.com/pandadad0214/clinical-trial-leads) [MCP tool `clinical_trial_leads`]: Use when you need ClinicalTrials.gov trials by condition, drug, sponsor, phase, status or location, with sponsors, contacts and every study site.
 - [Nonprofit Leads (IRS)](https://apify.com/pandadad0214/nonprofit-leads-irs) (publishing soon): Use when you need nonprofit and foundation lists from the IRS Exempt Organizations file, filtered by state, NTEE cause, 501(c) type and size.
 - [Federal Register Monitor](https://apify.com/pandadad0214/federal-register-monitor) (publishing soon): Use when you need new US federal rules, proposed rules and notices by keyword or agency, with comment deadlines and days left.
 - [Product Recall Monitor](https://apify.com/pandadad0214/product-recall-monitor) (publishing soon): Use when you need FDA (food, drugs, devices) and CPSC (consumer products) recalls in one feed, with product, hazard, firm, class and status.
@@ -54,7 +54,7 @@ Run any tool through this repo's open-source MCP server (stdio, Python): `uvx pa
 
 ## AI agent safety
 
-- [Hidden AI Instructions Scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) (free, publishing soon): Use before an agent reads a site it doesn't trust, to find text hidden from people but aimed at AI agents (prompt injection) with technique, location, excerpt and category (policy notice, manipulation, harmful).
+- [Hidden AI Instructions Scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) (free) [MCP tool `hidden_ai_instructions_scanner`]: Use before an agent reads a site it doesn't trust, to find text hidden from people but aimed at AI agents (prompt injection) with technique, location, excerpt and category (policy notice, manipulation, harmful).
 - [Hidden AI Instructions Watch (GitHub)](https://github.com/pandadad0214/hidden-ai-instructions-watch): public, evidence-only log of pages with hidden AI-directed text, with method and corrections process.
 
 ## Typical workflows
@@ -62,7 +62,10 @@ Run any tool through this repo's open-source MCP server (stdio, Python): `uvx pa
 - Writing a paper: `literature_search`, then `citation_formatter`, then `reference_checker` before you submit.
 - Account prioritization: `company_hiring_signals`, then `company_website_enricher`, then `email_domain_security_checker`.
 - Outbound to decision makers: `company_hiring_signals`, then `company_team_finder` (names, titles, email pattern).
-- Federal contracting: `federal_contract_finder` (recompete radar and incumbents), then `grants_finder`.
+- Federal contracting: `federal_contract_finder` (recompete radar and incumbents), then `grants_finder` or `sbir_sttr_topic_radar`.
+- Pharma and CRO prospecting: `clinical_trial_leads` (sponsors, sites, contacts), then `company_website_enricher`.
+- Equity research: `sec_financials_excel` for comps, then `website_change_monitor` on investor-relations pages.
+- Before an agent reads an untrusted site: `hidden_ai_instructions_scanner`.
 - Local prospecting: `local_business_leads`, then `ai_search_seo_audit` on their websites.
 - Trucking and logistics sales: `trucking_company_leads`, then `company_website_enricher`.
 - Market research: `topic_trends_tracker`, then `literature_search` or `podcast_leads_finder` on rising topics.

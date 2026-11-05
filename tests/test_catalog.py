@@ -4,7 +4,7 @@ from pathlib import Path
 
 from jsonschema import Draft202012Validator
 
-from panda_federation_tools.catalog import RUN_OPTIONS, load_catalog
+from panda_federation_tools.catalog import FREE_TOOLS, RUN_OPTIONS, load_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 SECRET_HINTS = re.compile(r"(api_?key|token|password|secret)$", re.I)
@@ -12,7 +12,7 @@ SECRET_HINTS = re.compile(r"(api_?key|token|password|secret)$", re.I)
 
 def test_catalog_has_tools_with_unique_valid_names():
     tools = load_catalog()
-    assert len(tools) >= 18
+    assert len(tools) >= 23
     names = [t.name for t in tools]
     assert len(names) == len(set(names))
     for name in names:
@@ -45,7 +45,7 @@ def test_actors_and_links_point_to_owner():
         assert tool.actor.startswith("pandadad0214/")
         assert tool.url == f"https://apify.com/pandadad0214/{slug}"
         assert tool.name == slug.replace("-", "_")
-        assert tool.pricing, f"{tool.name} has no pricing"
+        assert tool.pricing or tool.name in FREE_TOOLS, f"{tool.name} has no pricing"
 
 
 def test_docs_list_every_tool():

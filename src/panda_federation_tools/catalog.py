@@ -55,7 +55,13 @@ RESULT_CAP_FIELDS: dict[str, str] = {
     "topic_trends_tracker": "maxTopics",
     "trucking_company_leads": "maxResults",
     "website_change_monitor": "maxPages",
+    "sbir_sttr_topic_radar": "maxResults",
+    "hidden_ai_instructions_scanner": "maxPages",
+    "clinical_trial_leads": "maxResults",
 }
+
+# Tools published without pay-per-event pricing (no per-result charge).
+FREE_TOOLS: frozenset[str] = frozenset({"hidden_ai_instructions_scanner"})
 
 
 @dataclass(frozen=True)
@@ -71,7 +77,9 @@ class ToolSpec:
     @property
     def price_text(self) -> str:
         parts = [f"${p['usd']:g} per {p['title'].lower()}" for p in self.pricing if p.get("usd") is not None]
-        return "; ".join(parts) if parts else "see the Apify page"
+        if parts:
+            return "; ".join(parts)
+        return "free (no per-result charge)" if self.name in FREE_TOOLS else "see the Apify page"
 
     @property
     def result_cap_field(self) -> str | None:

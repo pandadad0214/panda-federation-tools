@@ -205,13 +205,57 @@ Price: $0.002 per carrier returned.
 ## Website Change Monitor
 
 URL: https://apify.com/pandadad0214/website-change-monitor
-Status: publishing soon (not yet public; not yet in this repo's MCP server).
+MCP tool (this repo): `website_change_monitor`
 Use when: you need to know if public web pages changed since the previous check, and what changed. Snapshots are kept in the caller's own Apify account (key-value store `panda-change-monitor-<monitorName>`), so repeated calls with the same `monitorName` compare against the last call.
 Input: `urls` (one per line, optional label after " | "), `monitorName`, `watchKeywords`, `cssSelector`, `ignorePatterns` (regex), `ignoreNumbersAndDates`, `minChangePercent`, `onlyReportChanges`, `webhookUrl` (https; POSTed only when pages changed), `maxPages`.
 Minimal input: `{"urls": ["https://example.com/pricing"], "monitorName": "my-watch"}`
 Output per item: `agentSummary`, `url`, `label`, `status` (baseline saved / changed / unchanged / unchanged (below threshold) / error), `changed`, `changePercent`, `addedCount`, `removedCount`, `addedLines`, `removedLines`, `prices`, `priceChanges`, `keywordsPresent`, `keywordsAppeared`, `keywordsDisappeared`, `titleBefore`, `titleAfter`, `previousCheckAt`.
 SUMMARY: `changed` (changed pages with summaries), `failed`, `counts`, `takeaway`, `nextStep`. Records: `CHANGES_XLSX` (Pages + every added/removed line), `PAGES_CSV`. Pages that can't be fetched are free.
 Price: $0.0015 per page checked.
+
+## SBIR/STTR Topic Radar
+
+URL: https://apify.com/pandadad0214/sbir-sttr-topic-radar
+MCP tool (this repo): `sbir_sttr_topic_radar`
+Use when: you need open (or closed) SBIR/STTR topics from every participating agency by keyword, with full topic text, close dates, days left and DoD Q&A.
+Input: `keywords`, `status` (open / closed), `agencies`, `program` (any / SBIR / STTR), `closeDateFrom`, `closeDateTo`, `maxResults` (1 to 1,000, default 50), `includeDetails`, `includeDodQa`.
+Minimal input: `{"keywords": "autonomous", "maxResults": 10}`
+Output per item: `agentSummary`, `topicId`, `topicNumber`, `title`, `agency`, `branch`, `program`, `phase`, `status`, `openDate`, `closeDate`, `daysLeft`, `description`, `technicalPointOfContact`, `dodQaStatus`, `dodPublishedQuestions`, `officialSolicitationUrl`, `url`.
+SUMMARY: counts, `takeaway`, `nextStep`. Records: `TOPICS_XLSX`, `TOPICS_CSV`. Searches with no results are free.
+Price: $0.003 per topic returned.
+
+## SEC Financials to Excel
+
+URL: https://apify.com/pandadad0214/sec-financials-excel
+MCP tool (this repo): `sec_financials_excel`
+Use when: you need standardized annual income statement, balance sheet and cash-flow lines (about 40 per year, with source XBRL tags) for US-listed companies from SEC EDGAR, as comps or model-ready data.
+Input: `companies` (tickers or CIKs, required), `contactEmail` (required by SEC fair-access rules, sent only in the SEC User-Agent), `years` (1 to 20, default 5).
+Minimal input: `{"companies": ["AAPL", "MSFT"], "contactEmail": "you@example.com", "years": 3}`
+Output per item (one company-year): `agentSummary`, `company`, `ticker`, `cik`, `fiscalYear`, `periodEnd`, `form`, `filed`, `revenue`, `grossProfit`, `operatingIncome`, `netIncome`, `epsDiluted`, `operatingCashFlow`, `capex`, `freeCashFlow`, `ebitda`, `cash`, `totalDebt`, `netDebt`, `stockholdersEquity`, margins, `revenueGrowth`, `epsGrowth`, `sourceTags`.
+SUMMARY: counts, `takeaway`, `nextStep`. Records: `FINANCIALS_XLSX` (comps and model sheets), `FINANCIALS_CSV`. Unknown tickers are free.
+Price: $0.002 per company-year returned.
+
+## Clinical Trial Leads
+
+URL: https://apify.com/pandadad0214/clinical-trial-leads
+MCP tool (this repo): `clinical_trial_leads`
+Use when: you need ClinicalTrials.gov trials by condition, drug, sponsor, phase, status or location, with sponsors, central contacts, principal investigators and every matching study site.
+Input: `condition`, `intervention`, `sponsor`, `keywords`, `statuses` (default RECRUITING, NOT_YET_RECRUITING), `phases`, `sponsorType`, `studyType`, `countries`, `states`, `city`, `updatedWithinDays`, `requireContact`, `maxResults` (1 to 50,000, default 100).
+Minimal input: `{"condition": "obesity", "phases": ["PHASE2", "PHASE3"], "countries": ["United States"]}`
+Output per item: `agentSummary`, `nctId`, `title`, `status`, `phase`, `conditions`, `interventions`, `leadSponsor`, `sponsorClass`, `collaborators`, `enrollment`, `startDate`, `primaryCompletionDate`, `centralContactName`, `centralContactPhone`, `centralContactEmail`, `principalInvestigators`, `sites`, `matchingSiteCount`, `url`.
+SUMMARY: counts, `takeaway`, `nextStep`. Records: `TRIALS_XLSX`, `TRIALS_CSV`. Searches with no results are free.
+Price: $0.002 per trial returned.
+
+## Hidden AI Instructions Scanner (free)
+
+URL: https://apify.com/pandadad0214/hidden-ai-instructions-scanner
+MCP tool (this repo): `hidden_ai_instructions_scanner`
+Use when: an agent is about to read a site it doesn't trust and you want to know if the page hides text from people but aims it at AI agents (prompt injection): CSS-hidden text, off-screen text, comments, alt/aria text, zero-width characters, content shown only to AI user agents.
+Input: `urls` (required), `renderJs`, `agentUaDiff` (compare what a browser and an AI agent user agent get), `crawlDepth` (0 to 5), `settleSecs`, `maxPages` (1 to 1,000, default 50), `minSeverity` (low / medium / high), `timeoutSecs`.
+Minimal input: `{"urls": ["https://example.com"]}`
+Output per item: page summaries (`type: page-summary`, `url`, `verdict`, `findings`, `categories`, `topSeverity`, `techniques`, `agentSummary`) and findings with technique, location, excerpt and category (policy notice, manipulation, harmful).
+SUMMARY: overall verdict and counts. Free: no per-result charge.
+Price: free.
 
 ## Hire a human (Fiverr)
 

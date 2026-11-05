@@ -2086,6 +2086,469 @@
         "required": [],
         "additionalProperties": false
       }
+    },
+    {
+      "name": "website_change_monitor",
+      "actor": "pandadad0214/website-change-monitor",
+      "title": "Website Change Monitor: Page Diffs, Price & Keyword Alerts",
+      "description": "Use this to watch competitor pricing, terms, product and careers pages for changes: each run shows added and removed text, change percent, price changes and keyword alerts versus the last run. Schedule it; webhook optional. Excel.",
+      "url": "https://apify.com/pandadad0214/website-change-monitor",
+      "pricing": [
+        {
+          "event": "page-checked",
+          "title": "Page checked",
+          "usd": 0.0015
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "urls": {
+            "type": "array",
+            "description": "Pages to watch. One URL per line. Optional label after ' | ' (e.g. https://acme.com/pricing | Acme pricing). Leave empty for a 2-page demo.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "https://competitor.com/pricing | Competitor pricing",
+                "https://example.com/terms"
+              ]
+            ]
+          },
+          "monitorName": {
+            "type": "string",
+            "default": "default",
+            "description": "Monitor name. Snapshots are saved in your account under this name (key-value store panda-change-monitor-). Use different names for separate watch lists; each run compares with the last run of the same name."
+          },
+          "watchKeywords": {
+            "type": "array",
+            "description": "Alert keywords. Optional. Reports when any of these words appear on or disappear from a page.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "discontinued",
+                "price increase",
+                "hiring",
+                "out of stock"
+              ]
+            ]
+          },
+          "cssSelector": {
+            "type": "string",
+            "description": "Only watch this part (CSS selector). Optional. Compare only the matching elements, e.g. main or #pricing. Ignores headers, footers and banners.",
+            "examples": [
+              "main, .pricing-table"
+            ]
+          },
+          "ignorePatterns": {
+            "type": "array",
+            "description": "Ignore text matching (regex). Optional regular expressions removed before comparing (counters, timestamps, rotating promos).",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "\\d+ (?:views|comments)",
+                "Last updated.*"
+              ]
+            ]
+          },
+          "ignoreNumbersAndDates": {
+            "type": "boolean",
+            "default": false,
+            "description": "Ignore dates and times. Strip dates and clock times before comparing, to avoid noise from 'updated today' widgets."
+          },
+          "minChangePercent": {
+            "type": "number",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Minimum change to report (%). Changes smaller than this are reported as 'unchanged (below threshold)' and the old snapshot is kept, so small edits add up."
+          },
+          "onlyReportChanges": {
+            "type": "boolean",
+            "default": false,
+            "description": "Dataset: changed pages only. Skip unchanged pages in the dataset (handy for alerts and integrations). Every page checked is still billed; failed pages never are."
+          },
+          "webhookUrl": {
+            "type": "string",
+            "description": "Webhook URL for changes (optional). Optional https URL (Slack/Zapier/Make/n8n webhook). Gets a JSON POST listing changed pages, only when something changed."
+          },
+          "maxPages": {
+            "type": "integer",
+            "default": 200,
+            "minimum": 1,
+            "maximum": 5000,
+            "description": "Maximum pages. You pay per page checked, so this also caps the cost."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "sbir_sttr_topic_radar",
+      "actor": "pandadad0214/sbir-sttr-topic-radar",
+      "title": "SBIR/STTR Topic Radar: Open Topics, Deadlines & DoD Q&A",
+      "description": "Use this to find open SBIR and STTR topics from every agency (DoD branches, NIH, NASA, NSF, DOE, USDA, DHS...) by keyword, with full topic text, close dates, days left, topic numbers, official links and DoD Q&A status plus technical points of contact. Excel and CSV.",
+      "url": "https://apify.com/pandadad0214/sbir-sttr-topic-radar",
+      "pricing": [
+        {
+          "event": "topic-found",
+          "title": "Topic found",
+          "usd": 0.003
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "keywords": {
+            "type": "string",
+            "description": "Keywords. Words to find in topic titles and text, e.g. autonomy, battery, machine learning, wound care. Leave empty to list every topic with the chosen status.",
+            "examples": [
+              "autonomous"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "closed"
+            ],
+            "default": "open",
+            "description": "Topic status. Open = topics you can still propose to. Closed = past topics, useful to see what an agency keeps asking for. Choices: open = Open (accepting proposals); closed = Closed (past topics, for research)."
+          },
+          "agencies": {
+            "type": "array",
+            "description": "Agencies. Optional agency or branch codes: DOD (all DoD/DoW), USAF, ARMY, NAVY, DARPA, DHA, DTRA, MDA, SOCOM, SDA, OSD, CBD, HHS, NIH, FDA, CDC, NASA, NSF, DOE, USDA, NIFA, DHS, DOT, ED, EPA, DOC, NIST, NOAA, DOI, NRC. Empty = all agencies.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "NAVY",
+                "NASA"
+              ]
+            ]
+          },
+          "program": {
+            "type": "string",
+            "enum": [
+              "any",
+              "SBIR",
+              "STTR"
+            ],
+            "default": "any",
+            "description": "Program. Topics tagged for both programs are kept either way. Choices: any = SBIR or STTR; SBIR = SBIR only; STTR = STTR only (needs a research-institution partner)."
+          },
+          "closeDateFrom": {
+            "type": "string",
+            "description": "Closes on or after. Optional, e.g. 2026-12 or 2026-12-15."
+          },
+          "closeDateTo": {
+            "type": "string",
+            "description": "Closes on or before. Optional, e.g. 2027-03-31."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 50,
+            "minimum": 1,
+            "maximum": 1000,
+            "description": "Maximum topics. You pay per topic returned, so this also caps the cost. 1 to 1,000; default 50."
+          },
+          "includeDetails": {
+            "type": "boolean",
+            "default": true,
+            "description": "Read full topic pages. Adds topic number, solicitation number, branch, due dates, full description and the official solicitation link (one extra page per topic, no extra charge)."
+          },
+          "includeDodQa": {
+            "type": "boolean",
+            "default": true,
+            "description": "Add DoD Q&A status and point of contact. For DoD/DoW topics, looks the topic up on the DoD SBIR/STTR Innovation Portal (DSIP) and adds Q&A status, Q&A end date, published-question count and the technical point of contact when published. Needs 'Read full topic pages'."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "sec_financials_excel",
+      "actor": "pandadad0214/sec-financials-excel",
+      "title": "SEC Financials to Excel: EDGAR XBRL Comps & Model Data",
+      "description": "Use this to get standardized annual income statement, balance sheet and cash-flow lines for US-listed companies from SEC EDGAR XBRL, with EBITDA, FCF, net debt, margins and a comps sheet that computes EV/EBITDA and P/E once you add share prices. Every number cites its filing. Excel.",
+      "url": "https://apify.com/pandadad0214/sec-financials-excel",
+      "pricing": [
+        {
+          "event": "company-year",
+          "title": "Company-year of financials",
+          "usd": 0.002
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companies": {
+            "type": "array",
+            "description": "Companies (tickers or CIKs). US-listed companies that file 10-Ks with the SEC, e.g. AAPL, MSFT, BRK-B or a CIK like 320193. Up to 200 per run.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "AAPL",
+                "MSFT",
+                "GOOGL"
+              ]
+            ]
+          },
+          "contactEmail": {
+            "type": "string",
+            "description": "Your contact email (required by SEC). SEC requires every automated request to declare a contact in its User-Agent header. It is sent to SEC only and is never stored in the output.",
+            "examples": [
+              ""
+            ]
+          },
+          "years": {
+            "type": "integer",
+            "default": 5,
+            "minimum": 1,
+            "maximum": 20,
+            "description": "Fiscal years per company. Most recent annual (10-K) periods to return. You pay per company-year row, so this also caps the cost."
+          }
+        },
+        "required": [
+          "companies",
+          "contactEmail"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "hidden_ai_instructions_scanner",
+      "actor": "pandadad0214/hidden-ai-instructions-scanner",
+      "title": "Hidden AI Instructions Scanner: Prompt Injection Detector",
+      "description": "Free. Use this to check web pages for text hidden from people but read by AI agents (display:none, off-screen, tiny or same-color text, comments, alt/meta, zero-width and Unicode tag characters) and flag prompt injection: policy notice, manipulation or harmful, with location and excerpt.",
+      "url": "https://apify.com/pandadad0214/hidden-ai-instructions-scanner",
+      "pricing": [],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "urls": {
+            "type": "array",
+            "description": "Page URLs. Pages to scan, one per line. Each URL is scanned once; links are not followed.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "https://example.com"
+              ]
+            ]
+          },
+          "renderJs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Render JavaScript (browser). Off: fast HTTP fetch, reads inline styles, rules, comments, meta, data-* and other attributes, JSON-LD/script data blocks, iframe srcdoc and Unicode tricks. On: loads each page in headless Chromium, waits for network idle plus the settle time (catches delayed injections), checks the computed style of every element, and walks open shadow roots and same-origin iframes."
+          },
+          "agentUaDiff": {
+            "type": "boolean",
+            "default": false,
+            "description": "Check AI-agent cloaking. Also fetch each page as GPTBot, ClaudeBot and ChatGPT-User and flag AI-addressed text served to those agents but not to a normal browser."
+          },
+          "crawlDepth": {
+            "type": "integer",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 5,
+            "description": "Crawl depth. 0 = only the URLs you give. 1+ = also follow same-site links that many clicks deep (signed-out pages only). Max pages still caps the run."
+          },
+          "settleSecs": {
+            "type": "integer",
+            "default": 4,
+            "minimum": 0,
+            "maximum": 30,
+            "description": "Wait after load (render mode). Extra wait after network idle so text injected on a timer is caught."
+          },
+          "maxPages": {
+            "type": "integer",
+            "default": 50,
+            "minimum": 1,
+            "maximum": 1000,
+            "description": "Max pages. Hard cap on pages scanned in one run."
+          },
+          "minSeverity": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "default": "low",
+            "description": "Minimum severity. Drop findings below this severity. Choices: low = Low (include policy notices); medium = Medium; high = High only."
+          },
+          "timeoutSecs": {
+            "type": "integer",
+            "default": 30,
+            "minimum": 5,
+            "maximum": 120,
+            "description": "Page timeout. Per-page load timeout."
+          }
+        },
+        "required": [
+          "urls"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "clinical_trial_leads",
+      "actor": "pandadad0214/clinical-trial-leads",
+      "title": "Clinical Trial Leads: Sponsors, Sites & Contacts",
+      "description": "Find clinical trials by condition, drug, sponsor, phase, status and location from the official ClinicalTrials.gov API: sponsor, phase, enrollment, dates, central contacts, investigators and every study site with contacts. Excel and CSV.",
+      "url": "https://apify.com/pandadad0214/clinical-trial-leads",
+      "pricing": [
+        {
+          "event": "trial-returned",
+          "title": "Trial returned",
+          "usd": 0.002
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "type": "string",
+            "description": "Condition or disease. e.g. obesity, breast cancer, Alzheimer. Uses ClinicalTrials.gov synonyms.",
+            "examples": [
+              "obesity"
+            ]
+          },
+          "intervention": {
+            "type": "string",
+            "description": "Drug or intervention. e.g. semaglutide, CAR-T, device name. Optional."
+          },
+          "sponsor": {
+            "type": "string",
+            "description": "Sponsor or collaborator. e.g. Pfizer, Mayo Clinic. Optional."
+          },
+          "keywords": {
+            "type": "string",
+            "description": "Other keywords. Free-text search across the whole record. Optional."
+          },
+          "statuses": {
+            "type": "array",
+            "default": [
+              "RECRUITING",
+              "NOT_YET_RECRUITING"
+            ],
+            "description": "Recruitment status. Default: recruiting + not yet recruiting.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "RECRUITING",
+                "NOT_YET_RECRUITING",
+                "ACTIVE_NOT_RECRUITING",
+                "ENROLLING_BY_INVITATION",
+                "COMPLETED",
+                "TERMINATED",
+                "WITHDRAWN",
+                "SUSPENDED"
+              ]
+            }
+          },
+          "phases": {
+            "type": "array",
+            "description": "Phases. Empty = any phase.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "EARLY_PHASE1",
+                "PHASE1",
+                "PHASE2",
+                "PHASE3",
+                "PHASE4",
+                "NA"
+              ]
+            },
+            "examples": [
+              [
+                "PHASE2",
+                "PHASE3"
+              ]
+            ]
+          },
+          "sponsorType": {
+            "type": "string",
+            "enum": [
+              "any",
+              "INDUSTRY",
+              "NIH",
+              "FED",
+              "OTHER_GOV",
+              "OTHER",
+              "NETWORK"
+            ],
+            "default": "any",
+            "description": "Lead sponsor type. Industry = pharma/biotech/device companies. Choices: any = Any; INDUSTRY = Industry; NIH = NIH; FED = Other federal; OTHER_GOV = Other government; OTHER = Academic / hospital / other; NETWORK = Network."
+          },
+          "studyType": {
+            "type": "string",
+            "enum": [
+              "any",
+              "INTERVENTIONAL",
+              "OBSERVATIONAL"
+            ],
+            "default": "any",
+            "description": "Study type. Interventional = treatment trials."
+          },
+          "countries": {
+            "type": "array",
+            "description": "Site countries. Keep trials with at least one site here, e.g. United States, Canada.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "United States"
+              ]
+            ]
+          },
+          "states": {
+            "type": "array",
+            "description": "Site states / regions. Full names as on ClinicalTrials.gov, e.g. Arizona, California, Ontario.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "city": {
+            "type": "string",
+            "description": "Site city. e.g. Phoenix."
+          },
+          "updatedWithinDays": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3650,
+            "description": "Updated in the last N days. Only trials whose record changed recently (good for weekly schedules)."
+          },
+          "requireContact": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only trials with a contact. Skip trials without a published central or site contact."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 50000,
+            "description": "Maximum results. You pay per trial returned, so this also caps the cost. Default 100."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
     }
   ]
 }

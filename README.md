@@ -1,6 +1,6 @@
 # Panda Federation Tools
 
-**One MCP server that gives Claude, Cursor, VS Code Copilot and other AI assistants 18 research and public-data tools: citation checks, literature search, grants, contracts, leads and domain audits.**
+**One MCP server that gives Claude, Cursor, VS Code Copilot and other AI assistants 23 research and public-data tools: citation checks, literature search, grants, contracts, SBIR/STTR topics, SEC financials, clinical trials, leads, website monitoring, domain audits and a free hidden-AI-instructions scanner.**
 
 [![PyPI](https://img.shields.io/pypi/v/panda-federation-tools)](https://pypi.org/project/panda-federation-tools/)
 [![Latest Release](https://img.shields.io/github/v/release/pandadad0214/panda-federation-tools?label=latest%20release)](https://github.com/pandadad0214/panda-federation-tools/releases/latest)
@@ -80,11 +80,11 @@ Add to `.vscode/mcp.json`. VS Code asks for the token and stores it securely:
 Command `uvx`, args `panda-federation-tools`, env `APIFY_TOKEN`. For Cline also set `"timeout": 60`. Agent-readable steps: [`llms-install.md`](llms-install.md).
 
 ### Other ways to install
-- **Pinned to a git tag:** `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0 panda-federation-tools`
-- **From the Release download:** `uvx --from https://github.com/pandadad0214/panda-federation-tools/releases/download/v1.2.0/panda_federation_tools-1.2.0-py3-none-any.whl panda-federation-tools`
+- **Pinned to a git tag:** `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.3.0 panda-federation-tools`
+- **From the Release download:** `uvx --from https://github.com/pandadad0214/panda-federation-tools/releases/download/v1.3.0/panda_federation_tools-1.3.0-py3-none-any.whl panda-federation-tools`
 - **Helper script:** download `install.sh` (macOS/Linux) or `install.ps1` (Windows) from the latest Release. It installs uv if needed, checks the server starts and prints your config. One package works on every OS.
-- **pip:** `pip install panda-federation-tools` (or a git tag: `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.2.0"`), then run `panda-federation-tools`.
-- **Docker:** `docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.2.0` then `docker run -i --rm -e APIFY_TOKEN panda-federation-tools`.
+- **pip:** `pip install panda-federation-tools` (or a git tag: `pip install "git+https://github.com/pandadad0214/panda-federation-tools@v1.3.0"`), then run `panda-federation-tools`.
+- **Docker:** `docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.3.0` then `docker run -i --rm -e APIFY_TOKEN panda-federation-tools`.
 
 ## What's included
 
@@ -117,6 +117,11 @@ Each MCP tool runs one public Apify Actor and returns its results. Input fields,
 | `topic_trends_tracker` | [topic-trends-tracker](https://apify.com/pandadad0214/topic-trends-tracker) | Wikipedia pageview trends with 30-day and YoY change (Google Trends alternative) | $0.002 / topic |
 | `company_team_finder` | [company-team-finder](https://apify.com/pandadad0214/company-team-finder) | Leaders and decision makers from companies' own team pages (no LinkedIn scraping) | $0.002 / person |
 | `trucking_company_leads` | [trucking-company-leads](https://apify.com/pandadad0214/trucking-company-leads) | New and existing US carriers and brokers from official FMCSA data | $0.002 / carrier |
+| `website_change_monitor` | [website-change-monitor](https://apify.com/pandadad0214/website-change-monitor) | Page diffs, price changes and keyword alerts on any public page | $0.0015 / page |
+| `sbir_sttr_topic_radar` | [sbir-sttr-topic-radar](https://apify.com/pandadad0214/sbir-sttr-topic-radar) | Open SBIR/STTR topics from every agency with deadlines and DoD Q&A | $0.003 / topic |
+| `sec_financials_excel` | [sec-financials-excel](https://apify.com/pandadad0214/sec-financials-excel) | SEC EDGAR XBRL financials → comps and model-ready Excel | $0.002 / company-year |
+| `hidden_ai_instructions_scanner` | [hidden-ai-instructions-scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) | Finds text hidden from people but aimed at AI agents (prompt injection) | Free |
+| `clinical_trial_leads` | [clinical-trial-leads](https://apify.com/pandadad0214/clinical-trial-leads) | ClinicalTrials.gov trials with sponsors, phases, contacts and every site | $0.002 / trial |
 
 Every tool also accepts three optional run controls: `run_max_items` (results to return, default 50), `run_max_charge_usd` (spending cap for the call, default $0.50) and `run_timeout_secs` (default 120, max 300). While a run is in progress the server sends MCP progress notifications every few seconds, so clients that support them do not time out. Most tools answer in 5–15 seconds for a few inputs; `local_business_leads` and big crawls can take a minute or more, so give them `run_timeout_secs: 300`.
 
@@ -128,11 +133,6 @@ Built and tested, and going public on the Apify Store a few a day (Apify limits 
 
 | Apify Actor | What it does | Price |
 |---|---|---|
-| [website-change-monitor](https://apify.com/pandadad0214/website-change-monitor) | Page diffs, price changes and keyword alerts on any public page | $0.0015 / page |
-| [sbir-sttr-topic-radar](https://apify.com/pandadad0214/sbir-sttr-topic-radar) | Open SBIR/STTR topics from every agency with deadlines and DoD Q&A | $0.003 / topic |
-| [sec-financials-excel](https://apify.com/pandadad0214/sec-financials-excel) | SEC EDGAR XBRL financials → comps and model-ready Excel | $0.002 / company-year |
-| [hidden-ai-instructions-scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) | Finds text hidden from people but aimed at AI agents (prompt injection) | Free |
-| [clinical-trial-leads](https://apify.com/pandadad0214/clinical-trial-leads) | ClinicalTrials.gov trials with sponsors, phases, contacts and every site | $0.002 / trial |
 | [nonprofit-leads-irs](https://apify.com/pandadad0214/nonprofit-leads-irs) | IRS charity and foundation lists by state, cause and size | $0.001 / nonprofit |
 | [federal-register-monitor](https://apify.com/pandadad0214/federal-register-monitor) | New federal rules and notices with open comment deadlines | $0.001 / document |
 | [product-recall-monitor](https://apify.com/pandadad0214/product-recall-monitor) | FDA food, drug and device plus CPSC recalls in one feed | $0.0015 / recall |
@@ -162,7 +162,7 @@ Built and tested, and going public on the Apify Store a few a day (Apify limits 
 
 - You pay Apify per result, at the prices above, from your own Apify account. Apify Bronze, Silver and Gold plans get 10–30% off.
 - **Empty runs cost nothing per result.** Apify adds a tiny platform start fee (about $0.00005 per run).
-- `run_max_items` (default 50) also sets the Actor's own result limit on 15 of the 18 tools, so you only pay for the results you asked for. On `grants_finder`, `pdf_table_extractor` and `company_team_finder` (whose limits count sources, pages or companies), set those fields directly; the charge cap still applies.
+- `run_max_items` (default 50) also sets the Actor's own result limit on 19 of the 23 tools, so you only pay for the results you asked for. On `grants_finder`, `pdf_table_extractor`, `company_team_finder` and `sec_financials_excel` (whose limits count sources, pages, companies or years), set those fields directly; the charge cap still applies.
 - Every MCP call is capped by `run_max_charge_usd` (default $0.50, set your own default with `PANDA_MAX_CHARGE_USD`). Apify stops the run when the cap is reached.
 - The MCP server itself is free and open source (MIT).
 

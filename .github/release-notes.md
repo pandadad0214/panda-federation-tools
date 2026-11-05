@@ -10,11 +10,9 @@ uvx panda-federation-tools@{{VERSION}}
 - Verify downloads with `SHA256SUMS.txt`.
 
 ### Added
-- Claude Desktop extension (.mcpb) with a secure token prompt.
-- One-click Cursor install button; install.sh / install.ps1 helpers.
-- Release assets built and checksummed automatically by CI; PyPI publishing via Trusted Publishing.
+- 5 new tools: Website Change Monitor, SBIR/STTR Topic Radar, SEC Financials to Excel, Clinical Trial Leads, and the free Hidden AI Instructions Scanner.
 
 ### Changed
-- README now leads with Install / Use; developer docs moved to "For developers".
+- README, llms.txt and llms-full.txt list them as live; 4 more Actors are still publishing soon.
 
-18 tools, same prices. Your `APIFY_TOKEN` only goes to api.apify.com. Full history: [CHANGELOG.md](https://github.com/pandadad0214/panda-federation-tools/blob/main/CHANGELOG.md).
+23 tools, same prices for existing ones. Your `APIFY_TOKEN` only goes to api.apify.com. Full history: [CHANGELOG.md](https://github.com/pandadad0214/panda-federation-tools/blob/main/CHANGELOG.md).

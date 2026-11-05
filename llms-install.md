@@ -27,7 +27,7 @@ Follow these steps to add this MCP server for the user.
 ```
 
    Keep `"timeout": 60`: Cline's default MCP timeout is 10 seconds, which is shorter than the 15 to 30 seconds uvx can take on the first start. Without it, Cline reports an `initialize` timeout.
-5. **Verify:** the server should list 18 tools (for example `reference_checker`, `literature_search`, `company_hiring_signals`). A cheap first test is `email_domain_security_checker` with `{"domains": ["example.com"], "run_max_items": 1}`.
+5. **Verify:** the server should list 23 tools (for example `reference_checker`, `literature_search`, `company_hiring_signals`). A cheap first test is `email_domain_security_checker` with `{"domains": ["example.com"], "run_max_items": 1}`.
 
 Optional environment variables: `PANDA_MAX_CHARGE_USD` (default spending cap per call, 0.50), `PANDA_MAX_ITEMS` (default 50), `PANDA_TIMEOUT_SECS` (default 120, max 300).
 

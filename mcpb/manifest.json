@@ -2,8 +2,8 @@
   "manifest_version": "0.3",
   "name": "panda-federation-tools",
   "display_name": "Panda Federation Tools",
-  "version": "1.2.0",
-  "description": "18 research and public-data tools on Apify: citation checks, literature search, grants, contracts, leads and domain audits.",
+  "version": "1.3.0",
+  "description": "23 research and public-data tools on Apify: citation checks, literature search, grants, contracts, SBIR/STTR, SEC financials, clinical trials, leads, monitoring and domain audits.",
   "author": {
     "name": "Panda Federation",
     "url": "https://github.com/pandadad0214"

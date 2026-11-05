@@ -4,8 +4,14 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-04
+
+### Added
+- 5 new MCP tools, now public on the Apify Store: `website_change_monitor`, `sbir_sttr_topic_radar`, `sec_financials_excel`, `clinical_trial_leads` and the free `hidden_ai_instructions_scanner` (23 tools in total).
+- `run_max_items` also caps results on `sbir_sttr_topic_radar`, `clinical_trial_leads` and `hidden_ai_instructions_scanner`.
+
 ### Changed
-- README and `llms.txt` list the 9 built-and-tested Actors that are publishing soon (Website Change Monitor, SBIR/STTR Topic Radar, SEC Financials to Excel, Hidden AI Instructions Scanner, Clinical Trial Leads, Nonprofit Leads, Federal Register Monitor, Product Recall Monitor, VIN Decoder + Recalls). `scripts/build_catalog.py` already knows their slugs and adds each one as an MCP tool once it is public.
+- README, `llms.txt` and `llms-full.txt` move these 5 out of "Publishing soon"; Nonprofit Leads, Federal Register Monitor, Product Recall Monitor and VIN Decoder + Recalls are still publishing soon.
 
 ## [1.2.0] - 2026-11-04
 
@@ -53,7 +59,8 @@ All notable changes to this project are documented here. The format follows [Kee
 ### Earlier
 - Tool index (`README.md`, `llms.txt`, `llms-full.txt`), MIT license and `server.json` for the hosted Academic Research MCP Server (`io.github.pandadad0214/panda-research-mcp`, version 1.0.0) in the official MCP Registry.
 
-[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.0.0...v1.1.0
