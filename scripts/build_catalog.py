@@ -40,6 +40,15 @@ SLUGS = [
     "company-team-finder",
     "trucking-company-leads",
     "website-change-monitor",
+    # Built and tested; skipped automatically until each one is public on the Store.
+    "sbir-sttr-topic-radar",
+    "sec-financials-excel",
+    "hidden-ai-instructions-scanner",
+    "clinical-trial-leads",
+    "nonprofit-leads-irs",
+    "federal-register-monitor",
+    "product-recall-monitor",
+    "vin-decoder-recalls",
 ]
 # Inputs an agent should not pass through a chat transcript, or that only work in the Console.
 SKIP_EDITORS = {"fileupload"}

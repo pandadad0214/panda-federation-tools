@@ -4,6 +4,9 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Changed
+- README and `llms.txt` list the 9 built-and-tested Actors that are publishing soon (Website Change Monitor, SBIR/STTR Topic Radar, SEC Financials to Excel, Hidden AI Instructions Scanner, Clinical Trial Leads, Nonprofit Leads, Federal Register Monitor, Product Recall Monitor, VIN Decoder + Recalls). `scripts/build_catalog.py` already knows their slugs and adds each one as an MCP tool once it is public.
+
 ## [1.2.0] - 2026-11-04
 
 ### Added

@@ -120,9 +120,25 @@ Each MCP tool runs one public Apify Actor and returns its results. Input fields,
 
 Every tool also accepts three optional run controls: `run_max_items` (results to return, default 50), `run_max_charge_usd` (spending cap for the call, default $0.50) and `run_timeout_secs` (default 120, max 300). While a run is in progress the server sends MCP progress notifications every few seconds, so clients that support them do not time out. Most tools answer in 5–15 seconds for a few inputs; `local_business_leads` and big crawls can take a minute or more, so give them `run_timeout_secs: 300`.
 
-Also on Apify: the hosted [Academic Research MCP Server](https://apify.com/pandadad0214/panda-research-mcp) ($0.01–$0.02 per call) and [Website Change Monitor](https://apify.com/pandadad0214/website-change-monitor) (publishing soon; it joins this server once it is public).
+Also on Apify: the hosted [Academic Research MCP Server](https://apify.com/pandadad0214/panda-research-mcp) ($0.01–$0.02 per call).
 
-Free for everyone: the [Hidden AI Instructions Scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) (publishing soon) checks web pages for hidden prompt injection aimed at AI agents, and [Hidden AI Instructions Watch](https://github.com/pandadad0214/hidden-ai-instructions-watch) is our public, evidence-only log of what it finds.
+### Publishing soon
+
+Built and tested, and going public on the Apify Store a few a day (Apify limits new publications). Each one joins this server as an MCP tool in the release after it goes public. Store links work once it is public.
+
+| Apify Actor | What it does | Price |
+|---|---|---|
+| [website-change-monitor](https://apify.com/pandadad0214/website-change-monitor) | Page diffs, price changes and keyword alerts on any public page | $0.0015 / page |
+| [sbir-sttr-topic-radar](https://apify.com/pandadad0214/sbir-sttr-topic-radar) | Open SBIR/STTR topics from every agency with deadlines and DoD Q&A | $0.003 / topic |
+| [sec-financials-excel](https://apify.com/pandadad0214/sec-financials-excel) | SEC EDGAR XBRL financials → comps and model-ready Excel | $0.002 / company-year |
+| [hidden-ai-instructions-scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) | Finds text hidden from people but aimed at AI agents (prompt injection) | Free |
+| [clinical-trial-leads](https://apify.com/pandadad0214/clinical-trial-leads) | ClinicalTrials.gov trials with sponsors, phases, contacts and every site | $0.002 / trial |
+| [nonprofit-leads-irs](https://apify.com/pandadad0214/nonprofit-leads-irs) | IRS charity and foundation lists by state, cause and size | $0.001 / nonprofit |
+| [federal-register-monitor](https://apify.com/pandadad0214/federal-register-monitor) | New federal rules and notices with open comment deadlines | $0.001 / document |
+| [product-recall-monitor](https://apify.com/pandadad0214/product-recall-monitor) | FDA food, drug and device plus CPSC recalls in one feed | $0.0015 / recall |
+| [vin-decoder-recalls](https://apify.com/pandadad0214/vin-decoder-recalls) | Bulk NHTSA VIN decode with recall campaigns and complaint counts | $0.001 / VIN |
+
+[Hidden AI Instructions Watch](https://github.com/pandadad0214/hidden-ai-instructions-watch) is our public, evidence-only log of what the free scanner finds.
 
 ### Example prompts
 - "Check these 12 references for fake or retracted papers and tell me which to fix."
