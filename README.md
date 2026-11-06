@@ -1,6 +1,6 @@
 # Panda Federation Tools
 
-**Index of Panda Federation public-data MCP tools on Apify.** Prefer one of the four focused domain servers (3–15 tools each). This umbrella still runs all 23 tools when `PFT_DOMAIN` is unset for backward compatibility.
+**Index of Panda Federation public-data MCP tools on Apify.** Prefer one of the four focused domain servers (3–15 tools each). This umbrella still runs all 27 tools when `PFT_DOMAIN` is unset for backward compatibility.
 
 [![PyPI](https://img.shields.io/pypi/v/panda-federation-tools)](https://pypi.org/project/panda-federation-tools/)
 [![Latest Release](https://img.shields.io/github/v/release/pandadad0214/panda-federation-tools?label=latest%20release)](https://github.com/pandadad0214/panda-federation-tools/releases/latest)
@@ -23,8 +23,8 @@ Replace `apify_api_YOUR_TOKEN` below with your token, and never commit a file th
 | Domain package | Tools | Scope | One-liner |
 |---|---|---|---|
 | [`panda-research-tools`](https://github.com/pandadad0214/panda-research-tools) | 6 | Scholarly integrity & papers | `uvx --from panda-federation-tools panda-research-tools` |
-| [`panda-public-funding-tools`](https://github.com/pandadad0214/panda-public-funding-tools) | 5 | US federal $ & filings | `uvx --from panda-federation-tools panda-public-funding-tools` |
-| [`panda-leads-tools`](https://github.com/pandadad0214/panda-leads-tools) | 8 | Public leads & enrichment | `uvx --from panda-federation-tools panda-leads-tools` |
+| [`panda-public-funding-tools`](https://github.com/pandadad0214/panda-public-funding-tools) | 8 | US federal $, filings & safety monitors | `uvx --from panda-federation-tools panda-public-funding-tools` |
+| [`panda-leads-tools`](https://github.com/pandadad0214/panda-leads-tools) | 9 | Public leads & enrichment | `uvx --from panda-federation-tools panda-leads-tools` |
 | [`panda-web-security-tools`](https://github.com/pandadad0214/panda-web-security-tools) | 4 | Site / email / agent safety | `uvx --from panda-federation-tools panda-web-security-tools` |
 
 Or set `PFT_DOMAIN` to `research` | `public-funding` | `leads` | `web-security` while running `uvx panda-federation-tools`.
@@ -62,14 +62,14 @@ claude mcp add panda-research-tools --env APIFY_TOKEN=apify_api_YOUR_TOKEN -- \
 uvx panda-federation-tools
 ```
 
-Lists all 23 tools. Kept for older configs. Prefer a focused domain server above.
+Lists all 27 tools. Kept for older configs. Prefer a focused domain server above.
 
 ### Other ways to install
-- **Pinned to a git tag:** `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.4.0 panda-research-tools`
-- **From the Release download:** `uvx --from https://github.com/pandadad0214/panda-federation-tools/releases/download/v1.4.0/panda_federation_tools-1.4.0-py3-none-any.whl panda-research-tools`
+- **Pinned to a git tag:** `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.5.0 panda-research-tools`
+- **From the Release download:** `uvx --from https://github.com/pandadad0214/panda-federation-tools/releases/download/v1.5.0/panda_federation_tools-1.5.0-py3-none-any.whl panda-research-tools`
 - **Helper script:** download `install.sh` (macOS/Linux) or `install.ps1` (Windows) from the latest Release.
 - **pip:** `pip install panda-federation-tools` then `panda-research-tools` (or another domain script).
-- **Docker:** `docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.4.0` then `docker run -i --rm -e APIFY_TOKEN -e PFT_DOMAIN=research panda-federation-tools`.
+- **Docker:** `docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.5.0` then `docker run -i --rm -e APIFY_TOKEN -e PFT_DOMAIN=research panda-federation-tools`.
 
 **No install?** Hosted research subset (4 tools) at `https://pandadad0214--panda-research-mcp.apify.actor/mcp` with header `Authorization: Bearer <your Apify token>`. See [Hosted options](#hosted-options-no-install).
 
@@ -93,7 +93,7 @@ Lists all 23 tools. Kept for older configs. Prefer a focused domain server above
 | `researcher_expert_finder` | [researcher-expert-finder](https://apify.com/pandadad0214/researcher-expert-finder) | Ranked academic experts and KOLs for a topic, with ORCID and h-index | $0.0025 / expert |
 | `pdf_table_extractor` | [pdf-table-extractor](https://apify.com/pandadad0214/pdf-table-extractor) | Every table in a PDF → rows, Excel and CSV, with OCR for scanned pages | $0.001 / page; $0.003 / table; $0.02 / OCR page |
 
-#### Public funding (`panda-public-funding-tools`) — 5 tools
+#### Public funding (`panda-public-funding-tools`) — 8 tools
 
 | MCP tool | Apify Actor | What it does | Price (Apify free plan) |
 |---|---|---|---|
@@ -102,8 +102,11 @@ Lists all 23 tools. Kept for older configs. Prefer a focused domain server above
 | `sbir_sttr_topic_radar` | [sbir-sttr-topic-radar](https://apify.com/pandadad0214/sbir-sttr-topic-radar) | Open SBIR/STTR topics from every agency with deadlines and DoD Q&A | $0.003 / topic |
 | `sec_financials_excel` | [sec-financials-excel](https://apify.com/pandadad0214/sec-financials-excel) | SEC EDGAR XBRL financials → comps and model-ready Excel | $0.002 / company-year |
 | `clinical_trial_leads` | [clinical-trial-leads](https://apify.com/pandadad0214/clinical-trial-leads) | ClinicalTrials.gov trials with sponsors, phases, contacts and every site | $0.002 / trial |
+| `federal_register_monitor` | [federal-register-monitor](https://apify.com/pandadad0214/federal-register-monitor) | New federal rules and notices with open comment deadlines | $0.001 / document |
+| `product_recall_monitor` | [product-recall-monitor](https://apify.com/pandadad0214/product-recall-monitor) | FDA food, drug and device plus CPSC recalls in one feed | $0.0015 / recall |
+| `vin_decoder_recalls` | [vin-decoder-recalls](https://apify.com/pandadad0214/vin-decoder-recalls) | Bulk NHTSA VIN decode with recall campaigns and complaint counts | $0.001 / VIN |
 
-#### Leads (`panda-leads-tools`) — 8 tools
+#### Leads (`panda-leads-tools`) — 9 tools
 
 | MCP tool | Apify Actor | What it does | Price (Apify free plan) |
 |---|---|---|---|
@@ -115,6 +118,7 @@ Lists all 23 tools. Kept for older configs. Prefer a focused domain server above
 | `company_team_finder` | [company-team-finder](https://apify.com/pandadad0214/company-team-finder) | Leaders and decision makers from companies' own team pages (no LinkedIn scraping) | $0.002 / person |
 | `topic_trends_tracker` | [topic-trends-tracker](https://apify.com/pandadad0214/topic-trends-tracker) | Wikipedia pageview trends with 30-day and YoY change (Google Trends alternative) | $0.002 / topic |
 | `trucking_company_leads` | [trucking-company-leads](https://apify.com/pandadad0214/trucking-company-leads) | New and existing US carriers and brokers from official FMCSA data | $0.002 / carrier |
+| `nonprofit_leads_irs` | [nonprofit-leads-irs](https://apify.com/pandadad0214/nonprofit-leads-irs) | IRS charity and foundation lists by state, cause and size | $0.001 / nonprofit |
 
 #### Web security (`panda-web-security-tools`) — 4 tools
 
@@ -135,10 +139,6 @@ Built and tested, and going public on the Apify Store a few a day (Apify limits 
 
 | Apify Actor | Likely domain | What it does | Price |
 |---|---|---|---|
-| [nonprofit-leads-irs](https://apify.com/pandadad0214/nonprofit-leads-irs) | leads | IRS charity and foundation lists by state, cause and size | $0.001 / nonprofit |
-| [federal-register-monitor](https://apify.com/pandadad0214/federal-register-monitor) | public-funding | New federal rules and notices with open comment deadlines | $0.001 / document |
-| [product-recall-monitor](https://apify.com/pandadad0214/product-recall-monitor) | public-funding | FDA food, drug and device plus CPSC recalls in one feed | $0.0015 / recall |
-| [vin-decoder-recalls](https://apify.com/pandadad0214/vin-decoder-recalls) | public-funding | Bulk NHTSA VIN decode with recall campaigns and complaint counts | $0.001 / VIN |
 | [building-permit-leads](https://apify.com/pandadad0214/building-permit-leads) | leads | New building permits from 8 US cities with trade category, job value and contractor | $0.0015 / permit |
 | [florida-new-business-leads](https://apify.com/pandadad0214/florida-new-business-leads) | leads | New Florida LLCs and corporations daily (Sunbiz) with officers and addresses | $0.0015 / business |
 | [bulk-domain-whois-expiry](https://apify.com/pandadad0214/bulk-domain-whois-expiry) | web-security | Bulk RDAP/WHOIS: registrar, expiry and days left, availability, DNS host | $0.001 / domain |
@@ -167,7 +167,7 @@ Built and tested, and going public on the Apify Store a few a day (Apify limits 
 
 - You pay Apify per result, at the prices above, from your own Apify account. Apify Bronze, Silver and Gold plans get 10–30% off.
 - **Empty runs cost nothing per result.** Apify adds a tiny platform start fee (about $0.00005 per run).
-- `run_max_items` (default 50) also sets the Actor's own result limit on 19 of the 23 tools, so you only pay for the results you asked for. On `grants_finder`, `pdf_table_extractor`, `company_team_finder` and `sec_financials_excel` (whose limits count sources, pages, companies or years), set those fields directly; the charge cap still applies.
+- `run_max_items` (default 50) also sets the Actor's own result limit on 23 of the 27 tools, so you only pay for the results you asked for. On `grants_finder`, `pdf_table_extractor`, `company_team_finder` and `sec_financials_excel` (whose limits count sources, pages, companies or years), set those fields directly; the charge cap still applies.
 - Every MCP call is capped by `run_max_charge_usd` (default $0.50, set your own default with `PANDA_MAX_CHARGE_USD`). Apify stops the run when the cap is reached.
 - The MCP server itself is free and open source (MIT).
 

@@ -12,8 +12,8 @@ TOKEN = "apify_api_DOMAINTEST999"
 
 EXPECTED_COUNTS = {
     "research": 6,
-    "public-funding": 5,
-    "leads": 8,
+    "public-funding": 8,
+    "leads": 9,
     "web-security": 4,
 }
 
@@ -23,7 +23,7 @@ def test_domain_map_covers_every_catalog_tool_exactly_once():
     catalog_names = {t.name for t in load_catalog()}
     mapped = set().union(*DOMAINS.values())
     assert mapped == catalog_names
-    assert sum(EXPECTED_COUNTS.values()) == len(catalog_names) == 23
+    assert sum(EXPECTED_COUNTS.values()) == len(catalog_names) == 27
 
 
 @pytest.mark.parametrize("domain,count", list(EXPECTED_COUNTS.items()))

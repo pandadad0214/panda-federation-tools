@@ -2572,6 +2572,383 @@
         "required": [],
         "additionalProperties": false
       }
+    },
+    {
+      "name": "nonprofit_leads_irs",
+      "actor": "pandadad0214/nonprofit-leads-irs",
+      "title": "Nonprofit Leads: IRS Charities & Foundations by State",
+      "description": "Build nonprofit and foundation lead lists from the official IRS Exempt Organizations Business Master File, filtered by state, city, ZIP, NTEE cause, 501(c) type, public charity vs private foundation, revenue, assets and ruling year. Unlike local_business_leads (OpenStreetMap shops) and npi_provider_lists (healthcare NPI), this is the IRS EO BMF for tax-exempt orgs. Use when you need charity or foundation prospect lists for fundraising, sponsorship, grants outreach or nonprofit CRM enrichment. Do not use for for-profit businesses (use local_business_leads or company_website_enricher) or for Form 990 full-text analysis. Parameters: states is the usual starting filter; orgType any|publicCharity|privateFoundation; only501c3 defaults true; minAssets/minRevenue and sortBy=assets|revenue|newest|name rank large prospects first; maxResults caps billed rows. In-care-of and address are what the org filed with the IRS and may be a PO box or attorney. Runs that match nothing are free. Returns per item: agentSummary, ein, name, inCareOf, street, city, state, zip, nteeCode, cause, subsection, orgType, privateFoundation, rulingYear, revenue, income, assets, sizeBand, deductible, propublicaUrl, irsUrl; plus NONPROFITS_XLSX/CSV.",
+      "storeDescription": "Build nonprofit and foundation lead lists from the official IRS Exempt Organizations file: EIN, name, address, in-care-of contact, NTEE cause, 501(c) type, ruling year, revenue and assets. Filter by state, city, ZIP, cause and size. Excel and CSV.",
+      "url": "https://apify.com/pandadad0214/nonprofit-leads-irs",
+      "pricing": [
+        {
+          "event": "nonprofit-returned",
+          "title": "Nonprofit returned",
+          "usd": 0.001
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "states": {
+            "type": "array",
+            "description": "States. 2-letter codes, up to 15 per run (one IRS file each), e.g. AZ, TX, DC.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "AZ"
+              ]
+            ]
+          },
+          "cities": {
+            "type": "array",
+            "description": "Cities. Optional, exact city names, e.g. Phoenix, Tucson.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "Phoenix"
+              ]
+            ]
+          },
+          "zipPrefixes": {
+            "type": "array",
+            "description": "ZIP prefixes. Optional, e.g. 850, 85281.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "nteeCodes": {
+            "type": "array",
+            "description": "Cause (NTEE codes). Optional NTEE letters or codes: A arts, B education, C environment, D animals, E health, F mental health, G diseases, P human services, L housing, O youth, S community, T grantmaking, X religion. E.g. P, B20, E22.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "P"
+              ]
+            ]
+          },
+          "nameContains": {
+            "type": "string",
+            "description": "Name contains. Optional, e.g. food bank, YMCA."
+          },
+          "only501c3": {
+            "type": "boolean",
+            "default": true,
+            "description": "Only 501(c)(3) charities. Off = include 501(c)(4) social welfare, (c)(6) trade associations and other exempt types."
+          },
+          "orgType": {
+            "type": "string",
+            "enum": [
+              "any",
+              "publicCharity",
+              "privateFoundation"
+            ],
+            "default": "any",
+            "description": "Charity or foundation. Private foundations make grants; public charities raise money. Choices: any = Any; publicCharity = Public charities; privateFoundation = Private foundations."
+          },
+          "minRevenue": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Minimum revenue ($). Latest annual revenue the IRS has on file."
+          },
+          "maxRevenue": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Maximum revenue ($). Optional."
+          },
+          "minAssets": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Minimum assets ($). Optional."
+          },
+          "rulingYearFrom": {
+            "type": "integer",
+            "minimum": 1900,
+            "maximum": 2100,
+            "description": "Exempt since year (new nonprofits). e.g. 2025 = organizations granted exemption in 2025 or later."
+          },
+          "requireFinancials": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only with revenue on file. Skip tiny organizations that file the 990-N postcard."
+          },
+          "sortBy": {
+            "type": "string",
+            "enum": [
+              "revenue",
+              "assets",
+              "newest",
+              "name"
+            ],
+            "default": "revenue",
+            "description": "Sort by. Order before the maximum is applied. Choices: revenue = Revenue (largest first); assets = Assets (largest first); newest = Newest exemption first; name = Name A-Z."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 500,
+            "minimum": 1,
+            "maximum": 50000,
+            "description": "Maximum results. You pay per nonprofit returned, so this also caps the cost. Default 500."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "federal_register_monitor",
+      "actor": "pandadad0214/federal-register-monitor",
+      "title": "Federal Register Monitor: New Rules & Comment Deadlines",
+      "description": "Track new US federal rules, proposed rules, notices and presidential documents from the official FederalRegister.gov API, with agency, publication and effective dates, comment deadline and days left, docket IDs, RIN, abstract and comment links. Unlike grants_finder (assistance opportunities) and federal_contract_finder (awarded contracts), this monitors the Federal Register rulemaking feed. Use when compliance, policy, lobbying or capture teams need new rules or open comment periods by keyword or agency. Do not use for grant RFPs (use grants_finder) or for awarded contract data (use federal_contract_finder). Parameters: keywords and agencies narrow the search; commentsOpenOnly=true keeps only open dockets; documentTypes RULE|PRORULE|NOTICE|PRESDOCU; daysBack or publishedFrom/To set the window; significantOnly filters significant rules; maxResults caps billed documents. Empty runs are free. Returns per item: agentSummary, documentNumber, type, title, agencies, publicationDate, effectiveDate, commentsCloseDate, commentDaysLeft, commentOpen, significant, docketIds, rins, citation, abstract, commentUrl, url, pdfUrl, regulationsGovDocketUrl; plus FEDREG_XLSX/CSV.",
+      "storeDescription": "Track new US federal rules, proposed rules and notices from the official FederalRegister.gov API: agency, comment deadline and days left, effective date, docket, RIN and comment link. Filter by keyword, agency, type and open comment periods. Excel.",
+      "url": "https://apify.com/pandadad0214/federal-register-monitor",
+      "pricing": [
+        {
+          "event": "document-returned",
+          "title": "Document returned",
+          "usd": 0.001
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "keywords": {
+            "type": "string",
+            "description": "Keywords. Full-text search, e.g. \"artificial intelligence\", PFAS, overtime. Quotes for exact phrases.",
+            "examples": [
+              "artificial intelligence"
+            ]
+          },
+          "agencies": {
+            "type": "array",
+            "description": "Agencies. Agency slugs from federalregister.gov/agencies, e.g. environmental-protection-agency, food-and-drug-administration, securities-and-exchange-commission.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "documentTypes": {
+            "type": "array",
+            "description": "Document types. Empty = all types.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "RULE",
+                "PRORULE",
+                "NOTICE",
+                "PRESDOCU"
+              ]
+            },
+            "examples": [
+              [
+                "RULE",
+                "PRORULE"
+              ]
+            ]
+          },
+          "daysBack": {
+            "type": "integer",
+            "default": 30,
+            "minimum": 1,
+            "maximum": 3650,
+            "description": "Published in the last N days. Use 1 or 7 on a daily or weekly schedule. Default 30."
+          },
+          "publishedFrom": {
+            "type": "string",
+            "description": "Published on or after. Optional YYYY-MM-DD; overrides days back."
+          },
+          "publishedTo": {
+            "type": "string",
+            "description": "Published on or before. Optional YYYY-MM-DD."
+          },
+          "commentsOpenOnly": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only open comment periods. Keep documents you can still comment on, soonest deadline first."
+          },
+          "significantOnly": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only significant rules. Rules flagged significant under EO 12866."
+          },
+          "cfrTitle": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "description": "CFR title. Optional, e.g. 21 (food and drugs), 40 (environment)."
+          },
+          "cfrPart": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "CFR part. Optional, with CFR title."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 50000,
+            "description": "Maximum results. You pay per document returned, so this also caps the cost. Default 100."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "product_recall_monitor",
+      "actor": "pandadad0214/product-recall-monitor",
+      "title": "Product Recall Monitor: FDA Food, Drug, Device & CPSC Recalls",
+      "description": "Pull one feed of US product recalls from openFDA (food, drug, medical device enforcement) and CPSC SaferProducts.gov (consumer products), with product, reason or hazard, recalling firm, FDA class, status, distribution, lots/UPCs, retailers and remedy. Unlike clinical_trial_leads (registered studies) and federal_register_monitor (rulemaking), this is safety recall enforcement. Use when QA, retail, insurance, marketplace or consumer-safety teams need recent recalls by keyword, firm, class, state or date. Do not use for vehicle VIN recalls (use vin_decoder_recalls) or for clinical-trial safety results. Parameters: sources food|drug|device|consumer (default all); keywords and firmContains filter before billing; classifications Class I|II|III (FDA); daysBack or dateFrom; states for distribution; maxResults caps billed recalls. Empty runs are free. Returns per item: agentSummary, source, recallNumber, date, classification, status, product, reason, firm, firmLocation, firmState, distribution, quantity, codes, retailers, remedy, hazard, url; plus RECALLS_XLSX/CSV.",
+      "storeDescription": "One feed of US product recalls from FDA (food, drugs, medical devices) and CPSC (consumer products): product, reason or hazard, firm, class, status, distribution, lots UPCs, retailers, remedy. Filter by keyword, firm, class, state, date. Excel.",
+      "url": "https://apify.com/pandadad0214/product-recall-monitor",
+      "pricing": [
+        {
+          "event": "recall-returned",
+          "title": "Recall returned",
+          "usd": 0.0015
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sources": {
+            "type": "array",
+            "default": [
+              "food",
+              "drug",
+              "device",
+              "consumer"
+            ],
+            "description": "Sources. FDA food, drugs and devices (openFDA, updated weekly) and CPSC consumer products.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "food",
+                "drug",
+                "device",
+                "consumer"
+              ]
+            },
+            "examples": [
+              [
+                "food",
+                "drug",
+                "device",
+                "consumer"
+              ]
+            ]
+          },
+          "daysBack": {
+            "type": "integer",
+            "default": 30,
+            "minimum": 1,
+            "maximum": 3650,
+            "description": "Reported in the last N days. Default 30. Use 7 on a weekly schedule."
+          },
+          "dateFrom": {
+            "type": "string",
+            "description": "Reported on or after. Optional YYYY-MM-DD; overrides days back."
+          },
+          "keywords": {
+            "type": "string",
+            "description": "Keywords (all must match). Comma-separated, matched in product, reason, firm, lots and retailers, e.g. peanut, listeria, insulin pump."
+          },
+          "firmContains": {
+            "type": "string",
+            "description": "Firm name contains. e.g. a supplier or brand."
+          },
+          "classifications": {
+            "type": "array",
+            "description": "FDA class. Class I = most serious. Setting this leaves out CPSC recalls (they have no class).",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Class I",
+                "Class II",
+                "Class III"
+              ]
+            }
+          },
+          "states": {
+            "type": "array",
+            "description": "Distributed in states. 2-letter codes; keeps nationwide recalls and FDA recalls whose distribution mentions the state, e.g. AZ.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 200,
+            "minimum": 1,
+            "maximum": 50000,
+            "description": "Maximum results. You pay per recall returned, so this also caps the cost. Default 200."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "vin_decoder_recalls",
+      "actor": "pandadad0214/vin-decoder-recalls",
+      "title": "VIN Decoder + Recalls: Bulk NHTSA Specs & Safety Recalls",
+      "description": "Bulk-decode vehicle identification numbers with the official NHTSA vPIC API and attach NHTSA recall campaigns and complaint counts for each model year in the same run (year, make, model, trim, body, engine, fuel, drivetrain, plant, safety features). Unlike product_recall_monitor (FDA/CPSC product recalls) and company_website_enricher (firmographics), this is VIN-level vehicle data. Use when dealers, fleets, insurers, marketplaces or repair shops need specs plus open safety recalls for many VINs. Do not use for consumer product or drug recalls (use product_recall_monitor) or for title/lien history. Parameters: vins (list; duplicates removed; up to 10,000); includeRecalls and includeComplaints default true; includeInvalid keeps undecodable VINs as free skipped rows; maxResults caps billed decodes. Undecodable VINs are skipped for free. Returns per item: agentSummary, vin, valid, modelYear, make, model, trim, bodyClass, vehicleType, driveType, engine, fuel, manufacturer, plant, safetyFeatures, recallCount, parkItRecall, recalls, complaintCount, nhtsaRecallUrl; plus VINS_XLSX (Vehicles + Recalls sheets)/CSV.",
+      "storeDescription": "Bulk-decode VINs with the official NHTSA vPIC API: year, make, model, trim, body, engine, fuel, drivetrain, GVWR, plant and safety features, plus NHTSA recall campaigns and complaint counts for each model year. Excel and CSV.",
+      "url": "https://apify.com/pandadad0214/vin-decoder-recalls",
+      "pricing": [
+        {
+          "event": "vin-decoded",
+          "title": "VIN decoded",
+          "usd": 0.001
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "vins": {
+            "type": "array",
+            "description": "VINs. Up to 10,000 17-character VINs. Spaces and dashes are removed, duplicates dropped.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "1HGCM82633A004352",
+                "5YJ3E1EA2KF317000"
+              ]
+            ]
+          },
+          "includeRecalls": {
+            "type": "boolean",
+            "default": true,
+            "description": "Add NHTSA recall campaigns. Recall campaigns for each make/model/year, with component, summary, remedy and park-it warnings (no extra charge)."
+          },
+          "includeComplaints": {
+            "type": "boolean",
+            "default": true,
+            "description": "Add complaint counts. Number of NHTSA owner complaints for the model year (no extra charge)."
+          },
+          "includeInvalid": {
+            "type": "boolean",
+            "default": false,
+            "description": "Return VINs that do not decode. On = every VIN gets a row (with the decode note) and is charged. Off = VINs NHTSA cannot decode at all are skipped for free."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 50000,
+            "description": "Maximum results. You pay per VIN returned, so this also caps the cost. Default 1000."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
     }
   ]
 }

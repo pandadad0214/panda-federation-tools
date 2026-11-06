@@ -58,6 +58,10 @@ RESULT_CAP_FIELDS: dict[str, str] = {
     "sbir_sttr_topic_radar": "maxResults",
     "hidden_ai_instructions_scanner": "maxPages",
     "clinical_trial_leads": "maxResults",
+    "nonprofit_leads_irs": "maxResults",
+    "federal_register_monitor": "maxResults",
+    "product_recall_monitor": "maxResults",
+    "vin_decoder_recalls": "maxResults",
 }
 
 # Tools published without pay-per-event pricing (no per-result charge).

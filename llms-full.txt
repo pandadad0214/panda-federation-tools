@@ -284,3 +284,47 @@ Price and delivery: from $30, 3-5 days (Basic package; larger packages available
 URL: https://www.fiverr.com/pandafederation/find-and-screen-scholarly-sources-for-your-topic-with-excel-bibtex-and-ris
 Use when: you want a screened list of scholarly sources on a topic, with retraction flags and Excel, BibTeX and RIS files (PubMed study table available as an add-on).
 Price and delivery: from $25, 2-5 days (Basic package; larger packages available).
+
+## Nonprofit Leads (IRS)
+
+URL: https://apify.com/pandadad0214/nonprofit-leads-irs
+MCP tool (this repo): `nonprofit_leads_irs`
+Use when: you need nonprofit and foundation lists from the IRS Exempt Organizations file by state, cause and size.
+Input: `states`, `cities`, `zipPrefixes`, `nteeCodes`, `nameContains`, `only501c3` (default true), `orgType` (any, publicCharity, privateFoundation), `minRevenue`/`maxRevenue`, `minAssets`, `rulingYearFrom`, `requireFinancials`, `sortBy` (revenue, assets, newest, name), `maxResults`.
+Minimal input: `{"states": ["AZ"], "orgType": "any", "minAssets": 500000, "maxResults": 5}`
+Output per item: `agentSummary`, `ein`, `name`, `inCareOf`, `street`, `city`, `state`, `zip`, `nteeCode`, `cause`, `subsection`, `orgType`, `privateFoundation`, `rulingYear`, `revenue`, `income`, `assets`, `sizeBand`, `deductible`, `propublicaUrl`, `irsUrl`.
+SUMMARY / files: `NONPROFITS_XLSX`, `NONPROFITS_CSV`.
+Price: $0.001 per nonprofit returned.
+
+## Federal Register Monitor
+
+URL: https://apify.com/pandadad0214/federal-register-monitor
+MCP tool (this repo): `federal_register_monitor`
+Use when: you need new US federal rules, proposed rules and notices with comment deadlines.
+Input: `keywords`, `agencies`, `documentTypes` (RULE, PRORULE, NOTICE, PRESDOCU), `daysBack`, `publishedFrom`/`publishedTo`, `commentsOpenOnly`, `significantOnly`, `cfrTitle`/`cfrPart`, `maxResults`.
+Minimal input: `{"agencies": ["food-and-drug-administration"], "commentsOpenOnly": true, "daysBack": 60, "maxResults": 5}`
+Output per item: `agentSummary`, `documentNumber`, `type`, `title`, `agencies`, `publicationDate`, `effectiveDate`, `commentsCloseDate`, `commentDaysLeft`, `commentOpen`, `significant`, `docketIds`, `rins`, `citation`, `abstract`, `commentUrl`, `url`, `pdfUrl`.
+SUMMARY / files: `FEDREG_XLSX`, `FEDREG_CSV`.
+Price: $0.001 per document returned.
+
+## Product Recall Monitor
+
+URL: https://apify.com/pandadad0214/product-recall-monitor
+MCP tool (this repo): `product_recall_monitor`
+Use when: you need FDA food/drug/device and CPSC consumer product recalls in one feed.
+Input: `sources` (food, drug, device, consumer), `daysBack`, `dateFrom`, `keywords`, `firmContains`, `classifications` (Class I/II/III), `states`, `maxResults`.
+Minimal input: `{"sources": ["food", "consumer"], "daysBack": 30, "keywords": "lead", "maxResults": 5}`
+Output per item: `agentSummary`, `source`, `recallNumber`, `date`, `classification`, `status`, `product`, `reason`, `firm`, `firmLocation`, `distribution`, `codes`, `retailers`, `remedy`, `hazard`, `url`.
+SUMMARY / files: `RECALLS_XLSX`, `RECALLS_CSV`.
+Price: $0.0015 per recall returned.
+
+## VIN Decoder + Recalls
+
+URL: https://apify.com/pandadad0214/vin-decoder-recalls
+MCP tool (this repo): `vin_decoder_recalls`
+Use when: you need to bulk-decode VINs with NHTSA specs plus recall campaigns and complaint counts.
+Input: `vins` (list), `includeRecalls` (default true), `includeComplaints` (default true), `includeInvalid`, `maxResults`.
+Minimal input: `{"vins": ["1HGCM82633A004352", "5YJ3E1EA2KF317000"], "includeRecalls": true}`
+Output per item: `agentSummary`, `vin`, `valid`, `modelYear`, `make`, `model`, `trim`, `bodyClass`, `engine`, `fuel`, `manufacturer`, `plant`, `recallCount`, `parkItRecall`, `recalls`, `complaintCount`, `nhtsaRecallUrl`.
+SUMMARY / files: `VINS_XLSX` (Vehicles + Recalls sheets), `VINS_CSV`.
+Price: $0.001 per VIN decoded.

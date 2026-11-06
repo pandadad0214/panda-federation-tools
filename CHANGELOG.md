@@ -4,6 +4,16 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-11-06
+
+### Added
+- 4 new MCP tools now public on the Apify Store: `nonprofit_leads_irs`, `federal_register_monitor`, `product_recall_monitor`, `vin_decoder_recalls` (27 tools total).
+- Domain map: leads 9 tools (adds nonprofit IRS); public-funding 8 tools (adds Federal Register, product recalls, VIN decoder).
+
+### Changed
+- README / `llms.txt` / `llms-full.txt` move these 4 out of "Publishing soon"; Building Permit, Florida New Business and Bulk Domain WHOIS remain publishing soon.
+- TDQS descriptions for the 4 new tools; `RESULT_CAP_FIELDS` maxResults wiring; domain server instructions and counts.
+
 ## [1.4.0] - 2026-11-05
 
 ### Added

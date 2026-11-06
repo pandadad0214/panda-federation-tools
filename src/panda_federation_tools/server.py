@@ -29,8 +29,8 @@ STORE_URL = "https://apify.com/pandadad0214"
 INDEX_INSTRUCTIONS = """Panda Federation Tools is the index / compatibility surface for Panda Federation MCP tools.
 Recommended: install one focused server instead of this mega-server (better Glama Tool Count / coherence):
   panda-research-tools (6) — citations, literature, PubMed, experts, PDF tables
-  panda-public-funding-tools (5) — grants, federal contracts, SBIR/STTR, SEC financials, clinical trials
-  panda-leads-tools (8) — NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking
+  panda-public-funding-tools (8) — grants, contracts, SBIR/STTR, SEC, clinical trials, Federal Register, recalls, VIN
+  panda-leads-tools (9) — NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking, IRS nonprofits
   panda-web-security-tools (4) — email domain security, AI/SEO audit, website change monitor, hidden AI scanner
 This process still exposes all tools when PFT_DOMAIN is unset (backward compatible). Set PFT_DOMAIN to
 research | public-funding | leads | web-security to load only that domain, or use the matching console script.
@@ -47,23 +47,29 @@ Sibling servers: panda-public-funding-tools (grants/contracts/trials), panda-lea
 panda-web-security-tools (email/site/agent safety). Use literature_search for all disciplines;
 pubmed_evidence_table only for biomedical PubMed queries. Each tool runs on the user's APIFY_TOKEN.
 Empty runs are not charged per result; spending is capped by run_max_charge_usd.""",
-    "public-funding": """Panda Public Funding Tools: US federal money and filings (Apify Actors by pandadad0214).
+    "public-funding": """Panda Public Funding Tools: US federal money, filings and safety monitors
+(Apify Actors by pandadad0214).
 Tools: grants_finder (Grants.gov + NIH/NSF awards), federal_contract_finder (USAspending awards/recompetes),
 sbir_sttr_topic_radar (open SBIR/STTR topics), sec_financials_excel (EDGAR XBRL comps),
-clinical_trial_leads (ClinicalTrials.gov sponsors/sites/contacts).
+clinical_trial_leads (ClinicalTrials.gov sponsors/sites/contacts),
+federal_register_monitor (rules and comment deadlines),
+product_recall_monitor (FDA + CPSC recalls), vin_decoder_recalls (NHTSA VIN decode + recalls).
 Sibling servers: panda-research-tools (papers/citations), panda-leads-tools (B2B leads),
 panda-web-security-tools (email/site/agent safety). Use grants_finder for assistance awards,
-federal_contract_finder for procurement contracts, sbir_sttr_topic_radar for open topics to bid.
+federal_contract_finder for procurement contracts, sbir_sttr_topic_radar for open topics to bid,
+federal_register_monitor for rulemaking, product_recall_monitor for FDA/CPSC,
+vin_decoder_recalls for vehicles.
 Each tool runs on the user's APIFY_TOKEN. Empty runs are not charged per result; capped by run_max_charge_usd.""",
     "leads": """Panda Leads Tools: public leads and enrichment (Apify Actors by pandadad0214).
 Tools: npi_provider_lists (US healthcare NPI), podcast_leads_finder (shows/hosts with RSS emails),
 local_business_leads (OpenStreetMap businesses), company_hiring_signals (public ATS boards),
 company_website_enricher (firmographics from the company site), company_team_finder (people from team pages),
-topic_trends_tracker (Wikipedia pageview trends), trucking_company_leads (FMCSA carriers/brokers).
+topic_trends_tracker (Wikipedia pageview trends), trucking_company_leads (FMCSA carriers/brokers),
+nonprofit_leads_irs (IRS Exempt Organizations charities and foundations).
 Sibling servers: panda-research-tools (papers), panda-public-funding-tools (federal $),
 panda-web-security-tools (email/site/agent safety). Prefer company_team_finder for people,
-company_website_enricher for one firmographic row. Each tool runs on the user's APIFY_TOKEN.
-Empty runs are not charged per result; spending is capped by run_max_charge_usd.""",
+company_website_enricher for one firmographic row, nonprofit_leads_irs for tax-exempt orgs.
+Each tool runs on the user's APIFY_TOKEN. Empty runs are not charged per result; capped by run_max_charge_usd.""",
     "web-security": """Panda Web Security Tools: site, email and agent safety (Apify Actors by pandadad0214).
 Tools: email_domain_security_checker (SPF/DKIM/DMARC/MTA-STS/BIMI), ai_search_seo_audit (SEO + GEO readiness),
 website_change_monitor (page diffs, price and keyword alerts), hidden_ai_instructions_scanner

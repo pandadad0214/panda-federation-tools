@@ -4,8 +4,8 @@
 
 Recommended MCP entry points (stdio, Python; needs `APIFY_TOKEN`):
 - `uvx --from panda-federation-tools panda-research-tools` (6 tools: citations, literature, PubMed, experts, PDF tables)
-- `uvx --from panda-federation-tools panda-public-funding-tools` (5: grants, contracts, SBIR/STTR, SEC, clinical trials)
-- `uvx --from panda-federation-tools panda-leads-tools` (8: NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking)
+- `uvx --from panda-federation-tools panda-public-funding-tools` (8: grants, contracts, SBIR/STTR, SEC, clinical trials, Federal Register, recalls, VIN)
+- `uvx --from panda-federation-tools panda-leads-tools` (9: NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking, IRS nonprofits)
 - `uvx --from panda-federation-tools panda-web-security-tools` (4: email security, AI/SEO audit, change monitor, hidden AI scanner)
 
 Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMAIN` is unset. Or set `PFT_DOMAIN` to one of research | public-funding | leads | web-security. You can also use Apify's MCP server (https://mcp.apify.com, Actor `pandadad0214/<slug>`), the Apify API, or the Apify Console. Full input and output details: [llms-full.txt](llms-full.txt).
@@ -53,10 +53,10 @@ Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMA
 - [SBIR/STTR Topic Radar](https://apify.com/pandadad0214/sbir-sttr-topic-radar) [MCP tool `sbir_sttr_topic_radar`]: Use when you need open SBIR/STTR topics from every agency by keyword, with full topic text, close dates and DoD Q&A.
 - [SEC Financials to Excel](https://apify.com/pandadad0214/sec-financials-excel) [MCP tool `sec_financials_excel`]: Use when you need standardized annual income statement, balance sheet and cash-flow lines for US-listed companies from SEC EDGAR XBRL, as comps or model data.
 - [Clinical Trial Leads](https://apify.com/pandadad0214/clinical-trial-leads) [MCP tool `clinical_trial_leads`]: Use when you need ClinicalTrials.gov trials by condition, drug, sponsor, phase, status or location, with sponsors, contacts and every study site.
-- [Nonprofit Leads (IRS)](https://apify.com/pandadad0214/nonprofit-leads-irs) (publishing soon): Use when you need nonprofit and foundation lists from the IRS Exempt Organizations file, filtered by state, NTEE cause, 501(c) type and size.
-- [Federal Register Monitor](https://apify.com/pandadad0214/federal-register-monitor) (publishing soon): Use when you need new US federal rules, proposed rules and notices by keyword or agency, with comment deadlines and days left.
-- [Product Recall Monitor](https://apify.com/pandadad0214/product-recall-monitor) (publishing soon): Use when you need FDA (food, drugs, devices) and CPSC (consumer products) recalls in one feed, with product, hazard, firm, class and status.
-- [VIN Decoder + Recalls](https://apify.com/pandadad0214/vin-decoder-recalls) (publishing soon): Use when you need to bulk-decode VINs with NHTSA vPIC (year, make, model, trim, engine, plant) plus NHTSA recall campaigns and complaint counts.
+- [Nonprofit Leads (IRS)](https://apify.com/pandadad0214/nonprofit-leads-irs) [MCP tool `nonprofit_leads_irs`]: Use when you need nonprofit and foundation lists from the IRS Exempt Organizations file, filtered by state, NTEE cause, 501(c) type and size.
+- [Federal Register Monitor](https://apify.com/pandadad0214/federal-register-monitor) [MCP tool `federal_register_monitor`]: Use when you need new US federal rules, proposed rules and notices by keyword or agency, with comment deadlines and days left.
+- [Product Recall Monitor](https://apify.com/pandadad0214/product-recall-monitor) [MCP tool `product_recall_monitor`]: Use when you need FDA (food, drugs, devices) and CPSC (consumer products) recalls in one feed, with product, hazard, firm, class and status.
+- [VIN Decoder + Recalls](https://apify.com/pandadad0214/vin-decoder-recalls) [MCP tool `vin_decoder_recalls`]: Use when you need to bulk-decode VINs with NHTSA vPIC (year, make, model, trim, engine, plant) plus NHTSA recall campaigns and complaint counts.
 - [Building Permit Leads](https://apify.com/pandadad0214/building-permit-leads) (publishing soon): Use when you need newly issued building permits from US city open-data portals (NYC, LA, Chicago, SF, Seattle, Austin, New Orleans, Cambridge) with address, trade category (roofing, solar, HVAC, new construction), job value, contractor and owner.
 - [Florida New Business Leads](https://apify.com/pandadad0214/florida-new-business-leads) (publishing soon): Use when you need new Florida LLCs, corporations and nonprofits from the official Sunbiz daily files, with addresses, officers/managers, registered agent and an industry guess, filtered by city, ZIP or industry.
 - [Bulk Domain WHOIS & Expiry Checker](https://apify.com/pandadad0214/bulk-domain-whois-expiry) (publishing soon): Use when you need registrar, created and expiry dates, days to expiry, availability, locks, nameservers and DNS host for many domains via official RDAP (WHOIS fallback).
@@ -77,6 +77,9 @@ Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMA
 - Before an agent reads an untrusted site: `hidden_ai_instructions_scanner`.
 - Local prospecting: `local_business_leads`, then `ai_search_seo_audit` on their websites.
 - Trucking and logistics sales: `trucking_company_leads`, then `company_website_enricher`.
+- Nonprofit prospecting: `nonprofit_leads_irs`, then `company_website_enricher` on org sites.
+- Regulatory watch: `federal_register_monitor` for open comments, then `grants_finder` or `sbir_sttr_topic_radar` if funding follows.
+- Product safety: `product_recall_monitor`; for vehicles use `vin_decoder_recalls`.
 - Market research: `topic_trends_tracker`, then `literature_search` or `podcast_leads_finder` on rising topics.
 
 ## Agent skills (Agensi)

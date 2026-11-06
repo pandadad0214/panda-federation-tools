@@ -26,6 +26,9 @@ DOMAINS: dict[str, frozenset[str]] = {
             "sbir_sttr_topic_radar",
             "sec_financials_excel",
             "clinical_trial_leads",
+            "federal_register_monitor",
+            "product_recall_monitor",
+            "vin_decoder_recalls",
         }
     ),
     "leads": frozenset(
@@ -38,6 +41,7 @@ DOMAINS: dict[str, frozenset[str]] = {
             "company_team_finder",
             "topic_trends_tracker",
             "trucking_company_leads",
+            "nonprofit_leads_irs",
         }
     ),
     "web-security": frozenset(
@@ -59,13 +63,17 @@ DOMAIN_META: dict[str, dict[str, str]] = {
     "public-funding": {
         "package": "panda-public-funding-tools",
         "title": "Panda Public Funding Tools",
-        "scope": "US federal money and filings: grants, contracts, SBIR/STTR topics, SEC financials, clinical trials.",
+        "scope": (
+            "US federal money, filings and safety monitors: grants, contracts, SBIR/STTR, SEC, "
+            "clinical trials, Federal Register, recalls, VIN decode."
+        ),
     },
     "leads": {
         "package": "panda-leads-tools",
         "title": "Panda Leads Tools",
         "scope": (
-            "Public leads and enrichment: NPI, podcasts, local businesses, hiring, websites, teams, trends, trucking."
+            "Public leads and enrichment: NPI, podcasts, local businesses, hiring, websites, teams, "
+            "trends, trucking, IRS nonprofits."
         ),
     },
     "web-security": {

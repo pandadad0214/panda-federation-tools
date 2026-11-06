@@ -12,7 +12,7 @@ SECRET_HINTS = re.compile(r"(api_?key|token|password|secret)$", re.I)
 
 def test_catalog_has_tools_with_unique_valid_names():
     tools = load_catalog()
-    assert len(tools) >= 23
+    assert len(tools) >= 27
     names = [t.name for t in tools]
     assert len(names) == len(set(names))
     for name in names:
