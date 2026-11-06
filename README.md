@@ -142,6 +142,9 @@ Built and tested, and going public on the Apify Store a few a day (Apify limits 
 | [building-permit-leads](https://apify.com/pandadad0214/building-permit-leads) | leads | New building permits from 8 US cities with trade category, job value and contractor | $0.0015 / permit |
 | [florida-new-business-leads](https://apify.com/pandadad0214/florida-new-business-leads) | leads | New Florida LLCs and corporations daily (Sunbiz) with officers and addresses | $0.0015 / business |
 | [bulk-domain-whois-expiry](https://apify.com/pandadad0214/bulk-domain-whois-expiry) | web-security | Bulk RDAP/WHOIS: registrar, expiry and days left, availability, DNS host | $0.001 / domain |
+| [texas-new-business-leads](https://apify.com/pandadad0214/texas-new-business-leads) | leads | New Texas franchise taxpayers (Comptroller open data) with SOS number and charter date | $0.0015 / business |
+| [h1b-lca-sponsor-leads](https://apify.com/pandadad0214/h1b-lca-sponsor-leads) | leads | DOL H-1B LCA disclosure: employers, titles, worksites and wages | $0.002 / case |
+| [wayback-snapshot-finder](https://apify.com/pandadad0214/wayback-snapshot-finder) | research | Internet Archive CDX snapshots: timestamps, archive URLs, first/last seen | $0.001 / snapshot |
 
 [Hidden AI Instructions Watch](https://github.com/pandadad0214/hidden-ai-instructions-watch) is our public, evidence-only log of what the free scanner finds.
 

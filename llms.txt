@@ -61,6 +61,10 @@ Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMA
 - [Florida New Business Leads](https://apify.com/pandadad0214/florida-new-business-leads) (publishing soon): Use when you need new Florida LLCs, corporations and nonprofits from the official Sunbiz daily files, with addresses, officers/managers, registered agent and an industry guess, filtered by city, ZIP or industry.
 - [Bulk Domain WHOIS & Expiry Checker](https://apify.com/pandadad0214/bulk-domain-whois-expiry) (publishing soon): Use when you need registrar, created and expiry dates, days to expiry, availability, locks, nameservers and DNS host for many domains via official RDAP (WHOIS fallback).
 
+- [Texas New Business Leads](https://apify.com/pandadad0214/texas-new-business-leads) (publishing soon): Use when you need newly registered Texas businesses from the Comptroller Active Franchise Taxpayers file, with address, SOS number, charter date and org type.
+- [H-1B LCA Visa Sponsor Leads](https://apify.com/pandadad0214/h1b-lca-sponsor-leads) (publishing soon): Use when you need DOL H-1B LCA disclosure rows: employer, job title, worksite, wage and case status, with an employer roll-up sheet.
+- [Wayback Snapshot Finder](https://apify.com/pandadad0214/wayback-snapshot-finder) (publishing soon): Use when you need Internet Archive CDX snapshot timestamps, archive URLs and first/last-seen dates for URLs or domains.
+
 ## AI agent safety
 
 - [Hidden AI Instructions Scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) (free) [MCP tool `hidden_ai_instructions_scanner`]: Use before an agent reads a site it doesn't trust, to find text hidden from people but aimed at AI agents (prompt injection) with technique, location, excerpt and category (policy notice, manipulation, harmful).
