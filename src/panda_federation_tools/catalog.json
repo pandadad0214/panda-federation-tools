@@ -614,7 +614,7 @@
           },
           "agencies": {
             "type": "array",
-            "description": "Agencies. Optional. Grants.gov agency codes or names (HHS-NIH11, NSF, DOE, USDA, ED, Geological Survey; a code prefix like HHS matches all HHS sub-agencies). NIH institutes (NCI, NIAID, NIMH… or NIH for all). NSF directorates (CSE, BIO, GEO, MPS, SBE, EDU, ENG, TIP, or NSF for all). A source is skipped when none of its agencies are listed.",
+            "description": "Agencies. Optional. Grants.gov agency codes or names (HHS-NIH11, NSF, DOE, USDA, ED, Geological Survey; a code prefix like HHS matches all HHS sub-agencies). NIH institutes (NCI, NIAID, NIMH\u2026 or NIH for all). NSF directorates (CSE, BIO, GEO, MPS, SBE, EDU, ENG, TIP, or NSF for all). A source is skipped when none of its agencies are listed.",
             "items": {
               "type": "string"
             },
@@ -758,7 +758,7 @@
           },
           "countries": {
             "type": "array",
-            "description": "Countries. Optional 2-letter ISO country codes (US, GB, DE, IN, AU…). Keeps experts whose current institution is in one of these countries, and counts only papers with an author in them.",
+            "description": "Countries. Optional 2-letter ISO country codes (US, GB, DE, IN, AU\u2026). Keeps experts whose current institution is in one of these countries, and counts only papers with an author in them.",
             "items": {
               "type": "string"
             },
@@ -771,7 +771,7 @@
           },
           "institution": {
             "type": "string",
-            "description": "Institution. Optional. University, hospital, lab or company name (e.g. Stanford University), a ROR ID or an OpenAlex institution ID (I…). Sub-units count too: a university includes its schools and hospitals. The matched institution is shown in the search log.",
+            "description": "Institution. Optional. University, hospital, lab or company name (e.g. Stanford University), a ROR ID or an OpenAlex institution ID (I\u2026). Sub-units count too: a university includes its schools and hospitals. The matched institution is shown in the search log.",
             "examples": [
               "Stanford University"
             ]
@@ -954,7 +954,7 @@
               "none"
             ],
             "default": "auto",
-            "description": "Header row. Auto finds header rows above the first data row (multi-line headers are joined). First row = always use row 1. None = generic Column 1, Column 2… names. Choices: auto = Auto-detect; firstRow = Always the first row; none = No header."
+            "description": "Header row. Auto finds header rows above the first data row (multi-line headers are joined). First row = always use row 1. None = generic Column 1, Column 2\u2026 names. Choices: auto = Auto-detect; firstRow = Always the first row; none = No header."
           },
           "mergeWrappedRows": {
             "type": "boolean",
@@ -1338,7 +1338,7 @@
           },
           "dkimSelectors": {
             "type": "array",
-            "description": "Extra DKIM selectors. Optional. About 40 common selectors (google, selector1, selector2, k1, s1, s2, default…) are always tried. Add your own if you sign with a custom one, e.g. 20230601 or mailo.",
+            "description": "Extra DKIM selectors. Optional. About 40 common selectors (google, selector1, selector2, k1, s1, s2, default\u2026) are always tried. Add your own if you sign with a custom one, e.g. 20230601 or mailo.",
             "items": {
               "type": "string"
             },
@@ -1514,7 +1514,7 @@
         "properties": {
           "categories": {
             "type": "array",
-            "description": "Business categories. Plain words, one per line: dentist, plumber, restaurant, coffee shop, lawyer, hair salon, gym, real estate, car repair… (about 150 built in). Other words are matched against OpenStreetMap tags and names. Power users can enter a tag like shop=florist or craft=hvac.",
+            "description": "Business categories. Plain words, one per line: dentist, plumber, restaurant, coffee shop, lawyer, hair salon, gym, real estate, car repair\u2026 (about 150 built in). Other words are matched against OpenStreetMap tags and names. Power users can enter a tag like shop=florist or craft=hvac.",
             "items": {
               "type": "string"
             },
@@ -1741,7 +1741,7 @@
         "properties": {
           "topics": {
             "type": "array",
-            "description": "Topics. One per line: a topic, brand, product, person, place or a Wikipedia link (https://en.wikipedia.org/wiki/ChatGPT). Each is matched to its Wikipedia article (redirects followed, e.g. Ozempic → Semaglutide). For ambiguous words like Mercury, paste the exact article link. Leave empty for a 3-topic demo.",
+            "description": "Topics. One per line: a topic, brand, product, person, place or a Wikipedia link (https://en.wikipedia.org/wiki/ChatGPT). Each is matched to its Wikipedia article (redirects followed, e.g. Ozempic \u2192 Semaglutide). For ambiguous words like Mercury, paste the exact article link. Leave empty for a 3-topic demo.",
             "items": {
               "type": "string"
             },
@@ -1763,7 +1763,7 @@
           "language": {
             "type": "string",
             "default": "en",
-            "description": "Wikipedia language. Language code of the Wikipedia edition to measure: en, de, fr, es, ja, pt, it, nl, pl… Default en. A full Wikipedia link overrides this per topic."
+            "description": "Wikipedia language. Language code of the Wikipedia edition to measure: en, de, fr, es, ja, pt, it, nl, pl\u2026 Default en. A full Wikipedia link overrides this per topic."
           },
           "device": {
             "type": "string",
@@ -1930,7 +1930,7 @@
           },
           "states": {
             "type": "array",
-            "description": "States / provinces. 2-letter codes of the physical address (TX, CA, FL, ON…). Empty = all states.",
+            "description": "States / provinces. 2-letter codes of the physical address (TX, CA, FL, ON\u2026). Empty = all states.",
             "items": {
               "type": "string"
             },
@@ -2949,6 +2949,24 @@
         "required": [],
         "additionalProperties": false
       }
+    }
+  ],
+  "guidanceServers": [
+    {
+      "name": "Quiet File Team MCP",
+      "repository": "https://github.com/pandadad0214/quiet-file-team-mcp",
+      "description": "Six free offline guidance tools for a local file-first quiet team. Separate focused server, not an Actor wrapper.",
+      "tools": [
+        "explain_method",
+        "generate_team_config",
+        "generate_early_exit",
+        "validate_layout_manifest",
+        "draft_workflow",
+        "draft_owner_batch"
+      ],
+      "freeCore": "https://github.com/pandadad0214/quiet-file-team",
+      "billing": "Free; no paid API calls",
+      "install": "uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp"
     }
   ]
 }

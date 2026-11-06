@@ -7,6 +7,7 @@ Recommended MCP entry points (stdio, Python; needs `APIFY_TOKEN`):
 - `uvx --from panda-federation-tools panda-public-funding-tools` (8: grants, contracts, SBIR/STTR, SEC, clinical trials, Federal Register, recalls, VIN)
 - `uvx --from panda-federation-tools panda-leads-tools` (9: NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking, IRS nonprofits)
 - `uvx --from panda-federation-tools panda-web-security-tools` (4: email security, AI/SEO audit, change monitor, hidden AI scanner)
+- Related, not an Apify wrapper: `uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp` (6 offline Quiet File Team setup tools). Free core: https://github.com/pandadad0214/quiet-file-team
 
 Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMAIN` is unset. Or set `PFT_DOMAIN` to one of research | public-funding | leads | web-security. You can also use Apify's MCP server (https://mcp.apify.com, Actor `pandadad0214/<slug>`), the Apify API, or the Apify Console. Full input and output details: [llms-full.txt](llms-full.txt).
 

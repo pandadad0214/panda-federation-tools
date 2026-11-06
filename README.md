@@ -31,6 +31,16 @@ Or set `PFT_DOMAIN` to `research` | `public-funding` | `leads` | `web-security` 
 
 Each domain also has its own thin GitHub repo (same console script names via `uvx <package>` once published on PyPI).
 
+### Related offline guidance (not an Apify wrapper)
+
+[Quiet File Team MCP](https://github.com/pandadad0214/quiet-file-team-mcp) is a separate focused server with six free offline tools: `explain_method`, `generate_team_config`, `generate_early_exit`, `validate_layout_manifest`, `draft_workflow` and `draft_owner_batch`. It does not read arbitrary files, call network APIs, or wrap Actors.
+
+```bash
+uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp
+```
+
+The file-first Bash core is https://github.com/pandadad0214/quiet-file-team (free). A paid setup kit is planned and not for sale yet.
+
 ### Cursor example (research)
 
 ```json

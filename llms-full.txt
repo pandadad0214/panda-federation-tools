@@ -328,3 +328,10 @@ Minimal input: `{"vins": ["1HGCM82633A004352", "5YJ3E1EA2KF317000"], "includeRec
 Output per item: `agentSummary`, `vin`, `valid`, `modelYear`, `make`, `model`, `trim`, `bodyClass`, `engine`, `fuel`, `manufacturer`, `plant`, `recallCount`, `parkItRecall`, `recalls`, `complaintCount`, `nhtsaRecallUrl`.
 SUMMARY / files: `VINS_XLSX` (Vehicles + Recalls sheets), `VINS_CSV`.
 Price: $0.001 per VIN decoded.
+
+## Quiet File Team MCP (offline guidance, not an Apify wrapper)
+
+URL: https://github.com/pandadad0214/quiet-file-team-mcp
+Install: `uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp`
+Use when: you need offline setup guidance for a local file-first quiet team (explain the method, draft team.conf, draft an early-exit block, review a supplied layout manifest, draft a fictional workflow, or batch owner questions).
+Not an Actor wrapper and not a network or filesystem inspector. Free core: https://github.com/pandadad0214/quiet-file-team. A paid setup kit is planned and not for sale yet.
