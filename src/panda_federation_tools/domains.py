@@ -65,16 +65,14 @@ DOMAIN_META: dict[str, dict[str, str]] = {
         "package": "panda-leads-tools",
         "title": "Panda Leads Tools",
         "scope": (
-            "Public leads and enrichment: NPI, podcasts, local businesses, "
-            "hiring, websites, teams, trends, trucking."
+            "Public leads and enrichment: NPI, podcasts, local businesses, hiring, websites, teams, trends, trucking."
         ),
     },
     "web-security": {
         "package": "panda-web-security-tools",
         "title": "Panda Web Security Tools",
         "scope": (
-            "Site, email and agent safety: SPF/DKIM/DMARC, AI/SEO audit, "
-            "page-change monitor, hidden AI instructions."
+            "Site, email and agent safety: SPF/DKIM/DMARC, AI/SEO audit, page-change monitor, hidden AI instructions."
         ),
     },
 }

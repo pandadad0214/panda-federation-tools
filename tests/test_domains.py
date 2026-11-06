@@ -1,6 +1,5 @@
 """Domain partition and focused-server catalog filters."""
 
-
 import pytest
 from mcp import Client
 
