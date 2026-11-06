@@ -104,10 +104,21 @@ class ToolSpec:
 
     @property
     def tool_description(self) -> str:
+        cap = self.result_cap_field
+        items = (
+            f"run_max_items (default 50) limits items returned and fills {cap} when you leave it unset, "
+            f"so it also limits what is billed; setting {cap} higher can bill more than is returned."
+            if cap
+            else "run_max_items (default 50) limits items returned but does not limit what the Actor bills; "
+            "use the tool's own limits and run_max_charge_usd."
+        )
         return (
-            f"{self.description}\n\nRuns the Apify Actor {self.actor} ({self.url}) on your own Apify account. "
-            f"Price: {self.price_text}. Runs that find nothing are not charged per result. "
-            "Spending is capped per call by run_max_charge_usd."
+            f"{self.description}\n\nBehavior: read-only; runs the Apify Actor {self.actor} ({self.url}) "
+            f"on your own Apify account. Price: {self.price_text}. Runs that find nothing are not charged per result, "
+            "and spending is capped per call by run_max_charge_usd (default $0.50). "
+            f"{items} Most calls finish in 5-15 s for a few inputs; large inputs or crawls can take minutes, so "
+            "raise run_timeout_secs (max 300) or shrink the input after a timeout error. Returns JSON "
+            "{actor, count, items}; long text output is trimmed to whole items, with all items in structuredContent."
         )
 
 

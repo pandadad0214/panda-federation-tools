@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import sys
 from collections.abc import Awaitable, Callable
 from typing import Any
@@ -16,33 +17,91 @@ from mcp.server.stdio import stdio_server
 
 from panda_federation_tools import __version__
 from panda_federation_tools.apify import ApifyClient, ApifyError, redact
-from panda_federation_tools.catalog import RUN_OPTIONS, ToolSpec, get_tool, load_catalog
+from panda_federation_tools.catalog import RUN_OPTIONS, ToolSpec, get_tool
 from panda_federation_tools.config import Settings
+from panda_federation_tools.domains import DOMAIN_META, DOMAINS, filter_catalog
 
 log = logging.getLogger("panda_federation_tools")
 MAX_TEXT_CHARS = 60_000
 HEARTBEAT_SECS = 5
 STORE_URL = "https://apify.com/pandadad0214"
 
-INSTRUCTIONS = """Panda Federation Tools: research and public-data tools (Apify Actors by pandadad0214).
+INDEX_INSTRUCTIONS = """Panda Federation Tools is the index / compatibility surface for Panda Federation MCP tools.
+Recommended: install one focused server instead of this mega-server (better Glama Tool Count / coherence):
+  panda-research-tools (6) — citations, literature, PubMed, experts, PDF tables
+  panda-public-funding-tools (5) — grants, federal contracts, SBIR/STTR, SEC financials, clinical trials
+  panda-leads-tools (8) — NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking
+  panda-web-security-tools (4) — email domain security, AI/SEO audit, website change monitor, hidden AI scanner
+This process still exposes all tools when PFT_DOMAIN is unset (backward compatible). Set PFT_DOMAIN to
+research | public-funding | leads | web-security to load only that domain, or use the matching console script.
 Each tool runs one Apify Actor on the user's own Apify account (APIFY_TOKEN) and returns its dataset items.
-Citations: reference_checker flags fake, mismatched or retracted references; find real papers with
-literature_search or pubmed_evidence_table; format them with citation_formatter.
-Leads and company data: company_hiring_signals, company_website_enricher, company_team_finder,
-local_business_leads, trucking_company_leads, podcast_leads_finder.
-Audits: email_domain_security_checker, ai_search_seo_audit.
-Public data: grants_finder, federal_contract_finder, npi_provider_lists, topic_trends_tracker,
-pdf_table_extractor, researcher_expert_finder.
-Each result has a one-line `summary` or `agentSummary`; rows may be marked OK / CHECK / FIX.
-run_max_items also caps how many results most tools produce and charge for.
-Every call costs a little per result (empty runs are not charged per result) and is capped by
-run_max_charge_usd. Keep inputs small first, then widen."""
+Every call costs a little per result (empty runs are not charged per result) and is capped by run_max_charge_usd.
+run_max_items also caps how many results most tools produce and charge for. Keep inputs small first, then widen."""
+
+DOMAIN_INSTRUCTIONS: dict[str, str] = {
+    "research": """Panda Research Tools: scholarly integrity and papers (Apify Actors by pandadad0214).
+Tools: reference_checker (fake/mismatched/retracted citations), citation_formatter (APA/MLA/etc.),
+literature_search (OpenAlex papers), pubmed_evidence_table (PubMed screening tables),
+researcher_expert_finder (academic KOLs), pdf_table_extractor (PDF tables to Excel/CSV).
+Sibling servers: panda-public-funding-tools (grants/contracts/trials), panda-leads-tools (B2B leads),
+panda-web-security-tools (email/site/agent safety). Use literature_search for all disciplines;
+pubmed_evidence_table only for biomedical PubMed queries. Each tool runs on the user's APIFY_TOKEN.
+Empty runs are not charged per result; spending is capped by run_max_charge_usd.""",
+    "public-funding": """Panda Public Funding Tools: US federal money and filings (Apify Actors by pandadad0214).
+Tools: grants_finder (Grants.gov + NIH/NSF awards), federal_contract_finder (USAspending awards/recompetes),
+sbir_sttr_topic_radar (open SBIR/STTR topics), sec_financials_excel (EDGAR XBRL comps),
+clinical_trial_leads (ClinicalTrials.gov sponsors/sites/contacts).
+Sibling servers: panda-research-tools (papers/citations), panda-leads-tools (B2B leads),
+panda-web-security-tools (email/site/agent safety). Use grants_finder for assistance awards,
+federal_contract_finder for procurement contracts, sbir_sttr_topic_radar for open topics to bid.
+Each tool runs on the user's APIFY_TOKEN. Empty runs are not charged per result; capped by run_max_charge_usd.""",
+    "leads": """Panda Leads Tools: public leads and enrichment (Apify Actors by pandadad0214).
+Tools: npi_provider_lists (US healthcare NPI), podcast_leads_finder (shows/hosts with RSS emails),
+local_business_leads (OpenStreetMap businesses), company_hiring_signals (public ATS boards),
+company_website_enricher (firmographics from the company site), company_team_finder (people from team pages),
+topic_trends_tracker (Wikipedia pageview trends), trucking_company_leads (FMCSA carriers/brokers).
+Sibling servers: panda-research-tools (papers), panda-public-funding-tools (federal $),
+panda-web-security-tools (email/site/agent safety). Prefer company_team_finder for people,
+company_website_enricher for one firmographic row. Each tool runs on the user's APIFY_TOKEN.
+Empty runs are not charged per result; spending is capped by run_max_charge_usd.""",
+    "web-security": """Panda Web Security Tools: site, email and agent safety (Apify Actors by pandadad0214).
+Tools: email_domain_security_checker (SPF/DKIM/DMARC/MTA-STS/BIMI), ai_search_seo_audit (SEO + GEO readiness),
+website_change_monitor (page diffs, price and keyword alerts), hidden_ai_instructions_scanner
+(free prompt-injection / hidden-AI-text detector).
+Sibling servers: panda-research-tools, panda-public-funding-tools, panda-leads-tools.
+Use hidden_ai_instructions_scanner before an agent reads an untrusted page. Each tool runs on the
+user's APIFY_TOKEN (scanner is free). Empty runs are not charged per result; capped by run_max_charge_usd.""",
+}
 
 ClientFactory = Callable[[Settings], ApifyClient]
 
 
 def _default_factory(settings: Settings) -> ApifyClient:
     return ApifyClient(settings.token, api_base=settings.api_base)
+
+
+def resolve_domain(explicit: str | None = None) -> str | None:
+    """Return a validated domain from argument or PFT_DOMAIN env, or None for the full index."""
+    raw = explicit if explicit is not None else os.environ.get("PFT_DOMAIN", "").strip()
+    if not raw:
+        return None
+    if raw not in DOMAINS:
+        raise SystemExit(f"Unknown PFT_DOMAIN={raw!r}; expected one of {sorted(DOMAINS)} or empty")
+    return raw
+
+
+def instructions_for(domain: str | None) -> str:
+    if domain is None:
+        return INDEX_INSTRUCTIONS
+    return DOMAIN_INSTRUCTIONS[domain]
+
+
+def server_identity(domain: str | None) -> tuple[str, str]:
+    """Return (mcp_name, title) for the running surface."""
+    if domain is None:
+        return "panda-federation-tools", "Panda Federation Tools"
+    meta = DOMAIN_META[domain]
+    return meta["package"], meta["title"]
 
 
 def _tool(spec: ToolSpec) -> types.Tool:
@@ -151,14 +210,24 @@ async def call_tool(
     return types.CallToolResult(content=[types.TextContent(type="text", text=text)], structured_content=payload)
 
 
-def create_server(settings: Settings | None = None, factory: ClientFactory = _default_factory) -> Server[Any]:
+def create_server(
+    settings: Settings | None = None,
+    factory: ClientFactory = _default_factory,
+    domain: str | None = None,
+) -> Server[Any]:
     cfg = settings or Settings.from_env()
-    tools = [_tool(s) for s in load_catalog()]
+    active = resolve_domain(domain)
+    catalog = filter_catalog(active)
+    tools = [_tool(s) for s in catalog]
+    allowed = {s.name for s in catalog}
+    name, title = server_identity(active)
 
     async def on_list_tools(ctx: Any, params: types.PaginatedRequestParams | None) -> types.ListToolsResult:
         return types.ListToolsResult(tools=tools)
 
     async def on_call_tool(ctx: Any, params: types.CallToolRequestParams) -> types.CallToolResult:
+        if params.name not in allowed:
+            return _error(f"Unknown tool: {params.name}")
         spec = get_tool(params.name)
         if spec is None:
             return _error(f"Unknown tool: {params.name}")
@@ -167,14 +236,16 @@ def create_server(settings: Settings | None = None, factory: ClientFactory = _de
         return await call_tool(spec, dict(params.arguments or {}), cfg, factory, progress)
 
     def schema_for(name: str) -> dict[str, Any] | None:
+        if name not in allowed:
+            return None
         spec = get_tool(name)
         return spec.input_schema if spec else None
 
     return Server(
-        "panda-federation-tools",
+        name,
         version=__version__,
-        title="Panda Federation Tools",
-        instructions=INSTRUCTIONS,
+        title=title,
+        instructions=instructions_for(active),
         website_url=STORE_URL,
         on_list_tools=on_list_tools,
         on_call_tool=on_call_tool,
@@ -182,15 +253,39 @@ def create_server(settings: Settings | None = None, factory: ClientFactory = _de
     )
 
 
-async def _run() -> None:
-    server = create_server()
+async def _run(domain: str | None = None) -> None:
+    server = create_server(domain=domain)
     async with stdio_server() as (read, write):
         await server.run(read, write, server.create_initialization_options())
 
 
-def main() -> None:
+def main_for(domain: str | None = None) -> None:
     logging.basicConfig(level=logging.WARNING, stream=sys.stderr, format="%(levelname)s %(name)s: %(message)s")
     if "--version" in sys.argv[1:]:
         print(__version__)
         return
-    anyio.run(_run)
+    # Domain console scripts set PFT_DOMAIN; CLI flag also accepted for debugging.
+    if domain is not None:
+        os.environ["PFT_DOMAIN"] = domain
+    anyio.run(_run, domain)
+
+
+def main() -> None:
+    """Umbrella / index entry (all tools unless PFT_DOMAIN is set)."""
+    main_for(None)
+
+
+def main_research() -> None:
+    main_for("research")
+
+
+def main_public_funding() -> None:
+    main_for("public-funding")
+
+
+def main_leads() -> None:
+    main_for("leads")
+
+
+def main_web_security() -> None:
+    main_for("web-security")

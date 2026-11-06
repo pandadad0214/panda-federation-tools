@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "panda-federation-tools"
-version = "1.3.0"
-description = "MCP server for the Panda Federation research and public-data tools on Apify (citations, literature, grants, contracts, leads, audits)."
+version = "1.4.0"
+description = "Index of Panda Federation public-data MCP tools on Apify, plus focused domain servers (research, public-funding, leads, web-security)."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -49,6 +49,10 @@ Changelog = "https://github.com/pandadad0214/panda-federation-tools/blob/main/CH
 
 [project.scripts]
 panda-federation-tools = "panda_federation_tools.server:main"
+panda-research-tools = "panda_federation_tools.server:main_research"
+panda-public-funding-tools = "panda_federation_tools.server:main_public_funding"
+panda-leads-tools = "panda_federation_tools.server:main_leads"
+panda-web-security-tools = "panda_federation_tools.server:main_web_security"
 
 [dependency-groups]
 dev = [

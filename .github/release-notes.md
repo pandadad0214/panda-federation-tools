@@ -1,18 +1,23 @@
-**Install in one command** from [PyPI](https://pypi.org/project/panda-federation-tools/) (needs [uv](https://docs.astral.sh/uv/) and a free [Apify token](https://console.apify.com/settings/integrations)):
+**Prefer a focused domain server** (TDQS). From [PyPI](https://pypi.org/project/panda-federation-tools/) (needs [uv](https://docs.astral.sh/uv/) and a free [Apify token](https://console.apify.com/settings/integrations)):
 
 ```bash
-uvx panda-federation-tools@{{VERSION}}
+uvx --from panda-federation-tools@{{VERSION}} panda-research-tools
+uvx --from panda-federation-tools@{{VERSION}} panda-public-funding-tools
+uvx --from panda-federation-tools@{{VERSION}} panda-leads-tools
+uvx --from panda-federation-tools@{{VERSION}} panda-web-security-tools
 ```
 
-- **Claude Desktop:** download `panda-federation-tools-{{VERSION}}.mcpb` below and double-click it.
-- **Cursor:** use the "Add to Cursor" button in the [README](https://github.com/pandadad0214/panda-federation-tools#install--use).
-- **Helper scripts:** `install.sh` (macOS/Linux) or `install.ps1` (Windows). One package works on every OS.
-- Verify downloads with `SHA256SUMS.txt`.
+Compatibility mega-server (all tools): `uvx panda-federation-tools@{{VERSION}}`
+
+- **Claude Desktop:** download `panda-federation-tools-{{VERSION}}.mcpb` below and double-click it (umbrella).
+- **Cursor:** see domain examples in the [README](https://github.com/pandadad0214/panda-federation-tools#install--use-focused-servers).
+- **Helper scripts:** `install.sh` (macOS/Linux) or `install.ps1` (Windows). Verify with `SHA256SUMS.txt`.
 
 ### Added
-- 5 new tools: Website Change Monitor, SBIR/STTR Topic Radar, SEC Financials to Excel, Clinical Trial Leads, and the free Hidden AI Instructions Scanner.
+- Focused domain MCP entry points + `PFT_DOMAIN` filter (research / public-funding / leads / web-security).
+- TDQS-grade tool descriptions for all 23 tools.
 
 ### Changed
-- README, llms.txt and llms-full.txt list them as live; 4 more Actors are still publishing soon.
+- Umbrella README is an index; recommended install path is a domain server, not the 23-tool mega-server.
 
-23 tools, same prices for existing ones. Your `APIFY_TOKEN` only goes to api.apify.com. Full history: [CHANGELOG.md](https://github.com/pandadad0214/panda-federation-tools/blob/main/CHANGELOG.md).
+Full history: [CHANGELOG.md](https://github.com/pandadad0214/panda-federation-tools/blob/main/CHANGELOG.md).

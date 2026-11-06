@@ -1,8 +1,14 @@
 # Panda Federation Tools
 
-> Research and public-data tools on Apify for people and AI agents: check citations for fake or retracted papers, format references, search scholarly literature and PubMed, find federal grants and contracts, and build B2B lead and market lists (company hiring signals, website enrichment, decision makers from company team pages, new trucking companies, local businesses, podcasts, email security, AI search audits, topic trends, website change alerts). Each tool uses official or open free sources (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, FMCSA, public ATS job boards, Wikipedia pageviews, public DNS, Apple Podcasts, OpenStreetMap), charges per result, returns JSON with a one-line `summary` or `agentSummary` per item and a `SUMMARY` record with a `takeaway`, and marks results OK / CHECK / FIX where it applies.
+> Index of Panda Federation public-data MCP tools on Apify. Prefer a focused domain server (research / public-funding / leads / web-security) instead of loading all tools at once. Official or open free sources only (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, FMCSA, public ATS job boards, Wikipedia pageviews, public DNS, Apple Podcasts, OpenStreetMap). Pay per result; JSON with `summary` or `agentSummary` and OK / CHECK / FIX where it applies.
 
-Run any tool through this repo's open-source MCP server (stdio, Python): `uvx panda-federation-tools` with `APIFY_TOKEN` set; each tool is exposed under the MCP tool name shown in brackets. You can also use Apify's MCP server (https://mcp.apify.com, Actor `pandadad0214/<slug>`), the Apify API (`POST https://api.apify.com/v2/acts/pandadad0214~<slug>/run-sync-get-dataset-items` with an Apify token), or the Apify Console. Full input and output details: [llms-full.txt](llms-full.txt).
+Recommended MCP entry points (stdio, Python; needs `APIFY_TOKEN`):
+- `uvx --from panda-federation-tools panda-research-tools` (6 tools: citations, literature, PubMed, experts, PDF tables)
+- `uvx --from panda-federation-tools panda-public-funding-tools` (5: grants, contracts, SBIR/STTR, SEC, clinical trials)
+- `uvx --from panda-federation-tools panda-leads-tools` (8: NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking)
+- `uvx --from panda-federation-tools panda-web-security-tools` (4: email security, AI/SEO audit, change monitor, hidden AI scanner)
+
+Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMAIN` is unset. Or set `PFT_DOMAIN` to one of research | public-funding | leads | web-security. You can also use Apify's MCP server (https://mcp.apify.com, Actor `pandadad0214/<slug>`), the Apify API, or the Apify Console. Full input and output details: [llms-full.txt](llms-full.txt).
 
 ## Citations and references
 

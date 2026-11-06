@@ -54,6 +54,9 @@ SLUGS = [
 SKIP_EDITORS = {"fileupload"}
 KEEP_KEYS = ("type", "enum", "default", "minimum", "maximum")
 OUT = Path(__file__).resolve().parents[1] / "src" / "panda_federation_tools" / "catalog.json"
+# MCP tool descriptions (TDQS standard). These replace the Apify Store blurb in tools/list;
+# the Store blurb is kept as storeDescription. Every public tool must have an entry here.
+DESCRIPTIONS = Path(__file__).resolve().parent / "tool_descriptions.json"
 API = "https://api.apify.com/v2/acts/"
 
 
@@ -114,6 +117,7 @@ def price_lines(act: dict) -> list[dict]:
 
 
 def build() -> list[dict]:
+    overrides = {k: v for k, v in json.loads(DESCRIPTIONS.read_text(encoding="utf-8")).items() if not k.startswith("_")}
     tools = []
     for slug in SLUGS:
         try:
@@ -136,7 +140,8 @@ def build() -> list[dict]:
                 "name": tool_name(slug),
                 "actor": f"{OWNER}/{slug}",
                 "title": act.get("title") or slug,
-                "description": text(act.get("description")),
+                "description": overrides.get(tool_name(slug)) or text(act.get("description")),
+                "storeDescription": text(act.get("description")),
                 "url": f"https://apify.com/{OWNER}/{slug}",
                 "pricing": price_lines(act),
                 "inputSchema": {
@@ -147,6 +152,8 @@ def build() -> list[dict]:
                 },
             }
         )
+        if tool_name(slug) not in overrides:
+            print(f"warn {slug}: no TDQS description in {DESCRIPTIONS.name}; using the Store blurb", file=sys.stderr)
         print(f"ok {slug}: {len(props)} inputs", file=sys.stderr)
     return tools
 

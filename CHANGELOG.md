@@ -4,8 +4,19 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
-## [1.3.0] - 2026-11-04
+## [1.4.0] - 2026-11-05
 
+### Added
+- Four focused domain MCP entry points for TDQS / Glama Tool Count (3–15 tools): `panda-research-tools` (6), `panda-public-funding-tools` (5), `panda-leads-tools` (8), `panda-web-security-tools` (4). Console scripts plus `PFT_DOMAIN` env (`research` | `public-funding` | `leads` | `web-security`).
+- Domain-specific MCP `instructions` strings naming sibling servers and when to use each tool set.
+- `domains.py` map + `filter_catalog()`; unit tests for domain counts and partition coverage.
+- Per-tool description upgrades across all 23 tools (Purpose / Usage / Behavior / Parameters checklist); source `scripts/tool_descriptions.json`, merged by `build_catalog.py`; Behavior suffix generated in `catalog.py`.
+
+### Changed
+- This package is the **index + compatibility surface**. README / llms.txt lead with the four focused servers; the 23-tool mega-server remains when `PFT_DOMAIN` is unset.
+- `server.json` title/description clarify the hosted Apify endpoint is the research subset in the official MCP Registry, not the full index.
+
+## [1.3.0] - 2026-11-04
 ### Added
 - 5 new MCP tools, now public on the Apify Store: `website_change_monitor`, `sbir_sttr_topic_radar`, `sec_financials_excel`, `clinical_trial_leads` and the free `hidden_ai_instructions_scanner` (23 tools in total).
 - `run_max_items` also caps results on `sbir_sttr_topic_radar`, `clinical_trial_leads` and `hidden_ai_instructions_scanner`.
@@ -59,7 +70,8 @@ All notable changes to this project are documented here. The format follows [Kee
 ### Earlier
 - Tool index (`README.md`, `llms.txt`, `llms-full.txt`), MIT license and `server.json` for the hosted Academic Research MCP Server (`io.github.pandadad0214/panda-research-mcp`, version 1.0.0) in the official MCP Registry.
 
-[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.0...v1.1.1
