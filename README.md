@@ -35,6 +35,11 @@ Each domain also has its own thin GitHub repo (same console script names via `uv
 
 [Quiet File Team MCP](https://github.com/pandadad0214/quiet-file-team-mcp) is a separate focused server with six free offline tools: `explain_method`, `generate_team_config`, `generate_early_exit`, `validate_layout_manifest`, `draft_workflow` and `draft_owner_batch`. It does not read arbitrary files, call network APIs, or wrap Actors.
 
+### Related document tool (not an MCP wrapper)
+
+[Manual Remake](https://apify.com/pandadad0214/manual-remake) rewrites a confusing PDF or photo manual into a clear printable English PDF. Free sample (no upload, no key), Text-only, and Standard share one Actor page — see the Store README for switch steps.
+
+
 ```bash
 uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp
 ```

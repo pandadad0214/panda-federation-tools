@@ -71,6 +71,10 @@ Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMA
 - [Hidden AI Instructions Scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) (free) [MCP tool `hidden_ai_instructions_scanner`]: Use before an agent reads a site it doesn't trust, to find text hidden from people but aimed at AI agents (prompt injection) with technique, location, excerpt and category (policy notice, manipulation, harmful).
 - [Hidden AI Instructions Watch (GitHub)](https://github.com/pandadad0214/hidden-ai-instructions-watch): public, evidence-only log of pages with hidden AI-directed text, with method and corrections process.
 
+## Manuals and documents (related Actor)
+
+- [Manual Remake](https://apify.com/pandadad0214/manual-remake): Use when you need a confusing PDF or photo manual rewritten into a clear printable English PDF. Three editions on one Actor — free sample (`{"sampleMode": true}`, no key, no charge), Text-only (pictures off), and Standard (pictures cleaned and numbered). Switch steps are in the Actor README.
+
 ## Typical workflows
 
 - Writing a paper: `literature_search`, then `citation_formatter`, then `reference_checker` before you submit.
@@ -86,6 +90,7 @@ Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMA
 - Regulatory watch: `federal_register_monitor` for open comments, then `grants_finder` or `sbir_sttr_topic_radar` if funding follows.
 - Product safety: `product_recall_monitor`; for vehicles use `vin_decoder_recalls`.
 - Market research: `topic_trends_tracker`, then `literature_search` or `podcast_leads_finder` on rising topics.
+- Confusing product manual: open [Manual Remake](https://apify.com/pandadad0214/manual-remake) with `{"sampleMode": true}` first, then Text-only or Standard for your own file.
 
 ## Agent skills (Agensi)
 
