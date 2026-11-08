@@ -4,6 +4,8 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-11-07
+
 ### Added
 - 5 new MCP tools now public on the Apify Store (32 tools total): `building_permit_leads`, `florida_new_business_leads`, `texas_new_business_leads` (leads), `bulk_domain_whois_expiry` (web-security) and `wayback_snapshot_finder` (research).
 - Domain map: research 7, public-funding 8, leads 12, web-security 5 (all inside the 3–15 band).

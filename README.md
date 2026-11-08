@@ -80,11 +80,11 @@ uvx panda-federation-tools
 Lists all 32 tools. Kept for older configs. Prefer a focused domain server above.
 
 ### Other ways to install
-- **Pinned to a git tag:** `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.5.0 panda-research-tools`
-- **From the Release download:** `uvx --from https://github.com/pandadad0214/panda-federation-tools/releases/download/v1.5.0/panda_federation_tools-1.5.0-py3-none-any.whl panda-research-tools`
+- **Pinned to a git tag:** `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.6.0 panda-research-tools`
+- **From the Release download:** `uvx --from https://github.com/pandadad0214/panda-federation-tools/releases/download/v1.6.0/panda_federation_tools-1.6.0-py3-none-any.whl panda-research-tools`
 - **Helper script:** download `install.sh` (macOS/Linux) or `install.ps1` (Windows) from the latest Release.
 - **pip:** `pip install panda-federation-tools` then `panda-research-tools` (or another domain script).
-- **Docker:** `docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.5.0` then `docker run -i --rm -e APIFY_TOKEN -e PFT_DOMAIN=research panda-federation-tools`.
+- **Docker:** `docker build -t panda-federation-tools https://github.com/pandadad0214/panda-federation-tools.git#v1.6.0` then `docker run -i --rm -e APIFY_TOKEN -e PFT_DOMAIN=research panda-federation-tools`.
 
 **No install?** Hosted research subset (4 tools) at `https://pandadad0214--panda-research-mcp.apify.actor/mcp` with header `Authorization: Bearer <your Apify token>`. See [Hosted options](#hosted-options-no-install).
 
