@@ -160,6 +160,9 @@ Built and tested, and going public on the Apify Store a few a day (Apify limits 
 | Apify Actor | Likely domain | What it does | Price |
 |---|---|---|---|
 | [h1b-lca-sponsor-leads](https://apify.com/pandadad0214/h1b-lca-sponsor-leads) | leads | DOL H-1B LCA disclosure: employers, titles, worksites and wages | $0.002 / case |
+| [new-york-new-business-leads](https://apify.com/pandadad0214/new-york-new-business-leads) | leads | New NY LLCs and corporations from official DOS open data | $0.0015 / business |
+| [eu-ted-tenders](https://apify.com/pandadad0214/eu-ted-tenders) | leads | Official EU TED public procurement notices by keyword, CPV and country | $0.002 / notice |
+| [broken-link-checker](https://apify.com/pandadad0214/broken-link-checker) | web-security | Find 404s, redirects and dead links on a website | $0.001 / link |
 
 [Hidden AI Instructions Watch](https://github.com/pandadad0214/hidden-ai-instructions-watch) is our public, evidence-only log of what the free scanner finds.
 
