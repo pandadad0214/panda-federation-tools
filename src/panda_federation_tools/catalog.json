@@ -614,7 +614,7 @@
           },
           "agencies": {
             "type": "array",
-            "description": "Agencies. Optional. Grants.gov agency codes or names (HHS-NIH11, NSF, DOE, USDA, ED, Geological Survey; a code prefix like HHS matches all HHS sub-agencies). NIH institutes (NCI, NIAID, NIMH\u2026 or NIH for all). NSF directorates (CSE, BIO, GEO, MPS, SBE, EDU, ENG, TIP, or NSF for all). A source is skipped when none of its agencies are listed.",
+            "description": "Agencies. Optional. Grants.gov agency codes or names (HHS-NIH11, NSF, DOE, USDA, ED, Geological Survey; a code prefix like HHS matches all HHS sub-agencies). NIH institutes (NCI, NIAID, NIMH… or NIH for all). NSF directorates (CSE, BIO, GEO, MPS, SBE, EDU, ENG, TIP, or NSF for all). A source is skipped when none of its agencies are listed.",
             "items": {
               "type": "string"
             },
@@ -758,7 +758,7 @@
           },
           "countries": {
             "type": "array",
-            "description": "Countries. Optional 2-letter ISO country codes (US, GB, DE, IN, AU\u2026). Keeps experts whose current institution is in one of these countries, and counts only papers with an author in them.",
+            "description": "Countries. Optional 2-letter ISO country codes (US, GB, DE, IN, AU…). Keeps experts whose current institution is in one of these countries, and counts only papers with an author in them.",
             "items": {
               "type": "string"
             },
@@ -771,7 +771,7 @@
           },
           "institution": {
             "type": "string",
-            "description": "Institution. Optional. University, hospital, lab or company name (e.g. Stanford University), a ROR ID or an OpenAlex institution ID (I\u2026). Sub-units count too: a university includes its schools and hospitals. The matched institution is shown in the search log.",
+            "description": "Institution. Optional. University, hospital, lab or company name (e.g. Stanford University), a ROR ID or an OpenAlex institution ID (I…). Sub-units count too: a university includes its schools and hospitals. The matched institution is shown in the search log.",
             "examples": [
               "Stanford University"
             ]
@@ -954,7 +954,7 @@
               "none"
             ],
             "default": "auto",
-            "description": "Header row. Auto finds header rows above the first data row (multi-line headers are joined). First row = always use row 1. None = generic Column 1, Column 2\u2026 names. Choices: auto = Auto-detect; firstRow = Always the first row; none = No header."
+            "description": "Header row. Auto finds header rows above the first data row (multi-line headers are joined). First row = always use row 1. None = generic Column 1, Column 2… names. Choices: auto = Auto-detect; firstRow = Always the first row; none = No header."
           },
           "mergeWrappedRows": {
             "type": "boolean",
@@ -1338,7 +1338,7 @@
           },
           "dkimSelectors": {
             "type": "array",
-            "description": "Extra DKIM selectors. Optional. About 40 common selectors (google, selector1, selector2, k1, s1, s2, default\u2026) are always tried. Add your own if you sign with a custom one, e.g. 20230601 or mailo.",
+            "description": "Extra DKIM selectors. Optional. About 40 common selectors (google, selector1, selector2, k1, s1, s2, default…) are always tried. Add your own if you sign with a custom one, e.g. 20230601 or mailo.",
             "items": {
               "type": "string"
             },
@@ -1514,7 +1514,7 @@
         "properties": {
           "categories": {
             "type": "array",
-            "description": "Business categories. Plain words, one per line: dentist, plumber, restaurant, coffee shop, lawyer, hair salon, gym, real estate, car repair\u2026 (about 150 built in). Other words are matched against OpenStreetMap tags and names. Power users can enter a tag like shop=florist or craft=hvac.",
+            "description": "Business categories. Plain words, one per line: dentist, plumber, restaurant, coffee shop, lawyer, hair salon, gym, real estate, car repair… (about 150 built in). Other words are matched against OpenStreetMap tags and names. Power users can enter a tag like shop=florist or craft=hvac.",
             "items": {
               "type": "string"
             },
@@ -1741,7 +1741,7 @@
         "properties": {
           "topics": {
             "type": "array",
-            "description": "Topics. One per line: a topic, brand, product, person, place or a Wikipedia link (https://en.wikipedia.org/wiki/ChatGPT). Each is matched to its Wikipedia article (redirects followed, e.g. Ozempic \u2192 Semaglutide). For ambiguous words like Mercury, paste the exact article link. Leave empty for a 3-topic demo.",
+            "description": "Topics. One per line: a topic, brand, product, person, place or a Wikipedia link (https://en.wikipedia.org/wiki/ChatGPT). Each is matched to its Wikipedia article (redirects followed, e.g. Ozempic → Semaglutide). For ambiguous words like Mercury, paste the exact article link. Leave empty for a 3-topic demo.",
             "items": {
               "type": "string"
             },
@@ -1763,7 +1763,7 @@
           "language": {
             "type": "string",
             "default": "en",
-            "description": "Wikipedia language. Language code of the Wikipedia edition to measure: en, de, fr, es, ja, pt, it, nl, pl\u2026 Default en. A full Wikipedia link overrides this per topic."
+            "description": "Wikipedia language. Language code of the Wikipedia edition to measure: en, de, fr, es, ja, pt, it, nl, pl… Default en. A full Wikipedia link overrides this per topic."
           },
           "device": {
             "type": "string",
@@ -1930,7 +1930,7 @@
           },
           "states": {
             "type": "array",
-            "description": "States / provinces. 2-letter codes of the physical address (TX, CA, FL, ON\u2026). Empty = all states.",
+            "description": "States / provinces. 2-letter codes of the physical address (TX, CA, FL, ON…). Empty = all states.",
             "items": {
               "type": "string"
             },
@@ -2949,24 +2949,557 @@
         "required": [],
         "additionalProperties": false
       }
-    }
-  ],
-  "guidanceServers": [
+    },
     {
-      "name": "Quiet File Team MCP",
-      "repository": "https://github.com/pandadad0214/quiet-file-team-mcp",
-      "description": "Six free offline guidance tools for a local file-first quiet team. Separate focused server, not an Actor wrapper.",
-      "tools": [
-        "explain_method",
-        "generate_team_config",
-        "generate_early_exit",
-        "validate_layout_manifest",
-        "draft_workflow",
-        "draft_owner_batch"
+      "name": "building_permit_leads",
+      "actor": "pandadad0214/building-permit-leads",
+      "title": "Building Permit Leads: New Permits, Contractors & Job Values",
+      "description": "Pull newly issued building permits from 8 US city open-data portals (NYC, Los Angeles, Chicago, San Francisco, Seattle, Austin, New Orleans, Cambridge) with address, work description, trade category, declared job value, contractor and owner where the city publishes them. Unlike local_business_leads (existing OpenStreetMap shops) and florida_new_business_leads / texas_new_business_leads (new company registrations), this is project-level construction activity. Use when contractors, solar/roofing/HVAC installers, suppliers or lenders need fresh jobs or want to track a competitor's permits. Do not use for cities outside the 8 listed, for property ownership records or for inspection history. Parameters: cities picks portals (contractor names are published by Chicago, NYC, Austin, Seattle, New Orleans and Cambridge only, so requireContractor drops the other cities); categories and keywords narrow by permit type/description; issuedFrom/issuedTo override daysBack; minValue drops permits with no declared value; sortBy=value with maxResults returns the biggest jobs first; maxResults caps billed permits. Runs with no matching permits are free. Returns per item: agentSummary, permitNumber, permitType, workType, description, status, appliedDate, issuedDate, address, zip, city, state, estimatedCost, contractorName, contractorTrade, contractorPhone, ownerName, applicantName, categories, latitude, longitude, permitUrl, sourceDataset; plus PERMITS_XLSX (with Contractors sheet)/CSV.",
+      "storeDescription": "Use this to get newly issued building permits from 8 US city open-data portals (NYC, LA, Chicago, SF, Seattle, Austin, New Orleans, Cambridge): address, work, trade category, job value, contractor, owner. Excel.",
+      "url": "https://apify.com/pandadad0214/building-permit-leads",
+      "pricing": [
+        {
+          "event": "permit-returned",
+          "title": "Permit returned",
+          "usd": 0.0015
+        }
       ],
-      "freeCore": "https://github.com/pandadad0214/quiet-file-team",
-      "billing": "Free; no paid API calls",
-      "install": "uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp"
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cities": {
+            "type": "array",
+            "description": "Cities. Official city open-data portals to search.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "chicago",
+                "nyc",
+                "losangeles",
+                "sanfrancisco",
+                "seattle",
+                "austin",
+                "neworleans",
+                "cambridge"
+              ]
+            },
+            "examples": [
+              [
+                "austin",
+                "chicago"
+              ]
+            ]
+          },
+          "categories": {
+            "type": "array",
+            "description": "Trade categories. Keep permits whose type or description matches. Empty = all permits.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "roofing",
+                "solar",
+                "hvac",
+                "electrical",
+                "plumbing",
+                "newConstruction",
+                "remodel",
+                "demolition",
+                "pool",
+                "adu",
+                "evCharger",
+                "fireSafety",
+                "windowsDoors",
+                "fenceDeck",
+                "elevator",
+                "sign"
+              ]
+            },
+            "examples": [
+              [
+                "roofing",
+                "solar"
+              ]
+            ]
+          },
+          "keywords": {
+            "type": "string",
+            "description": "Keywords (any). Comma-separated words matched in the permit type and description, e.g. generator, kitchen, restaurant, warehouse."
+          },
+          "daysBack": {
+            "type": "integer",
+            "default": 14,
+            "minimum": 1,
+            "maximum": 3650,
+            "description": "Issued in the last N days. Default 14. Use 1 or 7 on a daily or weekly schedule."
+          },
+          "issuedFrom": {
+            "type": "string",
+            "description": "Issued on or after. Optional YYYY-MM-DD; overrides days back."
+          },
+          "issuedTo": {
+            "type": "string",
+            "description": "Issued on or before. Optional YYYY-MM-DD."
+          },
+          "minValue": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Minimum job value ($). Declared job value on the permit. Permits without a value are left out when set."
+          },
+          "requireContractor": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only permits that name a contractor. Contractors are published by Chicago, NYC, Austin, Seattle, New Orleans and Cambridge."
+          },
+          "contractorContains": {
+            "type": "string",
+            "description": "Contractor name contains. Track one contractor or competitor, e.g. Sunrun."
+          },
+          "sortBy": {
+            "type": "string",
+            "enum": [
+              "newest",
+              "value"
+            ],
+            "default": "newest",
+            "description": "Sort by. Order before the maximum is applied. Choices: newest = Newest first; value = Highest job value first."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 200,
+            "minimum": 1,
+            "maximum": 50000,
+            "description": "Maximum results. You pay per permit returned, so this also caps the cost. Default 200."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "florida_new_business_leads",
+      "actor": "pandadad0214/florida-new-business-leads",
+      "title": "Florida New Business Leads: New LLCs & Corporations Daily",
+      "description": "List newly filed Florida LLCs, corporations and nonprofits from the official Sunbiz (Division of Corporations) daily data files, with principal and mailing address, officers/managers, registered agent, FEI/EIN when filed and an industry guess from the name. Unlike texas_new_business_leads (Texas Comptroller franchise taxpayers) and local_business_leads (established shops on OpenStreetMap), this is brand-new Florida formations. Use when you sell to new business owners (bookkeeping, insurance, banking, web design, signage) or monitor new competitors in a Florida city or ZIP. Do not use for other states, for historical entity search or for annual-report status checks. Parameters: daysBack (work days only; max 62 days per run) or dateFrom/dateTo; cities and zipPrefixes match principal or mailing address; industries and nameKeywords match words in the name, excludeKeywords removes holding companies; newFormationsOnly (default true) skips reinstatements and old foreign entities; personAgentOnly keeps filings without an agent company (often owner-filed); maxResults caps billed businesses. Runs with no matches are free. Returns per item: agentSummary, documentNumber, name, filingType, filingTypeLabel, status, formedDate, filedOn, principalAddress, principalCity, principalZip, mailingAddress, mailingCity, mailingState, mailingZip, feiNumber, registeredAgent, registeredAgentType, officers, officerNames, industryGuess, sunbizUrl; plus BUSINESSES_XLSX (with Officers sheet)/CSV.",
+      "storeDescription": "Use this to get new Florida LLCs, corporations and nonprofits from the official Sunbiz daily data: address, officers and managers, registered agent, EIN, industry guess. Filter by city, ZIP, industry, name. Excel.",
+      "url": "https://apify.com/pandadad0214/florida-new-business-leads",
+      "pricing": [
+        {
+          "event": "business-returned",
+          "title": "Business returned",
+          "usd": 0.0015
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "daysBack": {
+            "type": "integer",
+            "default": 7,
+            "minimum": 1,
+            "maximum": 62,
+            "description": "Filed in the last N days. Default 7. Files exist for work days only. Use 1 on a daily schedule."
+          },
+          "dateFrom": {
+            "type": "string",
+            "description": "Filed on or after. Optional YYYY-MM-DD; overrides days back. Up to 62 days per run."
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "Filed on or before. Optional YYYY-MM-DD."
+          },
+          "filingTypes": {
+            "type": "array",
+            "description": "Entity types. Empty = all types.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "FLAL",
+                "DOMP",
+                "DOMNP",
+                "FORL",
+                "FORP",
+                "FORNP",
+                "DOMLP",
+                "FORLP"
+              ]
+            },
+            "examples": [
+              [
+                "FLAL",
+                "DOMP"
+              ]
+            ]
+          },
+          "cities": {
+            "type": "array",
+            "description": "Cities. Principal or mailing city, e.g. Miami, Orlando, Tampa, Jacksonville.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "zipPrefixes": {
+            "type": "array",
+            "description": "ZIP prefixes. e.g. 331 (Miami), 328 (Orlando), 336 (Tampa), 33401.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "industries": {
+            "type": "array",
+            "description": "Industry guess. Guessed from words in the business name (e.g. ROOFING, REALTY, TRUCKING).",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Construction & trades",
+                "Real estate",
+                "Holding & investment",
+                "Transport & logistics",
+                "Auto",
+                "Beauty & personal care",
+                "Health & medical",
+                "Food & drink",
+                "Cleaning",
+                "Landscaping & pest",
+                "Consulting & management",
+                "Tech & software",
+                "Marketing & media",
+                "Finance & insurance",
+                "Legal",
+                "Retail & trade",
+                "Education & childcare",
+                "Fitness",
+                "Pets",
+                "Church & community"
+              ]
+            }
+          },
+          "nameKeywords": {
+            "type": "string",
+            "description": "Name contains (any). Comma-separated, e.g. roofing, cleaning, med spa."
+          },
+          "excludeKeywords": {
+            "type": "string",
+            "description": "Name excludes. Comma-separated, e.g. holdings, investments."
+          },
+          "newFormationsOnly": {
+            "type": "boolean",
+            "default": true,
+            "description": "Only new formations. Skip filings for entities formed more than 45 days before the file date (e.g. reinstatements and old foreign entities). Future effective dates are kept."
+          },
+          "requireOfficer": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only with an officer or manager listed. Skip filings with no named officer, manager or member."
+          },
+          "personAgentOnly": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only when the registered agent is a person. Skips filings that use a registered-agent company, which usually means the owner filed directly."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 50000,
+            "description": "Maximum results. You pay per business returned, so this also caps the cost. Default 1000."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "bulk_domain_whois_expiry",
+      "actor": "pandadad0214/bulk-domain-whois-expiry",
+      "title": "Bulk Domain WHOIS & Expiry Checker (RDAP): Registrar & Dates",
+      "description": "Check many domains at once with official RDAP (WHOIS fallback): registered or available, registrar, created/updated/expiry dates, days to expiry, transfer lock and pending-delete status, nameservers, DNS host and DNSSEC. Unlike email_domain_security_checker (SPF/DKIM/DMARC mail security) and company_website_enricher (site content and contacts), this is registration and expiry data for a domain portfolio. Use when you audit a domain portfolio for renewals, check which names are available, or verify registrar and DNS host for vendors or phishing look-alikes. Do not use for website content, uptime or email-auth checks (use email_domain_security_checker). Parameters: domains accepts URLs (scheme, www and paths stripped; duplicates dropped; up to 10,000); rootDomainOnly (default true) reduces subdomains to the registrable domain; expiringWithinDays sets the expiringSoon flag and only=expiringSoon|available|registered returns (and bills) just that subset; sortBy=expiry puts the soonest renewals first; followRegistrar adds registrant org/country when published but is slower; maxResults caps billed domains. Failed lookups are free. Returns per item: agentSummary, domain, registered, available, registrar, registrarIanaId, createdDate, updatedDate, expiresDate, daysToExpiry, ageYears, expiringSoon, statuses, transferLocked, pendingDelete, nameservers, dnsHost, dnssec, registrantOrg, registrantCountry, abuseEmail, source; plus DOMAINS_XLSX/CSV.",
+      "storeDescription": "Use this to check many domains at once with official RDAP (WHOIS fallback): registered or available, registrar, created and expiry dates, days left, locks, nameservers, DNS host, DNSSEC. Excel and CSV.",
+      "url": "https://apify.com/pandadad0214/bulk-domain-whois-expiry",
+      "pricing": [
+        {
+          "event": "domain-checked",
+          "title": "Domain checked",
+          "usd": 0.001
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "type": "array",
+            "description": "Domains. Up to 10,000 domains or URLs (https://, www. and paths are removed; duplicates dropped).",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "apify.com",
+                "wikipedia.org",
+                "github.io"
+              ]
+            ]
+          },
+          "expiringWithinDays": {
+            "type": "integer",
+            "default": 60,
+            "minimum": 1,
+            "maximum": 3650,
+            "description": "Expiring soon = within N days. Flags domains whose expiry is this close. Default 60."
+          },
+          "only": {
+            "type": "string",
+            "enum": [
+              "all",
+              "expiringSoon",
+              "available",
+              "registered"
+            ],
+            "default": "all",
+            "description": "Only return. Filter the results (you pay only for returned domains). Choices: all = All domains; expiringSoon = Expiring soon only; available = Not registered (likely available) only; registered = Registered only."
+          },
+          "rootDomainOnly": {
+            "type": "boolean",
+            "default": true,
+            "description": "Look up the root domain. blog.example.co.uk -> example.co.uk. Off = look up exactly what you typed."
+          },
+          "followRegistrar": {
+            "type": "boolean",
+            "default": false,
+            "description": "Ask the registrar's RDAP too. Adds registrant org/country when the registrar publishes them (slower)."
+          },
+          "sortBy": {
+            "type": "string",
+            "enum": [
+              "input",
+              "expiry"
+            ],
+            "default": "input",
+            "description": "Sort by. Order of results. Choices: input = Input order; expiry = Soonest expiry first."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 50000,
+            "description": "Maximum results. You pay per domain returned, so this also caps the cost. Default 1000."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "wayback_snapshot_finder",
+      "actor": "pandadad0214/wayback-snapshot-finder",
+      "title": "Wayback Machine Snapshot Finder: Archive Dates & URLs",
+      "description": "Find Internet Archive Wayback Machine snapshots for pages or whole domains through the official CDX API: capture timestamps, direct archive URLs, HTTP status, MIME type, content digest, and first/last-seen dates. Unlike website_change_monitor (diffs the live page on a schedule) and reference_checker (verifies scholarly citations), this looks up historical archived copies. Use when you need to cite or recover a dead link, prove what a page said on a date, date when a site or page first appeared, or list a domain's archived URLs. Do not use to fetch or diff live pages (use website_change_monitor) or to download full archived page content. Parameters: urls with matchType exact|domain|prefix, or domains (always domain match); from/to bound the date range (YYYY or YYYYMMDD); closestTo sorts by nearness to one date; collapseDigest (default true) keeps one row per unique content; filterStatus=200 drops redirects and errors; maxResultsPerUrl applies before maxResults, which caps billed snapshots (hard max 5000); includeFirstLast adds extra CDX probes and can add latency. Empty or failed lookups are free; the Archive's CDX API can be slow, so allow up to a minute or more. Returns per item: agentSummary, url, timestamp, timestampReadable, originalUrl, archiveUrl, statusCode, mimeType, digest, length, isFirst, isLast, firstSeen, lastSeen; plus SNAPSHOTS_XLSX/CSV.",
+      "storeDescription": "",
+      "url": "https://apify.com/pandadad0214/wayback-snapshot-finder",
+      "pricing": [
+        {
+          "event": "snapshot-returned",
+          "title": "Snapshot returned",
+          "usd": 0.001
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "urls": {
+            "type": "array",
+            "description": "URLs. Pages or hosts to look up (https:// and www. are fine). Duplicates are dropped.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "example.com",
+                "https://example.com/about"
+              ]
+            ]
+          },
+          "domains": {
+            "type": "array",
+            "description": "Domains. Whole domains to search (always uses domain match). Combine with URLs if you want.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "matchType": {
+            "type": "string",
+            "enum": [
+              "exact",
+              "domain",
+              "prefix"
+            ],
+            "default": "domain",
+            "description": "Match type (for URLs). exact = that URL only; domain = any URL on the host; prefix = that path and below. Choices: exact = Exact URL; domain = Whole domain; prefix = URL prefix."
+          },
+          "from": {
+            "type": "string",
+            "description": "From date. Earliest snapshot: YYYY or YYYYMMDD (e.g. 2015 or 20150101).",
+            "examples": [
+              "2015"
+            ]
+          },
+          "to": {
+            "type": "string",
+            "description": "To date. Latest snapshot: YYYY or YYYYMMDD.",
+            "examples": [
+              "2024"
+            ]
+          },
+          "filterStatus": {
+            "type": "string",
+            "description": "HTTP status filter. Only keep this status code (e.g. 200). Leave empty for all.",
+            "examples": [
+              "200"
+            ]
+          },
+          "collapseDigest": {
+            "type": "boolean",
+            "default": true,
+            "description": "Unique content only (collapse by digest). One row per unique page content. On by default."
+          },
+          "closestTo": {
+            "type": "string",
+            "description": "Closest to timestamp. Optional. Return snapshots nearest this date/time (YYYYMMDD or YYYY-MM-DD). Sorted by closeness.",
+            "examples": [
+              "2020-01-01"
+            ]
+          },
+          "includeFirstLast": {
+            "type": "boolean",
+            "default": true,
+            "description": "Mark first and last seen. Probe CDX for the earliest and latest capture of each URL and set isFirst / isLast (and firstSeen / lastSeen)."
+          },
+          "maxResultsPerUrl": {
+            "type": "integer",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 5000,
+            "description": "Max snapshots per URL. Cap per URL/domain before the global max. Default 100."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 5000,
+            "description": "Maximum results. You pay per snapshot returned, so this also caps the cost. Default 100 (hard max 5000)."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "texas_new_business_leads",
+      "actor": "pandadad0214/texas-new-business-leads",
+      "title": "Texas New Business Leads: New Franchise Taxpayers",
+      "description": "List new Texas businesses from the Texas Comptroller's active franchise taxpayer open data, matched on Secretary of State charter date or franchise-tax responsibility date, with address, county, organization type, SOS file number and status. Unlike florida_new_business_leads (Sunbiz filings with officers) and local_business_leads (OpenStreetMap shops), this is new Texas LLCs and corporations from state tax data; officers are not included. Use when you sell to newly formed Texas companies or watch new entrants in a Texas city, ZIP or county. Do not use for other states, for officer/owner names or for sole proprietors that do not owe franchise tax. Parameters: daysBack or charterFrom/charterTo (future effective dates are kept, so a recent window can include dates ahead of today); cities, zipPrefixes and countyCodes (Comptroller numbers, e.g. 101 Harris, 227 Travis) narrow the area; orgTypes (e.g. CL LLC, CT corporation) and nameContains filter the entity; activeOnly (default true) keeps right-to-transact active rows; requireSosNumber drops rows with no SOS file number; maxResults caps billed businesses (hard max 5000). Runs with no matches are free. Returns per item: agentSummary, taxpayerNumber, name, address, city, state, zip, countyCode, orgTypeCode, orgType, sosFileNumber, charterDate, responsibilityDate, sosStatus, rightToTransact, naics, sourceUrl, taxpayerUrl; plus TXBIZ_XLSX/CSV.",
+      "storeDescription": "",
+      "url": "https://apify.com/pandadad0214/texas-new-business-leads",
+      "pricing": [
+        {
+          "event": "business-returned",
+          "title": "Business returned",
+          "usd": 0.0015
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "daysBack": {
+            "type": "integer",
+            "default": 7,
+            "minimum": 1,
+            "maximum": 366,
+            "description": "Chartered / responsible in the last N days. Default 7. Matches SOS charter date OR franchise-tax responsibility beginning date. Future effective dates are kept. Use 1 on a daily schedule."
+          },
+          "charterFrom": {
+            "type": "string",
+            "description": "On or after. Optional YYYY-MM-DD; overrides days back. Applied to charter or responsibility date."
+          },
+          "charterTo": {
+            "type": "string",
+            "description": "On or before. Optional YYYY-MM-DD."
+          },
+          "cities": {
+            "type": "array",
+            "description": "Cities. Taxpayer city, e.g. Houston, Austin, Dallas, San Antonio, Fort Worth.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "zipPrefixes": {
+            "type": "array",
+            "description": "ZIP prefixes. e.g. 770 (Houston), 787 (Austin), 752 (Dallas), 782 (San Antonio).",
+            "items": {
+              "type": "string"
+            }
+          },
+          "countyCodes": {
+            "type": "array",
+            "description": "County codes. Texas Comptroller county codes as numbers, e.g. 101 (Harris), 227 (Travis), 57 (Dallas), 15 (Bexar), 220 (Tarrant).",
+            "items": {
+              "type": "string"
+            }
+          },
+          "orgTypes": {
+            "type": "array",
+            "description": "Organization types. Empty = all types.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CL",
+                "CT",
+                "CN",
+                "CI",
+                "CF",
+                "CM",
+                "CP",
+                "CU",
+                "PL",
+                "PF",
+                "PB",
+                "AP",
+                "AF",
+                "AR",
+                "TR"
+              ]
+            },
+            "examples": [
+              [
+                "CL",
+                "CT"
+              ]
+            ]
+          },
+          "nameContains": {
+            "type": "string",
+            "description": "Name contains. Case-insensitive substring, e.g. roofing, realty, trucking."
+          },
+          "activeOnly": {
+            "type": "boolean",
+            "default": true,
+            "description": "Only active (right to transact). Keep rows with right-to-transact code A and SOS status A (or blank SOS status)."
+          },
+          "requireSosNumber": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only with an SOS / COA file number. Skip taxpayers that have no Secretary of State or Certificate of Authority file number."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 500,
+            "minimum": 1,
+            "maximum": 5000,
+            "description": "Maximum results. You pay per business returned, so this also caps the cost. Default 500; hard max 5000."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
     }
   ]
 }

@@ -6,10 +6,10 @@ Follow these steps to add a **focused domain** MCP server for the user (preferre
    - macOS / Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
    - Windows (PowerShell): `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
 2. **Pick a domain** that matches the user's work:
-   - research → `panda-research-tools` (6 tools)
-   - public-funding → `panda-public-funding-tools` (5)
-   - leads → `panda-leads-tools` (8)
-   - web-security → `panda-web-security-tools` (4)
+   - research → `panda-research-tools` (7 tools)
+   - public-funding → `panda-public-funding-tools` (8)
+   - leads → `panda-leads-tools` (12)
+   - web-security → `panda-web-security-tools` (5)
 3. **Check that the server starts:**
    `uvx --from panda-federation-tools panda-research-tools --version`
    It should print the version number. The first start downloads the package from PyPI and can take 10 to 30 seconds.
@@ -32,7 +32,7 @@ Follow these steps to add a **focused domain** MCP server for the user (preferre
 ```
 
    Keep `"timeout": 60`: Cline's default MCP timeout is 10 seconds, which is shorter than the 15 to 30 seconds uvx can take on the first start. Without it, Cline reports an `initialize` timeout.
-6. **Verify:** the research server should list 6 tools (for example `reference_checker`, `literature_search`). A cheap first test on web-security is `email_domain_security_checker` with `{"domains": ["example.com"], "run_max_items": 1}`.
+6. **Verify:** the research server should list 7 tools (for example `reference_checker`, `literature_search`). A cheap first test on web-security is `email_domain_security_checker` with `{"domains": ["example.com"], "run_max_items": 1}`.
 
 Optional environment variables: `PFT_DOMAIN` (if using the `panda-federation-tools` entry), `PANDA_MAX_CHARGE_USD` (default spending cap per call, 0.50), `PANDA_MAX_ITEMS` (default 50), `PANDA_TIMEOUT_SECS` (default 120, max 300).
 

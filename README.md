@@ -1,6 +1,6 @@
 # Panda Federation Tools
 
-**Index of Panda Federation public-data MCP tools on Apify.** Prefer one of the four focused domain servers (3–15 tools each). This umbrella still runs all 27 tools when `PFT_DOMAIN` is unset for backward compatibility.
+**Index of Panda Federation public-data MCP tools on Apify.** Prefer one of the four focused domain servers (3–15 tools each). This umbrella still runs all 32 tools when `PFT_DOMAIN` is unset for backward compatibility.
 
 [![PyPI](https://img.shields.io/pypi/v/panda-federation-tools)](https://pypi.org/project/panda-federation-tools/)
 [![Latest Release](https://img.shields.io/github/v/release/pandadad0214/panda-federation-tools?label=latest%20release)](https://github.com/pandadad0214/panda-federation-tools/releases/latest)
@@ -22,10 +22,10 @@ Replace `apify_api_YOUR_TOKEN` below with your token, and never commit a file th
 
 | Domain package | Tools | Scope | One-liner |
 |---|---|---|---|
-| [`panda-research-tools`](https://github.com/pandadad0214/panda-research-tools) | 6 | Scholarly integrity & papers | `uvx --from panda-federation-tools panda-research-tools` |
+| [`panda-research-tools`](https://github.com/pandadad0214/panda-research-tools) | 7 | Scholarly integrity & papers | `uvx --from panda-federation-tools panda-research-tools` |
 | [`panda-public-funding-tools`](https://github.com/pandadad0214/panda-public-funding-tools) | 8 | US federal $, filings & safety monitors | `uvx --from panda-federation-tools panda-public-funding-tools` |
-| [`panda-leads-tools`](https://github.com/pandadad0214/panda-leads-tools) | 9 | Public leads & enrichment | `uvx --from panda-federation-tools panda-leads-tools` |
-| [`panda-web-security-tools`](https://github.com/pandadad0214/panda-web-security-tools) | 4 | Site / email / agent safety | `uvx --from panda-federation-tools panda-web-security-tools` |
+| [`panda-leads-tools`](https://github.com/pandadad0214/panda-leads-tools) | 12 | Public leads & enrichment | `uvx --from panda-federation-tools panda-leads-tools` |
+| [`panda-web-security-tools`](https://github.com/pandadad0214/panda-web-security-tools) | 5 | Site / email / agent safety | `uvx --from panda-federation-tools panda-web-security-tools` |
 
 Or set `PFT_DOMAIN` to `research` | `public-funding` | `leads` | `web-security` while running `uvx panda-federation-tools`.
 
@@ -77,7 +77,7 @@ claude mcp add panda-research-tools --env APIFY_TOKEN=apify_api_YOUR_TOKEN -- \
 uvx panda-federation-tools
 ```
 
-Lists all 27 tools. Kept for older configs. Prefer a focused domain server above.
+Lists all 32 tools. Kept for older configs. Prefer a focused domain server above.
 
 ### Other ways to install
 - **Pinned to a git tag:** `uvx --from git+https://github.com/pandadad0214/panda-federation-tools@v1.5.0 panda-research-tools`
@@ -90,14 +90,14 @@ Lists all 27 tools. Kept for older configs. Prefer a focused domain server above
 
 ## What's included
 
-- **Official, free data sources only:** Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, NPI Registry, FMCSA, public DNS, Apple Podcasts, OpenStreetMap, Wikimedia, public job-board feeds and companies' own websites. No logins, no paywalls, no LinkedIn scraping.
+- **Official, free data sources only:** Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, NPI Registry, FMCSA, public DNS, Apple Podcasts, OpenStreetMap, Wikimedia, IRS, Federal Register, FDA, CPSC, NHTSA, city building-permit portals, Florida Sunbiz, Texas Comptroller, RDAP, the Internet Archive, public job-board feeds and companies' own websites. No logins, no paywalls, no LinkedIn scraping.
 - **Pay per result, capped:** a few tenths of a cent per result; runs that find nothing are not charged per result; every MCP call has a hard USD spending cap.
 - **Agent-friendly output:** JSON with a one-line `summary` or `agentSummary` per row and **OK / CHECK / FIX** status where it applies.
 - **Your token stays yours:** the server runs on your machine and sends your `APIFY_TOKEN` only to `api.apify.com`, in a header. It is never logged or returned.
 
 ### Domain tool lists
 
-#### Research (`panda-research-tools`) — 6 tools
+#### Research (`panda-research-tools`) — 7 tools
 
 | MCP tool | Apify Actor | What it does | Price (Apify free plan) |
 |---|---|---|---|
@@ -107,6 +107,7 @@ Lists all 27 tools. Kept for older configs. Prefer a focused domain server above
 | `pubmed_evidence_table` | [pubmed-evidence-table](https://apify.com/pandadad0214/pubmed-evidence-table) | PubMed → evidence table (study design, sample size, retractions, PRISMA counts) | $0.004 / article |
 | `researcher_expert_finder` | [researcher-expert-finder](https://apify.com/pandadad0214/researcher-expert-finder) | Ranked academic experts and KOLs for a topic, with ORCID and h-index | $0.0025 / expert |
 | `pdf_table_extractor` | [pdf-table-extractor](https://apify.com/pandadad0214/pdf-table-extractor) | Every table in a PDF → rows, Excel and CSV, with OCR for scanned pages | $0.001 / page; $0.003 / table; $0.02 / OCR page |
+| `wayback_snapshot_finder` | [wayback-snapshot-finder](https://apify.com/pandadad0214/wayback-snapshot-finder) | Internet Archive snapshots: timestamps, archive URLs, first/last seen (dead links, dated evidence) | $0.001 / snapshot |
 
 #### Public funding (`panda-public-funding-tools`) — 8 tools
 
@@ -121,7 +122,7 @@ Lists all 27 tools. Kept for older configs. Prefer a focused domain server above
 | `product_recall_monitor` | [product-recall-monitor](https://apify.com/pandadad0214/product-recall-monitor) | FDA food, drug and device plus CPSC recalls in one feed | $0.0015 / recall |
 | `vin_decoder_recalls` | [vin-decoder-recalls](https://apify.com/pandadad0214/vin-decoder-recalls) | Bulk NHTSA VIN decode with recall campaigns and complaint counts | $0.001 / VIN |
 
-#### Leads (`panda-leads-tools`) — 9 tools
+#### Leads (`panda-leads-tools`) — 12 tools
 
 | MCP tool | Apify Actor | What it does | Price (Apify free plan) |
 |---|---|---|---|
@@ -134,8 +135,11 @@ Lists all 27 tools. Kept for older configs. Prefer a focused domain server above
 | `topic_trends_tracker` | [topic-trends-tracker](https://apify.com/pandadad0214/topic-trends-tracker) | Wikipedia pageview trends with 30-day and YoY change (Google Trends alternative) | $0.002 / topic |
 | `trucking_company_leads` | [trucking-company-leads](https://apify.com/pandadad0214/trucking-company-leads) | New and existing US carriers and brokers from official FMCSA data | $0.002 / carrier |
 | `nonprofit_leads_irs` | [nonprofit-leads-irs](https://apify.com/pandadad0214/nonprofit-leads-irs) | IRS charity and foundation lists by state, cause and size | $0.001 / nonprofit |
+| `building_permit_leads` | [building-permit-leads](https://apify.com/pandadad0214/building-permit-leads) | New building permits from 8 US cities with trade category, job value and contractor | $0.0015 / permit |
+| `florida_new_business_leads` | [florida-new-business-leads](https://apify.com/pandadad0214/florida-new-business-leads) | New Florida LLCs and corporations daily (Sunbiz) with officers and addresses | $0.0015 / business |
+| `texas_new_business_leads` | [texas-new-business-leads](https://apify.com/pandadad0214/texas-new-business-leads) | New Texas franchise taxpayers (Comptroller open data) with SOS number and charter date | $0.0015 / business |
 
-#### Web security (`panda-web-security-tools`) — 4 tools
+#### Web security (`panda-web-security-tools`) — 5 tools
 
 | MCP tool | Apify Actor | What it does | Price (Apify free plan) |
 |---|---|---|---|
@@ -143,6 +147,7 @@ Lists all 27 tools. Kept for older configs. Prefer a focused domain server above
 | `ai_search_seo_audit` | [ai-search-seo-audit](https://apify.com/pandadad0214/ai-search-seo-audit) | SEO and AI-search (GEO) readiness per page, AI crawler access, llms.txt draft | $0.004 / page |
 | `website_change_monitor` | [website-change-monitor](https://apify.com/pandadad0214/website-change-monitor) | Page diffs, price changes and keyword alerts on any public page | $0.0015 / page |
 | `hidden_ai_instructions_scanner` | [hidden-ai-instructions-scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) | Finds text hidden from people but aimed at AI agents (prompt injection) | Free |
+| `bulk_domain_whois_expiry` | [bulk-domain-whois-expiry](https://apify.com/pandadad0214/bulk-domain-whois-expiry) | Bulk RDAP/WHOIS: registrar, expiry and days left, availability, DNS host | $0.001 / domain |
 
 Every tool also accepts three optional run controls: `run_max_items` (results to return, default 50), `run_max_charge_usd` (spending cap for the call, default $0.50) and `run_timeout_secs` (default 120, max 300). While a run is in progress the server sends MCP progress notifications every few seconds, so clients that support them do not time out. Most tools answer in 5–15 seconds for a few inputs; `local_business_leads` and big crawls can take a minute or more, so give them `run_timeout_secs: 300`.
 
@@ -154,12 +159,7 @@ Built and tested, and going public on the Apify Store a few a day (Apify limits 
 
 | Apify Actor | Likely domain | What it does | Price |
 |---|---|---|---|
-| [building-permit-leads](https://apify.com/pandadad0214/building-permit-leads) | leads | New building permits from 8 US cities with trade category, job value and contractor | $0.0015 / permit |
-| [florida-new-business-leads](https://apify.com/pandadad0214/florida-new-business-leads) | leads | New Florida LLCs and corporations daily (Sunbiz) with officers and addresses | $0.0015 / business |
-| [bulk-domain-whois-expiry](https://apify.com/pandadad0214/bulk-domain-whois-expiry) | web-security | Bulk RDAP/WHOIS: registrar, expiry and days left, availability, DNS host | $0.001 / domain |
-| [texas-new-business-leads](https://apify.com/pandadad0214/texas-new-business-leads) | leads | New Texas franchise taxpayers (Comptroller open data) with SOS number and charter date | $0.0015 / business |
 | [h1b-lca-sponsor-leads](https://apify.com/pandadad0214/h1b-lca-sponsor-leads) | leads | DOL H-1B LCA disclosure: employers, titles, worksites and wages | $0.002 / case |
-| [wayback-snapshot-finder](https://apify.com/pandadad0214/wayback-snapshot-finder) | research | Internet Archive CDX snapshots: timestamps, archive URLs, first/last seen | $0.001 / snapshot |
 
 [Hidden AI Instructions Watch](https://github.com/pandadad0214/hidden-ai-instructions-watch) is our public, evidence-only log of what the free scanner finds.
 
@@ -179,13 +179,17 @@ Built and tested, and going public on the Apify Store a few a day (Apify limits 
 - **Outbound to decision makers:** `company_hiring_signals` → `company_team_finder` (names, titles, email pattern).
 - **Local prospecting:** `local_business_leads` → `ai_search_seo_audit` on their websites.
 - **Trucking and logistics sales:** `trucking_company_leads` → `company_website_enricher`.
+- **New-business outreach:** `florida_new_business_leads` or `texas_new_business_leads` → `company_website_enricher`.
+- **Contractor and supplier sales:** `building_permit_leads` (sortBy value) → `local_business_leads`.
+- **Domain portfolio:** `bulk_domain_whois_expiry` (only expiringSoon) → `email_domain_security_checker`.
+- **Dead links and dated evidence:** `wayback_snapshot_finder` → `reference_checker`.
 - **Market research:** `topic_trends_tracker` → `literature_search` or `podcast_leads_finder` on rising topics.
 
 ## Pricing
 
 - You pay Apify per result, at the prices above, from your own Apify account. Apify Bronze, Silver and Gold plans get 10–30% off.
 - **Empty runs cost nothing per result.** Apify adds a tiny platform start fee (about $0.00005 per run).
-- `run_max_items` (default 50) also sets the Actor's own result limit on 23 of the 27 tools, so you only pay for the results you asked for. On `grants_finder`, `pdf_table_extractor`, `company_team_finder` and `sec_financials_excel` (whose limits count sources, pages, companies or years), set those fields directly; the charge cap still applies.
+- `run_max_items` (default 50) also sets the Actor's own result limit on 28 of the 32 tools, so you only pay for the results you asked for. On `grants_finder`, `pdf_table_extractor`, `company_team_finder` and `sec_financials_excel` (whose limits count sources, pages, companies or years), set those fields directly; the charge cap still applies.
 - Every MCP call is capped by `run_max_charge_usd` (default $0.50, set your own default with `PANDA_MAX_CHARGE_USD`). Apify stops the run when the cap is reached.
 - The MCP server itself is free and open source (MIT).
 

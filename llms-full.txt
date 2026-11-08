@@ -329,6 +329,61 @@ Output per item: `agentSummary`, `vin`, `valid`, `modelYear`, `make`, `model`, `
 SUMMARY / files: `VINS_XLSX` (Vehicles + Recalls sheets), `VINS_CSV`.
 Price: $0.001 per VIN decoded.
 
+## Building Permit Leads
+
+URL: https://apify.com/pandadad0214/building-permit-leads
+MCP tool (this repo): `building_permit_leads`
+Use when: you need newly issued building permits from 8 US city open-data portals (NYC, LA, Chicago, SF, Seattle, Austin, New Orleans, Cambridge) with trade category, job value, contractor and owner.
+Input: `cities`, `categories` (e.g. roofing, solar), `keywords`, `daysBack` (default 14), `issuedFrom`/`issuedTo`, `minValue`, `requireContractor`, `contractorContains`, `sortBy` (newest, value), `maxResults`.
+Minimal input: `{"cities": ["chicago"], "daysBack": 7, "maxResults": 5}`
+Output per item: `agentSummary`, `permitNumber`, `permitType`, `workType`, `description`, `status`, `appliedDate`, `issuedDate`, `address`, `zip`, `city`, `state`, `estimatedCost`, `contractorName`, `contractorTrade`, `contractorPhone`, `ownerName`, `applicantName`, `categories`, `latitude`, `longitude`, `permitUrl`, `sourceDataset`.
+SUMMARY / files: `PERMITS_XLSX` (with Contractors sheet), `PERMITS_CSV`.
+Price: $0.0015 per permit returned.
+
+## Florida New Business Leads
+
+URL: https://apify.com/pandadad0214/florida-new-business-leads
+MCP tool (this repo): `florida_new_business_leads`
+Use when: you need new Florida LLCs, corporations and nonprofits from the official Sunbiz daily files, with officers, registered agent and an industry guess.
+Input: `daysBack` (default 7, work days), `dateFrom`/`dateTo` (max 62 days), `filingTypes`, `cities`, `zipPrefixes`, `industries`, `nameKeywords`, `excludeKeywords`, `newFormationsOnly` (default true), `requireOfficer`, `personAgentOnly`, `maxResults`.
+Minimal input: `{"daysBack": 3, "cities": ["Miami"], "maxResults": 5}`
+Output per item: `agentSummary`, `documentNumber`, `name`, `filingType`, `filingTypeLabel`, `status`, `formedDate`, `filedOn`, `principalAddress`, `principalCity`, `principalZip`, `mailingAddress`, `mailingCity`, `mailingState`, `mailingZip`, `feiNumber`, `registeredAgent`, `registeredAgentType`, `officers`, `officerNames`, `industryGuess`, `sunbizUrl`.
+SUMMARY / files: `BUSINESSES_XLSX` (with Officers sheet), `BUSINESSES_CSV`.
+Price: $0.0015 per business returned.
+
+## Texas New Business Leads
+
+URL: https://apify.com/pandadad0214/texas-new-business-leads
+MCP tool (this repo): `texas_new_business_leads`
+Use when: you need newly registered Texas LLCs and corporations from the Comptroller active franchise taxpayer open data, with address, county, SOS file number, charter date and org type (no officers).
+Input: `daysBack` (default 7), `charterFrom`/`charterTo`, `cities`, `zipPrefixes`, `countyCodes`, `orgTypes`, `nameContains`, `activeOnly` (default true), `requireSosNumber`, `maxResults` (max 5000).
+Minimal input: `{"daysBack": 7, "cities": ["Austin"], "maxResults": 5}`
+Output per item: `agentSummary`, `taxpayerNumber`, `name`, `address`, `city`, `state`, `zip`, `countyCode`, `orgTypeCode`, `orgType`, `sosFileNumber`, `charterDate`, `responsibilityDate`, `sosStatus`, `rightToTransact`, `naics`, `sourceUrl`, `taxpayerUrl`.
+SUMMARY / files: `TXBIZ_XLSX`, `TXBIZ_CSV`.
+Price: $0.0015 per business returned.
+
+## Bulk Domain WHOIS & Expiry Checker
+
+URL: https://apify.com/pandadad0214/bulk-domain-whois-expiry
+MCP tool (this repo): `bulk_domain_whois_expiry`
+Use when: you need registrar, created and expiry dates, days to expiry, availability, locks, nameservers and DNS host for many domains via official RDAP (WHOIS fallback).
+Input: `domains` (up to 10,000; URLs ok), `expiringWithinDays` (default 60), `only` (all, expiringSoon, available, registered), `rootDomainOnly` (default true), `followRegistrar`, `sortBy` (input, expiry), `maxResults`.
+Minimal input: `{"domains": ["apify.com", "wikipedia.org", "example.com"], "maxResults": 3}`
+Output per item: `agentSummary`, `domain`, `registered`, `available`, `registrar`, `createdDate`, `updatedDate`, `expiresDate`, `daysToExpiry`, `ageYears`, `expiringSoon`, `statuses`, `transferLocked`, `pendingDelete`, `nameservers`, `dnsHost`, `dnssec`, `registrantOrg`, `registrantCountry`, `abuseEmail`, `source`.
+SUMMARY / files: `DOMAINS_XLSX`, `DOMAINS_CSV`.
+Price: $0.001 per domain returned.
+
+## Wayback Machine Snapshot Finder
+
+URL: https://apify.com/pandadad0214/wayback-snapshot-finder
+MCP tool (this repo): `wayback_snapshot_finder`
+Use when: you need Internet Archive snapshot timestamps, archive URLs and first/last-seen dates for URLs or domains (dead links, dated evidence, site history).
+Input: `urls`, `domains`, `matchType` (exact, domain, prefix), `from`/`to` (YYYY or YYYYMMDD), `filterStatus`, `collapseDigest` (default true), `closestTo`, `includeFirstLast` (default true), `maxResultsPerUrl`, `maxResults` (max 5000).
+Minimal input: `{"urls": ["example.com"], "maxResultsPerUrl": 5, "maxResults": 5}`
+Output per item: `agentSummary`, `url`, `timestamp`, `timestampReadable`, `originalUrl`, `archiveUrl`, `statusCode`, `mimeType`, `digest`, `length`, `isFirst`, `isLast`, `firstSeen`, `lastSeen`.
+SUMMARY / files: `SNAPSHOTS_XLSX`, `SNAPSHOTS_CSV`.
+Price: $0.001 per snapshot returned.
+
 ## Quiet File Team MCP (offline guidance, not an Apify wrapper)
 
 URL: https://github.com/pandadad0214/quiet-file-team-mcp

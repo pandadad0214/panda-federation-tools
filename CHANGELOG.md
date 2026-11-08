@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Added
+- 5 new MCP tools now public on the Apify Store (32 tools total): `building_permit_leads`, `florida_new_business_leads`, `texas_new_business_leads` (leads), `bulk_domain_whois_expiry` (web-security) and `wayback_snapshot_finder` (research).
+- Domain map: research 7, public-funding 8, leads 12, web-security 5 (all inside the 3–15 band).
+- TDQS descriptions for the 5 new tools (purpose + nearest sibling, when / when not, billing and parameter interactions, return shape); `RESULT_CAP_FIELDS` maxResults wiring.
+
+### Changed
+- README / `llms.txt` / `llms-full.txt` / `llms-install.md` move these 5 out of "Publishing soon" into the domain tables; H-1B LCA Sponsor Leads stays publishing soon.
+- Domain server instructions and scope lines name the new tools and when to use each.
+
 ## [1.5.0] - 2026-11-06
 
 ### Added

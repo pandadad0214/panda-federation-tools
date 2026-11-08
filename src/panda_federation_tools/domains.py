@@ -17,6 +17,7 @@ DOMAINS: dict[str, frozenset[str]] = {
             "pubmed_evidence_table",
             "researcher_expert_finder",
             "pdf_table_extractor",
+            "wayback_snapshot_finder",
         }
     ),
     "public-funding": frozenset(
@@ -42,6 +43,9 @@ DOMAINS: dict[str, frozenset[str]] = {
             "topic_trends_tracker",
             "trucking_company_leads",
             "nonprofit_leads_irs",
+            "building_permit_leads",
+            "florida_new_business_leads",
+            "texas_new_business_leads",
         }
     ),
     "web-security": frozenset(
@@ -50,6 +54,7 @@ DOMAINS: dict[str, frozenset[str]] = {
             "ai_search_seo_audit",
             "website_change_monitor",
             "hidden_ai_instructions_scanner",
+            "bulk_domain_whois_expiry",
         }
     ),
 }
@@ -58,7 +63,10 @@ DOMAIN_META: dict[str, dict[str, str]] = {
     "research": {
         "package": "panda-research-tools",
         "title": "Panda Research Tools",
-        "scope": "Scholarly integrity and papers: citation checks, literature/PubMed search, experts, PDF tables.",
+        "scope": (
+            "Scholarly integrity and papers: citation checks, literature/PubMed search, experts, PDF tables, "
+            "Wayback Machine snapshots."
+        ),
     },
     "public-funding": {
         "package": "panda-public-funding-tools",
@@ -73,14 +81,15 @@ DOMAIN_META: dict[str, dict[str, str]] = {
         "title": "Panda Leads Tools",
         "scope": (
             "Public leads and enrichment: NPI, podcasts, local businesses, hiring, websites, teams, "
-            "trends, trucking, IRS nonprofits."
+            "trends, trucking, IRS nonprofits, building permits, new Florida and Texas businesses."
         ),
     },
     "web-security": {
         "package": "panda-web-security-tools",
         "title": "Panda Web Security Tools",
         "scope": (
-            "Site, email and agent safety: SPF/DKIM/DMARC, AI/SEO audit, page-change monitor, hidden AI instructions."
+            "Site, email and agent safety: SPF/DKIM/DMARC, AI/SEO audit, page-change monitor, hidden AI instructions, "
+            "domain WHOIS/expiry."
         ),
     },
 }

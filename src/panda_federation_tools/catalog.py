@@ -62,6 +62,11 @@ RESULT_CAP_FIELDS: dict[str, str] = {
     "federal_register_monitor": "maxResults",
     "product_recall_monitor": "maxResults",
     "vin_decoder_recalls": "maxResults",
+    "building_permit_leads": "maxResults",
+    "florida_new_business_leads": "maxResults",
+    "bulk_domain_whois_expiry": "maxResults",
+    "wayback_snapshot_finder": "maxResults",
+    "texas_new_business_leads": "maxResults",
 }
 
 # Tools published without pay-per-event pricing (no per-result charge).

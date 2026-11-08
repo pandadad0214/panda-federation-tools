@@ -11,10 +11,10 @@ from panda_federation_tools.server import INDEX_INSTRUCTIONS, create_server, ins
 TOKEN = "apify_api_DOMAINTEST999"
 
 EXPECTED_COUNTS = {
-    "research": 6,
+    "research": 7,
     "public-funding": 8,
-    "leads": 9,
-    "web-security": 4,
+    "leads": 12,
+    "web-security": 5,
 }
 
 
@@ -23,7 +23,7 @@ def test_domain_map_covers_every_catalog_tool_exactly_once():
     catalog_names = {t.name for t in load_catalog()}
     mapped = set().union(*DOMAINS.values())
     assert mapped == catalog_names
-    assert sum(EXPECTED_COUNTS.values()) == len(catalog_names) == 27
+    assert sum(EXPECTED_COUNTS.values()) == len(catalog_names) == 32
 
 
 @pytest.mark.parametrize("domain,count", list(EXPECTED_COUNTS.items()))
