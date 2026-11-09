@@ -14,10 +14,10 @@ Compatibility mega-server (all tools): `uvx panda-federation-tools@{{VERSION}}`
 - **Helper scripts:** `install.sh` (macOS/Linux) or `install.ps1` (Windows). Verify with `SHA256SUMS.txt`.
 
 ### Added
-- 5 new tools, now public on the Apify Store (32 in total): `building_permit_leads`, `florida_new_business_leads`, `texas_new_business_leads` (leads, 12 tools), `bulk_domain_whois_expiry` (web-security, 5 tools) and `wayback_snapshot_finder` (research, 7 tools).
+- 4 new tools, now public on the Apify Store (36 in total): `new_york_new_business_leads`, `h1b_lca_sponsor_leads`, `eu_ted_tenders` (leads, 15 tools) and `broken_link_checker` (web-security, 6 tools).
 - TDQS-grade descriptions for each new tool (nearest sibling, when / when not, billing and parameter interactions, return shape).
 
 ### Changed
-- Domain server instructions, README, `llms.txt` and `llms-full.txt` list the new tools; H-1B LCA Sponsor Leads is still publishing soon.
+- Domain server instructions, README, `llms.txt` and `llms-full.txt` list the new tools; nothing is queued as publishing soon.
 
 Full history: [CHANGELOG.md](https://github.com/pandadad0214/panda-federation-tools/blob/main/CHANGELOG.md).

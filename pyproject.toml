@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "panda-federation-tools"
-version = "1.6.0"
+version = "1.7.0"
 description = "Index of Panda Federation public-data MCP tools on Apify, plus focused domain servers (research, public-funding, leads, web-security)."
 readme = "README.md"
 license = "MIT"

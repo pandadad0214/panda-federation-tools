@@ -4,7 +4,7 @@
   "title": "Panda Research MCP (hosted subset)",
   "description": "Hosted research subset: check citations, catch fake/retracted papers, search OpenAlex & PubMed.",
   "websiteUrl": "https://apify.com/pandadad0214/panda-research-mcp",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "remotes": [
     {
       "type": "streamable-http",
