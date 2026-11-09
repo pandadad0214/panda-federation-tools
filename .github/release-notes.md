@@ -10,7 +10,7 @@ uvx --from panda-federation-tools@{{VERSION}} panda-web-security-tools
 Compatibility mega-server (all tools): `uvx panda-federation-tools@{{VERSION}}`
 
 - **Claude Desktop:** download `panda-federation-tools-{{VERSION}}.mcpb` below and double-click it (umbrella).
-- **Cursor:** see domain examples in the [README](https://github.com/pandadad0214/panda-federation-tools#install--use-focused-servers).
+- **Cursor:** see domain examples in the [README](https://github.com/pandadad0214/panda-federation-tools#install-for-your-client-focused-servers).
 - **Helper scripts:** `install.sh` (macOS/Linux) or `install.ps1` (Windows). Verify with `SHA256SUMS.txt`.
 
 ### Added
