@@ -1,6 +1,6 @@
 # Panda Federation Tools
 
-**Index of Panda Federation public-data MCP tools on Apify.** Prefer one of the four focused domain servers (3–15 tools each). This umbrella still runs all 36 tools when `PFT_DOMAIN` is unset for backward compatibility.
+Give Claude, Cursor or any MCP client 36 public-data tools for research, US federal funding, B2B leads and web security, split into four focused servers. Each tool runs an Apify Actor on your own Apify account over official open data, priced per result (most $0.001–$0.004), and the free plan's $5 monthly credit covers trying them.
 
 [![PyPI](https://img.shields.io/pypi/v/panda-federation-tools)](https://pypi.org/project/panda-federation-tools/)
 [![Latest Release](https://img.shields.io/github/v/release/pandadad0214/panda-federation-tools?label=latest%20release)](https://github.com/pandadad0214/panda-federation-tools/releases/latest)
@@ -16,7 +16,32 @@
 
 **Landing page:** [pandadad0214.github.io/panda-federation-tools](https://pandadad0214.github.io/panda-federation-tools/)
 
-## Install / Use (focused servers)
+## How to use this
+
+```bash
+uvx --from panda-federation-tools panda-research-tools
+```
+
+1. **Get a free Apify token** at [console.apify.com/settings/integrations](https://console.apify.com/settings/integrations) and install [uv](https://docs.astral.sh/uv/getting-started/installation/) (`curl -LsSf https://astral.sh/uv/install.sh | sh`).
+2. **Pick one domain server** from the table below (research, public funding, leads or web security) and add it to your MCP client with `APIFY_TOKEN` in its env (copy-paste configs below).
+3. **Ask in plain words**, e.g. "Check these 12 references for fake or retracted papers." Start with one or two inputs, read the `summary` / `agentSummary` line, then widen.
+
+No install? Use the hosted research subset (see [Hosted options](#hosted-options-no-install)). Landing page and chooser: [pandadad0214.github.io/panda-federation-tools](https://pandadad0214.github.io/panda-federation-tools/).
+
+## For AI agents
+
+| Field | Value |
+| --- | --- |
+| Purpose | MCP index + four focused public-data servers that run Panda Federation Apify Actors and return structured rows. |
+| Use when | A task needs scholarly checks, federal grants/contracts/filings, public B2B or local leads, or email/site/agent-safety audits from official sources. |
+| Do not use when | You need logged-in, paywalled or LinkedIn data, or a general web search; load only the one domain server the task needs, not the 36-tool umbrella. |
+| Install | `uvx --from panda-federation-tools <panda-research-tools\|panda-public-funding-tools\|panda-leads-tools\|panda-web-security-tools>` |
+| Auth | `APIFY_TOKEN` env var (your own Apify account; runs bill there). |
+| Outputs | JSON rows per result plus a one-line `summary` / `agentSummary` and a `SUMMARY` record with a takeaway and suggested next tool. |
+| Side effects and cost | Starts Apify runs on your account; pay per result (prices in [Pricing](#pricing)); empty runs are not charged per result; `run_max_charge_usd` caps a run. Read-only on third-party sites. |
+| Machine-readable docs | [`llms.txt`](llms.txt), [`llms-full.txt`](llms-full.txt), [`llms-install.md`](llms-install.md), [`server.json`](server.json) |
+
+## Install for your client (focused servers)
 
 **You need:** a free [Apify API token](https://console.apify.com/settings/integrations) (the free plan includes $5/month) and [uv](https://docs.astral.sh/uv/getting-started/installation/) (one command: `curl -LsSf https://astral.sh/uv/install.sh | sh`, or on Windows `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`).
 
@@ -42,11 +67,7 @@ Each domain also has its own thin GitHub repo (same console script names via `uv
 [Manual Remake](https://apify.com/pandadad0214/manual-remake) rewrites a confusing PDF or photo manual into a clear printable English PDF. Free sample (no upload, no key), Text-only, and Standard share one Actor page — see the Store README for switch steps.
 
 
-```bash
-uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp
-```
-
-The file-first Bash core is https://github.com/pandadad0214/quiet-file-team (free). A paid setup kit is planned and not for sale yet.
+Quiet File Team MCP install: `uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp`. The file-first Bash core is free at [quiet-file-team](https://github.com/pandadad0214/quiet-file-team); a paid setup kit is live on [Agensi](https://agensi.io/skills/quiet-file-team-setup-kit) ($29 one-time) and [Apify](https://apify.com/pandadad0214/quiet-file-team-setup) ($29 per generated kit).
 
 ### Cursor example (research)
 
