@@ -1,6 +1,6 @@
 # Panda Federation Tools
 
-> Index of Panda Federation public-data MCP tools on Apify. Prefer a focused domain server (research / public-funding / leads / web-security) instead of loading all tools at once. Official or open free sources only (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, FMCSA, public ATS job boards, Wikipedia pageviews, public DNS, Apple Podcasts, OpenStreetMap). Pay per result; JSON with `summary` or `agentSummary` and OK / CHECK / FIX where it applies.
+> Give Claude, Cursor or any MCP client 36 public-data tools for research, US federal funding, B2B leads and web security, split into four focused servers (research / public-funding / leads / web-security); load only the one the task needs. Official or open free sources only (Crossref, OpenAlex, PubMed, Unpaywall, Grants.gov, NIH, NSF, USAspending, FMCSA, public ATS job boards, Wikipedia pageviews, public DNS, Apple Podcasts, OpenStreetMap). Pay per result; JSON with `summary` or `agentSummary` and OK / CHECK / FIX where it applies.
 
 Recommended MCP entry points (stdio, Python; needs `APIFY_TOKEN`):
 - `uvx --from panda-federation-tools panda-research-tools` (7 tools: citations, literature, PubMed, experts, PDF tables, Wayback snapshots)
