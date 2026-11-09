@@ -67,6 +67,10 @@ RESULT_CAP_FIELDS: dict[str, str] = {
     "bulk_domain_whois_expiry": "maxResults",
     "wayback_snapshot_finder": "maxResults",
     "texas_new_business_leads": "maxResults",
+    "h1b_lca_sponsor_leads": "maxResults",
+    "new_york_new_business_leads": "maxResults",
+    "eu_ted_tenders": "maxResults",
+    "broken_link_checker": "maxLinks",
 }
 
 # Tools published without pay-per-event pricing (no per-result charge).

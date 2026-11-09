@@ -4,6 +4,17 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-11-08
+
+### Added
+- 4 new MCP tools now public on the Apify Store (36 tools total): `new_york_new_business_leads`, `h1b_lca_sponsor_leads`, `eu_ted_tenders` (leads) and `broken_link_checker` (web-security).
+- Domain map: research 7, public-funding 8, leads 15, web-security 6 (all inside the 3–15 band).
+- TDQS descriptions for the 4 new tools; `RESULT_CAP_FIELDS` wiring (`maxResults`, and `maxLinks` for the link checker).
+
+### Changed
+- README / `llms.txt` / `llms-full.txt` / `llms-install.md` move these 4 out of "Publishing soon" (nothing is queued now).
+- Domain server instructions and scope lines name the new tools and when to use each.
+
 ## [1.6.0] - 2026-11-07
 
 ### Added

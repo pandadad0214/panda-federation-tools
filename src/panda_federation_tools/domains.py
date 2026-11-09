@@ -46,6 +46,9 @@ DOMAINS: dict[str, frozenset[str]] = {
             "building_permit_leads",
             "florida_new_business_leads",
             "texas_new_business_leads",
+            "new_york_new_business_leads",
+            "h1b_lca_sponsor_leads",
+            "eu_ted_tenders",
         }
     ),
     "web-security": frozenset(
@@ -55,6 +58,7 @@ DOMAINS: dict[str, frozenset[str]] = {
             "website_change_monitor",
             "hidden_ai_instructions_scanner",
             "bulk_domain_whois_expiry",
+            "broken_link_checker",
         }
     ),
 }
@@ -81,7 +85,8 @@ DOMAIN_META: dict[str, dict[str, str]] = {
         "title": "Panda Leads Tools",
         "scope": (
             "Public leads and enrichment: NPI, podcasts, local businesses, hiring, websites, teams, "
-            "trends, trucking, IRS nonprofits, building permits, new Florida and Texas businesses."
+            "trends, trucking, IRS nonprofits, building permits, new Florida, Texas and New York businesses, "
+            "H-1B sponsors, EU tenders."
         ),
     },
     "web-security": {
@@ -89,7 +94,7 @@ DOMAIN_META: dict[str, dict[str, str]] = {
         "title": "Panda Web Security Tools",
         "scope": (
             "Site, email and agent safety: SPF/DKIM/DMARC, AI/SEO audit, page-change monitor, hidden AI instructions, "
-            "domain WHOIS/expiry."
+            "domain WHOIS/expiry, broken links."
         ),
     },
 }

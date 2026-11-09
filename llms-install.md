@@ -8,8 +8,8 @@ Follow these steps to add a **focused domain** MCP server for the user (preferre
 2. **Pick a domain** that matches the user's work:
    - research → `panda-research-tools` (7 tools)
    - public-funding → `panda-public-funding-tools` (8)
-   - leads → `panda-leads-tools` (12)
-   - web-security → `panda-web-security-tools` (5)
+   - leads → `panda-leads-tools` (15)
+   - web-security → `panda-web-security-tools` (6)
 3. **Check that the server starts:**
    `uvx --from panda-federation-tools panda-research-tools --version`
    It should print the version number. The first start downloads the package from PyPI and can take 10 to 30 seconds.

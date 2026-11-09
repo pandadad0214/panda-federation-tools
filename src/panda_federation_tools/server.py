@@ -30,10 +30,10 @@ INDEX_INSTRUCTIONS = """Panda Federation Tools is the index / compatibility surf
 Recommended: install one focused server instead of this mega-server (better Glama Tool Count / coherence):
   panda-research-tools (7) — citations, literature, PubMed, experts, PDF tables, Wayback snapshots
   panda-public-funding-tools (8) — grants, contracts, SBIR/STTR, SEC, clinical trials, Federal Register, recalls, VIN
-  panda-leads-tools (12) — NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking,
-    IRS nonprofits, building permits, new Florida and Texas businesses
-  panda-web-security-tools (5) — email domain security, AI/SEO audit, website change monitor, hidden AI scanner,
-    domain WHOIS/expiry
+  panda-leads-tools (15) — NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking,
+    IRS nonprofits, building permits, new Florida/Texas/New York businesses, H-1B sponsors, EU tenders
+  panda-web-security-tools (6) — email domain security, AI/SEO audit, website change monitor, hidden AI scanner,
+    domain WHOIS/expiry, broken links
 This process still exposes all tools when PFT_DOMAIN is unset (backward compatible). Set PFT_DOMAIN to
 research | public-funding | leads | web-security to load only that domain, or use the matching console script.
 Each tool runs one Apify Actor on the user's own Apify account (APIFY_TOKEN) and returns its dataset items.
@@ -72,19 +72,24 @@ topic_trends_tracker (Wikipedia pageview trends), trucking_company_leads (FMCSA 
 nonprofit_leads_irs (IRS Exempt Organizations charities and foundations),
 building_permit_leads (new permits in 8 US cities with contractors and job values),
 florida_new_business_leads (new Sunbiz LLCs/corporations with officers),
-texas_new_business_leads (new Texas franchise taxpayers).
+texas_new_business_leads (new Texas franchise taxpayers),
+new_york_new_business_leads (new NY DOS filings), h1b_lca_sponsor_leads (DOL H-1B/E-3 sponsors),
+eu_ted_tenders (EU public procurement notices).
 Sibling servers: panda-research-tools (papers), panda-public-funding-tools (federal $),
 panda-web-security-tools (email/site/agent safety). Prefer company_team_finder for people,
 company_website_enricher for one firmographic row, nonprofit_leads_irs for tax-exempt orgs,
-florida_/texas_new_business_leads for brand-new companies, building_permit_leads for construction jobs.
+florida_/texas_/new_york_new_business_leads for brand-new companies,
+h1b_lca_sponsor_leads for visa sponsors, eu_ted_tenders for EU tenders, building_permit_leads for construction jobs.
 Each tool runs on the user's APIFY_TOKEN. Empty runs are not charged per result; capped by run_max_charge_usd.""",
     "web-security": """Panda Web Security Tools: site, email and agent safety (Apify Actors by pandadad0214).
 Tools: email_domain_security_checker (SPF/DKIM/DMARC/MTA-STS/BIMI), ai_search_seo_audit (SEO + GEO readiness),
 website_change_monitor (page diffs, price and keyword alerts), hidden_ai_instructions_scanner
-(free prompt-injection / hidden-AI-text detector), bulk_domain_whois_expiry (RDAP registrar, expiry, availability).
+(free prompt-injection / hidden-AI-text detector), bulk_domain_whois_expiry (RDAP registrar, expiry, availability),
+broken_link_checker (404s and redirects).
 Sibling servers: panda-research-tools, panda-public-funding-tools, panda-leads-tools.
 Use hidden_ai_instructions_scanner before an agent reads an untrusted page;
-bulk_domain_whois_expiry for renewals, availability and look-alike domains. Each tool runs on the
+bulk_domain_whois_expiry for renewals, availability and look-alike domains;
+broken_link_checker for dead and redirecting links on a site. Each tool runs on the
 user's APIFY_TOKEN (scanner is free). Empty runs are not charged per result; capped by run_max_charge_usd.""",
 }
 

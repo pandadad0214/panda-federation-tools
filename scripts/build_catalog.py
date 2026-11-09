@@ -54,6 +54,10 @@ SLUGS = [
     "bulk-domain-whois-expiry",
     "wayback-snapshot-finder",
     "texas-new-business-leads",
+    "h1b-lca-sponsor-leads",
+    "new-york-new-business-leads",
+    "eu-ted-tenders",
+    "broken-link-checker",
 ]
 # Inputs an agent should not pass through a chat transcript, or that only work in the Console.
 SKIP_EDITORS = {"fileupload"}

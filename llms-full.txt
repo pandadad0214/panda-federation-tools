@@ -373,6 +373,50 @@ Output per item: `agentSummary`, `domain`, `registered`, `available`, `registrar
 SUMMARY / files: `DOMAINS_XLSX`, `DOMAINS_CSV`.
 Price: $0.001 per domain returned.
 
+## New York New Business Leads
+
+URL: https://apify.com/pandadad0214/new-york-new-business-leads
+MCP tool (this repo): `new_york_new_business_leads`
+Use when: you need newly filed New York LLCs, corporations and other entities from the official Department of State open data, with process address and CEO when filed (no emails or phones).
+Input: `daysBack` (default 7), `filedFrom`/`filedTo`, `counties`, `cities`, `zipPrefixes`, `entityTypes`, `nameContains`, `requireCeo`, `requireProcessAddress`, `maxResults`.
+Minimal input: `{"daysBack": 7, "counties": ["New York"], "maxResults": 5}`
+Output per item: `agentSummary`, `dosId`, `name`, `entityType`, `filingDate`, `county`, `jurisdiction`, `processName`, `processAddress`, `processCity`, `processState`, `processZip`, `ceoName` and CEO address fields, `sourceUrl`.
+SUMMARY / files: `NYBIZ_XLSX`, `NYBIZ_CSV`.
+Price: $0.0015 per business returned.
+
+## H-1B LCA Visa Sponsor Leads
+
+URL: https://apify.com/pandadad0214/h1b-lca-sponsor-leads
+MCP tool (this repo): `h1b_lca_sponsor_leads`
+Use when: you need employers sponsoring H-1B, H-1B1 or E-3 workers from the DOL OFLC LCA disclosure data, with job title, worksite and wage.
+Input: `employers`, `states`, `cities`, `titleContains`, `socContains`, `visaClass` (default H-1B), `caseStatuses`, `minWage`, `wageUnit`, `receivedFrom`/`receivedTo`, `daysBack`, `onlyFullTime`, `fiscalYearQuarter`, `dataUrl`, `demoMode`, `maxResults` (default 200, max 5000).
+Minimal input: `{"states": ["TX"], "titleContains": "software", "maxResults": 5}`
+Output per item: `agentSummary`, `caseNumber`, `status`, `receivedDate`, `visaClass`, `employerName`, `employerCity`, `employerState`, `jobTitle`, `socCode`, `socTitle`, `worksiteCity`, `worksiteState` plus wage, date and worker-count fields.
+SUMMARY / files: `LCA_CASES_XLSX` (Cases + Employers sheets), `LCA_CASES_CSV`.
+Price: $0.002 per case returned.
+
+## EU TED Tenders
+
+URL: https://apify.com/pandadad0214/eu-ted-tenders
+MCP tool (this repo): `eu_ted_tenders`
+Use when: you need official EU TED public procurement notices by keyword, CPV code, buyer country and date, with value (when published), deadline and TED links.
+Input: `daysBack` (default 7), `publishedFrom`/`publishedTo`, `keywords`, `cpvCodes`, `countries` (ISO-3), `maxResults` (default 200).
+Minimal input: `{"daysBack": 7, "cpvCodes": ["72000000"], "maxResults": 5}`
+Output per item: `agentSummary`, `noticeId`, `title`, `publicationDate`, `countries`, `nuts`, `noticeType`, `contractType`, `procedure`, `estimatedValue`, `deadline`, CPV codes, `noticeUrl`, `pdfUrl`, `htmlUrl`.
+SUMMARY / files: `TED_XLSX`, `TED_CSV`.
+Price: $0.002 per notice returned.
+
+## Broken Link Checker
+
+URL: https://apify.com/pandadad0214/broken-link-checker
+MCP tool (this repo): `broken_link_checker`
+Use when: you need to find 404s, redirects and dead links on a website: crawl start pages and check each unique http(s) link.
+Input: `startUrls`, `maxPages` (default 5), `maxLinks` (default 200), `checkExternal` (default true), `timeoutSecs` (default 15).
+Minimal input: `{"startUrls": ["https://example.com"], "maxPages": 1, "maxLinks": 20}`
+Output per item: `agentSummary`, `originalUrl`, `finalUrl`, `statusCode`, `broken`, `redirected`, `external`, `contentType`, `sourcePage`, `error`.
+SUMMARY / files: `LINKS_XLSX` (all links + Broken sheet), `LINKS_CSV`.
+Price: $0.001 per link that returns an HTTP status.
+
 ## Wayback Machine Snapshot Finder
 
 URL: https://apify.com/pandadad0214/wayback-snapshot-finder

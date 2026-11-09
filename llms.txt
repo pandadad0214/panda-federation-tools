@@ -5,8 +5,8 @@
 Recommended MCP entry points (stdio, Python; needs `APIFY_TOKEN`):
 - `uvx --from panda-federation-tools panda-research-tools` (7 tools: citations, literature, PubMed, experts, PDF tables, Wayback snapshots)
 - `uvx --from panda-federation-tools panda-public-funding-tools` (8: grants, contracts, SBIR/STTR, SEC, clinical trials, Federal Register, recalls, VIN)
-- `uvx --from panda-federation-tools panda-leads-tools` (12: NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking, IRS nonprofits, building permits, new Florida and Texas businesses)
-- `uvx --from panda-federation-tools panda-web-security-tools` (5: email security, AI/SEO audit, change monitor, hidden AI scanner, domain WHOIS/expiry)
+- `uvx --from panda-federation-tools panda-leads-tools` (15: NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking, IRS nonprofits, building permits, new Florida, Texas and New York businesses, H-1B sponsors, EU tenders)
+- `uvx --from panda-federation-tools panda-web-security-tools` (6: email security, AI/SEO audit, change monitor, hidden AI scanner, domain WHOIS/expiry, broken links)
 - Related, not an Apify wrapper: `uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp` (6 offline Quiet File Team setup tools). Free core: https://github.com/pandadad0214/quiet-file-team
 
 Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMAIN` is unset. Or set `PFT_DOMAIN` to one of research | public-funding | leads | web-security. You can also use Apify's MCP server (https://mcp.apify.com, Actor `pandadad0214/<slug>`), the Apify API, or the Apify Console. Full input and output details: [llms-full.txt](llms-full.txt).
@@ -62,11 +62,14 @@ Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMA
 - [Florida New Business Leads](https://apify.com/pandadad0214/florida-new-business-leads) [MCP tool `florida_new_business_leads`]: Use when you need new Florida LLCs, corporations and nonprofits from the official Sunbiz daily files, with addresses, officers/managers, registered agent and an industry guess, filtered by city, ZIP or industry.
 - [Bulk Domain WHOIS & Expiry Checker](https://apify.com/pandadad0214/bulk-domain-whois-expiry) [MCP tool `bulk_domain_whois_expiry`]: Use when you need registrar, created and expiry dates, days to expiry, availability, locks, nameservers and DNS host for many domains via official RDAP (WHOIS fallback).
 - [Texas New Business Leads](https://apify.com/pandadad0214/texas-new-business-leads) [MCP tool `texas_new_business_leads`]: Use when you need newly registered Texas businesses from the Comptroller Active Franchise Taxpayers file, with address, SOS number, charter date and org type.
-- [H-1B LCA Visa Sponsor Leads](https://apify.com/pandadad0214/h1b-lca-sponsor-leads) (publishing soon): Use when you need DOL H-1B LCA disclosure rows: employer, job title, worksite, wage and case status, with an employer roll-up sheet.
+- [New York New Business Leads](https://apify.com/pandadad0214/new-york-new-business-leads) [MCP tool `new_york_new_business_leads`]: Use when you need newly filed New York LLCs, corporations and other entities from the official Department of State open data, with county, process address, and CEO and registered agent when filed.
+- [H-1B LCA Visa Sponsor Leads](https://apify.com/pandadad0214/h1b-lca-sponsor-leads) [MCP tool `h1b_lca_sponsor_leads`]: Use when you need DOL H-1B LCA disclosure rows: employer, job title, worksite, wage and case status, with an employer roll-up sheet.
+- [EU TED Tenders](https://apify.com/pandadad0214/eu-ted-tenders) [MCP tool `eu_ted_tenders`]: Use when you need official EU TED public procurement notices by keyword, CPV code, buyer country and date, with value, deadline and TED links.
 - [Wayback Snapshot Finder](https://apify.com/pandadad0214/wayback-snapshot-finder) [MCP tool `wayback_snapshot_finder`]: Use when you need Internet Archive CDX snapshot timestamps, archive URLs and first/last-seen dates for URLs or domains.
 
 ## AI agent safety
 
+- [Broken Link Checker](https://apify.com/pandadad0214/broken-link-checker) [MCP tool `broken_link_checker`]: Use when you need to find 404s, redirects and dead links on a website: crawl start pages, check each unique link, and get status, final URL and broken/redirected flags with an Excel report.
 - [Hidden AI Instructions Scanner](https://apify.com/pandadad0214/hidden-ai-instructions-scanner) (free) [MCP tool `hidden_ai_instructions_scanner`]: Use before an agent reads a site it doesn't trust, to find text hidden from people but aimed at AI agents (prompt injection) with technique, location, excerpt and category (policy notice, manipulation, harmful).
 - [Hidden AI Instructions Watch (GitHub)](https://github.com/pandadad0214/hidden-ai-instructions-watch): public, evidence-only log of pages with hidden AI-directed text, with method and corrections process.
 
@@ -88,7 +91,10 @@ Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMA
 - Nonprofit prospecting: `nonprofit_leads_irs`, then `company_website_enricher` on org sites.
 - Regulatory watch: `federal_register_monitor` for open comments, then `grants_finder` or `sbir_sttr_topic_radar` if funding follows.
 - Product safety: `product_recall_monitor`; for vehicles use `vin_decoder_recalls`.
-- New-business outreach: `florida_new_business_leads` or `texas_new_business_leads`, then `company_website_enricher` once they have a site.
+- New-business outreach: `florida_new_business_leads` or `texas_new_business_leads` or `new_york_new_business_leads`, then `company_website_enricher` once they have a site.
+- Visa sponsors: `h1b_lca_sponsor_leads`, then `company_team_finder`.
+- EU tenders: `eu_ted_tenders`; US counterpart is `federal_contract_finder`.
+- Site health: `broken_link_checker`, then `wayback_snapshot_finder` for dead pages.
 - Contractor and supplier sales: `building_permit_leads` (sortBy value), then `local_business_leads` for the contractors.
 - Domain portfolio: `bulk_domain_whois_expiry` (only expiringSoon), then `email_domain_security_checker` on the names you keep.
 - Dead links and dated evidence: `wayback_snapshot_finder`, then `reference_checker` on the citations.
