@@ -14,6 +14,8 @@
 
 **[⬇ Download the latest Release](https://github.com/pandadad0214/panda-federation-tools/releases/latest)** · [Changelog](CHANGELOG.md)
 
+**Landing page:** [pandadad0214.github.io/panda-federation-tools](https://pandadad0214.github.io/panda-federation-tools/)
+
 ## Install / Use (focused servers)
 
 **You need:** a free [Apify API token](https://console.apify.com/settings/integrations) (the free plan includes $5/month) and [uv](https://docs.astral.sh/uv/getting-started/installation/) (one command: `curl -LsSf https://astral.sh/uv/install.sh | sh`, or on Windows `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`).

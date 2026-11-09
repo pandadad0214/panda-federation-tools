@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panda Federation Tools — Public-data MCP servers</title>
+  <meta name="description" content="36 public-data tools in four focused MCP servers: research, public funding, leads, and web security. Official/public sources, pay-per-result Apify Actors, MIT." />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="icon" href="logo-512.png" type="image/png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Panda Federation Tools — Public-data MCP servers" />
+  <meta property="og:description" content="36 public-data tools in four focused MCP servers. Built on official/public data. Pay per result with spend caps. MIT." />
+  <meta property="og:image" content="https://pandadad0214.github.io/panda-federation-tools/logo-512.png" />
+  <meta property="og:url" content="https://pandadad0214.github.io/panda-federation-tools/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Panda Federation Tools" />
+  <meta name="twitter:description" content="36 public-data MCP tools across four focused servers. Official/public data, pay per result, MIT." />
+  <meta name="twitter:image" content="https://pandadad0214.github.io/panda-federation-tools/logo-512.png" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #121a2b;
+      --text: #e8eefc;
+      --muted: #9aa8c7;
+      --accent: #5b8cff;
+      --accent-2: #3dd6c6;
+      --line: #243147;
+      --ok: #7ddea0;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: 1.55; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    header { display: grid; gap: 1rem; justify-items: center; text-align: center; padding: 1.5rem 0 2rem; }
+    header img { width: 112px; height: 112px; border-radius: 24px; background: #fff; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+    h1 { margin: 0; font-size: clamp(1.8rem, 4vw, 2.4rem); letter-spacing: -0.02em; }
+    .tagline { margin: 0; color: var(--muted); font-size: 1.1rem; max-width: 42rem; }
+    .badges { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+    .badge { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px; padding: .35rem .75rem; font-size: .85rem; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1.25rem 1.35rem; margin: 1.25rem 0; }
+    h2 { margin: 0 0 .75rem; font-size: 1.25rem; }
+    h3 { margin: 0 0 .35rem; font-size: 1.05rem; }
+    .count { display: inline-block; margin-left: .4rem; font-size: .75rem; color: var(--ok); border: 1px solid #2d4a3a; background: #14241c; border-radius: 999px; padding: .1rem .45rem; vertical-align: middle; }
+    p { margin: .4rem 0 .8rem; color: var(--muted); }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; background: #0a1020; border: 1px solid var(--line); border-radius: 6px; padding: .1rem .35rem; color: #d7e6ff; }
+    pre { overflow: auto; background: #070d18; border: 1px solid var(--line); border-radius: 12px; padding: 1rem; color: #d7e6ff; }
+    pre code { background: none; border: 0; padding: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    th, td { text-align: left; vertical-align: top; padding: .65rem .5rem; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+    .domain + .domain { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+    ul { margin: .4rem 0 0; padding-left: 1.1rem; }
+    li { margin: .25rem 0; }
+    .links { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .links a { border: 1px solid var(--line); background: #0e1626; border-radius: 10px; padding: .55rem .8rem; }
+    details { border-top: 1px solid var(--line); padding: .85rem 0; }
+    details:first-child { border-top: 0; }
+    summary { cursor: pointer; font-weight: 600; }
+    footer { margin-top: 2rem; color: var(--muted); font-size: .9rem; text-align: center; }
+    @media (max-width: 720px) {
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+      td { border-bottom: 0; padding: .25rem 0; }
+      tr { border-bottom: 1px solid var(--line); padding: .75rem 0; }
+      tr td:last-child { margin-bottom: .25rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="logo-512.png" width="112" height="112" alt="Panda Federation logo" />
+      <h1>Panda Federation Tools</h1>
+      <p class="tagline">Public-data MCP tools agents can actually run — research, federal filings, leads, and site safety, split into four focused servers.</p>
+      <div class="badges">
+        <span class="badge">36 tools</span>
+        <span class="badge">4 focused MCP servers</span>
+        <span class="badge">Official / public data</span>
+        <span class="badge">Pay per result</span>
+        <span class="badge">MIT</span>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>What it is</h2>
+      <p>Panda Federation Tools is an index of pay-per-result <a href="https://apify.com/pandadad0214">Apify</a> Actors wrapped as Model Context Protocol (MCP) servers. Prefer one focused domain server (3–15 tools) instead of loading every tool at once.</p>
+      <ul>
+        <li>Built on official and public datasets (no private scrapes of paywalled apps).</li>
+        <li>Each call runs on your Apify account with a spend cap (<code>run_max_charge_usd</code>).</li>
+        <li>MCP packages are MIT; Actors bill pay-per-result on Apify.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Install</h2>
+      <p>You need a free <a href="https://console.apify.com/settings/integrations">Apify API token</a> and <a href="https://docs.astral.sh/uv/getting-started/installation/">uv</a>.</p>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr><th>Server</th><th>Tools</th><th>Scope</th><th>Command</th></tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><a href="https://github.com/pandadad0214/panda-research-tools"><code>panda-research-tools</code></a></td>
+            <td>7</td>
+            <td>Scholarly integrity and papers: citation checks, literature/PubMed search, experts, PDF tables, Wayback Machine snapshots.</td>
+            <td><code>uvx --from panda-federation-tools panda-research-tools</code></td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/pandadad0214/panda-public-funding-tools"><code>panda-public-funding-tools</code></a></td>
+            <td>8</td>
+            <td>US federal money, filings and safety monitors: grants, contracts, SBIR/STTR, SEC, clinical trials, Federal Register, recalls, VIN decode.</td>
+            <td><code>uvx --from panda-federation-tools panda-public-funding-tools</code></td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/pandadad0214/panda-leads-tools"><code>panda-leads-tools</code></a></td>
+            <td>15</td>
+            <td>Public leads and enrichment: NPI, podcasts, local businesses, hiring, websites, teams, trends, trucking, IRS nonprofits, building permits, new Florida, Texas and New York businesses, H-1B sponsors, EU tenders.</td>
+            <td><code>uvx --from panda-federation-tools panda-leads-tools</code></td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/pandadad0214/panda-web-security-tools"><code>panda-web-security-tools</code></a></td>
+            <td>6</td>
+            <td>Site, email and agent safety: SPF/DKIM/DMARC, AI/SEO audit, page-change monitor, hidden AI instructions, domain WHOIS/expiry, broken links.</td>
+            <td><code>uvx --from panda-federation-tools panda-web-security-tools</code></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Example Cursor / Claude Desktop config (research):</p>
+      <pre><code>{
+  "mcpServers": {
+    "panda-research-tools": {
+      "command": "uvx",
+      "args": ["--from", "panda-federation-tools", "panda-research-tools"],
+      "env": { "APIFY_TOKEN": "apify_api_YOUR_TOKEN" }
+    }
+  }
+}</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>Tools by server</h2>
+      <section class="domain">
+        <h3>Panda Research Tools <span class="count">7</span></h3>
+        <p>Scholarly integrity and papers: citation checks, literature/PubMed search, experts, PDF tables, Wayback Machine snapshots.</p>
+        <ul>
+            <li><a href="https://apify.com/pandadad0214/citation-formatter">Citation Generator API</a> — <code>citation_formatter</code></li>
+            <li><a href="https://apify.com/pandadad0214/literature-search">Google Scholar Scraper Alternative</a> — <code>literature_search</code></li>
+            <li><a href="https://apify.com/pandadad0214/pdf-table-extractor">PDF Table Extractor</a> — <code>pdf_table_extractor</code></li>
+            <li><a href="https://apify.com/pandadad0214/pubmed-evidence-table">PubMed Scraper</a> — <code>pubmed_evidence_table</code></li>
+            <li><a href="https://apify.com/pandadad0214/reference-checker">Reference Checker</a> — <code>reference_checker</code></li>
+            <li><a href="https://apify.com/pandadad0214/researcher-expert-finder">Google Scholar Author Alternative</a> — <code>researcher_expert_finder</code></li>
+            <li><a href="https://apify.com/pandadad0214/wayback-snapshot-finder">Wayback Machine Snapshot Finder</a> — <code>wayback_snapshot_finder</code></li>
+        </ul>
+      </section>
+      <section class="domain">
+        <h3>Panda Public Funding Tools <span class="count">8</span></h3>
+        <p>US federal money, filings and safety monitors: grants, contracts, SBIR/STTR, SEC, clinical trials, Federal Register, recalls, VIN decode.</p>
+        <ul>
+            <li><a href="https://apify.com/pandadad0214/clinical-trial-leads">Clinical Trial Leads</a> — <code>clinical_trial_leads</code></li>
+            <li><a href="https://apify.com/pandadad0214/federal-contract-finder">USAspending Scraper</a> — <code>federal_contract_finder</code></li>
+            <li><a href="https://apify.com/pandadad0214/federal-register-monitor">Federal Register Monitor</a> — <code>federal_register_monitor</code></li>
+            <li><a href="https://apify.com/pandadad0214/grants-finder">Grants.gov Scraper</a> — <code>grants_finder</code></li>
+            <li><a href="https://apify.com/pandadad0214/product-recall-monitor">Product Recall Monitor</a> — <code>product_recall_monitor</code></li>
+            <li><a href="https://apify.com/pandadad0214/sbir-sttr-topic-radar">SBIR/STTR Topic Radar</a> — <code>sbir_sttr_topic_radar</code></li>
+            <li><a href="https://apify.com/pandadad0214/sec-financials-excel">SEC Financials to Excel</a> — <code>sec_financials_excel</code></li>
+            <li><a href="https://apify.com/pandadad0214/vin-decoder-recalls">VIN Decoder + Recalls</a> — <code>vin_decoder_recalls</code></li>
+        </ul>
+      </section>
+      <section class="domain">
+        <h3>Panda Leads Tools <span class="count">15</span></h3>
+        <p>Public leads and enrichment: NPI, podcasts, local businesses, hiring, websites, teams, trends, trucking, IRS nonprofits, building permits, new Florida, Texas and New York businesses, H-1B sponsors, EU tenders.</p>
+        <ul>
+            <li><a href="https://apify.com/pandadad0214/building-permit-leads">Building Permit Leads</a> — <code>building_permit_leads</code></li>
+            <li><a href="https://apify.com/pandadad0214/company-hiring-signals">Company Hiring Signals</a> — <code>company_hiring_signals</code></li>
+            <li><a href="https://apify.com/pandadad0214/company-team-finder">Company Team &amp; Decision-Maker Finder</a> — <code>company_team_finder</code></li>
+            <li><a href="https://apify.com/pandadad0214/company-website-enricher">Company Website Enricher</a> — <code>company_website_enricher</code></li>
+            <li><a href="https://apify.com/pandadad0214/eu-ted-tenders">EU TED Tenders</a> — <code>eu_ted_tenders</code></li>
+            <li><a href="https://apify.com/pandadad0214/florida-new-business-leads">Florida New Business Leads</a> — <code>florida_new_business_leads</code></li>
+            <li><a href="https://apify.com/pandadad0214/h1b-lca-sponsor-leads">H-1B LCA Visa Sponsor Leads</a> — <code>h1b_lca_sponsor_leads</code></li>
+            <li><a href="https://apify.com/pandadad0214/local-business-leads">Local Business Leads</a> — <code>local_business_leads</code></li>
+            <li><a href="https://apify.com/pandadad0214/new-york-new-business-leads">New York New Business Leads</a> — <code>new_york_new_business_leads</code></li>
+            <li><a href="https://apify.com/pandadad0214/nonprofit-leads-irs">Nonprofit Leads</a> — <code>nonprofit_leads_irs</code></li>
+            <li><a href="https://apify.com/pandadad0214/npi-provider-lists">NPI Registry Scraper</a> — <code>npi_provider_lists</code></li>
+            <li><a href="https://apify.com/pandadad0214/podcast-leads-finder">Podcast Leads Finder</a> — <code>podcast_leads_finder</code></li>
+            <li><a href="https://apify.com/pandadad0214/texas-new-business-leads">Texas New Business Leads</a> — <code>texas_new_business_leads</code></li>
+            <li><a href="https://apify.com/pandadad0214/topic-trends-tracker">Topic Trends Tracker</a> — <code>topic_trends_tracker</code></li>
+            <li><a href="https://apify.com/pandadad0214/trucking-company-leads">Trucking Company Leads</a> — <code>trucking_company_leads</code></li>
+        </ul>
+      </section>
+      <section class="domain">
+        <h3>Panda Web Security Tools <span class="count">6</span></h3>
+        <p>Site, email and agent safety: SPF/DKIM/DMARC, AI/SEO audit, page-change monitor, hidden AI instructions, domain WHOIS/expiry, broken links.</p>
+        <ul>
+            <li><a href="https://apify.com/pandadad0214/ai-search-seo-audit">AI Search &amp; SEO Audit</a> — <code>ai_search_seo_audit</code></li>
+            <li><a href="https://apify.com/pandadad0214/broken-link-checker">Broken Link Checker</a> — <code>broken_link_checker</code></li>
+            <li><a href="https://apify.com/pandadad0214/bulk-domain-whois-expiry">Bulk Domain WHOIS &amp; Expiry Checker (RDAP)</a> — <code>bulk_domain_whois_expiry</code></li>
+            <li><a href="https://apify.com/pandadad0214/email-domain-security-checker">SPF, DKIM &amp; DMARC Checker</a> — <code>email_domain_security_checker</code></li>
+            <li><a href="https://apify.com/pandadad0214/hidden-ai-instructions-scanner">Hidden AI Instructions Scanner</a> — <code>hidden_ai_instructions_scanner</code></li>
+            <li><a href="https://apify.com/pandadad0214/website-change-monitor">Website Change Monitor</a> — <code>website_change_monitor</code></li>
+        </ul>
+      </section>
+    </section>
+
+    <section class="card">
+      <h2>Links</h2>
+      <div class="links">
+        <a href="https://github.com/pandadad0214/panda-federation-tools">GitHub</a>
+        <a href="https://apify.com/pandadad0214">Apify Store</a>
+        <a href="https://pypi.org/project/panda-federation-tools/">PyPI</a>
+        <a href="https://registry.modelcontextprotocol.io/v0/servers?search=io.github.pandadad0214">MCP Registry</a>
+        <a href="https://github.com/pandadad0214/panda-federation-tools/releases/latest">Releases</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>FAQ</h2>
+      <details open>
+        <summary>Do I pay a subscription?</summary>
+        <p>No product subscription. Actors are pay per result on Apify. Empty runs are not charged per result; each call can set a hard spend cap.</p>
+      </details>
+      <details>
+        <summary>Why four servers instead of one mega-server?</summary>
+        <p>Focused servers stay in the 3–15 tool band, which scores better for Tool Definition Quality / Glama coherence. The umbrella package still exists for older configs.</p>
+      </details>
+      <details>
+        <summary>Where does the data come from?</summary>
+        <p>Official and public sources such as Crossref, OpenAlex, PubMed, Grants.gov, USAspending, SEC EDGAR, IRS nonprofit filings, NPI, FMCSA, EU TED, DNS/RDAP, and public web pages — depending on the tool.</p>
+      </details>
+      <details>
+        <summary>Is the code open source?</summary>
+        <p>Yes. The MCP servers are MIT on GitHub and PyPI. The Apify Actors bill separately for compute and results.</p>
+      </details>
+    </section>
+
+    <footer>
+      <p>Panda Federation Tools · MIT MCP servers · <a href="https://github.com/pandadad0214/panda-federation-tools">Source</a></p>
+    </footer>
+  </div>
+</body>
+</html>
