@@ -5,7 +5,7 @@ from mcp import Client
 
 from panda_federation_tools.catalog import load_catalog
 from panda_federation_tools.config import Settings
-from panda_federation_tools.domains import DOMAIN_META, DOMAINS, filter_catalog, validate_domain_map
+from panda_federation_tools.domains import DOMAIN_META, DOMAINS, REGISTRY_DESCRIPTION_MAX, filter_catalog, validate_domain_map, validate_registry_descriptions
 from panda_federation_tools.server import INDEX_INSTRUCTIONS, create_server, instructions_for, server_identity
 
 TOKEN = "apify_api_DOMAINTEST999"
@@ -24,6 +24,13 @@ def test_domain_map_covers_every_catalog_tool_exactly_once():
     mapped = set().union(*DOMAINS.values())
     assert mapped == catalog_names
     assert sum(EXPECTED_COUNTS.values()) == len(catalog_names) == 36
+
+
+def test_registry_descriptions_within_mcp_limit():
+    validate_registry_descriptions()
+    for domain, meta in DOMAIN_META.items():
+        desc = meta["registry_description"]
+        assert 1 <= len(desc) <= REGISTRY_DESCRIPTION_MAX, (domain, len(desc), desc)
 
 
 @pytest.mark.parametrize("domain,count", list(EXPECTED_COUNTS.items()))

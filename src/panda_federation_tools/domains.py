@@ -63,6 +63,9 @@ DOMAINS: dict[str, frozenset[str]] = {
     ),
 }
 
+# Official MCP Registry server.json description max (body.description).
+REGISTRY_DESCRIPTION_MAX = 100
+
 DOMAIN_META: dict[str, dict[str, str]] = {
     "research": {
         "package": "panda-research-tools",
@@ -71,6 +74,10 @@ DOMAIN_META: dict[str, dict[str, str]] = {
             "Scholarly integrity and papers: citation checks, literature/PubMed search, experts, PDF tables, "
             "Wayback Machine snapshots."
         ),
+        # Copied into each domain repo's server.json; must stay <= REGISTRY_DESCRIPTION_MAX.
+        "registry_description": (
+            "Scholarly integrity — citations, literature/PubMed, experts, PDF tables, Wayback (7 tools)."
+        ),
     },
     "public-funding": {
         "package": "panda-public-funding-tools",
@@ -78,6 +85,9 @@ DOMAIN_META: dict[str, dict[str, str]] = {
         "scope": (
             "US federal money, filings and safety monitors: grants, contracts, SBIR/STTR, SEC, "
             "clinical trials, Federal Register, recalls, VIN decode."
+        ),
+        "registry_description": (
+            "US federal filings & safety — grants, contracts, SBIR, SEC, trials, FedReg, recalls, VIN (8 tools)."
         ),
     },
     "leads": {
@@ -88,6 +98,9 @@ DOMAIN_META: dict[str, dict[str, str]] = {
             "trends, trucking, IRS nonprofits, building permits, new Florida, Texas and New York businesses, "
             "H-1B sponsors, EU tenders."
         ),
+        "registry_description": (
+            "Public leads from official data: NPI, local, hiring, trucking, IRS, permits, H-1B, tenders (15)."
+        ),
     },
     "web-security": {
         "package": "panda-web-security-tools",
@@ -95,6 +108,9 @@ DOMAIN_META: dict[str, dict[str, str]] = {
         "scope": (
             "Site, email and agent safety: SPF/DKIM/DMARC, AI/SEO audit, page-change monitor, hidden AI instructions, "
             "domain WHOIS/expiry, broken links."
+        ),
+        "registry_description": (
+            "Site/email/agent safety from public data: SPF/DKIM, SEO, monitor, hidden-AI, WHOIS, links (6)."
         ),
     },
 }
@@ -118,6 +134,20 @@ def validate_domain_map(tools: tuple[ToolSpec, ...] | None = None) -> None:
                 overlap.append(f"{a}/{b}: {sorted(shared)}")
     if missing or extra or overlap:
         raise RuntimeError(f"domain map drift: missing={sorted(missing)} extra={sorted(extra)} overlap={overlap}")
+
+
+def validate_registry_descriptions() -> None:
+    """Fail if any domain registry_description exceeds the MCP Registry 100-char limit."""
+    bad: list[str] = []
+    for domain, meta in DOMAIN_META.items():
+        desc = meta.get("registry_description", "")
+        if not desc:
+            bad.append(f"{domain}: missing registry_description")
+            continue
+        if len(desc) > REGISTRY_DESCRIPTION_MAX:
+            bad.append(f"{domain}: len={len(desc)}>{REGISTRY_DESCRIPTION_MAX}: {desc!r}")
+    if bad:
+        raise RuntimeError("registry_description over MCP limit: " + "; ".join(bad))
 
 
 def filter_catalog(domain: str | None = None, tools: tuple[ToolSpec, ...] | None = None) -> tuple[ToolSpec, ...]:
