@@ -157,6 +157,16 @@ Every tool also accepts three optional run controls: `run_max_items` (results to
 
 Also on Apify: the hosted [Academic Research MCP Server](https://apify.com/pandadad0214/panda-research-mcp) ($0.01–$0.02 per call).
 
+### Publishing soon
+
+Built and tested, and going public on the Apify Store a few a day (Apify limits new publications). Each one joins the matching **domain** server after it goes public (not the mega-server as the default add path). Store links work once it is public.
+
+| Apify Actor | Likely domain | What it does | Price |
+|---|---|---|---|
+| [colorado-new-business-leads](https://apify.com/pandadad0214/colorado-new-business-leads) | leads | New Colorado LLCs and corporations from official SOS open data, with a likely-owner flag | $0.0015 / business |
+| [france-company-leads](https://apify.com/pandadad0214/france-company-leads) | leads | French companies from the official SIRENE + RNE directory: SIREN, VAT, activity, size, revenue, directors | $0.002 / company |
+| [rss-feed-monitor](https://apify.com/pandadad0214/rss-feed-monitor) | research | Only-new items from RSS, Atom and JSON feeds (or websites), keyword and age filters | $0.0005 / item |
+
 [Hidden AI Instructions Watch](https://github.com/pandadad0214/hidden-ai-instructions-watch) is our public, evidence-only log of what the free scanner finds.
 
 ### Example prompts
