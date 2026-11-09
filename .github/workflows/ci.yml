@@ -29,10 +29,12 @@ jobs:
       - run: uv run ruff format --check .
       - run: uv run ruff check .
       - run: uv run mypy
-      - name: server.json and glama.json are valid JSON
+      - name: Manifest JSON files are valid
         run: |
           python -m json.tool server.json > /dev/null
           python -m json.tool glama.json > /dev/null
+          python -m json.tool mcp.json > /dev/null
+          python -m json.tool .cursor-plugin/plugin.json > /dev/null
 
   test:
     name: Tests (Python ${{ matrix.python }})

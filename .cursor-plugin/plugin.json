@@ -1,0 +1,44 @@
+{
+  "name": "panda-federation-tools",
+  "displayName": "Panda Federation Tools",
+  "version": "1.7.0",
+  "description": "Index of Panda Federation public-data MCP tools. Prefer a focused domain server (research, public funding, leads, or web security); the mega-server is compatibility only.",
+  "author": {
+    "name": "Panda Federation",
+    "email": "pandadad0214@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/pandadad0214/panda-federation-tools",
+  "repository": "https://github.com/pandadad0214/panda-federation-tools",
+  "license": "MIT",
+  "logo": "assets/logo.png",
+  "keywords": [
+    "mcp",
+    "apify",
+    "public-data",
+    "research",
+    "grants",
+    "leads",
+    "security",
+    "panda-federation"
+  ],
+  "category": "integrations",
+  "tags": [
+    "mcp",
+    "apify",
+    "public-data"
+  ],
+  "variables": {
+    "type": "object",
+    "properties": {
+      "APIFY_TOKEN": {
+        "type": "string",
+        "title": "Apify API token",
+        "description": "Free Apify API token from https://console.apify.com/settings/integrations. Runs bill to your Apify account."
+      }
+    },
+    "required": [
+      "APIFY_TOKEN"
+    ]
+  },
+  "mcpServers": "./mcp.json"
+}

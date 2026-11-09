@@ -69,6 +69,15 @@ Each domain also has its own thin GitHub repo (same console script names via `uv
 
 Quiet File Team MCP install: `uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp`. The file-first Bash core is free at [quiet-file-team](https://github.com/pandadad0214/quiet-file-team); a paid setup kit is live on [Agensi](https://agensi.io/skills/quiet-file-team-setup-kit) ($29 one-time) and [Apify](https://apify.com/pandadad0214/quiet-file-team-setup) ($29 per generated kit).
 
+### Cursor plugin (cursor.directory)
+
+This repo ships a Cursor plugin manifest so [cursor.directory](https://cursor.directory) and Cursor can auto-detect the four focused MCP servers:
+
+- [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) — name, logo, `APIFY_TOKEN` variable
+- [`mcp.json`](mcp.json) — `uvx --from panda-federation-tools <domain>` for research, public funding, leads, and web security
+
+Set `APIFY_TOKEN` when Cursor prompts (Plugins → Configure). Prefer one focused server over enabling all four at once.
+
 ### Cursor example (research)
 
 ```json

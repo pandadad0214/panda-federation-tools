@@ -1,0 +1,48 @@
+{
+  "mcpServers": {
+    "panda-research-tools": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "panda-federation-tools",
+        "panda-research-tools"
+      ],
+      "env": {
+        "APIFY_TOKEN": "${APIFY_TOKEN}"
+      }
+    },
+    "panda-public-funding-tools": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "panda-federation-tools",
+        "panda-public-funding-tools"
+      ],
+      "env": {
+        "APIFY_TOKEN": "${APIFY_TOKEN}"
+      }
+    },
+    "panda-leads-tools": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "panda-federation-tools",
+        "panda-leads-tools"
+      ],
+      "env": {
+        "APIFY_TOKEN": "${APIFY_TOKEN}"
+      }
+    },
+    "panda-web-security-tools": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "panda-federation-tools",
+        "panda-web-security-tools"
+      ],
+      "env": {
+        "APIFY_TOKEN": "${APIFY_TOKEN}"
+      }
+    }
+  }
+}
