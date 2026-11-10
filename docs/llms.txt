@@ -30,4 +30,5 @@ MCP client config example:
 - Apify Store: https://apify.com/pandadad0214
 - Product Hunt: https://www.producthunt.com/products/panda-federation-tools
 - Official site: https://pandafederation.com/
+- X: https://x.com/PandaFedHQ  (Follow on X: @PandaFedHQ)
 - Longer agent notes: https://github.com/pandadad0214/panda-federation-tools/blob/main/llms.txt
