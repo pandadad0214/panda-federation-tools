@@ -58,7 +58,7 @@ panda-web-security-tools = "panda_federation_tools.server:main_web_security"
 dev = [
   "pytest==9.2.0",
   "pytest-asyncio==1.4.1.post1",
-  "ruff==0.17.3",
+  "ruff==0.17.4",
   "mypy==2.4.1",
   "types-jsonschema",
   "pip-audit==2.10.1",
