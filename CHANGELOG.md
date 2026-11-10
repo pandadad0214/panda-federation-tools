@@ -4,6 +4,8 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.8.0] - 2026-11-10
+
 ### Added
 - 4 new MCP tools now public on the Apify Store (40 tools total): `colorado_new_business_leads`, `france_company_leads` (leads), `sam_gov_opportunities` (public-funding) and `rss_feed_monitor` (web-security).
 - TDQS descriptions and `RESULT_CAP_FIELDS` (`maxResults`) for the 4 new tools.
@@ -110,7 +112,11 @@ All notable changes to this project are documented here. The format follows [Kee
 ### Earlier
 - Tool index (`README.md`, `llms.txt`, `llms-full.txt`), MIT license and `server.json` for the hosted Academic Research MCP Server (`io.github.pandadad0214/panda-research-mcp`, version 1.0.0) in the official MCP Registry.
 
-[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.8.0...HEAD
+[1.8.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.7.0...v1.8.0
+[1.7.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.6.0...v1.7.0
+[1.6.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.5.0...v1.6.0
+[1.5.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.1.1...v1.2.0
