@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Added
+- 4 new MCP tools now public on the Apify Store (40 tools total): `colorado_new_business_leads`, `france_company_leads` (leads), `sam_gov_opportunities` (public-funding) and `rss_feed_monitor` (web-security).
+- TDQS descriptions and `RESULT_CAP_FIELDS` (`maxResults`) for the 4 new tools.
+
+### Changed
+- Domain rebalance to stay inside the 3–15 band: `topic_trends_tracker` moves leads → research, `eu_ted_tenders` moves leads → public-funding (next to `federal_contract_finder` and `sam_gov_opportunities`). Domain map: research 8, public-funding 10, leads 15, web-security 7.
+- README / `llms.txt` / `llms-full.txt` / `llms-install.md` / Pages index list the new tools; "Publishing soon" removed (nothing queued).
+
 ## [1.7.0] - 2026-11-08
 
 ### Added

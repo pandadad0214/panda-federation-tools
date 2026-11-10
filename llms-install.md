@@ -6,10 +6,10 @@ Follow these steps to add a **focused domain** MCP server for the user (preferre
    - macOS / Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
    - Windows (PowerShell): `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
 2. **Pick a domain** that matches the user's work:
-   - research → `panda-research-tools` (7 tools)
-   - public-funding → `panda-public-funding-tools` (8)
+   - research → `panda-research-tools` (8 tools)
+   - public-funding → `panda-public-funding-tools` (10)
    - leads → `panda-leads-tools` (15)
-   - web-security → `panda-web-security-tools` (6)
+   - web-security → `panda-web-security-tools` (7)
 3. **Check that the server starts:**
    `uvx --from panda-federation-tools panda-research-tools --version`
    It should print the version number. The first start downloads the package from PyPI and can take 10 to 30 seconds.

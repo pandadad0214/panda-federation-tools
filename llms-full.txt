@@ -417,6 +417,50 @@ Output per item: `agentSummary`, `originalUrl`, `finalUrl`, `statusCode`, `broke
 SUMMARY / files: `LINKS_XLSX` (all links + Broken sheet), `LINKS_CSV`.
 Price: $0.001 per link that returns an HTTP status.
 
+## Colorado New Business Leads
+
+URL: https://apify.com/pandadad0214/colorado-new-business-leads
+MCP tool (this repo): `colorado_new_business_leads`
+Use when: you need newly formed Colorado LLCs, corporations and nonprofits from the official Secretary of State open data (data.colorado.gov 4ykn-tg5h), with a likely-owner (self-agent) flag.
+Input: `daysBack` (default 7), `formedFrom`/`formedTo`, `cities`, `zipPrefixes`, `entityTypes`, `nameContains`, `onlySelfAgent`, `excludeAgentServices`, `onlyColoradoAddress`, `onlyGoodStanding` (default true), `maxResults` (default 500).
+Minimal input: `{"daysBack": 3, "cities": ["Denver"], "maxResults": 5}`
+Output per item: `agentSummary`, `entityId`, `name`, `entityType`, `formationDate`, `status`, principal and mailing address fields, `agentName`, `agentType`, `selfAgent`, `principalIsAgentAddress`, `sosUrl`.
+SUMMARY / files: `COBIZ_XLSX` (with Self-agent owners sheet), `COBIZ_CSV`.
+Price: $0.0015 per business returned.
+
+## France Company Leads
+
+URL: https://apify.com/pandadad0214/france-company-leads
+MCP tool (this repo): `france_company_leads`
+Use when: you need French B2B lists from the official SIRENE + RNE directory (recherche-entreprises.api.gouv.fr): SIREN, SIRET, VAT, NAF activity, size, address, published revenue, directors and labels. Prospecting opt-outs are always excluded.
+Input: `query`, `nafCodes`, `sectors`, `departments`, `postalCodes`, `regions`, `headcountBands`, `companyCategories`, `legalForms`, `revenueMin`/`revenueMax`, `netIncomeMin`, `labels`, `createdAfter`/`createdBefore`, `requireDirector`, `requireFinancials`, `onlyActive` (default true), `includeSoleTraders`, `maxResults` (default 200).
+Minimal input: `{"nafCodes": ["62.01Z"], "departments": ["69"], "maxResults": 5}`
+Output per item: `agentSummary`, `siren`, `siretHq`, `name`, `vatNumber`, `nafCode`, `nafLabel`, `legalForm`, `headcountBand`, `companyCategory`, `createdOn`, `hqAddress`, `hqCity`, `revenueEur`, `netIncomeEur`, `directors`, `topDirectorName`, `labels`, `annuaireUrl`.
+SUMMARY / files: `FRBIZ_XLSX` (with Directors sheet), `FRBIZ_CSV`.
+Price: $0.002 per company returned.
+
+## RSS & Atom Feed Monitor
+
+URL: https://apify.com/pandadad0214/rss-feed-monitor
+MCP tool (this repo): `rss_feed_monitor`
+Use when: you need only the new items from many RSS 2.0, Atom or JSON feeds (or website URLs, feed autodiscovered) since the last run, with keyword and age filters.
+Input: `feeds`, `keywords`, `excludeKeywords`, `maxAgeHours`, `onlyNew` (default true), `stateKey`, `maxItemsPerFeed` (default 50), `summaryChars` (default 500), `maxResults` (default 500).
+Minimal input: `{"feeds": ["https://github.blog"], "onlyNew": false, "maxResults": 5}`
+Output per item: `agentSummary`, `feedTitle`, `feedUrl`, `title`, `link`, `published`, `ageHours`, `author`, `summary`, `categories`, `matchedKeywords`, `itemKey`.
+SUMMARY / files: `RSS_XLSX`, `RSS_CSV`, `FEED_STATUS`.
+Price: $0.0005 per item returned (already-seen items, failed feeds and empty runs are free).
+
+## SAM.gov Contract Opportunities
+
+URL: https://apify.com/pandadad0214/sam-gov-opportunities
+MCP tool (this repo): `sam_gov_opportunities`
+Use when: you need open US federal contract opportunities (solicitations, sources sought, presolicitations, special notices, award notices) from the official SAM.gov public Contract Opportunities extract, no SAM.gov API key, with deadlines and contracting contacts.
+Input: `daysBack` (default 7), `postedFrom`/`postedTo`, `keywords`, `excludeKeywords`, `naicsCodes`, `pscCodes`, `setAsides`, `noticeTypes`, `agencies`, `states`, `openOnly` (default true), `minDaysToDeadline`, `requireContactEmail`, `descriptionChars` (default 600), `maxResults` (default 500).
+Minimal input: `{"daysBack": 3, "naicsCodes": ["5415"], "maxResults": 5}`
+Output per item: `agentSummary`, `noticeId`, `title`, `solicitationNumber`, `noticeType`, `postedDate`, `responseDeadline`, `daysToDeadline`, `department`, `subTier`, `office`, `naicsCode`, `pscCode`, `setAsideCode`, `setAside`, `popCity`, `popState`, `awardAmount`, `awardee`, `contactName`, `contactEmail`, `contactPhone`, `samUrl`, `description`.
+SUMMARY / files: `SAM_XLSX` (with By deadline and Award notices sheets), `SAM_CSV`.
+Price: $0.0015 per notice returned.
+
 ## Wayback Machine Snapshot Finder
 
 URL: https://apify.com/pandadad0214/wayback-snapshot-finder

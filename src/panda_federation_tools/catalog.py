@@ -71,6 +71,10 @@ RESULT_CAP_FIELDS: dict[str, str] = {
     "new_york_new_business_leads": "maxResults",
     "eu_ted_tenders": "maxResults",
     "broken_link_checker": "maxLinks",
+    "colorado_new_business_leads": "maxResults",
+    "france_company_leads": "maxResults",
+    "rss_feed_monitor": "maxResults",
+    "sam_gov_opportunities": "maxResults",
 }
 
 # Tools published without pay-per-event pricing (no per-result charge).

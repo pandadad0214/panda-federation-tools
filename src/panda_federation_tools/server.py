@@ -28,12 +28,13 @@ STORE_URL = "https://apify.com/pandadad0214"
 
 INDEX_INSTRUCTIONS = """Panda Federation Tools is the index / compatibility surface for Panda Federation MCP tools.
 Recommended: install one focused server instead of this mega-server (better Glama Tool Count / coherence):
-  panda-research-tools (7) — citations, literature, PubMed, experts, PDF tables, Wayback snapshots
-  panda-public-funding-tools (8) — grants, contracts, SBIR/STTR, SEC, clinical trials, Federal Register, recalls, VIN
-  panda-leads-tools (15) — NPI, podcasts, local businesses, hiring, enrichment, teams, trends, trucking,
-    IRS nonprofits, building permits, new Florida/Texas/New York businesses, H-1B sponsors, EU tenders
-  panda-web-security-tools (6) — email domain security, AI/SEO audit, website change monitor, hidden AI scanner,
-    domain WHOIS/expiry, broken links
+  panda-research-tools (8) — citations, literature, PubMed, experts, PDF tables, Wayback snapshots, topic trends
+  panda-public-funding-tools (10) — grants, contracts, SAM.gov bids, SBIR/STTR, SEC, clinical trials, Federal Register,
+    recalls, VIN, EU tenders
+  panda-leads-tools (15) — NPI, podcasts, local businesses, hiring, enrichment, teams, trucking,
+    IRS nonprofits, building permits, new Florida/Texas/New York/Colorado businesses, H-1B sponsors, French companies
+  panda-web-security-tools (7) — email domain security, AI/SEO audit, website change monitor, hidden AI scanner,
+    domain WHOIS/expiry, broken links, RSS feed monitor
 This process still exposes all tools when PFT_DOMAIN is unset (backward compatible). Set PFT_DOMAIN to
 research | public-funding | leads | web-security to load only that domain, or use the matching console script.
 Each tool runs one Apify Actor on the user's own Apify account (APIFY_TOKEN) and returns its dataset items.
@@ -45,11 +46,13 @@ DOMAIN_INSTRUCTIONS: dict[str, str] = {
 Tools: reference_checker (fake/mismatched/retracted citations), citation_formatter (APA/MLA/etc.),
 literature_search (OpenAlex papers), pubmed_evidence_table (PubMed screening tables),
 researcher_expert_finder (academic KOLs), pdf_table_extractor (PDF tables to Excel/CSV),
-wayback_snapshot_finder (Internet Archive snapshots for dead links and dated evidence).
+wayback_snapshot_finder (Internet Archive snapshots for dead links and dated evidence),
+topic_trends_tracker (Wikipedia pageview trends, a Google Trends alternative).
 Sibling servers: panda-public-funding-tools (grants/contracts/trials), panda-leads-tools (B2B leads),
 panda-web-security-tools (email/site/agent safety). Use literature_search for all disciplines;
 pubmed_evidence_table only for biomedical PubMed queries;
-wayback_snapshot_finder to recover or date a cited web page. Each tool runs on the user's APIFY_TOKEN.
+wayback_snapshot_finder to recover or date a cited web page; topic_trends_tracker for public interest over time.
+Each tool runs on the user's APIFY_TOKEN.
 Empty runs are not charged per result; spending is capped by run_max_charge_usd.""",
     "public-funding": """Panda Public Funding Tools: US federal money, filings and safety monitors
 (Apify Actors by pandadad0214).
@@ -57,10 +60,12 @@ Tools: grants_finder (Grants.gov + NIH/NSF awards), federal_contract_finder (USA
 sbir_sttr_topic_radar (open SBIR/STTR topics), sec_financials_excel (EDGAR XBRL comps),
 clinical_trial_leads (ClinicalTrials.gov sponsors/sites/contacts),
 federal_register_monitor (rules and comment deadlines),
-product_recall_monitor (FDA + CPSC recalls), vin_decoder_recalls (NHTSA VIN decode + recalls).
+product_recall_monitor (FDA + CPSC recalls), vin_decoder_recalls (NHTSA VIN decode + recalls),
+sam_gov_opportunities (open SAM.gov bids, sources sought and award notices), eu_ted_tenders (EU public procurement).
 Sibling servers: panda-research-tools (papers/citations), panda-leads-tools (B2B leads),
 panda-web-security-tools (email/site/agent safety). Use grants_finder for assistance awards,
-federal_contract_finder for procurement contracts, sbir_sttr_topic_radar for open topics to bid,
+federal_contract_finder for past awards and recompetes, sam_gov_opportunities for open bids,
+eu_ted_tenders for EU tenders, sbir_sttr_topic_radar for open topics to bid,
 federal_register_monitor for rulemaking, product_recall_monitor for FDA/CPSC,
 vin_decoder_recalls for vehicles.
 Each tool runs on the user's APIFY_TOKEN. Empty runs are not charged per result; capped by run_max_charge_usd.""",
@@ -68,28 +73,31 @@ Each tool runs on the user's APIFY_TOKEN. Empty runs are not charged per result;
 Tools: npi_provider_lists (US healthcare NPI), podcast_leads_finder (shows/hosts with RSS emails),
 local_business_leads (OpenStreetMap businesses), company_hiring_signals (public ATS boards),
 company_website_enricher (firmographics from the company site), company_team_finder (people from team pages),
-topic_trends_tracker (Wikipedia pageview trends), trucking_company_leads (FMCSA carriers/brokers),
+trucking_company_leads (FMCSA carriers/brokers),
 nonprofit_leads_irs (IRS Exempt Organizations charities and foundations),
 building_permit_leads (new permits in 8 US cities with contractors and job values),
 florida_new_business_leads (new Sunbiz LLCs/corporations with officers),
 texas_new_business_leads (new Texas franchise taxpayers),
-new_york_new_business_leads (new NY DOS filings), h1b_lca_sponsor_leads (DOL H-1B/E-3 sponsors),
-eu_ted_tenders (EU public procurement notices).
+new_york_new_business_leads (new NY DOS filings), colorado_new_business_leads (new Colorado SOS entities
+with a likely-owner flag), h1b_lca_sponsor_leads (DOL H-1B/E-3 sponsors),
+france_company_leads (French SIRENE/RNE companies with directors and revenue).
 Sibling servers: panda-research-tools (papers), panda-public-funding-tools (federal $),
 panda-web-security-tools (email/site/agent safety). Prefer company_team_finder for people,
 company_website_enricher for one firmographic row, nonprofit_leads_irs for tax-exempt orgs,
-florida_/texas_/new_york_new_business_leads for brand-new companies,
-h1b_lca_sponsor_leads for visa sponsors, eu_ted_tenders for EU tenders, building_permit_leads for construction jobs.
+florida_/texas_/new_york_/colorado_new_business_leads for brand-new companies,
+h1b_lca_sponsor_leads for visa sponsors, france_company_leads for French B2B lists,
+building_permit_leads for construction jobs.
 Each tool runs on the user's APIFY_TOKEN. Empty runs are not charged per result; capped by run_max_charge_usd.""",
     "web-security": """Panda Web Security Tools: site, email and agent safety (Apify Actors by pandadad0214).
 Tools: email_domain_security_checker (SPF/DKIM/DMARC/MTA-STS/BIMI), ai_search_seo_audit (SEO + GEO readiness),
 website_change_monitor (page diffs, price and keyword alerts), hidden_ai_instructions_scanner
 (free prompt-injection / hidden-AI-text detector), bulk_domain_whois_expiry (RDAP registrar, expiry, availability),
-broken_link_checker (404s and redirects).
+broken_link_checker (404s and redirects), rss_feed_monitor (only-new RSS/Atom/JSON feed items).
 Sibling servers: panda-research-tools, panda-public-funding-tools, panda-leads-tools.
 Use hidden_ai_instructions_scanner before an agent reads an untrusted page;
 bulk_domain_whois_expiry for renewals, availability and look-alike domains;
-broken_link_checker for dead and redirecting links on a site. Each tool runs on the
+broken_link_checker for dead and redirecting links on a site;
+rss_feed_monitor for daily digests of blogs and news feeds. Each tool runs on the
 user's APIFY_TOKEN (scanner is free). Empty runs are not charged per result; capped by run_max_charge_usd.""",
 }
 

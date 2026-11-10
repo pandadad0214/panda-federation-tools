@@ -6,7 +6,7 @@
       "actor": "pandadad0214/reference-checker",
       "title": "Reference Checker: Fake, AI-Hallucinated & Retracted Citations",
       "description": "Verify an existing bibliography against Crossref: flags fake (AI-hallucinated), miscited and retracted references, one row per reference. Unlike citation_formatter, it judges whether a reference is real and accurate; it does not produce formatted styles. Use when you must audit a reference list, DOIs or titles before submission or review. Do not use to discover new papers (use literature_search or pubmed_evidence_table) or to restyle citations (use citation_formatter). Parameters: give bibliography, dois or titles (at least one). Lowering minMatchScore finds more but risks false matches; includeCandidates adds audit detail without extra charge. mode=monitor re-checks the DOIs/ORCID works against the state saved under monitorName and reports only new problems, so reuse the same monitorName on scheduled runs. Each reference checked is billed, so maxReferences/run_max_items cap cost on long lists. Returns per item: summary, status (OK/CHECK/FIX), verdict, matchedDoi, matchScore, mismatches (cited vs actual), integrity.status (retracted, corrected, expression-of-concern), openAccessUrl, warnings.",
-      "storeDescription": "Use this to check a bibliography, DOIs or paper titles for fake (AI-hallucinated), miscited or retracted references. Input: reference text, DOIs or titles. Output: one row per reference with OK/CHECK/FIX status, matched DOI, mismatches and retraction status.",
+      "storeDescription": "Catch fake (AI-hallucinated), miscited and retracted references in any bibliography, DOI list or set of titles. Checked against Crossref, Retraction Watch and OpenAlex: one row per reference with OK/CHECK/FIX status, matched DOI and what is wrong.",
       "url": "https://apify.com/pandadad0214/reference-checker",
       "pricing": [
         {
@@ -113,7 +113,7 @@
       "actor": "pandadad0214/citation-formatter",
       "title": "Citation Generator API: DOI to APA, MLA, Chicago & BibTeX",
       "description": "Convert DOIs, ISBNs, PMIDs, arXiv IDs, titles or messy reference strings into checked citations in APA 7, MLA 9, Chicago, Harvard, IEEE, Vancouver, BibTeX and RIS. Unlike reference_checker, it formats rather than audits: unresolved items are listed, not diagnosed as fake or retracted. Use when you need a clean bibliography or .bib/.ris export. Do not use to find papers (use literature_search) or to prove references are genuine (use reference_checker first). Parameters: pass references (one per line) or paste a whole list or .bib/.ris contents in text. All styles are one price, so request every style you might need in one call rather than calling again. Text lookups below minMatchScore stay unresolved; DOIs and IDs resolve exactly. Only formatted citations are billed. Returns per item: summary, status, one field per style (apa, mla, ...), inText, bibtex, ris, doi, title, authors, year, containerTitle; combined bibliography files stay in the run's Apify key-value store.",
-      "storeDescription": "Use this to turn DOIs, ISBNs, PMIDs, arXiv IDs, titles or messy references into citations. Input: a reference list or pasted .bib/.ris text. Output: APA 7, MLA 9, Chicago, Harvard, IEEE, Vancouver, BibTeX and RIS per reference, checked against Crossref.",
+      "storeDescription": "Turn DOIs, ISBNs, PMIDs, arXiv IDs, titles or messy references into clean citations, each checked against Crossref. Output: APA 7, MLA 9, Chicago, Harvard, IEEE, Vancouver, BibTeX and RIS per reference; paste a list or .bib/.ris text.",
       "url": "https://apify.com/pandadad0214/citation-formatter",
       "pricing": [
         {
@@ -226,7 +226,7 @@
       "actor": "pandadad0214/literature-search",
       "title": "Google Scholar Scraper Alternative: Papers, Citations & BibTeX",
       "description": "Search 250M+ scholarly works (OpenAlex) by topic query or seed DOIs and return ranked papers with DOI, citation count, free PDF link, retraction flag and a ready citation. Unlike pubmed_evidence_table (PubMed biomedical records with study design and PRISMA counts), this covers every discipline and supports citation-network expansion. Use when you need real papers on a topic, a reading list, or papers citing/cited by known DOIs. Do not use for systematic biomedical screening (use pubmed_evidence_table) or to find people (use researcher_expert_finder). Parameters: seedDois with no query walks the citation network per seedMode (citing = forward, references = backward); with a query it searches inside that network. searchIn=fullText broadens recall but lowers precision. retractedPapers=flag returns and bills retracted papers marked FIX; exclude drops them unbilled. sortBy changes dataset order only; readingListSize does not affect cost. Returns per item: summary, status, title, authors, year, venue, doi, citations, readingRank, readingScore, isOpenAccess, pdfUrl, retracted, citation, bibtex, ris, abstract.",
-      "storeDescription": "Use this to find real scholarly papers on a topic (Google Scholar scraper alternative, 250M+ OpenAlex works). Input: a query or seed DOIs plus year and citation filters. Output: ranked papers with DOI, citations, free PDF link, retraction flag, citation and BibTeX.",
+      "storeDescription": "Find real scholarly papers on any topic across 250M+ OpenAlex works, a Google Scholar scraper alternative. Filter by year and citations or start from seed DOIs; get ranked papers with DOI, citation count, free PDF link, retraction flag and BibTeX.",
       "url": "https://apify.com/pandadad0214/literature-search",
       "pricing": [
         {
@@ -414,7 +414,7 @@
       "actor": "pandadad0214/pubmed-evidence-table",
       "title": "PubMed Scraper: Articles, Abstracts & Evidence Table to Excel",
       "description": "Run one or more PubMed queries and return a screening-ready evidence table: one row per article with PMID, journal, study design, sample size, retraction status and citation, plus PRISMA-style counts for the whole search. Unlike literature_search (all disciplines, OpenAlex ranking, citation-network walks), this uses native PubMed syntax and MeSH and is built for systematic-review screening. Use when the question is biomedical/clinical and you need reproducible PubMed queries or design filters (RCT, meta-analysis, cohort). Do not use for non-biomedical topics (use literature_search), for trial registrations (use clinical_trial_leads) or to verify a reference list (use reference_checker). Parameters: queries accept PubMed field tags ([tiab], [mh], [pt]) and Boolean operators; several queries are de-duplicated into one table. Filters (studyDesigns, excludeAnimalOnly, hasAbstract, freeFullTextOnly, excludePreprints) run before billing, and PRISMA counts still report what they removed. retractedArticles=flag bills retracted rows marked FIX; exclude drops them unbilled. sampleSize is parsed from the abstract and comes with sampleSizeConfidence; treat low confidence as unverified. Returns per item: summary, status, pmid, title, year, journal, studyDesign, sampleSize, sampleSizeConfidence, retractionStatus, retracted, citation. Excel, PRISMA and RIS/Rayyan import files stay in the run's Apify key-value store.",
-      "storeDescription": "Use this to search PubMed and get a screening-ready evidence table. Input: PubMed query strings plus optional date and study-design filters. Output: one row per article with PMID, journal, study design, sample size and retraction status, plus PRISMA counts and Excel.",
+      "storeDescription": "Turn PubMed searches into a screening-ready Excel evidence table. One row per article with PMID, journal, study design, sample size and retraction status, plus PRISMA counts; filter by date and study design.",
       "url": "https://apify.com/pandadad0214/pubmed-evidence-table",
       "pricing": [
         {
@@ -568,7 +568,7 @@
       "actor": "pandadad0214/grants-finder",
       "title": "Grants.gov Scraper: Federal Grants, NIH & NSF Awards API",
       "description": "Search US federal funding in one call: open and forecasted Grants.gov opportunities plus already-funded NIH RePORTER and NSF awards, one row per grant with agency, dates, amount (USD), eligibility and link. Unlike sbir_sttr_topic_radar (SBIR/STTR solicitation topics with deadlines and DoD Q&A) and federal_contract_finder (procurement contracts on USAspending), this covers assistance grants and research awards. Use when you need grants to apply for or want to see who was funded for a topic. Do not use for contracts (use federal_contract_finder) or small-business R&D topics (use sbir_sttr_topic_radar). Parameters: sources picks the mix; grants_gov is apply-able funding, nih/nsf are past awards. maxResultsPerSource applies to each source, so worst-case billed rows = maxResultsPerSource x number of sources; run_max_items does not set it, so keep it small first and rely on run_max_charge_usd. minAmount drops rows whose source publishes no amount. includeGrantsGovDetails adds award ceiling and eligibility but slows the run; turn it off for quick scans. Returns per item: agentSummary, source, recordType, status, title, agency, number, openDate, closeDate, amount, eligibility, summary, url.",
-      "storeDescription": "Use this to find US federal funding: open and forecasted Grants.gov opportunities plus funded NIH and NSF awards (Grants.gov scraper). Input: keywords plus agency, date and amount filters. Output: one row per grant with agency, dates, amount (USD), eligibility and link.",
+      "storeDescription": "Find US federal funding in one run: open and forecasted Grants.gov opportunities plus funded NIH and NSF awards. Filter by keyword, agency, date and amount; one row per grant with agency, dates, amount (USD), eligibility and official link.",
       "url": "https://apify.com/pandadad0214/grants-finder",
       "pricing": [
         {
@@ -729,7 +729,7 @@
       "actor": "pandadad0214/researcher-expert-finder",
       "title": "Google Scholar Author Alternative: Find Experts & KOLs by Topic",
       "description": "Rank the academic experts and key opinion leaders on a research topic from OpenAlex, with institution, ORCID, h-index, topic paper counts and their recent topic papers. Unlike literature_search (returns papers) this returns people; unlike company_team_finder (staff listed on a company website) it covers academics by publication record. Use when you need reviewers, KOLs, collaborators or speakers for a topic, optionally by country or institution. Do not use for company contacts (use company_team_finder) or for papers themselves (use literature_search). Parameters: the ranked pool is the 200 authors with the most matching papers, so maxResults above 200 adds nothing. maxAuthorsPerPaper ignores mega-collaboration papers that would inflate everyone on them; raise it only for physics-style fields. yearFrom/yearTo limit which papers count, while activeSince filters people. includeOrcid adds employment and bio at no extra charge. Returns per item: expert score, name, ORCID, current institution and country, h-index, total and topic works/citations, recent topic papers (title, year, DOI, citations), summary.",
-      "storeDescription": "Use this to find the academic experts and key opinion leaders on a research topic (Google Scholar author search alternative). Input: a topic plus country, institution and year filters. Output: ranked experts with ORCID, affiliation, h-index and topic papers.",
+      "storeDescription": "Find the academic experts and key opinion leaders on any research topic, a Google Scholar author search alternative. Filter by country, institution and years; get ranked experts with ORCID, affiliation, h-index and their topic papers.",
       "url": "https://apify.com/pandadad0214/researcher-expert-finder",
       "pricing": [
         {
@@ -872,7 +872,7 @@
       "actor": "pandadad0214/pdf-table-extractor",
       "title": "PDF Table Extractor: PDF to Excel & CSV Converter with OCR",
       "description": "Extract every table from PDF files (by URL or from an Apify key-value store) into structured rows, Excel and CSV, with optional OCR for scanned pages. Unlike sec_financials_excel (standardized XBRL financials straight from SEC filings), this reads whatever tables a PDF contains. Use when the data you need is locked in PDF tables: reports, statements, government releases. Do not use for SEC-listed company financials (use sec_financials_excel, which is exact) or to find papers (use literature_search). Parameters: billing is per page analysed plus per table extracted, so pages and maxPagesPerPdf are the real cost levers; run_max_items does not cap pages. ocrScannedPages=false skips and lists scanned pages; turning it on adds the per-OCR-page price up to maxOcrPagesPerPdf, and is much slower. detection=auto tries ruled-grid then whitespace detection; force lattice or stream only if auto merges or splits columns. Files over 150 MB fail and are not charged. Returns per item (one per table): summary, pages, header, row and column counts and cell data; Excel/CSV files stay in the run's Apify key-value store.",
-      "storeDescription": "Use this to extract every table from PDF files into Excel and CSV (PDF to Excel converter, OCR for scans). Input: PDF URLs or uploads plus optional page ranges. Output: one row per table with pages, header, row and column counts and cell data, plus Excel and CSV files.",
+      "storeDescription": "Extract every table from PDF files into Excel and CSV, with OCR for scanned pages. Give PDF URLs or uploads and optional page ranges; get one row per table with pages, header, row and column counts and cell data.",
       "url": "https://apify.com/pandadad0214/pdf-table-extractor",
       "pricing": [
         {
@@ -993,7 +993,7 @@
       "actor": "pandadad0214/npi-provider-lists",
       "title": "NPI Registry Scraper: US Doctors & Healthcare Provider Leads",
       "description": "Build de-duplicated lists of US healthcare providers (individuals and organizations) from the official CMS NPI Registry by specialty and territory, with NPI, name, specialty, practice address and phone. Unlike clinical_trial_leads (trial sites and investigators) or local_business_leads (any business category from OpenStreetMap), this is the authoritative US provider registry. Use when you need doctors, dentists, therapists, pharmacies or clinics in states, cities or ZIPs. Do not use for non-US providers or for email addresses (NPI publishes none; follow up with company_website_enricher on practice domains). Parameters: specialties take plain words, mapped to NPI taxonomies. Large states are split by ZIP automatically, so you are not limited by the registry's 1,200-result ceiling. cities and zipCodes narrow the states given. maxResults is shared across all specialty x area combinations. primarySpecialtyOnly=true removes providers who list the specialty only as secondary; includeSecondaryLocations=false drops providers whose main office is outside the territory. Returns per item: summary, NPI, provider type, name, specialty/taxonomy, practice address, phone.",
-      "storeDescription": "Use this to build lists of US healthcare providers from the official NPI Registry (NPI registry scraper). Input: specialties in plain words plus states, cities or ZIP codes. Output: one de-duplicated row per provider with NPI, name, specialty, address and phone, plus Excel.",
+      "storeDescription": "Build de-duplicated lists of US doctors and healthcare providers from the official NPI Registry. Type specialties in plain words plus states, cities or ZIPs; get NPI, name, specialty, address and phone per provider, with Excel.",
       "url": "https://apify.com/pandadad0214/npi-provider-lists",
       "pricing": [
         {
@@ -1113,7 +1113,7 @@
       "actor": "pandadad0214/federal-contract-finder",
       "title": "USAspending Scraper: Federal Contract Awards & Recompete Finder",
       "description": "Find US federal prime contract awards on USAspending.gov by keyword, NAICS, PSC, agency, place of performance, set-aside or recipient, or switch to recompete mode to list contracts whose period of performance ends soon. Unlike grants_finder (assistance grants and research awards) and sbir_sttr_topic_radar (open SBIR/STTR topics), this returns procurement contracts with incumbent, UEI and end date. Use when you need incumbents, competitor contract history, market sizing by NAICS/agency, or recompete pipeline leads. Do not use for grants (use grants_finder) or for open solicitations you can bid on today (USAspending holds awards, not SAM.gov notices). Parameters: mode=awards honors sortBy and dateFrom/dateTo (activity window, default last 24 months); mode=recompete ignores sortBy, sorts by soonest end date and uses recompeteMonths as the window. NAICS prefixes cover all child codes. recipientNames accepts company names or UEIs for competitor lookups. Keywords under 3 characters are rejected. Returns per item: agentSummary, awardId, recipientName, recipientUei, amount, awardingAgency, awardingSubAgency, naicsCode, pscCode, description, startDate, endDate, monthsLeft, status, performanceState, url.",
-      "storeDescription": "Use this to find US federal contract awards and contracts ending soon (recompete leads) from USAspending.gov. Input: keywords, NAICS, PSC, agency, state or set-aside. Output: one row per contract with incumbent, UEI, amount, agency, end date and link, plus top competitors.",
+      "storeDescription": "Find US federal contract awards and contracts ending soon (recompete leads) from USAspending.gov. Search by keyword, NAICS, PSC, agency, state or set-aside; one row per contract with incumbent, UEI, amount, end date and link, plus top competitors.",
       "url": "https://apify.com/pandadad0214/federal-contract-finder",
       "pricing": [
         {
@@ -1304,7 +1304,7 @@
       "actor": "pandadad0214/email-domain-security-checker",
       "title": "SPF, DKIM & DMARC Checker: Bulk Email Domain Security Audit",
       "description": "Audit email authentication for a list of domains: SPF, DKIM (about 40 common selectors), DMARC, MX provider, MTA-STS, TLS-RPT and BIMI, graded A-F with spoofing risk and plain-English fixes. Unlike company_website_enricher (firmographics, tech stack, contacts), this only grades mail security posture from public DNS. Use when you need deliverability or spoofing checks, a security prospect list, or a vendor review. Do not use for website SEO or AI-readiness (use ai_search_seo_audit) or for page-level prompt injection (use hidden_ai_instructions_scanner). Parameters: domains accept bare domains, emails or URLs and are normalized and de-duplicated. DKIM is only confirmed when a selector matches; add dkimSelectors you know are in use, otherwise a missing DKIM may be a false negative. Nonexistent or unresolvable domains are returned with a status and not charged. Returns per item: agentSummary, domain, grade, score (0-100), spoofable, mailProvider, spfRecord, spfAll, spfLookups, dmarcRecord, dmarcPolicy, dmarcReporting, dkimSelectorsFound, mtaSts, tlsRpt, bimi, mxHosts, fixes (prioritized), status.",
-      "storeDescription": "Use this to check SPF, DKIM, DMARC, MX provider, BIMI and MTA-STS for a list of domains or emails. Output: one row per domain with an A-F grade, spoofing risk, mail provider, senders and plain-English fixes, plus Excel and CSV.",
+      "storeDescription": "Check SPF, DKIM, DMARC, MX provider, BIMI and MTA-STS for a list of domains or emails in bulk. One row per domain with an A-F grade, spoofing risk, mail provider, allowed senders and plain-English fixes, plus Excel and CSV.",
       "url": "https://apify.com/pandadad0214/email-domain-security-checker",
       "pricing": [
         {
@@ -1358,7 +1358,7 @@
       "actor": "pandadad0214/ai-search-seo-audit",
       "title": "AI Search & SEO Audit: GEO, llms.txt & Schema Checker",
       "description": "Audit web pages for classic SEO and for AI-search readiness (ChatGPT, Perplexity, Claude, Google AI Overviews): titles, meta, schema/FAQ markup, author/date signals, blocked AI crawlers, llms.txt and ranked fixes, with an SEO score and an AI-readiness score per page. Unlike website_change_monitor (diffs pages over time) and hidden_ai_instructions_scanner (finds concealed prompt-injection text), this grades how discoverable and citable a page is. Use when you need an on-page SEO/GEO audit or an llms.txt draft. Do not use for change tracking (use website_change_monitor) or security scanning (use hidden_ai_instructions_scanner or email_domain_security_checker). Parameters: crawlInternalLinks multiplies pages: each URL can add up to that many same-site pages, and every page is billed, so maxPages/run_max_items is the real cost cap. generateLlmsTxt drafts one llms.txt per site lacking it at no extra charge. Pages that block our crawler are returned unbilled. Returns per item: agentSummary, url, seoScore, aiReadinessScore, title, metaDescription, h1, wordCount, schemaTypes, faqSchema, aiSearchBotsBlocked, aiTrainingBotsBlocked, llmsTxt, sitemapFound, canonical, noindex, crawlerBlocked, fixes.",
-      "storeDescription": "Use this to audit web pages for SEO and AI search (ChatGPT, Perplexity, Claude, AI Overviews) readiness. Input: URLs. Output: SEO and AI scores, blocked AI crawlers, schema, FAQ, author/date, llms.txt and prioritized fixes, plus Excel.",
+      "storeDescription": "Audit web pages for SEO and AI search readiness (ChatGPT, Perplexity, Claude, Google AI Overviews). Per URL: SEO and AI scores, blocked AI crawlers, schema, FAQ, author/date, llms.txt and prioritized fixes, plus Excel.",
       "url": "https://apify.com/pandadad0214/ai-search-seo-audit",
       "pricing": [
         {
@@ -1412,7 +1412,7 @@
       "actor": "pandadad0214/podcast-leads-finder",
       "title": "Podcast Leads Finder: Podcast Host Emails & Guest Booking List",
       "description": "Find active podcasts to pitch by topic from Apple Podcasts and each show's public RSS feed: host, contact email published in the feed, website, socials, episode count, last episode date and a guest-friendly signal. Unlike local_business_leads or company_team_finder (businesses and staff), this targets shows and their hosts for guest booking or sponsorship outreach. Use when you need a podcast guesting, PR or sponsorship list for a niche. Do not use for audience or download numbers (not public) or for general topic popularity (use topic_trends_tracker). Parameters: each keyword is searched separately and results are de-duplicated; deepSearch=true (default) searches descriptions too for up to 3x more shows but is slower. onlyWithEmail and guestFriendlyOnly filter before billing, so they shrink both list and cost. activeWithinDays=0 includes dormant shows. Emails come only from RSS feeds; nothing is guessed. Returns per item: agentSummary, podcastName, author, email, emailSource, website, socials, appleUrl, feedUrl, primaryGenre, episodeCount, lastEpisodeDate, avgDaysBetweenEpisodes, guestFriendly, guestEpisodeShare, recentEpisodeTitles.",
-      "storeDescription": "Use this to find podcasts to pitch by topic. Input: keywords and country. Output: one row per active show with host, contact email published in its RSS feed, website, socials, episodes, last episode date and a has-guests signal, plus Excel and CSV.",
+      "storeDescription": "Find active podcasts to pitch by topic and country. One row per show with host, the contact email published in its RSS feed, website, socials, episode count, last episode date and a has-guests signal, plus Excel and CSV.",
       "url": "https://apify.com/pandadad0214/podcast-leads-finder",
       "pricing": [
         {
@@ -1500,7 +1500,7 @@
       "actor": "pandadad0214/local-business-leads",
       "title": "Local Business Leads: Google Maps Alternative (OpenStreetMap)",
       "description": "List local businesses by category and place (city, county, ZIP, neighborhood or lat/lon radius) from OpenStreetMap under its open license, with address, phone, email, website, opening hours and socials. Unlike npi_provider_lists (official US healthcare registry) or trucking_company_leads (FMCSA carriers), this covers any business type worldwide, with coverage as good as local OSM mapping. Use when you need a prospect list such as plumbers in Phoenix or cafes in a ZIP. Do not use for US healthcare providers (use npi_provider_lists, which is authoritative) or for reviews/ratings (OSM has none). Parameters: give location, or latitude+longitude (radiusKm defaults to 5); radiusKm with a location searches a circle instead of the official boundary. Whole states or countries are slow, often longer than 60 s, so raise run_timeout_secs to 300 or narrow the area. requireEmail sharply reduces results because few OSM entries list email. Returns per item: agentSummary, name, category, street, city, state, postcode, phone, email, website, openingHours, socials, lat, lon, osmUrl, attribution (ODbL; credit OpenStreetMap when you republish).",
-      "storeDescription": "Use this to list local businesses by category and city, e.g. dentists in Tempe AZ. Output: one row per business with address, phone, email, website, opening hours and socials from OpenStreetMap (open license), plus Excel and CSV.",
+      "storeDescription": "List local businesses by category and city, e.g. dentists in Tempe AZ, from OpenStreetMap (open license), a Google Maps alternative. One row per business with address, phone, email, website, opening hours and socials, plus Excel and CSV.",
       "url": "https://apify.com/pandadad0214/local-business-leads",
       "pricing": [
         {
@@ -1587,7 +1587,7 @@
       "actor": "pandadad0214/company-hiring-signals",
       "title": "Company Hiring Signals: Job Openings & Hiring Intent by Company",
       "description": "Measure hiring intent per company from its public job board (Greenhouse, Lever, Ashby and more): open jobs, new jobs in 7/30 days, teams hiring, leadership openings, a 0-100 hiring score and hot/warm/cold signal. Unlike company_website_enricher (tech stack and contacts) and company_team_finder (current staff), this reads open roles as a buying or growth signal. Use when you need sales triggers, recruiting leads or competitor hiring watch for a known list of companies. Do not use to discover companies from scratch (start from local_business_leads, federal_contract_finder or your own list) or for individual job search. Parameters: companies accept domains, names or direct job-board links; links are exact, names can match the wrong board. checkWebsite=true reads the careers page to find the exact board (more accurate, slower). minOpenJobs filters below-threshold companies out unbilled. titleKeywords only count matches; they do not filter. Companies with no public board are returned free with status. Returns per item: agentSummary, company, domain, signal, hiringScore, openJobs, newJobs7d, newJobs30d, leadershipJobs, leadershipTitles, topFunctions, functionCounts, remoteShare, topLocations, keywordHits, newestJobs, lastPostedAt, ats, boardUrl, matchedBy, status.",
-      "storeDescription": "Use this to see which companies are hiring and for what. Give company domains, names or job-board links; get one row per company with open jobs, new jobs in 7/30 days, teams hiring, leadership roles and a hiring score. Greenhouse, Lever, Ashby and more.",
+      "storeDescription": "See which companies are hiring, for which teams and how fast. Give domains, names or job-board links; get open jobs, new jobs in 7/30 days, teams hiring, leadership roles and a hiring score per company from Greenhouse, Lever, Ashby and more.",
       "url": "https://apify.com/pandadad0214/company-hiring-signals",
       "pricing": [
         {
@@ -1655,7 +1655,7 @@
       "actor": "pandadad0214/company-website-enricher",
       "title": "Company Website Enricher: Tech Stack, Emails & Socials",
       "description": "Enrich company domains from public sources (the company's own site with robots.txt respected, DNS and RDAP): name, description, published emails and phones, LinkedIn and socials, address, tech stack by category, mail provider, SaaS tools seen in DNS and domain age. Unlike company_team_finder (named people and titles) and company_hiring_signals (open jobs), this returns one firmographic row per company. Use when you have domains and need contact points, technographics or a filter like sites running Shopify or HubSpot. Do not use to find people (use company_team_finder) or to grade email security (use email_domain_security_checker). Parameters: onlyWithTech, onlyWithEmail and onlyWithPhone filter before billing, so filtered-out domains are free. extraPages (0-4) reads contact/about/team pages: more found contacts, slower runs, same price. Only published contacts are returned; no guessed emails. Unreachable sites are free. Returns per item: agentSummary, companyName, description, primaryEmail, emails, phones, linkedinUrl, socials, address, cms, techStack, techByCategory, mailProvider, emailSendingTools, verifiedServices, domainCreated, domainAgeYears, domainExpires, registrar, copyrightYear, status.",
-      "storeDescription": "Use this to enrich a list of company domains in one run: company name, description, public emails and phones, LinkedIn and social links, tech stack (CMS, analytics, CRM, ads, chat), mail provider, SaaS tools seen in DNS and domain age. Excel and CSV.",
+      "storeDescription": "Enrich a list of company domains in one run with contacts, socials and tech stack. Name, description, public emails and phones, LinkedIn and social links, CMS, analytics, CRM, ads and chat tools, mail provider, SaaS seen in DNS and domain age. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/company-website-enricher",
       "pricing": [
         {
@@ -1727,7 +1727,7 @@
       "actor": "pandadad0214/topic-trends-tracker",
       "title": "Topic Trends Tracker: Google Trends Alternative, Real Numbers",
       "description": "Compare public interest in topics, brands, products or people over time using real Wikipedia pageview counts: daily and monthly views, 30-day and year-over-year change, peaks, spike days, a trend label and a 0-100 interest index. Unlike Google Trends (relative 0-100 only) this reports absolute views; unlike podcast_leads_finder or company_hiring_signals it measures attention, not contacts. Use when you need to size or compare interest, spot spikes, or validate a topic. Do not use for search-keyword volume or social mentions (Wikipedia attention is a proxy), or for topics without a Wikipedia article (returned free as notFound). Parameters: each topic resolves to one article in the chosen language edition; pass a Wikipedia URL to pin an ambiguous name. months sets the window (data from July 2015); year-over-year is always computed. includeDailySeries adds a dailyViews array per row and makes output much larger; leave off unless charting. Returns per item: agentSummary, topic, article, url, interestIndex, trend (surging/rising/flat/falling), totalViews, avgDailyViews, last30dViews, change30dPct, yoyChangePct, peakDate, peakViews, spikes, monthlyViews, optional dailyViews.",
-      "storeDescription": "Use this to compare public interest in topics, brands, products or people over time with real view counts (Wikipedia pageviews): daily and monthly views, 30-day and year-over-year change, peaks, spike days and a 0-100 interest index. Excel and CSV.",
+      "storeDescription": "Compare public interest in topics, brands, products or people with real view counts (Wikipedia pageviews), a Google Trends alternative. Daily and monthly views, 30-day and year-over-year change, peaks, spike days and a 0-100 interest index.",
       "url": "https://apify.com/pandadad0214/topic-trends-tracker",
       "pricing": [
         {
@@ -1802,7 +1802,7 @@
       "actor": "pandadad0214/company-team-finder",
       "title": "Company Team & Decision-Maker Finder: Names, Titles, Emails",
       "description": "Find the named people at a company from its own public website (team, leadership, about and staff pages): name, title, seniority, department, decision-maker flag, published email, LinkedIn link and the company's email pattern. Unlike company_website_enricher (one firmographic row per company) and researcher_expert_finder (academics ranked by publications), this returns one row per person; it never scrapes LinkedIn. Use when you need decision makers or staff contacts at known companies. Do not use for academic experts (use researcher_expert_finder), for company-level contacts or tech stack (use company_website_enricher), or when the site has no team page. Parameters: billing is per person, not per company, so maxPeoplePerCompany (most senior first) and decisionMakersOnly are the main cost levers; run_max_items sets maxCompanies only. Pasting the exact team page URL is faster and more reliable than a bare domain. maxPagesPerCompany trades coverage for speed. emailGuess is inferred (pattern from published emails, else unverified first.last) and comes with emailConfidence; verify before sending. Companies with no readable team page are free. Returns per item: agentSummary, company, domain, name, firstName, lastName, title, seniority, department, isDecisionMaker, email, emailGuess, emailConfidence, linkedinUrl, profileUrl, sourceUrl, foundVia.",
-      "storeDescription": "Use this to find the people behind a company from its own website: names, job titles, seniority, department, published emails, LinkedIn links and the email pattern, from team, leadership and staff pages. No LinkedIn scraping. Excel and CSV.",
+      "storeDescription": "Find the people behind a company from its own website, with no LinkedIn scraping. Names, job titles, seniority, department, published emails, LinkedIn links and the email pattern, read from team, leadership and staff pages. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/company-team-finder",
       "pricing": [
         {
@@ -1899,7 +1899,7 @@
       "actor": "pandadad0214/trucking-company-leads",
       "title": "Trucking Company Leads: New FMCSA Carriers, Email & Phone",
       "description": "Pull US and Canadian motor carrier, broker and freight-forwarder records from official FMCSA data, with phone, email, officers, fleet size, drivers, cargo, operating authority and safety rating. It runs in three modes: new USDOT registrations, filtered search of the registry, or lookup by USDOT number. Unlike local_business_leads (any category from OpenStreetMap) or npi_provider_lists (healthcare registry), this is the authoritative FMCSA registry for transportation companies. Use when you need new-entrant carrier leads (insurance, factoring, ELD, dispatch, fuel cards), carriers by lane/state/fleet/cargo, or to enrich known DOT numbers. Do not use for shipment tracking, load boards or rates. Parameters: mode=new uses daysBack and sorts newest first; mode=search ignores daysBack and uses the filters plus activeOnly; mode=lookup uses only dotNumbers. powerUnits/drivers bounds, carrierClass=forHire and requireEmail/requirePhone are the strongest narrowers and filter before billing. Phone and email are what carriers file with FMCSA and may be personal or stale. Runs that match nothing are free. Returns per item: agentSummary, dotNumber, mcNumber, legalName, dbaName, status, addedDate, daysSinceAdded, officers, phone, cellPhone, email, street, city, state, zip, powerUnits, drivers, fleetBand, cargo, hazmat, operation, carrierClasses, entityTypes, safetyRating, lastFilingDate, saferUrl.",
-      "storeDescription": "Use this to get fresh trucking company leads from official FMCSA data: new USDOT carriers, brokers and freight forwarders with phone, email, officers, fleet size, drivers, cargo and authority. Filter by state, date, fleet and cargo. Excel and CSV.",
+      "storeDescription": "Get fresh trucking company leads from official FMCSA data: new USDOT carriers, brokers and freight forwarders. Phone, email, officers, fleet size, drivers, cargo and authority; filter by state, date, fleet and cargo. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/trucking-company-leads",
       "pricing": [
         {
@@ -2110,7 +2110,7 @@
       "actor": "pandadad0214/website-change-monitor",
       "title": "Website Change Monitor: Page Diffs, Price & Keyword Alerts",
       "description": "Check a watch list of web pages against snapshots saved by your previous run and report added and removed text, change percent, price changes and keyword appear/disappear alerts, with an optional webhook when something changes. Unlike ai_search_seo_audit (one-time quality audit) and hidden_ai_instructions_scanner (concealed AI-directed text), this is stateful diffing over time. Use when you need to track competitor pricing, terms, product or careers pages on a schedule. Do not use for a one-off page read or audit (use ai_search_seo_audit), or for pages behind a login. Parameters: the first run per monitorName only saves baselines (status 'baseline saved'); reuse the same monitorName for every later run, and use a new name for a separate watch list. cssSelector, ignorePatterns and ignoreNumbersAndDates cut false alarms from banners, counters and timestamps. Below minChangePercent the old snapshot is kept, so small edits accumulate. onlyReportChanges shrinks output but every page checked is still billed; unreachable pages are free. webhookUrl posts outside the Apify run; only set it if you control that endpoint. Returns per item: agentSummary, url, label, status, changed, changePercent, addedCount, removedCount, addedLines, removedLines, prices, priceChanges, keywordsPresent, keywordsAppeared, keywordsDisappeared, titleBefore, titleAfter, previousCheckAt.",
-      "storeDescription": "Use this to watch competitor pricing, terms, product and careers pages for changes: each run shows added and removed text, change percent, price changes and keyword alerts versus the last run. Schedule it; webhook optional. Excel.",
+      "storeDescription": "Know when competitor pricing, terms, product or careers pages change. Each run shows added and removed text, change percent, price changes and keyword alerts versus the last run; schedule it, webhook optional, Excel export.",
       "url": "https://apify.com/pandadad0214/website-change-monitor",
       "pricing": [
         {
@@ -2213,7 +2213,7 @@
       "actor": "pandadad0214/sbir-sttr-topic-radar",
       "title": "SBIR/STTR Topic Radar: Open Topics, Deadlines & DoD Q&A",
       "description": "Find SBIR and STTR solicitation topics across agencies (DoD branches, NIH, NASA, NSF, DOE, USDA, DHS and more) by keyword, with full topic text, close dates, days left, topic numbers, official links, and DoD Q&A status and technical points of contact. Unlike grants_finder (general Grants.gov opportunities and past NIH/NSF awards) and federal_contract_finder (awarded contracts), this lists small-business R&D topics you can propose to. Use when a small business or research partner needs open SBIR/STTR topics, deadlines or a TPOC to contact. Do not use for general grants (use grants_finder) or for past contract winners (use federal_contract_finder). Parameters: empty keywords lists every topic matching the other filters, which can be large, so keep maxResults low. status=closed returns past topics to show what an agency keeps funding. includeDetails and includeDodQa each fetch extra pages per topic: richer rows, slower runs, same price; turn them off for a fast scan. Searches with no results are free. Returns per item: agentSummary, topicId, topicNumber, title, agency, branch, program, phase, status, openDate, closeDate, daysLeft, description, technicalPointOfContact, dodQaStatus, dodPublishedQuestions, officialSolicitationUrl, url.",
-      "storeDescription": "Use this to find open SBIR and STTR topics from every agency (DoD branches, NIH, NASA, NSF, DOE, USDA, DHS...) by keyword, with full topic text, close dates, days left, topic numbers, official links and DoD Q&A status plus technical points of contact. Excel and CSV.",
+      "storeDescription": "Find open SBIR and STTR topics from every agency (DoD branches, NIH, NASA, NSF, DOE, USDA, DHS...) by keyword. Full topic text, close dates, days left, topic numbers, official links, DoD Q&A status and technical contacts; Excel and CSV.",
       "url": "https://apify.com/pandadad0214/sbir-sttr-topic-radar",
       "pricing": [
         {
@@ -2299,7 +2299,7 @@
       "actor": "pandadad0214/sec-financials-excel",
       "title": "SEC Financials to Excel: EDGAR XBRL Comps & Model Data",
       "description": "Return standardized annual financials for US-listed companies from SEC EDGAR XBRL 10-K data: income statement, balance sheet and cash-flow lines plus EBITDA, free cash flow, net debt, margins and growth, one row per company-year, each number tagged to its source filing. Unlike pdf_table_extractor (any PDF table, best-effort), this reads structured filings and is exact; unlike federal_contract_finder it covers public-company fundamentals, not government spend. Use when you need comps, model inputs or multi-year history for tickers or CIKs. Do not use for private companies, foreign filers without 10-Ks, quarterly data or share prices (not included). Parameters: contactEmail is required by SEC's fair-access rule and is sent only to SEC. Billing is per company-year, so worst case = companies x years; run_max_items does not set years, so cap cost with years and run_max_charge_usd. Unknown tickers are returned free with a status. Returns per item: agentSummary, company, ticker, cik, fiscalYear, periodEnd, form, filed, revenue, grossProfit, operatingIncome, netIncome, epsDiluted, operatingCashFlow, capex, freeCashFlow, ebitda, cash, totalDebt, netDebt, stockholdersEquity, margins, revenueGrowth, epsGrowth, sourceTags. The comps workbook stays in the run's Apify key-value store.",
-      "storeDescription": "Use this to get standardized annual income statement, balance sheet and cash-flow lines for US-listed companies from SEC EDGAR XBRL, with EBITDA, FCF, net debt, margins and a comps sheet that computes EV/EBITDA and P/E once you add share prices. Every number cites its filing. Excel.",
+      "storeDescription": "Get standardized annual income statement, balance sheet and cash-flow lines for US-listed companies from SEC EDGAR XBRL. EBITDA, FCF, net debt, margins and a comps sheet for EV/EBITDA and P/E; every number cites its filing. Excel.",
       "url": "https://apify.com/pandadad0214/sec-financials-excel",
       "pricing": [
         {
@@ -2352,7 +2352,7 @@
       "actor": "pandadad0214/hidden-ai-instructions-scanner",
       "title": "Hidden AI Instructions Scanner: Prompt Injection Detector",
       "description": "Scan web pages for text hidden from people but read by AI agents (display:none, off-screen, tiny or same-color text, HTML comments, alt/meta/data attributes, zero-width and Unicode tag characters) and classify it as policy notice, manipulation or harmful prompt injection, with location and excerpt. Unlike ai_search_seo_audit (visible SEO and AI-readiness) and website_change_monitor (diffs over time), this is a security check on content an agent is about to read. Use when an agent or workflow will ingest a page and you need to know whether it carries hidden instructions, or when auditing your own site. Do not use for SEO grading (use ai_search_seo_audit) or for email security (use email_domain_security_checker). Parameters: renderJs=true runs a real browser to catch script-injected text (much slower, plus settleSecs per page); off is a fast HTTP read. agentUaDiff adds three fetches per page (GPTBot, ClaudeBot, ChatGPT-User) to detect cloaking. crawlDepth follows same-site links but maxPages always caps the run. Findings are leads for review, not proof of intent. Returns per item: page summaries (type page-summary, url, verdict, findings, categories, topSeverity, techniques, agentSummary) and findings (technique, location, excerpt, category, severity).",
-      "storeDescription": "Free. Use this to check web pages for text hidden from people but read by AI agents (display:none, off-screen, tiny or same-color text, comments, alt/meta, zero-width and Unicode tag characters) and flag prompt injection: policy notice, manipulation or harmful, with location and excerpt.",
+      "storeDescription": "Free: check web pages for text hidden from people but read by AI agents, and flag prompt injection. Finds display:none, off-screen, tiny or same-color text, comments, alt/meta, zero-width and Unicode tag characters, with category, location and excerpt.",
       "url": "https://apify.com/pandadad0214/hidden-ai-instructions-scanner",
       "pricing": [],
       "inputSchema": {
@@ -2430,7 +2430,7 @@
       "actor": "pandadad0214/clinical-trial-leads",
       "title": "Clinical Trial Leads: Sponsors, Sites & Contacts",
       "description": "Find clinical trials on the official ClinicalTrials.gov API by condition, intervention, sponsor, phase, status and site location, with sponsor class, enrollment, dates, central contacts, principal investigators and every study site with its contacts. Unlike pubmed_evidence_table (published articles) and npi_provider_lists (all registered providers), this returns registered studies and the people and sites running them. Use when you need recruiting trials near a location, sponsor or site pipelines, or investigator and site-contact leads for CROs, suppliers or patient referral. Do not use for published results (use pubmed_evidence_table) or for funding (use grants_finder). Parameters: statuses default to recruiting and not-yet-recruiting; add COMPLETED etc. for history. countries/states/city keep trials with at least one matching site and report matchingSiteCount. updatedWithinDays suits weekly schedules. requireContact filters out uncontactable trials before billing. Searches with no results are free. Returns per item: agentSummary, nctId, title, status, phase, conditions, interventions, leadSponsor, sponsorClass, collaborators, enrollment, startDate, primaryCompletionDate, centralContactName, centralContactPhone, centralContactEmail, principalInvestigators, sites, matchingSiteCount, url.",
-      "storeDescription": "Find clinical trials by condition, drug, sponsor, phase, status and location from the official ClinicalTrials.gov API: sponsor, phase, enrollment, dates, central contacts, investigators and every study site with contacts. Excel and CSV.",
+      "storeDescription": "Find clinical trials and the people running them from the official ClinicalTrials.gov API. Search by condition, drug, sponsor, phase, status and location; get sponsor, enrollment, dates, central contacts, investigators and every site. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/clinical-trial-leads",
       "pricing": [
         {
@@ -2578,7 +2578,7 @@
       "actor": "pandadad0214/nonprofit-leads-irs",
       "title": "Nonprofit Leads: IRS Charities & Foundations by State",
       "description": "Build nonprofit and foundation lead lists from the official IRS Exempt Organizations Business Master File, filtered by state, city, ZIP, NTEE cause, 501(c) type, public charity vs private foundation, revenue, assets and ruling year. Unlike local_business_leads (OpenStreetMap shops) and npi_provider_lists (healthcare NPI), this is the IRS EO BMF for tax-exempt orgs. Use when you need charity or foundation prospect lists for fundraising, sponsorship, grants outreach or nonprofit CRM enrichment. Do not use for for-profit businesses (use local_business_leads or company_website_enricher) or for Form 990 full-text analysis. Parameters: states is the usual starting filter; orgType any|publicCharity|privateFoundation; only501c3 defaults true; minAssets/minRevenue and sortBy=assets|revenue|newest|name rank large prospects first; maxResults caps billed rows. In-care-of and address are what the org filed with the IRS and may be a PO box or attorney. Runs that match nothing are free. Returns per item: agentSummary, ein, name, inCareOf, street, city, state, zip, nteeCode, cause, subsection, orgType, privateFoundation, rulingYear, revenue, income, assets, sizeBand, deductible, propublicaUrl, irsUrl; plus NONPROFITS_XLSX/CSV.",
-      "storeDescription": "Build nonprofit and foundation lead lists from the official IRS Exempt Organizations file: EIN, name, address, in-care-of contact, NTEE cause, 501(c) type, ruling year, revenue and assets. Filter by state, city, ZIP, cause and size. Excel and CSV.",
+      "storeDescription": "Build nonprofit and foundation lead lists from the official IRS Exempt Organizations file. EIN, name, address, in-care-of contact, NTEE cause, 501(c) type, ruling year, revenue and assets; filter by state, city, ZIP, cause and size. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/nonprofit-leads-irs",
       "pricing": [
         {
@@ -2706,7 +2706,7 @@
       "actor": "pandadad0214/federal-register-monitor",
       "title": "Federal Register Monitor: New Rules & Comment Deadlines",
       "description": "Track new US federal rules, proposed rules, notices and presidential documents from the official FederalRegister.gov API, with agency, publication and effective dates, comment deadline and days left, docket IDs, RIN, abstract and comment links. Unlike grants_finder (assistance opportunities) and federal_contract_finder (awarded contracts), this monitors the Federal Register rulemaking feed. Use when compliance, policy, lobbying or capture teams need new rules or open comment periods by keyword or agency. Do not use for grant RFPs (use grants_finder) or for awarded contract data (use federal_contract_finder). Parameters: keywords and agencies narrow the search; commentsOpenOnly=true keeps only open dockets; documentTypes RULE|PRORULE|NOTICE|PRESDOCU; daysBack or publishedFrom/To set the window; significantOnly filters significant rules; maxResults caps billed documents. Empty runs are free. Returns per item: agentSummary, documentNumber, type, title, agencies, publicationDate, effectiveDate, commentsCloseDate, commentDaysLeft, commentOpen, significant, docketIds, rins, citation, abstract, commentUrl, url, pdfUrl, regulationsGovDocketUrl; plus FEDREG_XLSX/CSV.",
-      "storeDescription": "Track new US federal rules, proposed rules and notices from the official FederalRegister.gov API: agency, comment deadline and days left, effective date, docket, RIN and comment link. Filter by keyword, agency, type and open comment periods. Excel.",
+      "storeDescription": "Track new US federal rules, proposed rules and notices from the official FederalRegister.gov API. Agency, comment deadline and days left, effective date, docket, RIN and comment link; filter by keyword, agency, type and open comment periods. Excel.",
       "url": "https://apify.com/pandadad0214/federal-register-monitor",
       "pricing": [
         {
@@ -2804,7 +2804,7 @@
       "actor": "pandadad0214/product-recall-monitor",
       "title": "Product Recall Monitor: FDA Food, Drug, Device & CPSC Recalls",
       "description": "Pull one feed of US product recalls from openFDA (food, drug, medical device enforcement) and CPSC SaferProducts.gov (consumer products), with product, reason or hazard, recalling firm, FDA class, status, distribution, lots/UPCs, retailers and remedy. Unlike clinical_trial_leads (registered studies) and federal_register_monitor (rulemaking), this is safety recall enforcement. Use when QA, retail, insurance, marketplace or consumer-safety teams need recent recalls by keyword, firm, class, state or date. Do not use for vehicle VIN recalls (use vin_decoder_recalls) or for clinical-trial safety results. Parameters: sources food|drug|device|consumer (default all); keywords and firmContains filter before billing; classifications Class I|II|III (FDA); daysBack or dateFrom; states for distribution; maxResults caps billed recalls. Empty runs are free. Returns per item: agentSummary, source, recallNumber, date, classification, status, product, reason, firm, firmLocation, firmState, distribution, quantity, codes, retailers, remedy, hazard, url; plus RECALLS_XLSX/CSV.",
-      "storeDescription": "One feed of US product recalls from FDA (food, drugs, medical devices) and CPSC (consumer products): product, reason or hazard, firm, class, status, distribution, lots UPCs, retailers, remedy. Filter by keyword, firm, class, state, date. Excel.",
+      "storeDescription": "Get one feed of US product recalls from FDA (food, drugs, medical devices) and CPSC (consumer products). Product, reason or hazard, firm, class, status, distribution, lots, UPCs, retailers and remedy; filter by keyword, firm, class, state, date. Excel.",
       "url": "https://apify.com/pandadad0214/product-recall-monitor",
       "pricing": [
         {
@@ -2898,7 +2898,7 @@
       "actor": "pandadad0214/vin-decoder-recalls",
       "title": "VIN Decoder + Recalls: Bulk NHTSA Specs & Safety Recalls",
       "description": "Bulk-decode vehicle identification numbers with the official NHTSA vPIC API and attach NHTSA recall campaigns and complaint counts for each model year in the same run (year, make, model, trim, body, engine, fuel, drivetrain, plant, safety features). Unlike product_recall_monitor (FDA/CPSC product recalls) and company_website_enricher (firmographics), this is VIN-level vehicle data. Use when dealers, fleets, insurers, marketplaces or repair shops need specs plus open safety recalls for many VINs. Do not use for consumer product or drug recalls (use product_recall_monitor) or for title/lien history. Parameters: vins (list; duplicates removed; up to 10,000); includeRecalls and includeComplaints default true; includeInvalid keeps undecodable VINs as free skipped rows; maxResults caps billed decodes. Undecodable VINs are skipped for free. Returns per item: agentSummary, vin, valid, modelYear, make, model, trim, bodyClass, vehicleType, driveType, engine, fuel, manufacturer, plant, safetyFeatures, recallCount, parkItRecall, recalls, complaintCount, nhtsaRecallUrl; plus VINS_XLSX (Vehicles + Recalls sheets)/CSV.",
-      "storeDescription": "Bulk-decode VINs with the official NHTSA vPIC API: year, make, model, trim, body, engine, fuel, drivetrain, GVWR, plant and safety features, plus NHTSA recall campaigns and complaint counts for each model year. Excel and CSV.",
+      "storeDescription": "Bulk-decode VINs with the official NHTSA vPIC API and add safety recalls in the same run. Year, make, model, trim, body, engine, fuel, drivetrain, GVWR, plant and safety features, plus recall campaigns and complaint counts. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/vin-decoder-recalls",
       "pricing": [
         {
@@ -2955,7 +2955,7 @@
       "actor": "pandadad0214/building-permit-leads",
       "title": "Building Permit Leads: New Permits, Contractors & Job Values",
       "description": "Pull newly issued building permits from 8 US city open-data portals (NYC, Los Angeles, Chicago, San Francisco, Seattle, Austin, New Orleans, Cambridge) with address, work description, trade category, declared job value, contractor and owner where the city publishes them. Unlike local_business_leads (existing OpenStreetMap shops) and florida_new_business_leads / texas_new_business_leads (new company registrations), this is project-level construction activity. Use when contractors, solar/roofing/HVAC installers, suppliers or lenders need fresh jobs or want to track a competitor's permits. Do not use for cities outside the 8 listed, for property ownership records or for inspection history. Parameters: cities picks portals (contractor names are published by Chicago, NYC, Austin, Seattle, New Orleans and Cambridge only, so requireContractor drops the other cities); categories and keywords narrow by permit type/description; issuedFrom/issuedTo override daysBack; minValue drops permits with no declared value; sortBy=value with maxResults returns the biggest jobs first; maxResults caps billed permits. Runs with no matching permits are free. Returns per item: agentSummary, permitNumber, permitType, workType, description, status, appliedDate, issuedDate, address, zip, city, state, estimatedCost, contractorName, contractorTrade, contractorPhone, ownerName, applicantName, categories, latitude, longitude, permitUrl, sourceDataset; plus PERMITS_XLSX (with Contractors sheet)/CSV.",
-      "storeDescription": "Use this to get newly issued building permits from 8 US city open-data portals (NYC, LA, Chicago, SF, Seattle, Austin, New Orleans, Cambridge): address, work, trade category, job value, contractor, owner. Excel.",
+      "storeDescription": "Get newly issued building permits from 8 US city open-data portals (NYC, LA, Chicago, SF, Seattle, Austin, New Orleans, Cambridge). Address, work, trade category, job value, contractor and owner, plus a ranked Contractors sheet. Excel.",
       "url": "https://apify.com/pandadad0214/building-permit-leads",
       "pricing": [
         {
@@ -3080,7 +3080,7 @@
       "actor": "pandadad0214/florida-new-business-leads",
       "title": "Florida New Business Leads: New LLCs & Corporations Daily",
       "description": "List newly filed Florida LLCs, corporations and nonprofits from the official Sunbiz (Division of Corporations) daily data files, with principal and mailing address, officers/managers, registered agent, FEI/EIN when filed and an industry guess from the name. Unlike texas_new_business_leads (Texas Comptroller franchise taxpayers) and local_business_leads (established shops on OpenStreetMap), this is brand-new Florida formations. Use when you sell to new business owners (bookkeeping, insurance, banking, web design, signage) or monitor new competitors in a Florida city or ZIP. Do not use for other states, for historical entity search or for annual-report status checks. Parameters: daysBack (work days only; max 62 days per run) or dateFrom/dateTo; cities and zipPrefixes match principal or mailing address; industries and nameKeywords match words in the name, excludeKeywords removes holding companies; newFormationsOnly (default true) skips reinstatements and old foreign entities; personAgentOnly keeps filings without an agent company (often owner-filed); maxResults caps billed businesses. Runs with no matches are free. Returns per item: agentSummary, documentNumber, name, filingType, filingTypeLabel, status, formedDate, filedOn, principalAddress, principalCity, principalZip, mailingAddress, mailingCity, mailingState, mailingZip, feiNumber, registeredAgent, registeredAgentType, officers, officerNames, industryGuess, sunbizUrl; plus BUSINESSES_XLSX (with Officers sheet)/CSV.",
-      "storeDescription": "Use this to get new Florida LLCs, corporations and nonprofits from the official Sunbiz daily data: address, officers and managers, registered agent, EIN, industry guess. Filter by city, ZIP, industry, name. Excel.",
+      "storeDescription": "Get every new Florida LLC, corporation and nonprofit from official Sunbiz daily data. Address, officers and managers, registered agent, EIN when filed and an industry guess; filter by city, ZIP, industry and name. Excel.",
       "url": "https://apify.com/pandadad0214/florida-new-business-leads",
       "pricing": [
         {
@@ -3213,7 +3213,7 @@
       "actor": "pandadad0214/bulk-domain-whois-expiry",
       "title": "Bulk Domain WHOIS & Expiry Checker (RDAP): Registrar & Dates",
       "description": "Check many domains at once with official RDAP (WHOIS fallback): registered or available, registrar, created/updated/expiry dates, days to expiry, transfer lock and pending-delete status, nameservers, DNS host and DNSSEC. Unlike email_domain_security_checker (SPF/DKIM/DMARC mail security) and company_website_enricher (site content and contacts), this is registration and expiry data for a domain portfolio. Use when you audit a domain portfolio for renewals, check which names are available, or verify registrar and DNS host for vendors or phishing look-alikes. Do not use for website content, uptime or email-auth checks (use email_domain_security_checker). Parameters: domains accepts URLs (scheme, www and paths stripped; duplicates dropped; up to 10,000); rootDomainOnly (default true) reduces subdomains to the registrable domain; expiringWithinDays sets the expiringSoon flag and only=expiringSoon|available|registered returns (and bills) just that subset; sortBy=expiry puts the soonest renewals first; followRegistrar adds registrant org/country when published but is slower; maxResults caps billed domains. Failed lookups are free. Returns per item: agentSummary, domain, registered, available, registrar, registrarIanaId, createdDate, updatedDate, expiresDate, daysToExpiry, ageYears, expiringSoon, statuses, transferLocked, pendingDelete, nameservers, dnsHost, dnssec, registrantOrg, registrantCountry, abuseEmail, source; plus DOMAINS_XLSX/CSV.",
-      "storeDescription": "Use this to check many domains at once with official RDAP (WHOIS fallback): registered or available, registrar, created and expiry dates, days left, locks, nameservers, DNS host, DNSSEC. Excel and CSV.",
+      "storeDescription": "Check many domains at once with official RDAP (WHOIS fallback) for availability and expiry. Registrar, created and expiry dates, days left, locks, nameservers, DNS host and DNSSEC per domain. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/bulk-domain-whois-expiry",
       "pricing": [
         {
@@ -3293,7 +3293,7 @@
       "actor": "pandadad0214/wayback-snapshot-finder",
       "title": "Wayback Machine Snapshot Finder: Archive Dates & URLs",
       "description": "Find Internet Archive Wayback Machine snapshots for pages or whole domains through the official CDX API: capture timestamps, direct archive URLs, HTTP status, MIME type, content digest, and first/last-seen dates. Unlike website_change_monitor (diffs the live page on a schedule) and reference_checker (verifies scholarly citations), this looks up historical archived copies. Use when you need to cite or recover a dead link, prove what a page said on a date, date when a site or page first appeared, or list a domain's archived URLs. Do not use to fetch or diff live pages (use website_change_monitor) or to download full archived page content. Parameters: urls with matchType exact|domain|prefix, or domains (always domain match); from/to bound the date range (YYYY or YYYYMMDD); closestTo sorts by nearness to one date; collapseDigest (default true) keeps one row per unique content; filterStatus=200 drops redirects and errors; maxResultsPerUrl applies before maxResults, which caps billed snapshots (hard max 5000); includeFirstLast adds extra CDX probes and can add latency. Empty or failed lookups are free; the Archive's CDX API can be slow, so allow up to a minute or more. Returns per item: agentSummary, url, timestamp, timestampReadable, originalUrl, archiveUrl, statusCode, mimeType, digest, length, isFirst, isLast, firstSeen, lastSeen; plus SNAPSHOTS_XLSX/CSV.",
-      "storeDescription": "Use this to find Internet Archive Wayback Machine snapshots for pages or whole domains via the official CDX API: capture dates, archive URLs, status, MIME type, first and last seen. Dead links, dated evidence, site history. Excel and CSV.",
+      "storeDescription": "Find Internet Archive Wayback Machine snapshots for pages or whole domains via the official CDX API. Capture dates, archive URLs, status, MIME type and first and last seen, for dead links, dated evidence and site history. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/wayback-snapshot-finder",
       "pricing": [
         {
@@ -3397,7 +3397,7 @@
       "actor": "pandadad0214/texas-new-business-leads",
       "title": "Texas New Business Leads: New Franchise Taxpayers",
       "description": "List new Texas businesses from the Texas Comptroller's active franchise taxpayer open data, matched on Secretary of State charter date or franchise-tax responsibility date, with address, county, organization type, SOS file number and status. Unlike florida_new_business_leads (Sunbiz filings with officers) and local_business_leads (OpenStreetMap shops), this is new Texas LLCs and corporations from state tax data; officers are not included. Use when you sell to newly formed Texas companies or watch new entrants in a Texas city, ZIP or county. Do not use for other states, for officer/owner names or for sole proprietors that do not owe franchise tax. Parameters: daysBack or charterFrom/charterTo (future effective dates are kept, so a recent window can include dates ahead of today); cities, zipPrefixes and countyCodes (Comptroller numbers, e.g. 101 Harris, 227 Travis) narrow the area; orgTypes (e.g. CL LLC, CT corporation) and nameContains filter the entity; activeOnly (default true) keeps right-to-transact active rows; requireSosNumber drops rows with no SOS file number; maxResults caps billed businesses (hard max 5000). Runs with no matches are free. Returns per item: agentSummary, taxpayerNumber, name, address, city, state, zip, countyCode, orgTypeCode, orgType, sosFileNumber, charterDate, responsibilityDate, sosStatus, rightToTransact, naics, sourceUrl, taxpayerUrl; plus TXBIZ_XLSX/CSV.",
-      "storeDescription": "Use this to get new Texas LLCs and corporations from official Comptroller franchise taxpayer open data: name, address, county, org type, SOS file number, charter date, status. Filter by city, ZIP, county, name. Excel and CSV.",
+      "storeDescription": "Get new Texas LLCs and corporations from official Comptroller franchise taxpayer open data. Name, address, county, org type, SOS file number, charter date and status; filter by city, ZIP, county and name. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/texas-new-business-leads",
       "pricing": [
         {
@@ -3506,7 +3506,7 @@
       "actor": "pandadad0214/h1b-lca-sponsor-leads",
       "title": "H-1B LCA Visa Sponsor Leads: DOL Employers, Jobs & Wages",
       "description": "Find employers sponsoring H-1B, H-1B1 and E-3 workers from the US Department of Labor OFLC LCA disclosure data (FY2026 Q3 default), with job title, SOC code, worksite, wage range and unit, case status, dates and worker count, plus a free employer roll-up sheet. Unlike npi_provider_lists (healthcare providers) and federal_contract_finder (federal awards), this is labor-condition-application filings. Use when recruiters, immigration attorneys, payroll/benefits/relocation sellers or wage analysts need sponsor lists by employer, state, city, title or SOC. Do not use for approved-visa outcomes, individual workers or non-LCA visas (PERM, O-1). Parameters: employers, states, cities, titleContains, socContains narrow rows; visaClass defaults H-1B (All widens it); caseStatuses, minWage with wageUnit, receivedFrom/To or daysBack filter further; fiscalYearQuarter or dataUrl pick another disclosure file; demoMode (or empty input) returns a tiny embedded sample without the ~250 MB DOL download; maxResults caps billed cases (hard max 5000). Tight filters finish faster. Runs with no matches are free. Returns per item: agentSummary, caseNumber, status, receivedDate, visaClass, employerName, employerCity, employerState, jobTitle, socCode, socTitle, worksiteCity, worksiteState plus wage, date and worker-count fields; plus LCA_CASES_XLSX (Cases + Employers sheets)/CSV.",
-      "storeDescription": "",
+      "storeDescription": "Find H-1B, H-1B1 and E-3 visa sponsors from official DOL OFLC LCA disclosure data. One row per case with employer, job title, SOC, worksite, wage and status, plus a free Employers sheet; filter by state, title, SOC and date. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/h1b-lca-sponsor-leads",
       "pricing": [
         {
@@ -3644,7 +3644,7 @@
       "actor": "pandadad0214/new-york-new-business-leads",
       "title": "New York New Business Leads: New DOS Filings",
       "description": "List newly filed New York LLCs, corporations and other entities from the official NY Department of State Active Corporations open data (data.ny.gov), with DOS ID, entity type, filing date, county, jurisdiction, process name and address, and CEO and registered agent when filed. Unlike florida_new_business_leads (Sunbiz filings with officers) and texas_new_business_leads (Comptroller franchise taxpayers), this is New York DOS filings. Use when banks, payroll, insurance, accounting, agencies or suppliers want new New York owners in their first weeks. Do not use for other states, for emails or phones (the source has none) or for sole proprietors. Parameters: daysBack (default 7) or filedFrom/filedTo set the window; counties, cities, zipPrefixes, entityTypes (e.g. DOMESTIC LIMITED LIABILITY COMPANY) and nameContains narrow rows; requireCeo and requireProcessAddress drop incomplete rows (CEO is often empty on new LLCs, so the process address is the reliable contact); maxResults caps billed businesses. Runs with no matches are free. Returns per item: agentSummary, dosId, name, entityType, filingDate, county, jurisdiction, processName, processAddress, processCity, processState, processZip, ceoName and CEO address fields, sourceUrl; plus NYBIZ_XLSX/CSV.",
-      "storeDescription": "Use this to get new New York LLCs, corporations and other DOS entities from the official data.ny.gov Active Corporations dataset: name, entity type, filing date, county, jurisdiction, process address, CEO and registered agent when filed. Filter by county, city, ZIP, entity type or name.",
+      "storeDescription": "Get new New York LLCs, corporations and other DOS entities from the official data.ny.gov Active Corporations dataset. Name, entity type, filing date, county, process address, CEO and registered agent when filed; filter by county, city, ZIP, type, name.",
       "url": "https://apify.com/pandadad0214/new-york-new-business-leads",
       "pricing": [
         {
@@ -3749,7 +3749,7 @@
       "actor": "pandadad0214/eu-ted-tenders",
       "title": "EU TED Tenders: Public Procurement Notices",
       "description": "Search official EU TED (Tenders Electronic Daily) public procurement notices through the TED Search API v3, with English title, publication date, buyer country, NUTS, notice and contract type, procedure, estimated or award value when published, tender deadline, CPV codes and TED HTML/PDF links. Unlike federal_contract_finder (US federal awards) and grants_finder (US assistance grants), this covers European public tenders. Use when BD or capture teams, EU suppliers or researchers need tenders by keyword, CPV code or buyer country. Do not use to submit bids, for US opportunities or for national portals outside TED. Parameters: daysBack (default 7) or publishedFrom/To set the window; keywords and cpvCodes (e.g. 72000000 IT services) match the notice; countries takes ISO-3 buyer codes such as DEU or FRA; maxResults caps billed notices. Value is often missing because many notices omit it. Empty input runs a small IT-services demo. Runs with no matches are free. Returns per item: agentSummary, noticeId, title, publicationDate, countries, nuts, noticeType, contractType, procedure, estimatedValue, deadline, CPV codes, noticeUrl, pdfUrl, htmlUrl; plus TED_XLSX/CSV.",
-      "storeDescription": "Use this to search official EU TED (Tenders Electronic Daily) notices: title, publication date, buyer country, CPV, procedure/notice type, estimated value when present, and the TED HTML/PDF links. Filter by keyword, CPV, country and date. Excel export.",
+      "storeDescription": "Search official EU public procurement notices from TED (Tenders Electronic Daily). Title, publication date, buyer country, CPV, procedure and notice type, estimated value when present and TED HTML/PDF links; filter by keyword, CPV, country, date. Excel.",
       "url": "https://apify.com/pandadad0214/eu-ted-tenders",
       "pricing": [
         {
@@ -3814,7 +3814,7 @@
       "actor": "pandadad0214/broken-link-checker",
       "title": "Broken Link Checker: 404s, Redirects and Dead Links",
       "description": "Crawl one or more start pages and check every unique http(s) link for HTTP status, final URL after redirects, a broken flag (status 400+) and a redirected flag, with external links checked by default. Unlike ai_search_seo_audit (page SEO/GEO scoring) and website_change_monitor (content diffs over time), this finds dead and redirecting links. Use when SEO, content or agency teams need a 404 report for a site or page. Do not use to search the web, to crawl a whole large site in one call or to check private or internal addresses (blocked and never billed). Parameters: startUrls (required in practice) are the pages crawled; maxPages is pages followed per host (1 = only the start pages); maxLinks caps checked links and therefore billing; checkExternal=false stays on-site; timeoutSecs is the per-request timeout (default 15). Billed per link that returns an HTTP status; timeouts, DNS failures and robots-skipped targets are free. Returns per item: agentSummary, originalUrl, finalUrl, statusCode, broken, redirected, external, contentType, sourcePage, error; plus LINKS_XLSX (all links plus a Broken sheet)/CSV.",
-      "storeDescription": "Use this to find broken links on a website: crawl starting pages (optional same-host follow), check each unique http(s) URL, and get status, final URL, redirect flag and a broken flag. Excel report of every checked link.",
+      "storeDescription": "Find broken links on a website: crawl your start pages (optional same-host follow) and check every unique http(s) link. Status, final URL, redirect and broken flags per link, in an Excel report with a broken-only sheet.",
       "url": "https://apify.com/pandadad0214/broken-link-checker",
       "pricing": [
         {
@@ -3864,6 +3864,578 @@
             "minimum": 3,
             "maximum": 60,
             "description": "Per-request timeout (seconds). How long to wait for each request. Timed-out URLs are recorded but not charged."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "colorado_new_business_leads",
+      "actor": "pandadad0214/colorado-new-business-leads",
+      "title": "Colorado New Business Leads: New SOS Filings Daily",
+      "description": "List newly formed Colorado LLCs, corporations and nonprofits from the official Colorado Secretary of State 'Business Entities in Colorado' open data (data.colorado.gov, updated daily), with formation date, entity type, status, principal and mailing address, registered agent and a self-agent flag (the agent is a person at the business address, usually the owner). Unlike florida_new_business_leads (Sunbiz with officers), texas_new_business_leads (Comptroller franchise taxpayers) and new_york_new_business_leads (NY DOS), this is Colorado formations. Use when banks, insurance, payroll, accountants, web agencies or suppliers want new Colorado owners in their first weeks. Do not use for other states, for emails or phones (the source has none) or for historical entity search. Parameters: daysBack (default 7) or formedFrom/formedTo set the window; cities and zipPrefixes match the principal address; entityTypes and nameContains (comma-separated words) narrow rows; onlySelfAgent keeps likely owner-filed rows; excludeAgentServices drops commercial registered-agent companies and virtual offices; onlyColoradoAddress drops out-of-state foreign entities; onlyGoodStanding (default true); maxResults caps billed businesses (hard max 10000). Runs with no matches are free. Returns per item: agentSummary, entityId, name, entityType, formationDate, status, jurisdiction, principal and mailing address fields, agentName, agentType, agent address fields, selfAgent, principalIsAgentAddress, sosUrl, sourceUrl; plus COBIZ_XLSX (with Self-agent owners sheet)/CSV.",
+      "storeDescription": "Get new Colorado LLCs, corporations and nonprofits from the official Secretary of State open dataset. Name, type, formation date, principal address, registered agent and a likely-owner flag; filter by city, ZIP, type and name.",
+      "url": "https://apify.com/pandadad0214/colorado-new-business-leads",
+      "pricing": [
+        {
+          "event": "business-returned",
+          "title": "Business returned",
+          "usd": 0.0015
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "daysBack": {
+            "type": "integer",
+            "default": 7,
+            "minimum": 1,
+            "maximum": 366,
+            "description": "Formed in the last N days. Default 7. Matches the Secretary of State formation date. Use 1 or 2 on a daily schedule."
+          },
+          "formedFrom": {
+            "type": "string",
+            "description": "Formed on or after. Optional YYYY-MM-DD; overrides days back."
+          },
+          "formedTo": {
+            "type": "string",
+            "description": "Formed on or before. Optional YYYY-MM-DD."
+          },
+          "cities": {
+            "type": "array",
+            "description": "Cities. Principal-address city (case-insensitive), e.g. Denver, Colorado Springs, Aurora, Fort Collins, Boulder, Lakewood.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "Denver",
+                "Colorado Springs"
+              ]
+            ]
+          },
+          "zipPrefixes": {
+            "type": "array",
+            "description": "ZIP prefixes. Principal ZIP starts-with, e.g. 802 (Denver), 809 (Colorado Springs), 805 (Fort Collins/Boulder area).",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entityTypes": {
+            "type": "array",
+            "description": "Entity types. Empty = all types. Colorado LLCs are about 80% of new filings.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "DLLC",
+                "DPC",
+                "FLLC",
+                "DNC",
+                "FPC",
+                "FNC",
+                "DLLP",
+                "FO",
+                "DLP",
+                "DPC-PBC",
+                "FLP",
+                "DLLLP",
+                "FLLP",
+                "FLLLP",
+                "DLCA",
+                "DLCA-PBC",
+                "DC56",
+                "DC55-PBC"
+              ]
+            }
+          },
+          "nameContains": {
+            "type": "string",
+            "description": "Name contains. Case-insensitive; comma-separate several words to match any, e.g. roofing, construction, landscaping."
+          },
+          "onlySelfAgent": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only self-agent filings (likely owner). Keep rows where the registered agent is a person at the business address, which is usually the owner."
+          },
+          "excludeAgentServices": {
+            "type": "boolean",
+            "default": false,
+            "description": "Exclude agent services and virtual offices. Drop rows whose agent is a commercial registered-agent company, or whose principal address is the agent company's address."
+          },
+          "onlyColoradoAddress": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only Colorado principal address. Drop foreign entities with an out-of-state principal address."
+          },
+          "onlyGoodStanding": {
+            "type": "boolean",
+            "default": true,
+            "description": "Only Good Standing. Default on. Turn off to include withdrawn or dissolved entities formed in the window."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 500,
+            "minimum": 1,
+            "maximum": 10000,
+            "description": "Maximum results. You pay per business returned, so this also caps the cost. Default 500; hard max 10000."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "france_company_leads",
+      "actor": "pandadad0214/france-company-leads",
+      "title": "France Company Leads: SIREN, Directors, Revenue",
+      "description": "Search French companies in the official government company directory (recherche-entreprises.api.gouv.fr: INSEE SIRENE + INPI RNE, Licence Ouverte) and get SIREN, head-office SIRET, intra-EU VAT number, NAF activity code and label, legal form, headcount band, SME/mid-size/large category, creation date, head-office and matching local site address, published revenue and net income, directors and official labels (RGE, Bio, Qualiopi and others). Unlike eu_ted_tenders (EU procurement notices) and local_business_leads (OpenStreetMap shops), this is the French company register. Use when sales, agencies, recruiters or market researchers need French B2B lists by activity, area, size or revenue, or the president or gérant of a company. Do not use for other countries, for emails or phones (not in the source) or for sole traders unless includeSoleTraders is set. Parameters: query (free text: name, brand or director); nafCodes (e.g. 62.01Z software, 43.22B plumbing), sectors, departments (e.g. 69, 75, 2A), postalCodes and regions narrow the area and activity; headcountBands, companyCategories (PME, ETI, GE) and legalForms set size and form; revenueMin/revenueMax and netIncomeMin use published accounts; labels keeps certified firms; createdAfter/createdBefore filter by creation date; requireDirector and requireFinancials drop incomplete rows; onlyActive (default true); maxResults caps billed companies. Companies that opted out of prospecting are always excluded and never billed; runs with no matches are free. Returns per item: agentSummary, siren, siretHq, name, tradeNames, vatNumber, nafCode, nafLabel, legalForm, headcountBand, companyCategory, createdOn, hqAddress, hqPostalCode, hqCity, hqDepartment, revenueEur, netIncomeEur, financialYear, directors, topDirectorName, topDirectorRole, labels, annuaireUrl; plus FRBIZ_XLSX (with Directors sheet)/CSV.",
+      "storeDescription": "Build French B2B lead lists from the official government company directory (SIRENE + RNE). SIREN, SIRET, VAT number, NAF activity, size, address, revenue and directors; filter by NAF, department, size, revenue or label. Opt-outs excluded.",
+      "url": "https://apify.com/pandadad0214/france-company-leads",
+      "pricing": [
+        {
+          "event": "company-returned",
+          "title": "Company returned",
+          "usd": 0.002
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text. Optional free text: company name, brand, address words or a director name, e.g. boulangerie, transport, Dupont. Leave empty to list by filters only."
+          },
+          "nafCodes": {
+            "type": "array",
+            "description": "NAF / APE activity codes. French activity codes, e.g. 62.01Z (software), 43.22B (plumbing/HVAC), 56.10A (restaurants), 69.20Z (accountants), 41.20A (house building). Dots optional.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "62.01Z"
+              ]
+            ]
+          },
+          "sectors": {
+            "type": "array",
+            "description": "Sectors (NAF sections). Broad sector letters. Empty = any.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F",
+                "G",
+                "H",
+                "I",
+                "J",
+                "K",
+                "L",
+                "M",
+                "N",
+                "O",
+                "P",
+                "Q",
+                "R",
+                "S",
+                "T",
+                "U"
+              ]
+            }
+          },
+          "departments": {
+            "type": "array",
+            "description": "Departments. Department codes, e.g. 75 (Paris), 69 (Rhône/Lyon), 13 (Bouches-du-Rhône/Marseille), 33 (Gironde/Bordeaux), 2A. Matches any establishment in the department.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "69"
+              ]
+            ]
+          },
+          "postalCodes": {
+            "type": "array",
+            "description": "Postal codes. 5-digit postal codes, e.g. 75011, 31000.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "regions": {
+            "type": "array",
+            "description": "Regions. INSEE region codes, e.g. 11 (Ile-de-France), 84 (Auvergne-Rhône-Alpes), 93 (Provence-Alpes-Côte d'Azur), 75 (Nouvelle-Aquitaine).",
+            "items": {
+              "type": "string"
+            }
+          },
+          "headcountBands": {
+            "type": "array",
+            "description": "Employee bands. INSEE headcount bands. Empty = any.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "NN",
+                "00",
+                "01",
+                "02",
+                "03",
+                "11",
+                "12",
+                "21",
+                "22",
+                "31",
+                "32",
+                "41",
+                "42",
+                "51",
+                "52",
+                "53"
+              ]
+            }
+          },
+          "companyCategories": {
+            "type": "array",
+            "description": "Company size category. PME (SME), ETI (mid-size), GE (large).",
+            "items": {
+              "type": "string",
+              "enum": [
+                "PME",
+                "ETI",
+                "GE"
+              ]
+            }
+          },
+          "legalForms": {
+            "type": "array",
+            "description": "Legal form codes. INSEE nature juridique codes, e.g. 5710 (SAS), 5720 (SASU), 5499 (SARL), 5498 (EURL), 5599 (SA), 6540 (SCI), 9220 (association).",
+            "items": {
+              "type": "string"
+            }
+          },
+          "revenueMin": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Minimum revenue (EUR). Only companies that published accounts with at least this turnover."
+          },
+          "revenueMax": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Maximum revenue (EUR). Upper turnover bound."
+          },
+          "netIncomeMin": {
+            "type": "integer",
+            "description": "Minimum net income (EUR). Only companies with at least this published net result."
+          },
+          "labels": {
+            "type": "array",
+            "description": "Official labels. Keep companies holding any of these labels.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "est_rge",
+                "est_bio",
+                "est_qualiopi",
+                "est_organisme_formation",
+                "est_ess",
+                "est_societe_mission",
+                "est_entrepreneur_spectacle",
+                "est_patrimoine_vivant",
+                "est_siae",
+                "est_finess",
+                "est_achats_responsables",
+                "egapro_renseignee"
+              ]
+            }
+          },
+          "createdAfter": {
+            "type": "string",
+            "description": "Created on or after. Optional YYYY-MM-DD post-filter on company creation date (checked over up to 10,000 matches; combine with narrow filters)."
+          },
+          "createdBefore": {
+            "type": "string",
+            "description": "Created on or before. Optional YYYY-MM-DD post-filter."
+          },
+          "requireDirector": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only with a named director. Keep companies that list at least one director (gérant, président...)."
+          },
+          "requireFinancials": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only with published revenue. Keep companies whose latest accounts show a revenue figure."
+          },
+          "onlyActive": {
+            "type": "boolean",
+            "default": true,
+            "description": "Only active companies. Default on (etat administratif A)."
+          },
+          "includeSoleTraders": {
+            "type": "boolean",
+            "default": false,
+            "description": "Include sole traders (entrepreneurs individuels). Default off: sole traders are people; most B2B lists skip them."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 200,
+            "minimum": 1,
+            "maximum": 10000,
+            "description": "Maximum results. You pay per company returned, so this also caps the cost. Default 200; the source allows 10,000 matches per query."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "rss_feed_monitor",
+      "actor": "pandadad0214/rss-feed-monitor",
+      "title": "RSS & Atom Feed Monitor: Only New Items",
+      "description": "Watch many RSS 2.0, Atom or JSON Feed URLs, or plain website and blog URLs (the feed is found automatically), and return one row per item with title, link, published date, age, author, plain-text summary, categories, enclosure and matched keywords. With onlyNew (default true) the Actor remembers returned items per stateKey in a named key-value store in your account, so scheduled runs return and bill only items that are new since the last run. Unlike website_change_monitor (diffs a whole page) and federal_register_monitor (US rulemaking only), this follows any site's feed. Use when you need a daily digest of competitor blogs, news, regulator or vendor feeds, filtered by keywords. Do not use for pages without a feed (use website_change_monitor), for full article text or for private or internal addresses (blocked and never billed). Parameters: feeds (up to 500); keywords and excludeKeywords match title, summary and categories; maxAgeHours skips old items; onlyNew and stateKey control the memory (use a different stateKey per watch list); maxItemsPerFeed (default 50); summaryChars (default 500); maxResults caps billed items. Items already seen, failed feeds and empty runs are free; per-feed health is in FEED_STATUS. Returns per item: agentSummary, feedTitle, feedUrl, siteUrl, title, link, published, ageHours, author, summary, categories, enclosureUrl, matchedKeywords, itemKey; plus RSS_XLSX/CSV.",
+      "storeDescription": "Watch many RSS, Atom or JSON feeds (or just website URLs, feed found automatically) and get only the items that are new since your last run. Keyword and age filters; one clean row per item with an agent-ready summary. Excel and CSV.",
+      "url": "https://apify.com/pandadad0214/rss-feed-monitor",
+      "pricing": [
+        {
+          "event": "item-returned",
+          "title": "Feed item returned",
+          "usd": 0.0005
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "feeds": {
+            "type": "array",
+            "description": "Feeds or websites. RSS, Atom or JSON Feed URLs, or plain website/blog URLs (the feed is found automatically). Up to 500 per run.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "https://blog.apify.com",
+                "https://hnrss.org/newest?points=100"
+              ]
+            ]
+          },
+          "keywords": {
+            "type": "array",
+            "description": "Keywords (any). Keep items whose title, summary or categories contain any of these words (case-insensitive). Empty = keep all.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "excludeKeywords": {
+            "type": "array",
+            "description": "Exclude keywords. Drop items containing any of these words.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "maxAgeHours": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Maximum age (hours). Skip items older than this. 0 or empty = any age. Undated items are kept."
+          },
+          "onlyNew": {
+            "type": "boolean",
+            "default": true,
+            "description": "Only new items since last run. Default on. Remembers returned items (per state key) in a named key-value store, so scheduled runs return and charge only new items."
+          },
+          "stateKey": {
+            "type": "string",
+            "description": "State key. Separate memory for different watch lists, e.g. competitors or regulators. Default: default."
+          },
+          "maxItemsPerFeed": {
+            "type": "integer",
+            "default": 50,
+            "minimum": 1,
+            "maximum": 1000,
+            "description": "Max items per feed. Newest N items considered per feed. Default 50."
+          },
+          "summaryChars": {
+            "type": "integer",
+            "default": 500,
+            "minimum": 50,
+            "maximum": 5000,
+            "description": "Summary length (characters). Plain-text summary length per item. Default 500."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 500,
+            "minimum": 1,
+            "maximum": 20000,
+            "description": "Maximum results. You pay per item returned, so this also caps the cost. Default 500."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "sam_gov_opportunities",
+      "actor": "pandadad0214/sam-gov-opportunities",
+      "title": "SAM.gov Contract Opportunities: Open Federal Bids, No API Key",
+      "description": "List current US federal contract opportunities from the official SAM.gov public Contract Opportunities data extract (GSA, refreshed daily, no SAM.gov API key): solicitations, combined synopsis/solicitations, presolicitations, sources sought, special notices and award notices, with title, solicitation number, notice type, posted date, response deadline and days left, department/sub-tier/office, NAICS and PSC codes, set-aside, place of performance, contracting officer name, email and phone, and awardee and amount for award notices. Unlike federal_contract_finder (past USAspending awards, incumbents and recompete dates) and grants_finder (assistance grants), this is open SAM.gov notices you can respond to now. Use when small businesses, GovCon BD teams, proposal writers or subcontractors need new bids by NAICS, PSC, set-aside, agency, state or keyword, or award notices to find primes for teaming. Do not use to download attachments or submit bids (open samUrl on SAM.gov), or for state/local or EU tenders (use eu_ted_tenders). Parameters: daysBack (default 7) or postedFrom/postedTo set the posted window (the file is newest first, so short windows are fast); keywords and excludeKeywords match title and description; naicsCodes and pscCodes are prefix matches (e.g. 5415, D3); setAsides takes SAM codes (SBA, 8A, HZC, SDVOSBC, WOSB, EDWOSB, NONE...); noticeTypes, agencies (department/sub-tier/office contains) and states (place of performance or office state) narrow rows; openOnly (default true) drops passed deadlines but keeps notices with no deadline; minDaysToDeadline keeps biddable notices only; requireContactEmail; descriptionChars (default 600); maxResults caps billed notices. Runs with no matches are free. Returns per item: agentSummary, noticeId, title, solicitationNumber, noticeType, postedDate, responseDeadline, daysToDeadline, department, subTier, office, naicsCode, pscCode, setAsideCode, setAside, popCity, popState, awardDate, awardAmount, awardee, contactName, contactEmail, contactPhone, samUrl, description; plus SAM_XLSX (with By deadline and Award notices sheets)/CSV.",
+      "storeDescription": "Use this to find open federal contract opportunities from the official SAM.gov public data extract, no API key: solicitations, sources sought, award notices. Filter by NAICS, PSC, set-aside, agency, state, deadline. Contacts, Excel.",
+      "url": "https://apify.com/pandadad0214/sam-gov-opportunities",
+      "pricing": [
+        {
+          "event": "opportunity-returned",
+          "title": "Opportunity returned",
+          "usd": 0.0015
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "daysBack": {
+            "type": "integer",
+            "default": 7,
+            "minimum": 1,
+            "maximum": 365,
+            "description": "Posted in the last N days. Default 7. Matches the SAM.gov posted date. Use 1 or 2 on a daily schedule. The source file is newest first, so short windows are fast."
+          },
+          "postedFrom": {
+            "type": "string",
+            "description": "Posted on or after. Optional YYYY-MM-DD; overrides days back."
+          },
+          "postedTo": {
+            "type": "string",
+            "description": "Posted on or before. Optional YYYY-MM-DD."
+          },
+          "keywords": {
+            "type": "array",
+            "description": "Keywords (any). Keep notices whose title or description contains any of these words or phrases (case-insensitive), e.g. janitorial, cybersecurity, HVAC.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "cybersecurity"
+              ]
+            ]
+          },
+          "excludeKeywords": {
+            "type": "array",
+            "description": "Exclude keywords. Drop notices containing any of these words, e.g. brand name only.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "naicsCodes": {
+            "type": "array",
+            "description": "NAICS codes (prefix). Starts-with match, e.g. 5415 (IT services), 541330 (engineering), 236220 (commercial building), 561720 (janitorial).",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pscCodes": {
+            "type": "array",
+            "description": "PSC codes (prefix). Product/service code starts-with, e.g. D3 (IT), R4 (professional services), Z2 (building repair), S2 (housekeeping).",
+            "items": {
+              "type": "string"
+            }
+          },
+          "setAsides": {
+            "type": "array",
+            "description": "Set-asides. Empty = any. NONE keeps notices with no set-aside (full and open).",
+            "items": {
+              "type": "string",
+              "enum": [
+                "SBA",
+                "SBP",
+                "8A",
+                "8AN",
+                "HZC",
+                "HZS",
+                "SDVOSBC",
+                "SDVOSBS",
+                "WOSB",
+                "WOSBSS",
+                "EDWOSB",
+                "EDWOSBSS",
+                "VSA",
+                "VSS",
+                "LAS",
+                "IEE",
+                "ISBEE",
+                "BICiv",
+                "NONE"
+              ]
+            }
+          },
+          "noticeTypes": {
+            "type": "array",
+            "description": "Notice types. Empty = all. Award Notice rows carry the awardee and amount (teaming and subcontracting leads).",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Solicitation",
+                "Combined Synopsis/Solicitation",
+                "Presolicitation",
+                "Sources Sought",
+                "Special Notice",
+                "Award Notice",
+                "Justification",
+                "Sale of Surplus Property",
+                "Consolidate/(Substantially) Bundle"
+              ]
+            }
+          },
+          "agencies": {
+            "type": "array",
+            "description": "Agency contains. Match department, sub-tier or office (case-insensitive), e.g. veterans affairs, army, GSA, NASA.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "states": {
+            "type": "array",
+            "description": "States. Two-letter codes matched on the place of performance or the contracting office state, e.g. AZ, TX, VA.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "openOnly": {
+            "type": "boolean",
+            "default": true,
+            "description": "Open only. Default on. Drops notices whose response deadline has passed. Notices with no deadline (award notices, many special notices) are kept."
+          },
+          "minDaysToDeadline": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 365,
+            "description": "At least N days to deadline. Optional. Keep notices with at least this many days left to respond (drops notices with no deadline)."
+          },
+          "requireContactEmail": {
+            "type": "boolean",
+            "default": false,
+            "description": "Only with a contracting contact email. Keep notices that list a primary point-of-contact email."
+          },
+          "activeOnly": {
+            "type": "boolean",
+            "default": true,
+            "description": "Active notices only. Default on (SAM.gov Active = Yes)."
+          },
+          "descriptionChars": {
+            "type": "integer",
+            "default": 600,
+            "minimum": 0,
+            "maximum": 5000,
+            "description": "Description length. Characters of the notice description to include. Default 600; 0 = none."
+          },
+          "maxResults": {
+            "type": "integer",
+            "default": 500,
+            "minimum": 1,
+            "maximum": 10000,
+            "description": "Maximum results. You pay per notice returned, so this also caps the cost. Default 500; hard max 10000."
           }
         },
         "required": [],

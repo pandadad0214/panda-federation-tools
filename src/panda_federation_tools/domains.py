@@ -18,6 +18,7 @@ DOMAINS: dict[str, frozenset[str]] = {
             "researcher_expert_finder",
             "pdf_table_extractor",
             "wayback_snapshot_finder",
+            "topic_trends_tracker",
         }
     ),
     "public-funding": frozenset(
@@ -30,6 +31,8 @@ DOMAINS: dict[str, frozenset[str]] = {
             "federal_register_monitor",
             "product_recall_monitor",
             "vin_decoder_recalls",
+            "sam_gov_opportunities",
+            "eu_ted_tenders",
         }
     ),
     "leads": frozenset(
@@ -40,7 +43,6 @@ DOMAINS: dict[str, frozenset[str]] = {
             "company_hiring_signals",
             "company_website_enricher",
             "company_team_finder",
-            "topic_trends_tracker",
             "trucking_company_leads",
             "nonprofit_leads_irs",
             "building_permit_leads",
@@ -48,7 +50,8 @@ DOMAINS: dict[str, frozenset[str]] = {
             "texas_new_business_leads",
             "new_york_new_business_leads",
             "h1b_lca_sponsor_leads",
-            "eu_ted_tenders",
+            "colorado_new_business_leads",
+            "france_company_leads",
         }
     ),
     "web-security": frozenset(
@@ -59,6 +62,7 @@ DOMAINS: dict[str, frozenset[str]] = {
             "hidden_ai_instructions_scanner",
             "bulk_domain_whois_expiry",
             "broken_link_checker",
+            "rss_feed_monitor",
         }
     ),
 }
@@ -72,22 +76,22 @@ DOMAIN_META: dict[str, dict[str, str]] = {
         "title": "Panda Research Tools",
         "scope": (
             "Scholarly integrity and papers: citation checks, literature/PubMed search, experts, PDF tables, "
-            "Wayback Machine snapshots."
+            "Wayback Machine snapshots, topic trends."
         ),
         # Copied into each domain repo's server.json; must stay <= REGISTRY_DESCRIPTION_MAX.
         "registry_description": (
-            "Scholarly integrity — citations, literature/PubMed, experts, PDF tables, Wayback (7 tools)."
+            "Scholarly integrity — citations, literature/PubMed, experts, PDF tables, Wayback, trends (8 tools)."
         ),
     },
     "public-funding": {
         "package": "panda-public-funding-tools",
         "title": "Panda Public Funding Tools",
         "scope": (
-            "US federal money, filings and safety monitors: grants, contracts, SBIR/STTR, SEC, "
-            "clinical trials, Federal Register, recalls, VIN decode."
+            "Public money, filings and safety monitors: grants, contracts, SAM.gov bids, SBIR/STTR, SEC, "
+            "clinical trials, Federal Register, recalls, VIN decode, EU tenders."
         ),
         "registry_description": (
-            "US federal filings & safety — grants, contracts, SBIR, SEC, trials, FedReg, recalls, VIN (8 tools)."
+            "Public money & safety: grants, contracts, SAM.gov bids, SBIR, SEC, FedReg, recalls, EU tenders (10)."
         ),
     },
     "leads": {
@@ -95,11 +99,11 @@ DOMAIN_META: dict[str, dict[str, str]] = {
         "title": "Panda Leads Tools",
         "scope": (
             "Public leads and enrichment: NPI, podcasts, local businesses, hiring, websites, teams, "
-            "trends, trucking, IRS nonprofits, building permits, new Florida, Texas and New York businesses, "
-            "H-1B sponsors, EU tenders."
+            "trucking, IRS nonprofits, building permits, new Florida, Texas, New York and Colorado businesses, "
+            "H-1B sponsors, French companies."
         ),
         "registry_description": (
-            "Public leads from official data: NPI, local, hiring, trucking, IRS, permits, H-1B, tenders (15)."
+            "Public leads from official data: NPI, local, hiring, trucking, IRS, permits, new firms, France (15)."
         ),
     },
     "web-security": {
@@ -107,10 +111,10 @@ DOMAIN_META: dict[str, dict[str, str]] = {
         "title": "Panda Web Security Tools",
         "scope": (
             "Site, email and agent safety: SPF/DKIM/DMARC, AI/SEO audit, page-change monitor, hidden AI instructions, "
-            "domain WHOIS/expiry, broken links."
+            "domain WHOIS/expiry, broken links, RSS feed monitor."
         ),
         "registry_description": (
-            "Site/email/agent safety from public data: SPF/DKIM, SEO, monitor, hidden-AI, WHOIS, links (6)."
+            "Site/email/agent safety and monitors: SPF/DKIM, SEO, change + RSS monitors, hidden-AI, WHOIS (7)."
         ),
     },
 }
