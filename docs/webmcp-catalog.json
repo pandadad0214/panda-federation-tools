@@ -1,0 +1,529 @@
+{
+  "version": "2026-11-10",
+  "generated_at": "2026-11-10T10:23:00-07:00",
+  "source": "Panda Federation public catalog. Tool counts come from this file, not from page copy.",
+  "site": {
+    "name": "Panda Federation Tools",
+    "description": "40 public-data tools in four focused MCP servers: research, public funding, leads and web security.",
+    "url": "https://pandadad0214.github.io/panda-federation-tools/",
+    "links": {
+      "github": "https://github.com/pandadad0214",
+      "official_site": "https://pandafederation.com/",
+      "tools_docs": "https://pandadad0214.github.io/panda-federation-tools/",
+      "pypi": "https://pypi.org/project/panda-federation-tools/",
+      "mcp_registry": "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.pandadad0214",
+      "apify": "https://apify.com/pandadad0214",
+      "product_hunt": "https://www.producthunt.com/products/panda-federation-tools",
+      "x": "https://x.com/Pandadad0214",
+      "agensi": "https://www.agensi.io/creators/panda-federation",
+      "llms_txt": "https://pandadad0214.github.io/panda-federation-tools/llms.txt",
+      "catalog": "https://pandadad0214.github.io/panda-federation-tools/webmcp-catalog.json"
+    }
+  },
+  "counts": {
+    "focused_mcp_servers": 4,
+    "focused_tools": 40,
+    "research": 8,
+    "public_funding": 10,
+    "leads": 15,
+    "web_security": 7
+  },
+  "servers": [
+    {
+      "id": "panda-research-tools",
+      "name": "Panda Research Tools",
+      "tool_count": 8,
+      "description": "8 research-integrity tools: citation checks, OpenAlex and literature search, PubMed evidence tables, experts, PDF tables, Wayback snapshots and topic trends.",
+      "repo": "https://github.com/pandadad0214/panda-research-tools",
+      "homepage": "https://pandadad0214.github.io/panda-federation-tools/",
+      "pypi": "https://pypi.org/project/panda-research-tools/",
+      "pypi_version": "0.2.0",
+      "registry": "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.pandadad0214/panda-research-tools",
+      "listings": {
+        "glama": "https://glama.ai/mcp/servers/pandadad0214/panda-research-tools",
+        "mcprepository": "https://mcprepository.com/pandadad0214/panda-research-tools"
+      },
+      "install": {
+        "uvx": "uvx --from panda-federation-tools panda-research-tools",
+        "args": [
+          "--from",
+          "panda-federation-tools",
+          "panda-research-tools"
+        ],
+        "requires": [
+          "APIFY_TOKEN"
+        ]
+      },
+      "tools": [
+        {
+          "name": "citation_formatter",
+          "title": "Citation Generator API",
+          "description": "Turn DOIs, ISBNs, PMIDs, arXiv IDs or messy references into APA, MLA, Chicago, Harvard, IEEE, Vancouver, BibTeX or RIS.",
+          "apify": "https://apify.com/pandadad0214/citation-formatter",
+          "url": "https://apify.com/pandadad0214/citation-formatter"
+        },
+        {
+          "name": "literature_search",
+          "title": "Google Scholar Scraper Alternative",
+          "description": "Find real scholarly papers on a topic, with citation counts, free PDF links, retraction flags and BibTeX.",
+          "apify": "https://apify.com/pandadad0214/literature-search",
+          "url": "https://apify.com/pandadad0214/literature-search"
+        },
+        {
+          "name": "pdf_table_extractor",
+          "title": "PDF Table Extractor",
+          "description": "Extract every table in a PDF to Excel and CSV, with OCR for scanned pages.",
+          "apify": "https://apify.com/pandadad0214/pdf-table-extractor",
+          "url": "https://apify.com/pandadad0214/pdf-table-extractor"
+        },
+        {
+          "name": "pubmed_evidence_table",
+          "title": "PubMed Scraper",
+          "description": "Build a screening-ready PubMed evidence table with study design, sample size, retraction status and PRISMA counts.",
+          "apify": "https://apify.com/pandadad0214/pubmed-evidence-table",
+          "url": "https://apify.com/pandadad0214/pubmed-evidence-table"
+        },
+        {
+          "name": "reference_checker",
+          "title": "Reference Checker",
+          "description": "Check whether references, DOIs or paper titles are real, correctly cited and not retracted.",
+          "apify": "https://apify.com/pandadad0214/reference-checker",
+          "url": "https://apify.com/pandadad0214/reference-checker"
+        },
+        {
+          "name": "researcher_expert_finder",
+          "title": "Google Scholar Author Alternative",
+          "description": "Rank academic experts and key opinion leaders for a research topic.",
+          "apify": "https://apify.com/pandadad0214/researcher-expert-finder",
+          "url": "https://apify.com/pandadad0214/researcher-expert-finder"
+        },
+        {
+          "name": "wayback_snapshot_finder",
+          "title": "Wayback Machine Snapshot Finder",
+          "description": "Find Internet Archive CDX snapshot timestamps, archive URLs and first/last-seen dates for URLs or domains.",
+          "apify": "https://apify.com/pandadad0214/wayback-snapshot-finder",
+          "url": "https://apify.com/pandadad0214/wayback-snapshot-finder"
+        },
+        {
+          "name": "topic_trends_tracker",
+          "title": "Topic Trends Tracker",
+          "description": "Measure public interest in topics over time from Wikipedia pageviews, with trend, peaks and an interest index.",
+          "apify": "https://apify.com/pandadad0214/topic-trends-tracker",
+          "url": "https://apify.com/pandadad0214/topic-trends-tracker"
+        }
+      ]
+    },
+    {
+      "id": "panda-public-funding-tools",
+      "name": "Panda Public Funding Tools",
+      "tool_count": 10,
+      "description": "10 public-funding tools: grants, contracts, SAM.gov bids, SBIR/STTR, SEC financials, clinical trials, Federal Register, recalls, VIN decode and EU tenders.",
+      "repo": "https://github.com/pandadad0214/panda-public-funding-tools",
+      "homepage": "https://pandadad0214.github.io/panda-federation-tools/",
+      "pypi": "https://pypi.org/project/panda-public-funding-tools/",
+      "pypi_version": "0.2.0",
+      "registry": "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.pandadad0214/panda-public-funding-tools",
+      "listings": {
+        "glama": "https://glama.ai/mcp/servers/pandadad0214/panda-public-funding-tools",
+        "mcprepository": "https://mcprepository.com/pandadad0214/panda-public-funding-tools",
+        "cursor_directory": "https://cursor.directory/plugins/panda-public-funding-tools"
+      },
+      "install": {
+        "uvx": "uvx --from panda-federation-tools panda-public-funding-tools",
+        "args": [
+          "--from",
+          "panda-federation-tools",
+          "panda-public-funding-tools"
+        ],
+        "requires": [
+          "APIFY_TOKEN"
+        ]
+      },
+      "tools": [
+        {
+          "name": "clinical_trial_leads",
+          "title": "Clinical Trial Leads",
+          "description": "Find ClinicalTrials.gov trials by condition, drug, sponsor, phase, status or location, with contacts and sites.",
+          "apify": "https://apify.com/pandadad0214/clinical-trial-leads",
+          "url": "https://apify.com/pandadad0214/clinical-trial-leads"
+        },
+        {
+          "name": "federal_contract_finder",
+          "title": "USAspending Scraper",
+          "description": "Find US federal contract awards, incumbents and contracts ending soon by NAICS, PSC, agency, state or set-aside.",
+          "apify": "https://apify.com/pandadad0214/federal-contract-finder",
+          "url": "https://apify.com/pandadad0214/federal-contract-finder"
+        },
+        {
+          "name": "federal_register_monitor",
+          "title": "Federal Register Monitor",
+          "description": "Watch new US federal rules, proposed rules and notices by keyword or agency, with comment deadlines.",
+          "apify": "https://apify.com/pandadad0214/federal-register-monitor",
+          "url": "https://apify.com/pandadad0214/federal-register-monitor"
+        },
+        {
+          "name": "grants_finder",
+          "title": "Grants.gov Scraper",
+          "description": "Find open or upcoming US federal grant opportunities plus funded NIH and NSF awards.",
+          "apify": "https://apify.com/pandadad0214/grants-finder",
+          "url": "https://apify.com/pandadad0214/grants-finder"
+        },
+        {
+          "name": "product_recall_monitor",
+          "title": "Product Recall Monitor",
+          "description": "Combine FDA and CPSC recalls in one feed, with product, hazard, firm, class and status.",
+          "apify": "https://apify.com/pandadad0214/product-recall-monitor",
+          "url": "https://apify.com/pandadad0214/product-recall-monitor"
+        },
+        {
+          "name": "sbir_sttr_topic_radar",
+          "title": "SBIR/STTR Topic Radar",
+          "description": "Search open SBIR/STTR topics from every agency by keyword, with close dates and DoD Q&A.",
+          "apify": "https://apify.com/pandadad0214/sbir-sttr-topic-radar",
+          "url": "https://apify.com/pandadad0214/sbir-sttr-topic-radar"
+        },
+        {
+          "name": "sec_financials_excel",
+          "title": "SEC Financials to Excel",
+          "description": "Pull standardized annual financials for US-listed companies from SEC EDGAR XBRL.",
+          "apify": "https://apify.com/pandadad0214/sec-financials-excel",
+          "url": "https://apify.com/pandadad0214/sec-financials-excel"
+        },
+        {
+          "name": "vin_decoder_recalls",
+          "title": "VIN Decoder + Recalls",
+          "description": "Bulk-decode VINs with NHTSA vPIC and attach recall campaigns and complaint counts.",
+          "apify": "https://apify.com/pandadad0214/vin-decoder-recalls",
+          "url": "https://apify.com/pandadad0214/vin-decoder-recalls"
+        },
+        {
+          "name": "sam_gov_opportunities",
+          "title": "SAM.gov Contract Opportunities",
+          "description": "List open US federal bids from the official SAM.gov public extract, with contacts and deadlines.",
+          "apify": "https://apify.com/pandadad0214/sam-gov-opportunities",
+          "url": "https://apify.com/pandadad0214/sam-gov-opportunities"
+        },
+        {
+          "name": "eu_ted_tenders",
+          "title": "EU TED Tenders",
+          "description": "Search official EU TED public procurement notices by keyword, CPV, buyer country and date.",
+          "apify": "https://apify.com/pandadad0214/eu-ted-tenders",
+          "url": "https://apify.com/pandadad0214/eu-ted-tenders"
+        }
+      ]
+    },
+    {
+      "id": "panda-leads-tools",
+      "name": "Panda Leads Tools",
+      "tool_count": 15,
+      "description": "15 public lead tools: NPI, podcasts, local businesses, hiring, enrichment, teams, trucking, IRS nonprofits, building permits, new Florida, Texas, New York and Colorado businesses, H-1B sponsors and French companies.",
+      "repo": "https://github.com/pandadad0214/panda-leads-tools",
+      "homepage": "https://pandadad0214.github.io/panda-federation-tools/",
+      "pypi": "https://pypi.org/project/panda-leads-tools/",
+      "pypi_version": "0.2.0",
+      "registry": "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.pandadad0214/panda-leads-tools",
+      "listings": {
+        "glama": "https://glama.ai/mcp/servers/pandadad0214/panda-leads-tools",
+        "mcprepository": "https://mcprepository.com/pandadad0214/panda-leads-tools"
+      },
+      "install": {
+        "uvx": "uvx --from panda-federation-tools panda-leads-tools",
+        "args": [
+          "--from",
+          "panda-federation-tools",
+          "panda-leads-tools"
+        ],
+        "requires": [
+          "APIFY_TOKEN"
+        ]
+      },
+      "tools": [
+        {
+          "name": "building_permit_leads",
+          "title": "Building Permit Leads",
+          "description": "Find newly issued US city building permits with address, trade, job value, contractor and owner.",
+          "apify": "https://apify.com/pandadad0214/building-permit-leads",
+          "url": "https://apify.com/pandadad0214/building-permit-leads"
+        },
+        {
+          "name": "company_hiring_signals",
+          "title": "Company Hiring Signals",
+          "description": "See whether companies are hiring from their public ATS boards, with scores and keyword hits.",
+          "apify": "https://apify.com/pandadad0214/company-hiring-signals",
+          "url": "https://apify.com/pandadad0214/company-hiring-signals"
+        },
+        {
+          "name": "company_team_finder",
+          "title": "Company Team & Decision-Maker Finder",
+          "description": "Find leaders and decision makers from a company's own public team pages, without scraping LinkedIn.",
+          "apify": "https://apify.com/pandadad0214/company-team-finder",
+          "url": "https://apify.com/pandadad0214/company-team-finder"
+        },
+        {
+          "name": "company_website_enricher",
+          "title": "Company Website Enricher",
+          "description": "Enrich company domains with name, description, published contacts, social links, tech and domain age.",
+          "apify": "https://apify.com/pandadad0214/company-website-enricher",
+          "url": "https://apify.com/pandadad0214/company-website-enricher"
+        },
+        {
+          "name": "colorado_new_business_leads",
+          "title": "Colorado New Business Leads",
+          "description": "List newly formed Colorado LLCs, corporations and nonprofits from official Secretary of State open data.",
+          "apify": "https://apify.com/pandadad0214/colorado-new-business-leads",
+          "url": "https://apify.com/pandadad0214/colorado-new-business-leads"
+        },
+        {
+          "name": "florida_new_business_leads",
+          "title": "Florida New Business Leads",
+          "description": "List new Florida LLCs, corporations and nonprofits from official Sunbiz daily files.",
+          "apify": "https://apify.com/pandadad0214/florida-new-business-leads",
+          "url": "https://apify.com/pandadad0214/florida-new-business-leads"
+        },
+        {
+          "name": "france_company_leads",
+          "title": "France Company Leads",
+          "description": "Find French companies from the official SIRENE + RNE directory, with directors and prospecting opt-outs excluded.",
+          "apify": "https://apify.com/pandadad0214/france-company-leads",
+          "url": "https://apify.com/pandadad0214/france-company-leads"
+        },
+        {
+          "name": "h1b_lca_sponsor_leads",
+          "title": "H-1B LCA Visa Sponsor Leads",
+          "description": "Search DOL H-1B LCA disclosure rows and roll them up by employer.",
+          "apify": "https://apify.com/pandadad0214/h1b-lca-sponsor-leads",
+          "url": "https://apify.com/pandadad0214/h1b-lca-sponsor-leads"
+        },
+        {
+          "name": "local_business_leads",
+          "title": "Local Business Leads",
+          "description": "Find local businesses of a type in a city or radius from OpenStreetMap, with published contact details.",
+          "apify": "https://apify.com/pandadad0214/local-business-leads",
+          "url": "https://apify.com/pandadad0214/local-business-leads"
+        },
+        {
+          "name": "new_york_new_business_leads",
+          "title": "New York New Business Leads",
+          "description": "List newly filed New York entities from official Department of State open data.",
+          "apify": "https://apify.com/pandadad0214/new-york-new-business-leads",
+          "url": "https://apify.com/pandadad0214/new-york-new-business-leads"
+        },
+        {
+          "name": "nonprofit_leads_irs",
+          "title": "Nonprofit Leads",
+          "description": "Build nonprofit and foundation lists from the IRS Exempt Organizations file.",
+          "apify": "https://apify.com/pandadad0214/nonprofit-leads-irs",
+          "url": "https://apify.com/pandadad0214/nonprofit-leads-irs"
+        },
+        {
+          "name": "npi_provider_lists",
+          "title": "NPI Registry Scraper",
+          "description": "Build de-duplicated lists of US healthcare providers from the official NPI Registry.",
+          "apify": "https://apify.com/pandadad0214/npi-provider-lists",
+          "url": "https://apify.com/pandadad0214/npi-provider-lists"
+        },
+        {
+          "name": "podcast_leads_finder",
+          "title": "Podcast Leads Finder",
+          "description": "Find active podcasts on a topic with the host, published contact email and guest-friendly signals.",
+          "apify": "https://apify.com/pandadad0214/podcast-leads-finder",
+          "url": "https://apify.com/pandadad0214/podcast-leads-finder"
+        },
+        {
+          "name": "texas_new_business_leads",
+          "title": "Texas New Business Leads",
+          "description": "List newly registered Texas businesses from the Comptroller Active Franchise Taxpayers file.",
+          "apify": "https://apify.com/pandadad0214/texas-new-business-leads",
+          "url": "https://apify.com/pandadad0214/texas-new-business-leads"
+        },
+        {
+          "name": "trucking_company_leads",
+          "title": "Trucking Company Leads",
+          "description": "Find US trucking companies, brokers or forwarders from official FMCSA open data.",
+          "apify": "https://apify.com/pandadad0214/trucking-company-leads",
+          "url": "https://apify.com/pandadad0214/trucking-company-leads"
+        }
+      ]
+    },
+    {
+      "id": "panda-web-security-tools",
+      "name": "Panda Web Security Tools",
+      "tool_count": 7,
+      "description": "7 site and email safety tools: SPF/DKIM/DMARC, AI/SEO audit, hidden-AI scanner, domain WHOIS/expiry, broken links, website change monitor and RSS feed monitor.",
+      "repo": "https://github.com/pandadad0214/panda-web-security-tools",
+      "homepage": "https://pandadad0214.github.io/panda-federation-tools/",
+      "pypi": "https://pypi.org/project/panda-web-security-tools/",
+      "pypi_version": "0.2.0",
+      "registry": "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.pandadad0214/panda-web-security-tools",
+      "listings": {
+        "glama": "https://glama.ai/mcp/servers/pandadad0214/panda-web-security-tools",
+        "mcprepository": "https://mcprepository.com/pandadad0214/panda-web-security-tools"
+      },
+      "install": {
+        "uvx": "uvx --from panda-federation-tools panda-web-security-tools",
+        "args": [
+          "--from",
+          "panda-federation-tools",
+          "panda-web-security-tools"
+        ],
+        "requires": [
+          "APIFY_TOKEN"
+        ]
+      },
+      "tools": [
+        {
+          "name": "ai_search_seo_audit",
+          "title": "AI Search & SEO Audit",
+          "description": "Score SEO and AI-search readiness for web pages, including crawler access, ranked fixes and an llms.txt draft.",
+          "apify": "https://apify.com/pandadad0214/ai-search-seo-audit",
+          "url": "https://apify.com/pandadad0214/ai-search-seo-audit"
+        },
+        {
+          "name": "broken_link_checker",
+          "title": "Broken Link Checker",
+          "description": "Crawl start pages and report 404s, redirects and dead links with an Excel report.",
+          "apify": "https://apify.com/pandadad0214/broken-link-checker",
+          "url": "https://apify.com/pandadad0214/broken-link-checker"
+        },
+        {
+          "name": "bulk_domain_whois_expiry",
+          "title": "Bulk Domain WHOIS & Expiry Checker",
+          "description": "Look up registrar, created and expiry dates, locks and nameservers for many domains via official RDAP.",
+          "apify": "https://apify.com/pandadad0214/bulk-domain-whois-expiry",
+          "url": "https://apify.com/pandadad0214/bulk-domain-whois-expiry"
+        },
+        {
+          "name": "email_domain_security_checker",
+          "title": "SPF, DKIM & DMARC Checker",
+          "description": "Check whether domains have SPF, DKIM, DMARC, MTA-STS and BIMI set up correctly.",
+          "apify": "https://apify.com/pandadad0214/email-domain-security-checker",
+          "url": "https://apify.com/pandadad0214/email-domain-security-checker"
+        },
+        {
+          "name": "hidden_ai_instructions_scanner",
+          "title": "Hidden AI Instructions Scanner",
+          "description": "Find text hidden from people but aimed at AI agents, with technique, location, excerpt and category.",
+          "apify": "https://apify.com/pandadad0214/hidden-ai-instructions-scanner",
+          "url": "https://apify.com/pandadad0214/hidden-ai-instructions-scanner"
+        },
+        {
+          "name": "rss_feed_monitor",
+          "title": "RSS & Atom Feed Monitor",
+          "description": "Return only the new items from many RSS, Atom or JSON feeds since the last run.",
+          "apify": "https://apify.com/pandadad0214/rss-feed-monitor",
+          "url": "https://apify.com/pandadad0214/rss-feed-monitor"
+        },
+        {
+          "name": "website_change_monitor",
+          "title": "Website Change Monitor",
+          "description": "See whether public web pages changed since the last check and what changed.",
+          "apify": "https://apify.com/pandadad0214/website-change-monitor",
+          "url": "https://apify.com/pandadad0214/website-change-monitor"
+        }
+      ]
+    },
+    {
+      "id": "panda-federation-tools",
+      "name": "Panda Federation Tools (umbrella)",
+      "tool_count": 40,
+      "description": "Index package for all 40 public-data tools across the four focused servers. Prefer a focused server unless an older config still loads the umbrella.",
+      "repo": "https://github.com/pandadad0214/panda-federation-tools",
+      "homepage": "https://pandadad0214.github.io/panda-federation-tools/",
+      "pypi": "https://pypi.org/project/panda-federation-tools/",
+      "pypi_version": "1.8.0",
+      "registry": "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.pandadad0214",
+      "listings": {
+        "glama": "https://glama.ai/mcp/servers/pandadad0214/panda-federation-tools",
+        "mcprepository": "https://mcprepository.com/pandadad0214/panda-federation-tools"
+      },
+      "install": {
+        "uvx": "uvx panda-federation-tools",
+        "args": [
+          "panda-federation-tools"
+        ],
+        "requires": [
+          "APIFY_TOKEN"
+        ],
+        "notes": "The umbrella lists every tool when PFT_DOMAIN is unset, or one domain when PFT_DOMAIN is research, public-funding, leads or web-security. Prefer a focused server for new installs."
+      },
+      "tools": [],
+      "related": [
+        "panda-research-tools",
+        "panda-public-funding-tools",
+        "panda-leads-tools",
+        "panda-web-security-tools"
+      ]
+    }
+  ],
+  "editions": [
+    {
+      "product": "Quiet File Team",
+      "editions": [
+        {
+          "name": "Free MCP companion",
+          "kind": "free",
+          "url": "https://pandafederation.com/quiet-file-team-mcp/",
+          "notes": "Six offline MCP tools. Install with uvx from the GitHub repo."
+        },
+        {
+          "name": "Free Bash core",
+          "kind": "free",
+          "url": "https://github.com/pandadad0214/quiet-file-team",
+          "notes": "Clone the repo, set TEAM_DIR, and follow the README."
+        },
+        {
+          "name": "Quiet File Team Setup Kit",
+          "kind": "paid",
+          "url": "https://agensi.io/skills/quiet-file-team-setup-kit",
+          "notes": "Paid Agensi skill. Guided local install and practice files. Live price is on the listing."
+        },
+        {
+          "name": "Setup kit generator",
+          "kind": "paid",
+          "url": "https://apify.com/pandadad0214/quiet-file-team-setup",
+          "notes": "Paid Apify Actor that builds a configured starter ZIP. Live price is on the Store page."
+        }
+      ]
+    },
+    {
+      "product": "Hidden AI Instructions Scanner",
+      "editions": [
+        {
+          "name": "Free scanner (Actor and MCP tool)",
+          "kind": "free",
+          "url": "https://apify.com/pandadad0214/hidden-ai-instructions-scanner",
+          "notes": "Also available as hidden_ai_instructions_scanner in panda-web-security-tools."
+        },
+        {
+          "name": "Public evidence log",
+          "kind": "free",
+          "url": "https://github.com/pandadad0214/hidden-ai-instructions-watch",
+          "notes": "Evidence-only log of public pages, with method and corrections process."
+        }
+      ]
+    },
+    {
+      "product": "Manual Remake",
+      "editions": [
+        {
+          "name": "Free sample",
+          "kind": "free",
+          "url": "https://apify.com/pandadad0214/manual-remake",
+          "notes": "Free sample and paid remake editions are both on the Apify Store listing."
+        },
+        {
+          "name": "Paid remake",
+          "kind": "paid",
+          "url": "https://apify.com/pandadad0214/manual-remake",
+          "notes": "Live price is on the Store page."
+        },
+        {
+          "name": "Free Agensi skill",
+          "kind": "free",
+          "url": "https://www.agensi.io/creators/panda-federation",
+          "notes": "The free skill is listed on the Panda Federation Agensi creator page."
+        }
+      ]
+    }
+  ]
+}

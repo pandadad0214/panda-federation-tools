@@ -1,0 +1,33 @@
+# Panda Federation Tools
+
+> 40 public-data tools in four focused MCP servers: research (8), public funding (10), leads (15) and web security (7). Official or public sources. Pay per result. MIT.
+
+Catalog (source of tool counts): https://pandadad0214.github.io/panda-federation-tools/webmcp-catalog.json
+
+This GitHub Pages site exposes read-only WebMCP tools: list_servers, list_tools, search_tools, get_install_command, get_links, list_editions.
+
+## Install
+
+Needs `APIFY_TOKEN`. Prefer one focused server:
+
+- `uvx --from panda-federation-tools panda-research-tools`
+- `uvx --from panda-federation-tools panda-public-funding-tools`
+- `uvx --from panda-federation-tools panda-leads-tools`
+- `uvx --from panda-federation-tools panda-web-security-tools`
+- Umbrella (all 40, or set `PFT_DOMAIN`): `uvx panda-federation-tools`
+
+MCP client config example:
+
+```json
+{"mcpServers":{"panda-research-tools":{"command":"uvx","args":["--from","panda-federation-tools","panda-research-tools"],"env":{"APIFY_TOKEN":"${APIFY_TOKEN}"}}}}
+```
+
+## Links
+
+- GitHub: https://github.com/pandadad0214/panda-federation-tools
+- PyPI: https://pypi.org/project/panda-federation-tools/
+- Official MCP Registry: https://registry.modelcontextprotocol.io/v0/servers?search=io.github.pandadad0214
+- Apify Store: https://apify.com/pandadad0214
+- Product Hunt: https://www.producthunt.com/products/panda-federation-tools
+- Official site: https://pandafederation.com/
+- Longer agent notes: https://github.com/pandadad0214/panda-federation-tools/blob/main/llms.txt

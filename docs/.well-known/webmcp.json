@@ -1,0 +1,21 @@
+{
+  "version": "1",
+  "name": "Panda Federation Tools",
+  "description": "40 public-data MCP tools in four focused servers.",
+  "url": "https://pandadad0214.github.io/panda-federation-tools/",
+  "spec": "https://webmachinelearning.github.io/webmcp/",
+  "catalog": "https://pandadad0214.github.io/panda-federation-tools/webmcp-catalog.json",
+  "llms_txt": "https://pandadad0214.github.io/panda-federation-tools/llms.txt",
+  "tools": [
+    "list_servers",
+    "list_tools",
+    "search_tools",
+    "get_install_command",
+    "get_links",
+    "list_editions"
+  ],
+  "registration": "document.modelContext.registerTool",
+  "annotations": {
+    "readOnlyHint": true
+  }
+}
