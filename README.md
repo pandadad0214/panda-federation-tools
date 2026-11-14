@@ -11,6 +11,7 @@ Give Claude, Cursor or any MCP client 40 public-data tools for research, US fede
 [![Apify Store](https://img.shields.io/badge/Apify_Store-pandadad0214-00a3ff)](https://apify.com/pandadad0214)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Approved on SaaSHub](https://cdn-b.saashub.com/img/badges/approved-color.png?v=1)](https://www.saashub.com/panda-federation-tools?utm_source=badge&utm_campaign=badge&utm_content=panda-federation-tools&badge_variant=color&badge_kind=approved)
 
 **[⬇ Download the latest Release](https://github.com/pandadad0214/panda-federation-tools/releases/latest)** · [Changelog](CHANGELOG.md)
 
