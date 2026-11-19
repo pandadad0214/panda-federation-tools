@@ -13,6 +13,7 @@ Give Claude, Cursor or any MCP client 40 public-data tools for research, US fede
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Approved on SaaSHub](https://cdn-b.saashub.com/img/badges/approved-color.png?v=1)](https://www.saashub.com/panda-federation-tools?utm_source=badge&utm_campaign=badge&utm_content=panda-federation-tools&badge_variant=color&badge_kind=approved)
 [![Listed on Submit AI Tools](https://submitaitools.org/static_submitaitools/images/submitaitools.png)](https://submitaitools.org/pandadad0214-github-io-panda-federation-tools/)
+[![Featured on TrustedMCP](https://trustedmcp.io/badge/s/5i9jxtssjsksrhl6bhv6.svg)](https://trustedmcp.io/l/5i9jxtssjsksrhl6bhv6)
 
 **[⬇ Download the latest Release](https://github.com/pandadad0214/panda-federation-tools/releases/latest)** · [Changelog](CHANGELOG.md)
 
