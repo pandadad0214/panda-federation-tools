@@ -1,5 +1,7 @@
 # Panda Federation Tools
 
+<!-- mcp-name: io.github.pandadad0214/panda-federation-tools -->
+
 Give Claude, Cursor or any MCP client 40 public-data tools for research, US federal funding, B2B leads and web security, split into four focused servers. Each tool runs an Apify Actor on your own Apify account over official open data, priced per result (most $0.001–$0.004), and the free plan's $5 monthly credit covers trying them.
 
 [![PyPI](https://img.shields.io/pypi/v/panda-federation-tools)](https://pypi.org/project/panda-federation-tools/)
@@ -265,7 +267,7 @@ Also on Apify: the hosted [Academic Research MCP Server](https://apify.com/panda
 
 ## Hosted options (no install)
 
-- **Academic Research MCP Server (Streamable HTTP):** `https://pandadad0214--panda-research-mcp.apify.actor/mcp` with header `Authorization: Bearer <your Apify token>`. Four research tools (`check_references`, `format_citations`, `search_literature`, `pubmed_evidence_table`). This is the server listed in the official MCP Registry as `io.github.pandadad0214/panda-research-mcp` ([server.json](server.json)) — a hosted research subset, not the full index.
+- **Academic Research MCP Server (Streamable HTTP):** `https://pandadad0214--panda-research-mcp.apify.actor/mcp` with header `Authorization: Bearer <your Apify token>`. Four research tools (`check_references`, `format_citations`, `search_literature`, `pubmed_evidence_table`). This is the server listed in the official MCP Registry as `io.github.pandadad0214/panda-research-mcp` ([server.json](server.json)) — a hosted research subset, not the full index. The full stdio umbrella is `io.github.pandadad0214/panda-federation-tools` ([server-federation-tools.json](server-federation-tools.json)).
 - **Apify's MCP server:** `https://mcp.apify.com` can call any of these Actors as `pandadad0214/<slug>`.
 - **Plain HTTP API:**
 

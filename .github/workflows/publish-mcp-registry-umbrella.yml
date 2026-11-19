@@ -1,0 +1,44 @@
+name: Publish umbrella to MCP Registry
+
+# Publishes server-federation-tools.json (io.github.pandadad0214/panda-federation-tools)
+# to the official MCP Registry. The existing publish-mcp-registry.yml workflow
+# still publishes server.json (the hosted research subset).
+# Uses GitHub OIDC, so no registry token is stored in this repository.
+on:
+  workflow_dispatch:
+  # Not tied to v* tags: those tags already publish the hosted research subset
+  # from server.json. Dispatch this workflow after a matching PyPI version is live
+  # and the README carries the mcp-name line.
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      MCP_PUBLISHER_VERSION: v1.8.7
+      MCP_PUBLISHER_SHA256: 00b21004149a4ce66f0782508ae4a2bce67d1bea395a8da0bd8028159fb59579
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check umbrella server.json matches PyPI package version and name
+        run: |
+          test "$(python3 -c 'import json;print(json.load(open("server-federation-tools.json"))["name"])')" = "io.github.pandadad0214/panda-federation-tools"
+          test "$(python3 -c 'import json;print(json.load(open("server-federation-tools.json"))["version"])')" = "$(python3 -c 'import tomllib;print(tomllib.load(open("pyproject.toml","rb"))["project"]["version"])')"
+          test "$(python3 -c 'import json;print(json.load(open("server-federation-tools.json"))["packages"][0]["version"])')" = "$(python3 -c 'import tomllib;print(tomllib.load(open("pyproject.toml","rb"))["project"]["version"])')"
+          test "$(python3 -c 'import json;print(json.load(open("server-federation-tools.json"))["packages"][0]["identifier"])')" = "panda-federation-tools"
+          grep -q "mcp-name: io.github.pandadad0214/panda-federation-tools" README.md
+      - name: Install mcp-publisher (pinned, checksum verified)
+        run: |
+          curl -fsSL -o mcp-publisher.tgz "https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}/mcp-publisher_linux_amd64.tar.gz"
+          echo "${MCP_PUBLISHER_SHA256}  mcp-publisher.tgz" | sha256sum -c -
+          tar xzf mcp-publisher.tgz mcp-publisher
+      - run: ./mcp-publisher validate server-federation-tools.json
+      - run: ./mcp-publisher login github-oidc
+      - run: ./mcp-publisher publish server-federation-tools.json

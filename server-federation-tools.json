@@ -1,0 +1,33 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.pandadad0214/panda-federation-tools",
+  "title": "Panda Federation Tools",
+  "description": "40 public-data tools for research, US federal funding, B2B leads and web security.",
+  "websiteUrl": "https://github.com/pandadad0214/panda-federation-tools",
+  "repository": {
+    "url": "https://github.com/pandadad0214/panda-federation-tools",
+    "source": "github",
+    "id": "1440174878"
+  },
+  "version": "1.8.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "panda-federation-tools",
+      "version": "1.8.0",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "APIFY_TOKEN",
+          "description": "Apify API token. Free token: https://console.apify.com/settings/integrations",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
