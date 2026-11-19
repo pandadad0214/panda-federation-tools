@@ -430,7 +430,7 @@
       "repo": "https://github.com/pandadad0214/panda-federation-tools",
       "homepage": "https://pandadad0214.github.io/panda-federation-tools/",
       "pypi": "https://pypi.org/project/panda-federation-tools/",
-      "pypi_version": "1.8.0",
+      "pypi_version": "1.8.1",
       "registry": "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.pandadad0214",
       "listings": {
         "glama": "https://glama.ai/mcp/servers/pandadad0214/panda-federation-tools",

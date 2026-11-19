@@ -4,6 +4,11 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.8.1] - 2026-11-18
+
+### Added
+- Official MCP Registry metadata for the stdio umbrella package (`io.github.pandadad0214/panda-federation-tools`), including the required `mcp-name` line in the README. The hosted research subset remains `io.github.pandadad0214/panda-research-mcp`.
+
 ## [1.8.0] - 2026-11-10
 
 ### Added
@@ -112,7 +117,8 @@ All notable changes to this project are documented here. The format follows [Kee
 ### Earlier
 - Tool index (`README.md`, `llms.txt`, `llms-full.txt`), MIT license and `server.json` for the hosted Academic Research MCP Server (`io.github.pandadad0214/panda-research-mcp`, version 1.0.0) in the official MCP Registry.
 
-[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.8.0...HEAD
+[Unreleased]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.8.1...HEAD
+[1.8.1]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.8.0...v1.8.1
 [1.8.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/pandadad0214/panda-federation-tools/compare/v1.5.0...v1.6.0
