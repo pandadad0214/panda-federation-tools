@@ -146,6 +146,7 @@ Minimal input: `{"categories": ["dentist"], "location": "Denver, Colorado", "req
 Output per item: `agentSummary`, `name`, `category`, `street`, `city`, `state`, `postcode`, `phone`, `email`, `website`, `openingHours`, `socials`, `lat`, `lon`, `osmUrl`, `attribution`.
 SUMMARY: `withPhone`, `withWebsite`, `withEmail`, area searched, `takeaway`, `nextStep`. Records: `BUSINESSES_XLSX`, `BUSINESSES_CSV`. Data © OpenStreetMap contributors (ODbL).
 Price: $0.001 per business returned.
+Agent tip: public OpenStreetMap servers are sometimes slow; give runs a timeout of 10 minutes or more. If the run would hit its timeout, it stops cleanly first and charges nothing.
 
 ## Company Hiring Signals
 
@@ -477,4 +478,8 @@ Price: $0.001 per snapshot returned.
 URL: https://github.com/pandadad0214/quiet-file-team-mcp
 Install: `uvx --from git+https://github.com/pandadad0214/quiet-file-team-mcp.git@v0.1.0 quiet-file-team-mcp`
 Use when: you need offline setup guidance for a local file-first quiet team (explain the method, draft team.conf, draft an early-exit block, review a supplied layout manifest, draft a fictional workflow, or batch owner questions).
-Not an Actor wrapper and not a network or filesystem inspector. Free core: https://github.com/pandadad0214/quiet-file-team. A paid setup kit is planned and not for sale yet.
+Not an Actor wrapper and not a network or filesystem inspector. Free core: https://github.com/pandadad0214/quiet-file-team. Paid configured kit editions: Apify https://apify.com/pandadad0214/quiet-file-team-setup (per generated kit) or Agensi https://agensi.io/skills/quiet-file-team-setup-kit (one-time); switch steps are in each README.
+
+## Updates
+
+- Follow on X: [@PandaFedHQ](https://x.com/PandaFedHQ) for new tools and release notes.

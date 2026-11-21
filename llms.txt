@@ -126,3 +126,4 @@ Prefer a person to run the tools and hand you finished files? Panda Federation a
 - [Source code, install and security notes (GitHub)](https://github.com/pandadad0214/panda-federation-tools): the MCP server in this repo, client configs for Claude, Cursor and VS Code, and SECURITY.md.
 
 - [All Panda Federation tools on Apify](https://apify.com/pandadad0214)
+- [Panda Federation on X (@PandaFedHQ)](https://x.com/PandaFedHQ): new tools and release notes.
