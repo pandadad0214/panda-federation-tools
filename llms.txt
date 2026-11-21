@@ -13,31 +13,31 @@ Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMA
 
 ## Citations and references
 
-- [Reference Checker](https://apify.com/pandadad0214/reference-checker) [MCP tool `reference_checker`]: Use when you need to know whether references, DOIs or paper titles are real, correctly cited and not retracted (catches AI-hallucinated citations).
-- [Citation Generator API](https://apify.com/pandadad0214/citation-formatter) [MCP tool `citation_formatter`]: Use when you need DOIs, ISBNs, PMIDs, arXiv IDs or messy references turned into APA, MLA, Chicago, Harvard, IEEE, Vancouver, BibTeX or RIS.
+- [Fake Citation Checker (Reference Checker)](https://apify.com/pandadad0214/reference-checker) [MCP tool `reference_checker`]: Use when you need to know whether references, DOIs or paper titles are real, correctly cited and not retracted (catches AI-hallucinated citations), then get the verified ones formatted in APA, MLA and BibTeX in the same run.
+- [Citation Generator API](https://apify.com/pandadad0214/citation-formatter) [MCP tool `citation_formatter`]: Use when you need DOIs, ISBNs, PMIDs, arXiv IDs or messy references turned into APA, MLA, Chicago, Harvard, IEEE, Vancouver, BibTeX or RIS. To check references first and format in one run, use Reference Checker.
 
 ## Literature search
 
-- [Google Scholar Scraper Alternative (Literature Search)](https://apify.com/pandadad0214/literature-search) [MCP tool `literature_search`]: Use when you need real scholarly papers on a topic, ranked, with citation counts, free PDF links, retraction flags and BibTeX.
-- [PubMed Scraper (Evidence Table)](https://apify.com/pandadad0214/pubmed-evidence-table) [MCP tool `pubmed_evidence_table`]: Use when you need PubMed studies in a screening-ready evidence table with study design, sample size, retraction status and PRISMA counts.
+- [Google Scholar Alternative: Papers, Authors & Experts (Literature Search)](https://apify.com/pandadad0214/literature-search) [MCP tool `literature_search`]: Use when you need real scholarly papers on a topic, ranked, with citation counts, free PDF links, retraction flags and BibTeX, or (mode=experts) the ranked academic experts on that topic.
+- [PubMed Evidence Table for Systematic Reviews & Medical Writers](https://apify.com/pandadad0214/pubmed-evidence-table) [MCP tool `pubmed_evidence_table`]: Use when you need PubMed studies in a screening-ready evidence table with study design, sample size, retraction status and PRISMA counts.
 
 ## Funding
 
-- [Grants.gov Scraper (Grants Finder)](https://apify.com/pandadad0214/grants-finder) [MCP tool `grants_finder`]: Use when you need open or upcoming US federal grant opportunities plus funded NIH and NSF awards in one table.
+- [Federal Grant Finder for Grant Writers & Nonprofits (Grants.gov)](https://apify.com/pandadad0214/grants-finder) [MCP tool `grants_finder`]: Use when you need open or upcoming US federal grant opportunities, filtered by applicant type (nonprofit, small business, tribal, government), plus funded NIH and NSF awards in one table.
 
 ## For AI agents (MCP)
 
-- [Academic Research MCP Server](https://apify.com/pandadad0214/panda-research-mcp): Use when an AI agent should check its own citations, find real sources and format references through MCP tool calls (`check_references`, `format_citations`, `search_literature`, `pubmed_evidence_table`).
+- [Academic Research MCP Server](https://apify.com/pandadad0214/panda-research-mcp): Use when an AI agent should check its own citations, find real sources and format references through MCP tool calls (`check_references`, `format_citations`, `search_literature`, `pubmed_evidence_table`). A normal run tries one tool and shows real output; the free local edition is `panda-research-tools` on PyPI.
 
 ## Documents and public data
 
-- [PDF Table Extractor (PDF to Excel & CSV)](https://apify.com/pandadad0214/pdf-table-extractor) [MCP tool `pdf_table_extractor`]: Use when you need every table in a PDF extracted to Excel and CSV, with OCR for scanned pages.
-- [NPI Registry Scraper (NPI Provider Lists)](https://apify.com/pandadad0214/npi-provider-lists) [MCP tool `npi_provider_lists`]: Use when you need de-duplicated lists of US healthcare providers from the official NPI Registry.
+- [PDF Table Extractor: Bank Statements & Reports to Excel, CSV](https://apify.com/pandadad0214/pdf-table-extractor) [MCP tool `pdf_table_extractor`]: Use when you need every table in a PDF extracted to Excel and CSV, bank or card statements combined into one transactions sheet, or financial-report tables without narrative text, with OCR for scanned pages.
+- [NPI Registry Scraper: NPPES Healthcare Providers by Specialty](https://apify.com/pandadad0214/npi-provider-lists) [MCP tool `npi_provider_lists`]: Use when you need de-duplicated lists of US healthcare providers from the official NPI Registry by specialty, state, city, ZIP, name or a batch of NPI numbers.
 - [USAspending Scraper (Federal Contract Finder)](https://apify.com/pandadad0214/federal-contract-finder) [MCP tool `federal_contract_finder`]: Use when you need US federal contract awards, the incumbents in a market, or contracts ending soon (recompete leads) by NAICS, PSC, agency, state or set-aside.
 
 ## Experts
 
-- [Google Scholar Author Alternative (Researcher & Expert Finder)](https://apify.com/pandadad0214/researcher-expert-finder) [MCP tool `researcher_expert_finder`]: Use when you need ranked academic experts and key opinion leaders for a research topic.
+- [Google Scholar Author Alternative (Researcher & Expert Finder)](https://apify.com/pandadad0214/researcher-expert-finder) [MCP tool `researcher_expert_finder`]: Use when you need ranked academic experts and key opinion leaders for a research topic. Also available as experts mode in Literature Search.
 
 ## Marketing, SEO and leads
 

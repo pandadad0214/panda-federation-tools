@@ -146,12 +146,12 @@ Lists all 40 tools. Kept for older configs. Prefer a focused domain server above
 
 | MCP tool | Apify Actor | What it does | Price (Apify free plan) |
 |---|---|---|---|
-| `reference_checker` | [reference-checker](https://apify.com/pandadad0214/reference-checker) | Finds fake, AI-hallucinated, mismatched and retracted citations | $0.01 / reference |
-| `citation_formatter` | [citation-formatter](https://apify.com/pandadad0214/citation-formatter) | DOI, PMID, arXiv, ISBN or messy text → APA, MLA, Chicago, Harvard, IEEE, Vancouver, BibTeX, RIS | $0.003 / citation |
-| `literature_search` | [literature-search](https://apify.com/pandadad0214/literature-search) | Real papers from 250M+ OpenAlex works, with citations, free PDFs and BibTeX | $0.003 / paper |
-| `pubmed_evidence_table` | [pubmed-evidence-table](https://apify.com/pandadad0214/pubmed-evidence-table) | PubMed → evidence table (study design, sample size, retractions, PRISMA counts) | $0.004 / article |
-| `researcher_expert_finder` | [researcher-expert-finder](https://apify.com/pandadad0214/researcher-expert-finder) | Ranked academic experts and KOLs for a topic, with ORCID and h-index | $0.0025 / expert |
-| `pdf_table_extractor` | [pdf-table-extractor](https://apify.com/pandadad0214/pdf-table-extractor) | Every table in a PDF → rows, Excel and CSV, with OCR for scanned pages | $0.001 / page; $0.003 / table; $0.02 / OCR page |
+| `reference_checker` | [reference-checker](https://apify.com/pandadad0214/reference-checker) | Finds fake, AI-hallucinated, mismatched and retracted citations, then formats the verified ones (APA, MLA, BibTeX) | $0.01 / reference |
+| `citation_formatter` | [citation-formatter](https://apify.com/pandadad0214/citation-formatter) | DOI, PMID, arXiv, ISBN or messy text → APA, MLA, Chicago, Harvard, IEEE, Vancouver, BibTeX, RIS (check-then-format now also in reference-checker) | $0.003 / citation |
+| `literature_search` | [literature-search](https://apify.com/pandadad0214/literature-search) | Real papers from 250M+ OpenAlex works, with citations, free PDFs and BibTeX; `mode: experts` ranks the experts on the topic | $0.003 / paper; $0.0025 / expert (experts mode, from Dec 6, 2026) |
+| `pubmed_evidence_table` | [pubmed-evidence-table](https://apify.com/pandadad0214/pubmed-evidence-table) | PubMed → evidence table for systematic reviews and medical writers (study design, sample size, retractions, PRISMA counts) | $0.004 / article |
+| `researcher_expert_finder` | [researcher-expert-finder](https://apify.com/pandadad0214/researcher-expert-finder) | Ranked academic experts and KOLs for a topic, with ORCID and h-index (also literature-search experts mode) | $0.0025 / expert |
+| `pdf_table_extractor` | [pdf-table-extractor](https://apify.com/pandadad0214/pdf-table-extractor) | Every table in a PDF → rows, Excel and CSV; bank-statement and financial-report presets; OCR for scanned pages | $0.001 / page; $0.003 / table; $0.02 / OCR page |
 | `wayback_snapshot_finder` | [wayback-snapshot-finder](https://apify.com/pandadad0214/wayback-snapshot-finder) | Internet Archive snapshots: timestamps, archive URLs, first/last seen (dead links, dated evidence) | $0.001 / snapshot |
 | `topic_trends_tracker` | [topic-trends-tracker](https://apify.com/pandadad0214/topic-trends-tracker) | Wikipedia pageview trends with 30-day and YoY change (Google Trends alternative) | $0.002 / topic |
 
@@ -159,7 +159,7 @@ Lists all 40 tools. Kept for older configs. Prefer a focused domain server above
 
 | MCP tool | Apify Actor | What it does | Price (Apify free plan) |
 |---|---|---|---|
-| `grants_finder` | [grants-finder](https://apify.com/pandadad0214/grants-finder) | Grants.gov opportunities plus NIH and NSF awards in one table | $0.003 / grant |
+| `grants_finder` | [grants-finder](https://apify.com/pandadad0214/grants-finder) | Grants.gov opportunities by applicant type (nonprofits, small business, tribes, governments) plus NIH and NSF awards in one table | $0.003 / grant |
 | `federal_contract_finder` | [federal-contract-finder](https://apify.com/pandadad0214/federal-contract-finder) | USAspending contract awards, incumbents and recompete leads | $0.002 / contract |
 | `sbir_sttr_topic_radar` | [sbir-sttr-topic-radar](https://apify.com/pandadad0214/sbir-sttr-topic-radar) | Open SBIR/STTR topics from every agency with deadlines and DoD Q&A | $0.003 / topic |
 | `sec_financials_excel` | [sec-financials-excel](https://apify.com/pandadad0214/sec-financials-excel) | SEC EDGAR XBRL financials → comps and model-ready Excel | $0.002 / company-year |
@@ -174,7 +174,7 @@ Lists all 40 tools. Kept for older configs. Prefer a focused domain server above
 
 | MCP tool | Apify Actor | What it does | Price (Apify free plan) |
 |---|---|---|---|
-| `npi_provider_lists` | [npi-provider-lists](https://apify.com/pandadad0214/npi-provider-lists) | De-duplicated US healthcare provider lists from the official NPI Registry | $0.0015 / provider |
+| `npi_provider_lists` | [npi-provider-lists](https://apify.com/pandadad0214/npi-provider-lists) | De-duplicated US healthcare provider lists from the official NPI Registry by specialty, area or NPI batch | $0.0015 / provider |
 | `podcast_leads_finder` | [podcast-leads-finder](https://apify.com/pandadad0214/podcast-leads-finder) | Active podcasts by topic with host, published contact email and guest flag | $0.004 / podcast |
 | `local_business_leads` | [local-business-leads](https://apify.com/pandadad0214/local-business-leads) | Local businesses by category and city from OpenStreetMap (Google Maps alternative) | $0.001 / business |
 | `company_hiring_signals` | [company-hiring-signals](https://apify.com/pandadad0214/company-hiring-signals) | Open and new jobs, leadership roles and a hiring score from public ATS boards | $0.003 / company |

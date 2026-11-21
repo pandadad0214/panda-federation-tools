@@ -4,9 +4,9 @@
     {
       "name": "reference_checker",
       "actor": "pandadad0214/reference-checker",
-      "title": "Reference Checker: Fake, AI-Hallucinated & Retracted Citations",
-      "description": "Verify an existing bibliography against Crossref: flags fake (AI-hallucinated), miscited and retracted references, one row per reference. Unlike citation_formatter, it judges whether a reference is real and accurate; it does not produce formatted styles. Use when you must audit a reference list, DOIs or titles before submission or review. Do not use to discover new papers (use literature_search or pubmed_evidence_table) or to restyle citations (use citation_formatter). Parameters: give bibliography, dois or titles (at least one). Lowering minMatchScore finds more but risks false matches; includeCandidates adds audit detail without extra charge. mode=monitor re-checks the DOIs/ORCID works against the state saved under monitorName and reports only new problems, so reuse the same monitorName on scheduled runs. Each reference checked is billed, so maxReferences/run_max_items cap cost on long lists. Returns per item: summary, status (OK/CHECK/FIX), verdict, matchedDoi, matchScore, mismatches (cited vs actual), integrity.status (retracted, corrected, expression-of-concern), openAccessUrl, warnings.",
-      "storeDescription": "Catch fake (AI-hallucinated), miscited and retracted references in any bibliography, DOI list or set of titles. Checked against Crossref, Retraction Watch and OpenAlex: one row per reference with OK/CHECK/FIX status, matched DOI and what is wrong.",
+      "title": "Fake Citation Checker: AI-Hallucinated Refs + APA, MLA, BibTeX",
+      "description": "Verify an existing bibliography against Crossref: flags fake (AI-hallucinated), miscited and retracted references, one row per reference, then formats the verified ones in APA, MLA and BibTeX (citationFormats; [] = check only). Since 2026-11-21 it includes the citation_formatter output for checked references, so check-then-format is one call; FIX rows are never formatted. Use when you must audit a reference list, DOIs or titles before submission or review. Do not use to discover new papers (use literature_search or pubmed_evidence_table) or to restyle IDs/ISBNs you already trust into Chicago, Harvard, IEEE or Vancouver (use citation_formatter). Parameters: give bibliography, dois or titles (at least one). Lowering minMatchScore finds more but risks false matches; includeCandidates adds audit detail without extra charge. mode=monitor re-checks the DOIs/ORCID works against the state saved under monitorName and reports only new problems, so reuse the same monitorName on scheduled runs. Each reference checked is billed, so maxReferences/run_max_items cap cost on long lists. Returns per item: summary, status (OK/CHECK/FIX), verdict, matchedDoi, matchScore, mismatches (cited vs actual), integrity.status (retracted, corrected, expression-of-concern), openAccessUrl, warnings.",
+      "storeDescription": "Check a bibliography, DOIs or titles from ChatGPT or any draft for fake (AI-hallucinated), miscited and retracted citations, then format the real ones. Output: one row per reference with OK/CHECK/FIX, matched DOI, what is wrong, and APA, MLA or BibTeX ready to paste.",
       "url": "https://apify.com/pandadad0214/reference-checker",
       "pricing": [
         {
@@ -48,6 +48,28 @@
                 "Attention is all you need"
               ]
             ]
+          },
+          "citationFormats": {
+            "type": "array",
+            "default": [
+              "apa",
+              "mla",
+              "bibtex"
+            ],
+            "description": "Format verified references as. Check, then format: every reference that passes the check (OK or CHECK) also gets ready-to-paste citations in these formats, plus whole-list files in the key-value store (BIBLIOGRAPHY_APA, BIBLIOGRAPHY_BIBTEX, ...). Fake, retracted or seriously miscited references (FIX) are never formatted. Included in the per-reference price. Clear the list to check only. Default: APA, MLA and BibTeX.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "apa",
+                "mla",
+                "chicago",
+                "harvard",
+                "ieee",
+                "vancouver",
+                "bibtex",
+                "ris"
+              ]
+            }
           },
           "minMatchScore": {
             "type": "integer",
@@ -112,8 +134,8 @@
       "name": "citation_formatter",
       "actor": "pandadad0214/citation-formatter",
       "title": "Citation Generator API: DOI to APA, MLA, Chicago & BibTeX",
-      "description": "Convert DOIs, ISBNs, PMIDs, arXiv IDs, titles or messy reference strings into checked citations in APA 7, MLA 9, Chicago, Harvard, IEEE, Vancouver, BibTeX and RIS. Unlike reference_checker, it formats rather than audits: unresolved items are listed, not diagnosed as fake or retracted. Use when you need a clean bibliography or .bib/.ris export. Do not use to find papers (use literature_search) or to prove references are genuine (use reference_checker first). Parameters: pass references (one per line) or paste a whole list or .bib/.ris contents in text. All styles are one price, so request every style you might need in one call rather than calling again. Text lookups below minMatchScore stay unresolved; DOIs and IDs resolve exactly. Only formatted citations are billed. Returns per item: summary, status, one field per style (apa, mla, ...), inText, bibtex, ris, doi, title, authors, year, containerTitle; combined bibliography files stay in the run's Apify key-value store.",
-      "storeDescription": "Turn DOIs, ISBNs, PMIDs, arXiv IDs, titles or messy references into clean citations, each checked against Crossref. Output: APA 7, MLA 9, Chicago, Harvard, IEEE, Vancouver, BibTeX and RIS per reference; paste a list or .bib/.ris text.",
+      "description": "Convert DOIs, ISBNs, PMIDs, arXiv IDs, titles or messy reference strings into checked citations in APA 7, MLA 9, Chicago, Harvard, IEEE, Vancouver, BibTeX and RIS. Unlike reference_checker (which now checks and then formats verified references in APA/MLA/BibTeX in one call), it formats rather than audits: unresolved items are listed, not diagnosed as fake or retracted. Use when you need a clean bibliography or .bib/.ris export. Do not use to find papers (use literature_search) or to prove references are genuine (use reference_checker first). Parameters: pass references (one per line) or paste a whole list or .bib/.ris contents in text. All styles are one price, so request every style you might need in one call rather than calling again. Text lookups below minMatchScore stay unresolved; DOIs and IDs resolve exactly. Only formatted citations are billed. Returns per item: summary, status, one field per style (apa, mla, ...), inText, bibtex, ris, doi, title, authors, year, containerTitle; combined bibliography files stay in the run's Apify key-value store.",
+      "storeDescription": "Turn DOIs, ISBNs, PMIDs, arXiv IDs, titles or messy references into APA 7, MLA 9, Chicago, Harvard, IEEE, Vancouver, BibTeX and RIS. Still live for format-only jobs; to also catch fake or retracted references first, use the merged Reference Checker.",
       "url": "https://apify.com/pandadad0214/citation-formatter",
       "pricing": [
         {
@@ -224,20 +246,34 @@
     {
       "name": "literature_search",
       "actor": "pandadad0214/literature-search",
-      "title": "Google Scholar Scraper Alternative: Papers, Citations & BibTeX",
-      "description": "Search 250M+ scholarly works (OpenAlex) by topic query or seed DOIs and return ranked papers with DOI, citation count, free PDF link, retraction flag and a ready citation. Unlike pubmed_evidence_table (PubMed biomedical records with study design and PRISMA counts), this covers every discipline and supports citation-network expansion. Use when you need real papers on a topic, a reading list, or papers citing/cited by known DOIs. Do not use for systematic biomedical screening (use pubmed_evidence_table) or to find people (use researcher_expert_finder). Parameters: seedDois with no query walks the citation network per seedMode (citing = forward, references = backward); with a query it searches inside that network. searchIn=fullText broadens recall but lowers precision. retractedPapers=flag returns and bills retracted papers marked FIX; exclude drops them unbilled. sortBy changes dataset order only; readingListSize does not affect cost. Returns per item: summary, status, title, authors, year, venue, doi, citations, readingRank, readingScore, isOpenAccess, pdfUrl, retracted, citation, bibtex, ris, abstract.",
-      "storeDescription": "Find real scholarly papers on any topic across 250M+ OpenAlex works, a Google Scholar scraper alternative. Filter by year and citations or start from seed DOIs; get ranked papers with DOI, citation count, free PDF link, retraction flag and BibTeX.",
+      "title": "Google Scholar Alternative: Papers, Authors & Experts + BibTeX",
+      "description": "Search 250M+ scholarly works (OpenAlex) by topic query or seed DOIs and return ranked papers with DOI, citation count, free PDF link, retraction flag and a ready citation. Unlike pubmed_evidence_table (PubMed biomedical records with study design and PRISMA counts), this covers every discipline and supports citation-network expansion. Use when you need real papers on a topic, a reading list, or papers citing/cited by known DOIs. Do not use for systematic biomedical screening (use pubmed_evidence_table) Set mode=experts to rank academic experts/KOLs for the query instead of papers (the same engine as researcher_expert_finder, merged in 2026-11-21). Parameters: seedDois with no query walks the citation network per seedMode (citing = forward, references = backward); with a query it searches inside that network. searchIn=fullText broadens recall but lowers precision. retractedPapers=flag returns and bills retracted papers marked FIX; exclude drops them unbilled. sortBy changes dataset order only; readingListSize does not affect cost. Returns per item: summary, status, title, authors, year, venue, doi, citations, readingRank, readingScore, isOpenAccess, pdfUrl, retracted, citation, bibtex, ris, abstract.",
+      "storeDescription": "Find real scholarly papers on any topic across 250M+ OpenAlex works, or switch to experts mode to find the researchers and KOLs behind it. Output: ranked papers with DOI, citations, free PDF, retraction flag and BibTeX, or ranked experts with ORCID and h-index.",
       "url": "https://apify.com/pandadad0214/literature-search",
       "pricing": [
         {
           "event": "paper-found",
           "title": "Paper found",
           "usd": 0.003
+        },
+        {
+          "event": "expert-found",
+          "title": "Expert found",
+          "usd": 0.0025
         }
       ],
       "inputSchema": {
         "type": "object",
         "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "papers",
+              "experts"
+            ],
+            "default": "papers",
+            "description": "What to find. Papers (default): ranked scholarly papers with citations, free PDFs, retraction flags and BibTeX. Experts: the researchers and key opinion leaders who publish most on your query (Google Scholar author search alternative; merged in from Researcher & Expert Finder), with ORCID, institution, h-index and their papers. Experts mode uses the query, year and \"Experts mode\" fields below. Choices: papers = Papers (literature search); experts = Experts and KOLs (researcher search)."
+          },
           "query": {
             "type": "string",
             "description": "Search query. Topic or Boolean query. Use quotes for phrases and AND / OR / NOT in capitals, e.g. \"retrieval augmented generation\" AND (clinical OR medicine) NOT survey. Leave empty to explore around seed papers only.",
@@ -403,6 +439,79 @@
             "examples": [
               "name@example.org"
             ]
+          },
+          "maxExperts": {
+            "type": "integer",
+            "default": 25,
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Max experts (experts mode). Experts mode only. How many ranked researchers to return, 1 to 200; default 25. You pay per expert returned, so this also caps the cost."
+          },
+          "expertSortBy": {
+            "type": "string",
+            "enum": [
+              "expertScore",
+              "topicWorks",
+              "topicCitations",
+              "citations",
+              "hIndex"
+            ],
+            "default": "expertScore",
+            "description": "Rank experts by (experts mode). Expert score (default) blends matching papers, their citations and h-index. Or sort by a single number. Choices: expertScore = Expert score; topicWorks = Matching papers; topicCitations = Citations of top matching papers; citations = Total citations; hIndex = h-index."
+          },
+          "countries": {
+            "type": "array",
+            "description": "Countries (experts mode). Experts mode only. Optional 2-letter ISO country codes (US, GB, DE, IN, AU…). Keeps experts whose current institution is in one of these countries, and counts only papers with an author in them.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "US",
+                "GB"
+              ]
+            ]
+          },
+          "institution": {
+            "type": "string",
+            "description": "Institution (experts mode). Experts mode only. Optional. University, hospital, lab or company name (e.g. Stanford University), a ROR ID or an OpenAlex institution ID (I…). Sub-units count too: a university includes its schools and hospitals. The matched institution is shown in the search log.",
+            "examples": [
+              "Stanford University"
+            ]
+          },
+          "activeSince": {
+            "type": "integer",
+            "minimum": 1900,
+            "description": "Active since (year) (experts mode). Experts mode only. Optional. Only keep people who published anything in or after this year (uses OpenAlex yearly counts for the last ~10 years). Whole number, 1900 or more.",
+            "examples": [
+              2023
+            ]
+          },
+          "minTopicWorks": {
+            "type": "integer",
+            "default": 2,
+            "minimum": 1,
+            "description": "Minimum matching papers (experts mode). Experts mode only. Each expert must have at least this many papers on your topic. Whole number, 1 or more papers; default 2."
+          },
+          "minHIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Minimum h-index (experts mode). Experts mode only. Optional. Whole number, 0 or more.",
+            "examples": [
+              10
+            ]
+          },
+          "papersPerExpert": {
+            "type": "integer",
+            "default": 3,
+            "minimum": 0,
+            "maximum": 10,
+            "description": "Recent papers per expert (experts mode). Experts mode only. How many of each expert's newest matching papers to list (title, year, DOI, citations). 0 to skip. Whole number, 0 to 10 papers; default 3."
+          },
+          "includeOrcid": {
+            "type": "boolean",
+            "default": true,
+            "description": "Add ORCID details (experts mode). Experts mode only. For experts with an ORCID iD, add current employment and role, keywords, websites and a short biography from the public ORCID record. Default: on."
           }
         },
         "required": [],
@@ -412,9 +521,9 @@
     {
       "name": "pubmed_evidence_table",
       "actor": "pandadad0214/pubmed-evidence-table",
-      "title": "PubMed Scraper: Articles, Abstracts & Evidence Table to Excel",
+      "title": "PubMed Evidence Table for Systematic Reviews & Medical Writers",
       "description": "Run one or more PubMed queries and return a screening-ready evidence table: one row per article with PMID, journal, study design, sample size, retraction status and citation, plus PRISMA-style counts for the whole search. Unlike literature_search (all disciplines, OpenAlex ranking, citation-network walks), this uses native PubMed syntax and MeSH and is built for systematic-review screening. Use when the question is biomedical/clinical and you need reproducible PubMed queries or design filters (RCT, meta-analysis, cohort). Do not use for non-biomedical topics (use literature_search), for trial registrations (use clinical_trial_leads) or to verify a reference list (use reference_checker). Parameters: queries accept PubMed field tags ([tiab], [mh], [pt]) and Boolean operators; several queries are de-duplicated into one table. Filters (studyDesigns, excludeAnimalOnly, hasAbstract, freeFullTextOnly, excludePreprints) run before billing, and PRISMA counts still report what they removed. retractedArticles=flag bills retracted rows marked FIX; exclude drops them unbilled. sampleSize is parsed from the abstract and comes with sampleSizeConfidence; treat low confidence as unverified. Returns per item: summary, status, pmid, title, year, journal, studyDesign, sampleSize, sampleSizeConfidence, retractionStatus, retracted, citation. Excel, PRISMA and RIS/Rayyan import files stay in the run's Apify key-value store.",
-      "storeDescription": "Turn PubMed searches into a screening-ready Excel evidence table. One row per article with PMID, journal, study design, sample size and retraction status, plus PRISMA counts; filter by date and study design.",
+      "storeDescription": "Turn PubMed searches into a screening-ready Excel evidence table for systematic reviews and medical writing: one row per study with design, sample size, population and retraction status, plus PRISMA counts and Rayyan, Covidence and EndNote import files.",
       "url": "https://apify.com/pandadad0214/pubmed-evidence-table",
       "pricing": [
         {
@@ -566,9 +675,9 @@
     {
       "name": "grants_finder",
       "actor": "pandadad0214/grants-finder",
-      "title": "Grants.gov Scraper: Federal Grants, NIH & NSF Awards API",
-      "description": "Search US federal funding in one call: open and forecasted Grants.gov opportunities plus already-funded NIH RePORTER and NSF awards, one row per grant with agency, dates, amount (USD), eligibility and link. Unlike sbir_sttr_topic_radar (SBIR/STTR solicitation topics with deadlines and DoD Q&A) and federal_contract_finder (procurement contracts on USAspending), this covers assistance grants and research awards. Use when you need grants to apply for or want to see who was funded for a topic. Do not use for contracts (use federal_contract_finder) or small-business R&D topics (use sbir_sttr_topic_radar). Parameters: sources picks the mix; grants_gov is apply-able funding, nih/nsf are past awards. maxResultsPerSource applies to each source, so worst-case billed rows = maxResultsPerSource x number of sources; run_max_items does not set it, so keep it small first and rely on run_max_charge_usd. minAmount drops rows whose source publishes no amount. includeGrantsGovDetails adds award ceiling and eligibility but slows the run; turn it off for quick scans. Returns per item: agentSummary, source, recordType, status, title, agency, number, openDate, closeDate, amount, eligibility, summary, url.",
-      "storeDescription": "Find US federal funding in one run: open and forecasted Grants.gov opportunities plus funded NIH and NSF awards. Filter by keyword, agency, date and amount; one row per grant with agency, dates, amount (USD), eligibility and official link.",
+      "title": "Federal Grant Finder for Grant Writers & Nonprofits: Grants.gov",
+      "description": "Search US federal funding in one call: open and forecasted Grants.gov opportunities plus already-funded NIH RePORTER and NSF awards, one row per grant with agency, dates, amount (USD), eligibility and link. Unlike sbir_sttr_topic_radar (SBIR/STTR solicitation topics with deadlines and DoD Q&A) and federal_contract_finder (procurement contracts on USAspending), this covers assistance grants and research awards. Use when you need grants to apply for or want to see who was funded for a topic. Do not use for contracts (use federal_contract_finder) or small-business R&D topics (use sbir_sttr_topic_radar). Parameters: sources picks the mix; grants_gov is apply-able funding, nih/nsf are past awards. maxResultsPerSource applies to each source, so worst-case billed rows = maxResultsPerSource x number of sources; run_max_items does not set it, so keep it small first and rely on run_max_charge_usd. minAmount drops rows whose source publishes no amount. applicantTypes (e.g. nonprofit-501c3, small-business, state-government) filters Grants.gov by eligibility for grant writers and nonprofits. includeGrantsGovDetails adds award ceiling and eligibility but slows the run; turn it off for quick scans. Returns per item: agentSummary, source, recordType, status, title, agency, number, openDate, closeDate, amount, eligibility, summary, url.",
+      "storeDescription": "Find open federal grants a nonprofit, small business, school or city can apply for, plus who NIH and NSF already fund, in one run. For grant writers and nonprofits: one row per grant with deadline, award ceiling, eligibility and official link, in Excel or CSV.",
       "url": "https://apify.com/pandadad0214/grants-finder",
       "pricing": [
         {
@@ -604,6 +713,29 @@
                 "nsf"
               ]
             }
+          },
+          "applicantTypes": {
+            "type": "array",
+            "description": "Who is applying (Grants.gov eligibility). Optional. Keep only Grants.gov opportunities this kind of applicant can apply for, e.g. Nonprofit for a 501(c)(3). Calls open to any applicant are always kept. Applies to Grants.gov only; NIH and NSF rows are past awards and are not filtered. Leave empty for all.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "nonprofit",
+                "small-business",
+                "for-profit",
+                "higher-education",
+                "local-government",
+                "state-government",
+                "tribal",
+                "individual",
+                "other"
+              ]
+            },
+            "examples": [
+              [
+                "nonprofit"
+              ]
+            ]
           },
           "maxResultsPerSource": {
             "type": "integer",
@@ -728,8 +860,8 @@
       "name": "researcher_expert_finder",
       "actor": "pandadad0214/researcher-expert-finder",
       "title": "Google Scholar Author Alternative: Find Experts & KOLs by Topic",
-      "description": "Rank the academic experts and key opinion leaders on a research topic from OpenAlex, with institution, ORCID, h-index, topic paper counts and their recent topic papers. Unlike literature_search (returns papers) this returns people; unlike company_team_finder (staff listed on a company website) it covers academics by publication record. Use when you need reviewers, KOLs, collaborators or speakers for a topic, optionally by country or institution. Do not use for company contacts (use company_team_finder) or for papers themselves (use literature_search). Parameters: the ranked pool is the 200 authors with the most matching papers, so maxResults above 200 adds nothing. maxAuthorsPerPaper ignores mega-collaboration papers that would inflate everyone on them; raise it only for physics-style fields. yearFrom/yearTo limit which papers count, while activeSince filters people. includeOrcid adds employment and bio at no extra charge. Returns per item: expert score, name, ORCID, current institution and country, h-index, total and topic works/citations, recent topic papers (title, year, DOI, citations), summary.",
-      "storeDescription": "Find the academic experts and key opinion leaders on any research topic, a Google Scholar author search alternative. Filter by country, institution and years; get ranked experts with ORCID, affiliation, h-index and their topic papers.",
+      "description": "Now also available as mode=experts in literature_search (merged 2026-11-21); this tool keeps working. Rank the academic experts and key opinion leaders on a research topic from OpenAlex, with institution, ORCID, h-index, topic paper counts and their recent topic papers. Unlike literature_search (returns papers) this returns people; unlike company_team_finder (staff listed on a company website) it covers academics by publication record. Use when you need reviewers, KOLs, collaborators or speakers for a topic, optionally by country or institution. Do not use for company contacts (use company_team_finder) or for papers themselves (use literature_search). Parameters: the ranked pool is the 200 authors with the most matching papers, so maxResults above 200 adds nothing. maxAuthorsPerPaper ignores mega-collaboration papers that would inflate everyone on them; raise it only for physics-style fields. yearFrom/yearTo limit which papers count, while activeSince filters people. includeOrcid adds employment and bio at no extra charge. Returns per item: expert score, name, ORCID, current institution and country, h-index, total and topic works/citations, recent topic papers (title, year, DOI, citations), summary.",
+      "storeDescription": "Find the academic experts and KOLs on any research topic, a Google Scholar author search alternative. Ranked experts with ORCID, affiliation, h-index and papers. Still live; the same search is now also experts mode in Literature Search.",
       "url": "https://apify.com/pandadad0214/researcher-expert-finder",
       "pricing": [
         {
@@ -870,9 +1002,9 @@
     {
       "name": "pdf_table_extractor",
       "actor": "pandadad0214/pdf-table-extractor",
-      "title": "PDF Table Extractor: PDF to Excel & CSV Converter with OCR",
-      "description": "Extract every table from PDF files (by URL or from an Apify key-value store) into structured rows, Excel and CSV, with optional OCR for scanned pages. Unlike sec_financials_excel (standardized XBRL financials straight from SEC filings), this reads whatever tables a PDF contains. Use when the data you need is locked in PDF tables: reports, statements, government releases. Do not use for SEC-listed company financials (use sec_financials_excel, which is exact) or to find papers (use literature_search). Parameters: billing is per page analysed plus per table extracted, so pages and maxPagesPerPdf are the real cost levers; run_max_items does not cap pages. ocrScannedPages=false skips and lists scanned pages; turning it on adds the per-OCR-page price up to maxOcrPagesPerPdf, and is much slower. detection=auto tries ruled-grid then whitespace detection; force lattice or stream only if auto merges or splits columns. Files over 150 MB fail and are not charged. Returns per item (one per table): summary, pages, header, row and column counts and cell data; Excel/CSV files stay in the run's Apify key-value store.",
-      "storeDescription": "Extract every table from PDF files into Excel and CSV, with OCR for scanned pages. Give PDF URLs or uploads and optional page ranges; get one row per table with pages, header, row and column counts and cell data.",
+      "title": "PDF Table Extractor: Bank Statements & Reports to Excel, CSV",
+      "description": "Extract every table from PDF files (by URL or from an Apify key-value store) into structured rows, Excel and CSV, with optional OCR for scanned pages. Unlike sec_financials_excel (standardized XBRL financials straight from SEC filings), this reads whatever tables a PDF contains. Use when the data you need is locked in PDF tables: reports, statements, government releases. Do not use for SEC-listed company financials (use sec_financials_excel, which is exact) or to find papers (use literature_search). Parameters: billing is per page analysed plus per table extracted, so pages and maxPagesPerPdf are the real cost levers; run_max_items does not cap pages. ocrScannedPages=false skips and lists scanned pages; turning it on adds the per-OCR-page price up to maxOcrPagesPerPdf, and is much slower. detection=auto tries ruled-grid then whitespace detection; force lattice or stream only if auto merges or splits columns. preset=bank-statement combines every transaction into one Transactions sheet/CSV; preset=financial-report skips narrative text blocks. Bad links (login wall, 404, web page, non-PDF, password) fail with a plain reason and are not charged; files over 150 MB fail and are not charged. Returns per item (one per table): summary, pages, header, row and column counts and cell data; Excel/CSV files stay in the run's Apify key-value store.",
+      "storeDescription": "PDF to Excel and CSV: extract every table from reports, filings and bank or card statements. Bank-statement preset combines all transactions into one sheet; financial-report preset skips narrative text. OCR (beta) for scans, clear errors for bad links.",
       "url": "https://apify.com/pandadad0214/pdf-table-extractor",
       "pricing": [
         {
@@ -922,6 +1054,16 @@
               ]
             ]
           },
+          "preset": {
+            "type": "string",
+            "enum": [
+              "general",
+              "bank-statement",
+              "financial-report"
+            ],
+            "default": "general",
+            "description": "Document type. Tunes extraction for the kind of PDF. Bank statement: whitespace-column detection, tables joined across pages, and every transaction combined into one TRANSACTIONS sheet and CSV (Date, Description, Debit, Credit, Amount, Balance, Page). Financial report: annual/quarterly reports, 10-K/10-Q, statistical releases; numbers as real numbers and narrative text blocks left out (not charged). General (default): every table as found. Same prices for all three. Choices: general = General (every table); bank-statement = Bank or card statement (one transactions sheet); financial-report = Financial or statistical report."
+          },
           "pages": {
             "type": "string",
             "description": "Pages. Optional. Only these pages, e.g. 1-5, 8, 12-end. Leave empty for all pages (up to the page limit below).",
@@ -934,7 +1076,10 @@
             "default": 100,
             "minimum": 1,
             "maximum": 2000,
-            "description": "Maximum pages per PDF. Caps cost and run time on very long documents. You pay per page analysed. Whole number, 1 to 2,000 pages; default 100."
+            "description": "Maximum pages per PDF. Caps cost and run time on very long documents. You pay per page analysed. Whole number, 1 to 2,000 pages; default 100.",
+            "examples": [
+              5
+            ]
           },
           "detection": {
             "type": "string",
@@ -991,9 +1136,9 @@
     {
       "name": "npi_provider_lists",
       "actor": "pandadad0214/npi-provider-lists",
-      "title": "NPI Registry Scraper: US Doctors & Healthcare Provider Leads",
-      "description": "Build de-duplicated lists of US healthcare providers (individuals and organizations) from the official CMS NPI Registry by specialty and territory, with NPI, name, specialty, practice address and phone. Unlike clinical_trial_leads (trial sites and investigators) or local_business_leads (any business category from OpenStreetMap), this is the authoritative US provider registry. Use when you need doctors, dentists, therapists, pharmacies or clinics in states, cities or ZIPs. Do not use for non-US providers or for email addresses (NPI publishes none; follow up with company_website_enricher on practice domains). Parameters: specialties take plain words, mapped to NPI taxonomies. Large states are split by ZIP automatically, so you are not limited by the registry's 1,200-result ceiling. cities and zipCodes narrow the states given. maxResults is shared across all specialty x area combinations. primarySpecialtyOnly=true removes providers who list the specialty only as secondary; includeSecondaryLocations=false drops providers whose main office is outside the territory. Returns per item: summary, NPI, provider type, name, specialty/taxonomy, practice address, phone.",
-      "storeDescription": "Build de-duplicated lists of US doctors and healthcare providers from the official NPI Registry. Type specialties in plain words plus states, cities or ZIPs; get NPI, name, specialty, address and phone per provider, with Excel.",
+      "title": "NPI Registry Scraper: NPPES Healthcare Providers by Specialty",
+      "description": "Build de-duplicated lists of US healthcare providers (individuals and organizations) from the official CMS NPI Registry by specialty and territory, with NPI, name, specialty, practice address and phone. Unlike clinical_trial_leads (trial sites and investigators) or local_business_leads (any business category from OpenStreetMap), this is the authoritative US provider registry. Use when you need doctors, dentists, therapists, pharmacies or clinics in states, cities or ZIPs. Do not use for non-US providers or for email addresses (NPI publishes none; follow up with company_website_enricher on practice domains). Parameters: also accepts the common NPI-scraper input names (taxonomyDescription, state, city, postalCode, npiNumbers for batch lookup). specialties take plain words, mapped to NPI taxonomies. Large states are split by ZIP automatically, so you are not limited by the registry's 1,200-result ceiling. cities and zipCodes narrow the states given. maxResults is shared across all specialty x area combinations. primarySpecialtyOnly=true removes providers who list the specialty only as secondary; includeSecondaryLocations=false drops providers whose main office is outside the territory. Returns per item: summary, NPI, provider type, name, specialty/taxonomy, practice address, phone.",
+      "storeDescription": "Scrape the NPPES NPI Registry for US doctors, clinics and healthcare providers by specialty (taxonomy), state, city, ZIP, name or NPI number. One de-duplicated row per provider with NPI, taxonomy, license, address and phone, in Excel or CSV; no 1,200-result cap.",
       "url": "https://apify.com/pandadad0214/npi-provider-lists",
       "pricing": [
         {
@@ -1007,7 +1152,7 @@
         "properties": {
           "specialties": {
             "type": "array",
-            "description": "Specialties. Plain names work: dentist, orthodontist, family doctor, pediatrician, cardiologist, dermatologist, psychiatrist, chiropractor, physical therapist, nurse practitioner, psychologist, mental health counselor, social worker, pharmacy, home health, hospice, nursing home, urgent care, hospital, FQHC and more (full list in the README). Any NPPES taxonomy description also works, e.g. \"Family Medicine\" or \"Nurse Practitioner, Pediatrics\".",
+            "description": "Specialty / taxonomy (e.g. Family Medicine, dentist). Plain names work: dentist, orthodontist, family doctor, pediatrician, cardiologist, dermatologist, psychiatrist, chiropractor, physical therapist, nurse practitioner, psychologist, mental health counselor, social worker, pharmacy, home health, hospice, nursing home, urgent care, hospital, FQHC and more (full list in the README). Any NPPES taxonomy description also works, e.g. \"Family Medicine\" or \"Nurse Practitioner, Pediatrics\".",
             "items": {
               "type": "string"
             },
@@ -1020,7 +1165,7 @@
           },
           "states": {
             "type": "array",
-            "description": "States. 2-letter codes, e.g. VT, TX. Big states are split automatically by ZIP code, so you are not stuck at the registry's 1,200-result ceiling. If you also list cities without a state, these states are used for them.",
+            "description": "State (2-letter code). 2-letter codes, e.g. VT, TX. Big states are split automatically by ZIP code, so you are not stuck at the registry's 1,200-result ceiling. If you also list cities without a state, these states are used for them.",
             "items": {
               "type": "string"
             },
@@ -1032,7 +1177,7 @@
           },
           "cities": {
             "type": "array",
-            "description": "Cities. Optional. Write \"Austin, TX\". Saint/St, Fort/Ft and Mount/Mt spellings are searched together. When cities are given, the list is limited to those cities (states only fill in a missing state).",
+            "description": "City, ST. Optional. Write \"Austin, TX\". Saint/St, Fort/Ft and Mount/Mt spellings are searched together. When cities are given, the list is limited to those cities (states only fill in a missing state).",
             "items": {
               "type": "string"
             },
@@ -1044,7 +1189,7 @@
           },
           "zipCodes": {
             "type": "array",
-            "description": "ZIP codes. Optional. 5-digit ZIPs (05401) or prefixes of 2-4 digits (941 = San Francisco area, 05 = Vermont/New Hampshire). Added to the territory on top of states or cities.",
+            "description": "ZIP / postal code. Optional. 5-digit ZIPs (05401) or prefixes of 2-4 digits (941 = San Francisco area, 05 = Vermont/New Hampshire). Added to the territory on top of states or cities.",
             "items": {
               "type": "string"
             },
@@ -1060,10 +1205,11 @@
             "enum": [
               "all",
               "individual",
-              "organization"
+              "organization",
+              "both"
             ],
             "default": "all",
-            "description": "Provider type. Individuals (NPI-1: doctors, nurses, therapists) or organizations (NPI-2: practices, clinics, pharmacies, agencies). Choices: all = Both; individual = Individuals only; organization = Organizations only."
+            "description": "Provider type. Individuals (NPI-1: doctors, nurses, therapists) or organizations (NPI-2: practices, clinics, pharmacies, agencies). Choices: all = Both (individuals and organizations); individual = Individuals only (NPI-1); organization = Organizations only (NPI-2); both = Both (same as the first option; accepted for compatibility with other NPI tools)."
           },
           "lastName": {
             "type": "string",
@@ -1086,6 +1232,19 @@
               "Kaiser*"
             ]
           },
+          "npiNumbers": {
+            "type": "array",
+            "description": "NPI numbers (batch lookup). Optional. Look up these exact providers by their 10-digit NPI number instead of searching (up to 50,000). Specialty and territory filters are ignored for a lookup. Other tools' names also work in the API: npiNumber, npi.",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "1003000126",
+                "1679576722"
+              ]
+            ]
+          },
           "primarySpecialtyOnly": {
             "type": "boolean",
             "default": false,
@@ -1101,7 +1260,10 @@
             "default": 500,
             "minimum": 1,
             "maximum": 50000,
-            "description": "Maximum providers. You pay per provider in the list, so this also caps the cost. Up to 50,000. With several specialties or areas the limit is shared fairly between them. Whole number, 1 to 50,000 results; default 500."
+            "description": "Maximum providers. You pay per provider in the list, so this also caps the cost. Up to 50,000. With several specialties or areas the limit is shared fairly between them. Whole number, 1 to 50,000 results; default 500.",
+            "examples": [
+              25
+            ]
           }
         },
         "required": [],
@@ -2313,31 +2475,36 @@
         "properties": {
           "companies": {
             "type": "array",
+            "default": [
+              "AAPL"
+            ],
             "description": "Companies (tickers or CIKs). US-listed companies that file 10-Ks with the SEC, e.g. AAPL, MSFT, BRK-B or a CIK like 320193. Up to 200 per run.",
             "items": {
               "type": "string"
             },
             "examples": [
               [
-                "AAPL",
-                "MSFT",
-                "GOOGL"
+                "AAPL"
               ]
             ]
           },
           "contactEmail": {
             "type": "string",
+            "default": "superdad@mail.grokbot.com",
             "description": "Your contact email (required by SEC). SEC requires every automated request to declare a contact in its User-Agent header. It is sent to SEC only and is never stored in the output.",
             "examples": [
-              ""
+              "superdad@mail.grokbot.com"
             ]
           },
           "years": {
             "type": "integer",
-            "default": 5,
+            "default": 1,
             "minimum": 1,
             "maximum": 20,
-            "description": "Fiscal years per company. Most recent annual (10-K) periods to return. You pay per company-year row, so this also caps the cost."
+            "description": "Fiscal years per company. Most recent annual (10-K) periods to return. You pay per company-year row, so this also caps the cost.",
+            "examples": [
+              1
+            ]
           }
         },
         "required": [
@@ -3397,7 +3564,7 @@
       "actor": "pandadad0214/texas-new-business-leads",
       "title": "Texas New Business Leads: New Franchise Taxpayers",
       "description": "List new Texas businesses from the Texas Comptroller's active franchise taxpayer open data, matched on Secretary of State charter date or franchise-tax responsibility date, with address, county, organization type, SOS file number and status. Unlike florida_new_business_leads (Sunbiz filings with officers) and local_business_leads (OpenStreetMap shops), this is new Texas LLCs and corporations from state tax data; officers are not included. Use when you sell to newly formed Texas companies or watch new entrants in a Texas city, ZIP or county. Do not use for other states, for officer/owner names or for sole proprietors that do not owe franchise tax. Parameters: daysBack or charterFrom/charterTo (future effective dates are kept, so a recent window can include dates ahead of today); cities, zipPrefixes and countyCodes (Comptroller numbers, e.g. 101 Harris, 227 Travis) narrow the area; orgTypes (e.g. CL LLC, CT corporation) and nameContains filter the entity; activeOnly (default true) keeps right-to-transact active rows; requireSosNumber drops rows with no SOS file number; maxResults caps billed businesses (hard max 5000). Runs with no matches are free. Returns per item: agentSummary, taxpayerNumber, name, address, city, state, zip, countyCode, orgTypeCode, orgType, sosFileNumber, charterDate, responsibilityDate, sosStatus, rightToTransact, naics, sourceUrl, taxpayerUrl; plus TXBIZ_XLSX/CSV.",
-      "storeDescription": "Get new Texas LLCs and corporations from official Comptroller franchise taxpayer open data. Name, address, county, org type, SOS file number, charter date and status; filter by city, ZIP, county and name. Excel and CSV.",
+      "storeDescription": "Get new Texas LLCs and corporations from official Comptroller franchise taxpayer open data: name, address, county, org type, SOS file number, charter date, status. Filter by city, ZIP, county, name. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/texas-new-business-leads",
       "pricing": [
         {
@@ -3875,7 +4042,7 @@
       "actor": "pandadad0214/colorado-new-business-leads",
       "title": "Colorado New Business Leads: New SOS Filings Daily",
       "description": "List newly formed Colorado LLCs, corporations and nonprofits from the official Colorado Secretary of State 'Business Entities in Colorado' open data (data.colorado.gov, updated daily), with formation date, entity type, status, principal and mailing address, registered agent and a self-agent flag (the agent is a person at the business address, usually the owner). Unlike florida_new_business_leads (Sunbiz with officers), texas_new_business_leads (Comptroller franchise taxpayers) and new_york_new_business_leads (NY DOS), this is Colorado formations. Use when banks, insurance, payroll, accountants, web agencies or suppliers want new Colorado owners in their first weeks. Do not use for other states, for emails or phones (the source has none) or for historical entity search. Parameters: daysBack (default 7) or formedFrom/formedTo set the window; cities and zipPrefixes match the principal address; entityTypes and nameContains (comma-separated words) narrow rows; onlySelfAgent keeps likely owner-filed rows; excludeAgentServices drops commercial registered-agent companies and virtual offices; onlyColoradoAddress drops out-of-state foreign entities; onlyGoodStanding (default true); maxResults caps billed businesses (hard max 10000). Runs with no matches are free. Returns per item: agentSummary, entityId, name, entityType, formationDate, status, jurisdiction, principal and mailing address fields, agentName, agentType, agent address fields, selfAgent, principalIsAgentAddress, sosUrl, sourceUrl; plus COBIZ_XLSX (with Self-agent owners sheet)/CSV.",
-      "storeDescription": "Get new Colorado LLCs, corporations and nonprofits from the official Secretary of State open dataset. Name, type, formation date, principal address, registered agent and a likely-owner flag; filter by city, ZIP, type and name.",
+      "storeDescription": "Get new Colorado LLCs, corporations and nonprofits from official Secretary of State open data. Name, type, formation date, address, registered agent and a likely-owner flag; filter by city, ZIP, type and name. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/colorado-new-business-leads",
       "pricing": [
         {
@@ -3990,7 +4157,7 @@
       "actor": "pandadad0214/france-company-leads",
       "title": "France Company Leads: SIREN, Directors, Revenue",
       "description": "Search French companies in the official government company directory (recherche-entreprises.api.gouv.fr: INSEE SIRENE + INPI RNE, Licence Ouverte) and get SIREN, head-office SIRET, intra-EU VAT number, NAF activity code and label, legal form, headcount band, SME/mid-size/large category, creation date, head-office and matching local site address, published revenue and net income, directors and official labels (RGE, Bio, Qualiopi and others). Unlike eu_ted_tenders (EU procurement notices) and local_business_leads (OpenStreetMap shops), this is the French company register. Use when sales, agencies, recruiters or market researchers need French B2B lists by activity, area, size or revenue, or the president or gérant of a company. Do not use for other countries, for emails or phones (not in the source) or for sole traders unless includeSoleTraders is set. Parameters: query (free text: name, brand or director); nafCodes (e.g. 62.01Z software, 43.22B plumbing), sectors, departments (e.g. 69, 75, 2A), postalCodes and regions narrow the area and activity; headcountBands, companyCategories (PME, ETI, GE) and legalForms set size and form; revenueMin/revenueMax and netIncomeMin use published accounts; labels keeps certified firms; createdAfter/createdBefore filter by creation date; requireDirector and requireFinancials drop incomplete rows; onlyActive (default true); maxResults caps billed companies. Companies that opted out of prospecting are always excluded and never billed; runs with no matches are free. Returns per item: agentSummary, siren, siretHq, name, tradeNames, vatNumber, nafCode, nafLabel, legalForm, headcountBand, companyCategory, createdOn, hqAddress, hqPostalCode, hqCity, hqDepartment, revenueEur, netIncomeEur, financialYear, directors, topDirectorName, topDirectorRole, labels, annuaireUrl; plus FRBIZ_XLSX (with Directors sheet)/CSV.",
-      "storeDescription": "Build French B2B lead lists from the official government company directory (SIRENE + RNE). SIREN, SIRET, VAT number, NAF activity, size, address, revenue and directors; filter by NAF, department, size, revenue or label. Opt-outs excluded.",
+      "storeDescription": "Build French B2B lead lists from the official company directory (SIRENE + RNE). SIREN, SIRET, VAT, NAF activity, size, address, revenue and directors; filter by NAF, department, size, revenue or label. Opt-outs excluded. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/france-company-leads",
       "pricing": [
         {
@@ -4198,7 +4365,7 @@
       "actor": "pandadad0214/rss-feed-monitor",
       "title": "RSS & Atom Feed Monitor: Only New Items",
       "description": "Watch many RSS 2.0, Atom or JSON Feed URLs, or plain website and blog URLs (the feed is found automatically), and return one row per item with title, link, published date, age, author, plain-text summary, categories, enclosure and matched keywords. With onlyNew (default true) the Actor remembers returned items per stateKey in a named key-value store in your account, so scheduled runs return and bill only items that are new since the last run. Unlike website_change_monitor (diffs a whole page) and federal_register_monitor (US rulemaking only), this follows any site's feed. Use when you need a daily digest of competitor blogs, news, regulator or vendor feeds, filtered by keywords. Do not use for pages without a feed (use website_change_monitor), for full article text or for private or internal addresses (blocked and never billed). Parameters: feeds (up to 500); keywords and excludeKeywords match title, summary and categories; maxAgeHours skips old items; onlyNew and stateKey control the memory (use a different stateKey per watch list); maxItemsPerFeed (default 50); summaryChars (default 500); maxResults caps billed items. Items already seen, failed feeds and empty runs are free; per-feed health is in FEED_STATUS. Returns per item: agentSummary, feedTitle, feedUrl, siteUrl, title, link, published, ageHours, author, summary, categories, enclosureUrl, matchedKeywords, itemKey; plus RSS_XLSX/CSV.",
-      "storeDescription": "Watch many RSS, Atom or JSON feeds (or just website URLs, feed found automatically) and get only the items that are new since your last run. Keyword and age filters; one clean row per item with an agent-ready summary. Excel and CSV.",
+      "storeDescription": "Watch many RSS, Atom or JSON feeds — or just website URLs, with feed autodiscovery — and get only items that are new since your last run. Keyword and age filters; one clean row per item with an agent-ready summary. Excel and CSV.",
       "url": "https://apify.com/pandadad0214/rss-feed-monitor",
       "pricing": [
         {
@@ -4282,7 +4449,7 @@
       "actor": "pandadad0214/sam-gov-opportunities",
       "title": "SAM.gov Contract Opportunities: Open Federal Bids, No API Key",
       "description": "List current US federal contract opportunities from the official SAM.gov public Contract Opportunities data extract (GSA, refreshed daily, no SAM.gov API key): solicitations, combined synopsis/solicitations, presolicitations, sources sought, special notices and award notices, with title, solicitation number, notice type, posted date, response deadline and days left, department/sub-tier/office, NAICS and PSC codes, set-aside, place of performance, contracting officer name, email and phone, and awardee and amount for award notices. Unlike federal_contract_finder (past USAspending awards, incumbents and recompete dates) and grants_finder (assistance grants), this is open SAM.gov notices you can respond to now. Use when small businesses, GovCon BD teams, proposal writers or subcontractors need new bids by NAICS, PSC, set-aside, agency, state or keyword, or award notices to find primes for teaming. Do not use to download attachments or submit bids (open samUrl on SAM.gov), or for state/local or EU tenders (use eu_ted_tenders). Parameters: daysBack (default 7) or postedFrom/postedTo set the posted window (the file is newest first, so short windows are fast); keywords and excludeKeywords match title and description; naicsCodes and pscCodes are prefix matches (e.g. 5415, D3); setAsides takes SAM codes (SBA, 8A, HZC, SDVOSBC, WOSB, EDWOSB, NONE...); noticeTypes, agencies (department/sub-tier/office contains) and states (place of performance or office state) narrow rows; openOnly (default true) drops passed deadlines but keeps notices with no deadline; minDaysToDeadline keeps biddable notices only; requireContactEmail; descriptionChars (default 600); maxResults caps billed notices. Runs with no matches are free. Returns per item: agentSummary, noticeId, title, solicitationNumber, noticeType, postedDate, responseDeadline, daysToDeadline, department, subTier, office, naicsCode, pscCode, setAsideCode, setAside, popCity, popState, awardDate, awardAmount, awardee, contactName, contactEmail, contactPhone, samUrl, description; plus SAM_XLSX (with By deadline and Award notices sheets)/CSV.",
-      "storeDescription": "Use this to find open federal contract opportunities from the official SAM.gov public data extract, no API key: solicitations, sources sought, award notices. Filter by NAICS, PSC, set-aside, agency, state, deadline. Contacts, Excel.",
+      "storeDescription": "Find open federal contract opportunities from the official SAM.gov public data extract, no API key: solicitations, sources sought, award notices. Filter by NAICS, PSC, set-aside, agency, state, deadline. Contacts, Excel.",
       "url": "https://apify.com/pandadad0214/sam-gov-opportunities",
       "pricing": [
         {

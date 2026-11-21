@@ -4,6 +4,9 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Changed
+- Catalog, tool descriptions, README, llms.txt and llms-full.txt refreshed for the 2026-11-21 Actor updates: `reference_checker` now also formats verified references (APA, MLA, BibTeX), `literature_search` gained an experts mode (Researcher & Expert Finder merged in; both old slugs keep working), `pdf_table_extractor` bank-statement and financial-report presets, `grants_finder` applicant-type filter, `npi_provider_lists` common NPI-scraper input names and batch NPI lookup. New titles for PubMed, grants, NPI and PDF tools.
+
 ## [1.8.1] - 2026-11-18
 
 ### Added
