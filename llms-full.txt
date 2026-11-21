@@ -146,7 +146,7 @@ Minimal input: `{"categories": ["dentist"], "location": "Denver, Colorado", "req
 Output per item: `agentSummary`, `name`, `category`, `street`, `city`, `state`, `postcode`, `phone`, `email`, `website`, `openingHours`, `socials`, `lat`, `lon`, `osmUrl`, `attribution`.
 SUMMARY: `withPhone`, `withWebsite`, `withEmail`, area searched, `takeaway`, `nextStep`. Records: `BUSINESSES_XLSX`, `BUSINESSES_CSV`. Data © OpenStreetMap contributors (ODbL).
 Price: $0.001 per business returned.
-Agent tip: public OpenStreetMap servers are sometimes slow; give runs a timeout of 10 minutes or more. If the run would hit its timeout, it stops cleanly first and charges nothing.
+Agent tip: public OpenStreetMap servers are sometimes slow. Through this MCP server, set `run_timeout_secs` to 300 (the maximum); on direct Apify runs, a timeout of 10 minutes or more is safer. If a run would hit its timeout, it stops cleanly first and charges nothing.
 
 ## Company Hiring Signals
 
