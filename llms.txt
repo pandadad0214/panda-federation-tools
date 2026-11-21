@@ -18,7 +18,7 @@ Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMA
 
 ## Literature search
 
-- [Google Scholar Alternative: Papers, Authors & Experts (Literature Search)](https://apify.com/pandadad0214/literature-search) [MCP tool `literature_search`]: Use when you need real scholarly papers on a topic, ranked, with citation counts, free PDF links, retraction flags and BibTeX, or (mode=experts) the ranked academic experts on that topic.
+- [Google Scholar Scraper Alternative: Papers, Authors & Experts (Literature Search)](https://apify.com/pandadad0214/literature-search) [MCP tool `literature_search`]: Use when you need real scholarly papers on a topic, ranked, with citation counts, free PDF links, retraction flags and BibTeX, or (mode=experts) the ranked academic experts on that topic.
 - [PubMed Evidence Table for Systematic Reviews & Medical Writers](https://apify.com/pandadad0214/pubmed-evidence-table) [MCP tool `pubmed_evidence_table`]: Use when you need PubMed studies in a screening-ready evidence table with study design, sample size, retraction status and PRISMA counts.
 
 ## Funding
@@ -31,7 +31,7 @@ Compatibility: `uvx panda-federation-tools` still lists all tools when `PFT_DOMA
 
 ## Documents and public data
 
-- [PDF Table Extractor: Bank Statements & Reports to Excel, CSV](https://apify.com/pandadad0214/pdf-table-extractor) [MCP tool `pdf_table_extractor`]: Use when you need every table in a PDF extracted to Excel and CSV, bank or card statements combined into one transactions sheet, or financial-report tables without narrative text, with OCR for scanned pages.
+- [PDF Table Extractor: Bank Statement PDF & Reports to Excel, CSV](https://apify.com/pandadad0214/pdf-table-extractor) [MCP tool `pdf_table_extractor`]: Use when you need every table in a PDF extracted to Excel and CSV, bank or card statements combined into one transactions sheet, or financial-report tables without narrative text, with OCR for scanned pages.
 - [NPI Registry Scraper: NPPES Healthcare Providers by Specialty](https://apify.com/pandadad0214/npi-provider-lists) [MCP tool `npi_provider_lists`]: Use when you need de-duplicated lists of US healthcare providers from the official NPI Registry by specialty, state, city, ZIP, name or a batch of NPI numbers.
 - [USAspending Scraper (Federal Contract Finder)](https://apify.com/pandadad0214/federal-contract-finder) [MCP tool `federal_contract_finder`]: Use when you need US federal contract awards, the incumbents in a market, or contracts ending soon (recompete leads) by NAICS, PSC, agency, state or set-aside.
 

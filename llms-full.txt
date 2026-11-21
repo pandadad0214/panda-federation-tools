@@ -26,7 +26,7 @@ Output per item: `summary`, `status`, one field per style (`apa`, `mla`, ...), `
 SUMMARY: `total`, `formatted`, `ok`, `check`, `unresolved`, `duplicates`, `files`, `takeaway`, `nextStep`. Key-value records: `BIBLIOGRAPHY_<STYLE>`, `BIBLIOGRAPHY_BIBTEX`, `BIBLIOGRAPHY_RIS`.
 Price: $0.003 per formatted citation.
 
-## Google Scholar Alternative: Papers, Authors & Experts (Literature Search)
+## Google Scholar Scraper Alternative: Papers, Authors & Experts (Literature Search)
 
 URL: https://apify.com/pandadad0214/literature-search
 MCP tool (this repo): `literature_search`
@@ -53,7 +53,7 @@ Price: $0.004 per article returned.
 URL: https://apify.com/pandadad0214/grants-finder
 MCP tool (this repo): `grants_finder`
 Use when: you need open or forecasted US federal grant opportunities, or funded NIH and NSF awards.
-Input: `keywords` (required), `sources` (grants_gov, nih, nsf), `maxResultsPerSource` (1 to 1,000), `agencies`, `dateFrom`/`dateTo` (YYYY, YYYY-MM or YYYY-MM-DD), `minAmount`/`maxAmount` (USD), `grantsGovStatuses`, `applicantTypes` (Grants.gov eligibility, e.g. nonprofit-501c3, nonprofit-other, small-business, state-government, county-government, city-government, tribal-government, higher-education-public, individuals), `sortBy`.
+Input: `keywords` (required), `sources` (grants_gov, nih, nsf), `maxResultsPerSource` (1 to 1,000), `agencies`, `dateFrom`/`dateTo` (YYYY, YYYY-MM or YYYY-MM-DD), `minAmount`/`maxAmount` (USD), `grantsGovStatuses`, `applicantTypes` (Grants.gov eligibility: nonprofit, small-business, for-profit, higher-education, local-government, state-government, tribal, individual, other; calls open to anyone are always kept), `sortBy`.
 Minimal input: `{"keywords": "rural broadband", "maxResultsPerSource": 10}`
 Output per item: `agentSummary` (one line), `source`, `recordType`, `status`, `title`, `agency`, `number`, `openDate`, `closeDate`, `amount` (USD), `eligibility`, `summary` (the grant's own description), `url`.
 SUMMARY: `returned`, `bySource`, `takeaway`, `nextStep`. Records: `GRANTS_XLSX`, `GRANTS_CSV`.
@@ -69,7 +69,7 @@ Output: JSON with `results`, a one-line `takeaway`, status OK/CHECK/FIX where it
 Try without an MCP client: a normal run with `{"tool": "check_references", "references": ["..."]}` (or `format_citations`, `search_literature`, `pubmed_evidence_table` with `query`) calls one tool once and saves the result in `OUTPUT` and the dataset. Free local stdio edition: `uvx panda-research-tools` (PyPI `panda-research-tools`).
 Price: $0.01 per reference tool call, $0.02 per search tool call; failed or empty calls are free.
 
-## PDF Table Extractor: Bank Statements & Reports to Excel, CSV
+## PDF Table Extractor: Bank Statement PDF & Reports to Excel, CSV
 
 URL: https://apify.com/pandadad0214/pdf-table-extractor
 MCP tool (this repo): `pdf_table_extractor`
@@ -82,7 +82,7 @@ Price: $0.001 per PDF page analysed, plus $0.003 per table extracted and $0.02 p
 URL: https://apify.com/pandadad0214/npi-provider-lists
 MCP tool (this repo): `npi_provider_lists`
 Use when: you need de-duplicated lists of US healthcare providers from the official NPI Registry.
-Input/output: specialties plus states, cities or ZIP codes in (also accepts common NPI-scraper names: `taxonomyDescription`, `state`, `city`, `postalCode`, `firstName`, `lastName`, `organizationName`, and `npiNumbers` for batch lookup); one de-duplicated provider per item (NPI, name, specialty, address, phone, `summary`) plus Excel out.
+Input/output: specialties plus states (codes or full names), cities or ZIP codes in (also accepts common NPI-scraper names: `taxonomyDescription`, `state`, `city`, `postalCode`, `firstName`, `lastName`, `organizationName`, and `npiNumbers` for batch lookup); one de-duplicated provider per item (NPI, name, specialty, address, phone, `summary`) plus Excel out.
 Price: $0.0015 per provider.
 
 ## Google Scholar Author Alternative (Researcher & Expert Finder)
