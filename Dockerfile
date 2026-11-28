@@ -1,7 +1,7 @@
 # Runs the MCP server over stdio:
 #   docker build -t panda-federation-tools .
 #   docker run -i --rm -e APIFY_TOKEN panda-federation-tools
-FROM python:3.13-slim
+FROM python:3.15-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1 PIP_DISABLE_PIP_VERSION_CHECK=1
 WORKDIR /app
